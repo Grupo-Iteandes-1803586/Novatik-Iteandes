@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2020-06-09 13:00
+-- Generated: 2020-06-12 12:14
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -10,53 +10,21 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 ALTER TABLE `iteandes_novati'k`.`Teacher` 
-DROP FOREIGN KEY `fk_Teacher_Experience`,
-DROP FOREIGN KEY `fk_Teacher_Person1`;
+DROP FOREIGN KEY `fk_Teacher_TeacherStudies1`;
 
 ALTER TABLE `iteandes_novati'k`.`TeacherLenguages` 
-DROP FOREIGN KEY `fk_TeacherLenguages_Lenguages1`;
-
-ALTER TABLE `iteandes_novati'k`.`Student` 
-DROP FOREIGN KEY `fk_Student_Person1`;
-
-ALTER TABLE `iteandes_novati'k`.`Activity` 
-DROP FOREIGN KEY `fk_Activity_LearningResult1`;
-
-ALTER TABLE `iteandes_novati'k`.`TrainingCompetition` 
-DROP FOREIGN KEY `fk_TrainingCompetition_TrainingProgram1`;
-
-ALTER TABLE `iteandes_novati'k`.`LearningResult` 
-DROP FOREIGN KEY `fk_LearningResult_TrainingCompetition1`;
-
-ALTER TABLE `iteandes_novati'k`.`Note` 
-DROP FOREIGN KEY `fk_Note_Activity1`,
-DROP FOREIGN KEY `fk_Note_Teacher1`;
+DROP FOREIGN KEY `fk_TeacherLenguages_Teacher1`;
 
 ALTER TABLE `iteandes_novati'k`.`Enrollment` 
-DROP FOREIGN KEY `fk_Enrollment_Semester1`,
-DROP FOREIGN KEY `fk_Enrollment_TrainingProgram1`;
-
-ALTER TABLE `iteandes_novati'k`.`Schedule` 
-DROP FOREIGN KEY `fk_Schedule_Group1`;
-
-ALTER TABLE `iteandes_novati'k`.`Group` 
-DROP FOREIGN KEY `fk_Group_TrainingCompetition1`;
-
-ALTER TABLE `iteandes_novati'k`.`EnrollmentCompetition` 
-DROP FOREIGN KEY `fk_EnrollmentCompetition_Enrollment1`,
-DROP FOREIGN KEY `fk_EnrollmentCompetition_Schedule1`,
-DROP FOREIGN KEY `fk_EnrollmentCompetition_TrainingCompetition1`;
-
-ALTER TABLE `iteandes_novati'k`.`Person` 
-CHANGE COLUMN `idPerson` `idPerson` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT ;
+DROP FOREIGN KEY `fk_Enrollment_Student1`;
 
 ALTER TABLE `iteandes_novati'k`.`Teacher` 
 CHANGE COLUMN `idTeacher` `idTeacher` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT ,
 CHANGE COLUMN `Experience_idExperience` `Experience_idExperience` BIGINT(19) UNSIGNED NOT NULL ,
 CHANGE COLUMN `TeacherStudies_idTeacherStudies` `TeacherStudies_idTeacherStudies` BIGINT(19) UNSIGNED NOT NULL ,
 CHANGE COLUMN `Person_idPerson` `Person_idPerson` BIGINT(19) UNSIGNED NOT NULL ,
-ADD INDEX `fk_Teacher_TeacherStudies1_idx` (`TeacherStudies_idTeacherStudies` ASC),
-ADD INDEX `fk_Teacher_Person1_idx` (`Person_idPerson` ASC) VISIBLE,
+ADD INDEX `fk_Teacher_TeacherStudies1_idx` (`TeacherStudies_idTeacherStudies` ASC) ,
+ADD INDEX `fk_Teacher_Person1_idx` (`Person_idPerson` ASC) ,
 DROP INDEX `fk_Teacher_Person_idx` ,
 DROP INDEX `fk_Teacher_TeacherStudies_idx` ;
 ;
@@ -125,10 +93,25 @@ CHANGE COLUMN `Enrollment_idEnrollment` `Enrollment_idEnrollment` BIGINT(19) UNS
 CHANGE COLUMN `Schedule_idSchedule` `Schedule_idSchedule` BIGINT(19) UNSIGNED NOT NULL ,
 CHANGE COLUMN `TrainingCompetition_idTrainingCompetition` `TrainingCompetition_idTrainingCompetition` BIGINT(19) UNSIGNED NOT NULL ;
 
-ALTER TABLE `iteandes_novati'k`.`Teacher` 
-DROP FOREIGN KEY `fk_Teacher_TeacherStudies1`;
+CREATE TABLE IF NOT EXISTS `iteandes_novati'k`.`Archive` (
+  `idArchive` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nameArchive` VARCHAR(100) NOT NULL,
+  `descriptionArchive` VARCHAR(250) NOT NULL,
+  `stateArchive` ENUM('Activo', 'Inactivo') NOT NULL,
+  `rutaArchive` VARCHAR(250) NOT NULL,
+  `Activity_idActivity` BIGINT(19) UNSIGNED NOT NULL,
+  PRIMARY KEY (`idArchive`),
+  INDEX `fk_Archive_Activity1_idx` (`Activity_idActivity` ASC),
+  CONSTRAINT `fk_Archive_Activity1`
+    FOREIGN KEY (`Activity_idActivity`)
+    REFERENCES `iteandes_novati'k`.`Activity` (`idActivity`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
-ALTER TABLE `iteandes_novati'k`.`Teacher` ADD CONSTRAINT `fk_Teacher_Experience`
+ALTER TABLE `iteandes_novati'k`.`Teacher` 
+ADD CONSTRAINT `fk_Teacher_Experience`
   FOREIGN KEY (`Experience_idExperience`)
   REFERENCES `iteandes_novati'k`.`Experience` (`idExperience`)
   ON DELETE NO ACTION
@@ -145,9 +128,7 @@ ADD CONSTRAINT `fk_Teacher_Person1`
   ON UPDATE NO ACTION;
 
 ALTER TABLE `iteandes_novati'k`.`TeacherLenguages` 
-DROP FOREIGN KEY `fk_TeacherLenguages_Teacher1`;
-
-ALTER TABLE `iteandes_novati'k`.`TeacherLenguages` ADD CONSTRAINT `fk_TeacherLenguages_Teacher1`
+ADD CONSTRAINT `fk_TeacherLenguages_Teacher1`
   FOREIGN KEY (`Teacher_idTeacher`)
   REFERENCES `iteandes_novati'k`.`Teacher` (`idTeacher`)
   ON DELETE NO ACTION
@@ -199,9 +180,7 @@ ADD CONSTRAINT `fk_Note_Teacher1`
   ON UPDATE NO ACTION;
 
 ALTER TABLE `iteandes_novati'k`.`Enrollment` 
-DROP FOREIGN KEY `fk_Enrollment_Student1`;
-
-ALTER TABLE `iteandes_novati'k`.`Enrollment` ADD CONSTRAINT `fk_Enrollment_Student1`
+ADD CONSTRAINT `fk_Enrollment_Student1`
   FOREIGN KEY (`Student_idStudent`)
   REFERENCES `iteandes_novati'k`.`Student` (`idStudent`)
   ON DELETE NO ACTION
