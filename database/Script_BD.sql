@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2020-06-12 16:08
+-- Generated: 2020-06-16 20:23
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -9,14 +9,11 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-CREATE SCHEMA IF NOT EXISTS `Iteandes_Novatik` DEFAULT CHARACTER SET utf8 ;
-
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Person` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Person` (
   `idPerson` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `documentPerson` INT(11) NOT NULL,
   `namePerson` VARCHAR(55) NOT NULL,
   `dateBornPerson` DATE NOT NULL,
-  `agePerson` TINYINT(4) NOT NULL,
   `rhPerson` VARCHAR(3) NOT NULL,
   `emailPerson` VARCHAR(70) NOT NULL,
   `phonePerson` INT(11) NOT NULL,
@@ -26,13 +23,13 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Person` (
   `passwordPerson` VARCHAR(45) NOT NULL,
   `typePerson` ENUM('Administrador', 'Secreataria', 'Docente', 'Estudiante') NOT NULL,
   `statePerson` ENUM('Activo', 'Inactivo') NOT NULL,
-  `photoPerson` BLOB NULL DEFAULT NULL,
+  `photoPerson` VARCHAR(350) NULL DEFAULT NULL,
   PRIMARY KEY (`idPerson`),
   UNIQUE INDEX `documentPerson_UNIQUE` (`documentPerson` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Teacher` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Teacher` (
   `idTeacher` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `Experience_idExperience` BIGINT(19) UNSIGNED NOT NULL,
   `TeacherStudies_idTeacherStudies` BIGINT(19) UNSIGNED NOT NULL,
@@ -43,23 +40,23 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Teacher` (
   INDEX `fk_Teacher_Person1_idx` (`Person_idPerson` ASC),
   CONSTRAINT `fk_Teacher_Experience`
     FOREIGN KEY (`Experience_idExperience`)
-    REFERENCES `Iteandes_Novatik`.`Experience` (`idExperience`)
+    REFERENCES `iteandes_novatik`.`Experience` (`idExperience`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Teacher_TeacherStudies1`
     FOREIGN KEY (`TeacherStudies_idTeacherStudies`)
-    REFERENCES `Iteandes_Novatik`.`TeacherStudies` (`idTeacherStudies`)
+    REFERENCES `iteandes_novatik`.`TeacherStudies` (`idTeacherStudies`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Teacher_Person1`
     FOREIGN KEY (`Person_idPerson`)
-    REFERENCES `Iteandes_Novatik`.`Person` (`idPerson`)
+    REFERENCES `iteandes_novatik`.`Person` (`idPerson`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`TeacherLenguages` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`TeacherLenguages` (
   `idTeacherLenguages` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `Teacher_idTeacher` BIGINT(19) UNSIGNED NOT NULL,
   `Lenguages_idLenguages` TINYINT(3) UNSIGNED NOT NULL,
@@ -68,18 +65,18 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`TeacherLenguages` (
   INDEX `fk_TeacherLenguages_Lenguages1_idx` (`Lenguages_idLenguages` ASC),
   CONSTRAINT `fk_TeacherLenguages_Teacher1`
     FOREIGN KEY (`Teacher_idTeacher`)
-    REFERENCES `Iteandes_Novatik`.`Teacher` (`idTeacher`)
+    REFERENCES `iteandes_novatik`.`Teacher` (`idTeacher`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_TeacherLenguages_Lenguages1`
     FOREIGN KEY (`Lenguages_idLenguages`)
-    REFERENCES `Iteandes_Novatik`.`Lenguages` (`idLenguages`)
+    REFERENCES `iteandes_novatik`.`Lenguages` (`idLenguages`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Experience` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Experience` (
   `idExperience` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `institutionExperience` VARCHAR(100) NOT NULL,
   `dedicationExperience` VARCHAR(50) NOT NULL,
@@ -89,14 +86,14 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Experience` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Lenguages` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Lenguages` (
   `idLenguages` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nameLenguages` VARCHAR(40) NOT NULL,
   PRIMARY KEY (`idLenguages`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`TeacherStudies` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`TeacherStudies` (
   `idTeacherStudies` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `titleTeacherStudies` VARCHAR(100) NOT NULL,
   `yearStudyTeacher` SMALLINT(4) NOT NULL,
@@ -104,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`TeacherStudies` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Student` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Student` (
   `idStudent` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `gradeYear` SMALLINT(4) NOT NULL,
   `modality` ENUM('Bachiler', 'Tecnico') NOT NULL,
@@ -114,13 +111,13 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Student` (
   INDEX `fk_Student_Person1_idx` (`Person_idPerson` ASC),
   CONSTRAINT `fk_Student_Person1`
     FOREIGN KEY (`Person_idPerson`)
-    REFERENCES `Iteandes_Novatik`.`Person` (`idPerson`)
+    REFERENCES `iteandes_novatik`.`Person` (`idPerson`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`TrainingProgram` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`TrainingProgram` (
   `idTrainingProgram` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `codeTrainingProgram` BIGINT(19) UNSIGNED NOT NULL,
   `nameTrainingProgram` VARCHAR(100) NOT NULL,
@@ -131,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`TrainingProgram` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Activity` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Activity` (
   `idActivity` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `codeActivity` BIGINT(20) NOT NULL,
   `nameActivity` VARCHAR(100) NOT NULL,
@@ -143,13 +140,13 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Activity` (
   INDEX `fk_Activity_LearningResult1_idx` (`LearningResult_idLearningResult` ASC),
   CONSTRAINT `fk_Activity_LearningResult1`
     FOREIGN KEY (`LearningResult_idLearningResult`)
-    REFERENCES `Iteandes_Novatik`.`LearningResult` (`idLearningResult`)
+    REFERENCES `iteandes_novatik`.`LearningResult` (`idLearningResult`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`TrainingCompetition` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`TrainingCompetition` (
   `idTrainingCompetition` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `codeTrainingCompetition` BIGINT(20) NOT NULL,
   `denomination` VARCHAR(150) NOT NULL,
@@ -163,13 +160,13 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`TrainingCompetition` (
   INDEX `fk_TrainingCompetition_TrainingProgram1_idx` (`TrainingProgram_idTrainingProgram` ASC),
   CONSTRAINT `fk_TrainingCompetition_TrainingProgram1`
     FOREIGN KEY (`TrainingProgram_idTrainingProgram`)
-    REFERENCES `Iteandes_Novatik`.`TrainingProgram` (`idTrainingProgram`)
+    REFERENCES `iteandes_novatik`.`TrainingProgram` (`idTrainingProgram`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`LearningResult` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`LearningResult` (
   `idLearningResult` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `codeLearningResult` BIGINT(20) NOT NULL,
   `nameLearningResult` VARCHAR(500) NOT NULL,
@@ -181,13 +178,13 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`LearningResult` (
   INDEX `fk_LearningResult_TrainingCompetition1_idx` (`TrainingCompetition_idTrainingCompetition` ASC),
   CONSTRAINT `fk_LearningResult_TrainingCompetition1`
     FOREIGN KEY (`TrainingCompetition_idTrainingCompetition`)
-    REFERENCES `Iteandes_Novatik`.`TrainingCompetition` (`idTrainingCompetition`)
+    REFERENCES `iteandes_novatik`.`TrainingCompetition` (`idTrainingCompetition`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Note` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Note` (
   `idNote` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `dateNote` DATE NOT NULL,
   `valueNote` FLOAT(11) NOT NULL,
@@ -198,18 +195,18 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Note` (
   INDEX `fk_Note_Teacher1_idx` (`Teacher_idTeacher` ASC),
   CONSTRAINT `fk_Note_Activity1`
     FOREIGN KEY (`Activity_idActivity`)
-    REFERENCES `Iteandes_Novatik`.`Activity` (`idActivity`)
+    REFERENCES `iteandes_novatik`.`Activity` (`idActivity`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Note_Teacher1`
     FOREIGN KEY (`Teacher_idTeacher`)
-    REFERENCES `Iteandes_Novatik`.`Teacher` (`idTeacher`)
+    REFERENCES `iteandes_novatik`.`Teacher` (`idTeacher`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Enrollment` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Enrollment` (
   `idEnrollment` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `dateEnrollment` DATE NOT NULL,
   `stateEnrollment` ENUM('Activo', 'Inactivo') NOT NULL,
@@ -222,23 +219,23 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Enrollment` (
   INDEX `fk_Enrollment_TrainingProgram1_idx` (`TrainingProgram_idTrainingProgram` ASC),
   CONSTRAINT `fk_Enrollment_Student1`
     FOREIGN KEY (`Student_idStudent`)
-    REFERENCES `Iteandes_Novatik`.`Student` (`idStudent`)
+    REFERENCES `iteandes_novatik`.`Student` (`idStudent`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Enrollment_Semester1`
     FOREIGN KEY (`Semester_idSemester`)
-    REFERENCES `Iteandes_Novatik`.`Semester` (`idSemester`)
+    REFERENCES `iteandes_novatik`.`Semester` (`idSemester`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Enrollment_TrainingProgram1`
     FOREIGN KEY (`TrainingProgram_idTrainingProgram`)
-    REFERENCES `Iteandes_Novatik`.`TrainingProgram` (`idTrainingProgram`)
+    REFERENCES `iteandes_novatik`.`TrainingProgram` (`idTrainingProgram`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Semester` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Semester` (
   `idSemester` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nameSemester` VARCHAR(50) NOT NULL,
   `startDate` DATE NOT NULL,
@@ -248,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Semester` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Schedule` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Schedule` (
   `idSchedule` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `startDateSchedule` DATE NOT NULL,
   `endDateSchedule` DATE NOT NULL,
@@ -262,13 +259,13 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Schedule` (
   INDEX `fk_Schedule_Group1_idx` (`Group_idGroup` ASC),
   CONSTRAINT `fk_Schedule_Group1`
     FOREIGN KEY (`Group_idGroup`)
-    REFERENCES `Iteandes_Novatik`.`Group` (`idGroup`)
+    REFERENCES `iteandes_novatik`.`Group` (`idGroup`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Group` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Group` (
   `idGroup` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `codeGroup` BIGINT(20) NOT NULL,
   `nameGroup` VARCHAR(100) NOT NULL,
@@ -281,13 +278,13 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Group` (
   INDEX `fk_Group_TrainingCompetition1_idx` (`TrainingCompetition_idTrainingCompetition` ASC),
   CONSTRAINT `fk_Group_TrainingCompetition1`
     FOREIGN KEY (`TrainingCompetition_idTrainingCompetition`)
-    REFERENCES `Iteandes_Novatik`.`TrainingCompetition` (`idTrainingCompetition`)
+    REFERENCES `iteandes_novatik`.`TrainingCompetition` (`idTrainingCompetition`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`EnrollmentCompetition` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`EnrollmentCompetition` (
   `idEnrollmentCompetition` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `Enrollment_idEnrollment` BIGINT(19) UNSIGNED NOT NULL,
   `Schedule_idSchedule` BIGINT(19) UNSIGNED NOT NULL,
@@ -298,23 +295,23 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`EnrollmentCompetition` (
   INDEX `fk_EnrollmentCompetition_TrainingCompetition1_idx` (`TrainingCompetition_idTrainingCompetition` ASC),
   CONSTRAINT `fk_EnrollmentCompetition_Enrollment1`
     FOREIGN KEY (`Enrollment_idEnrollment`)
-    REFERENCES `Iteandes_Novatik`.`Enrollment` (`idEnrollment`)
+    REFERENCES `iteandes_novatik`.`Enrollment` (`idEnrollment`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_EnrollmentCompetition_Schedule1`
     FOREIGN KEY (`Schedule_idSchedule`)
-    REFERENCES `Iteandes_Novatik`.`Schedule` (`idSchedule`)
+    REFERENCES `iteandes_novatik`.`Schedule` (`idSchedule`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_EnrollmentCompetition_TrainingCompetition1`
     FOREIGN KEY (`TrainingCompetition_idTrainingCompetition`)
-    REFERENCES `Iteandes_Novatik`.`TrainingCompetition` (`idTrainingCompetition`)
+    REFERENCES `iteandes_novatik`.`TrainingCompetition` (`idTrainingCompetition`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Archive` (
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Archive` (
   `idArchive` BIGINT(19) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nameArchive` VARCHAR(100) NOT NULL,
   `descriptionArchive` VARCHAR(250) NOT NULL,
@@ -325,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `Iteandes_Novatik`.`Archive` (
   INDEX `fk_Archive_Activity1_idx` (`Activity_idActivity` ASC),
   CONSTRAINT `fk_Archive_Activity1`
     FOREIGN KEY (`Activity_idActivity`)
-    REFERENCES `Iteandes_Novatik`.`Activity` (`idActivity`)
+    REFERENCES `iteandes_novatik`.`Activity` (`idActivity`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

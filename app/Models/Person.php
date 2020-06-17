@@ -29,7 +29,6 @@ class Person extends BasicModel{
      * @param $documentPerson
      * @param $namePerson
      * @param $dateBornPerson
-     * @param $agePerson
      * @param $rhPerson
      * @param $emailPerson
      * @param $phonePerson
@@ -47,7 +46,6 @@ class Person extends BasicModel{
         $this->documentPerson = $person['documentPerson'] ?? null;
         $this->namePerson = $person['namePerson'] ?? null;
         $this->dateBornPerson = $person['dateBornPerson'] ?? null;
-        $this->agePerson = $person['agePerson'] ?? null;
         $this->rhPerson = $person['rhPerson'] ?? null;
         $this->emailPerson = $person['emailPerson'] ?? null;
         $this->phonePerson = $person['phonePerson'] ?? null;
@@ -130,23 +128,6 @@ class Person extends BasicModel{
     public function setDateBornPerson(?date $dateBornPerson): void
     {
         $this->dateBornPerson = $dateBornPerson;
-    }
-
-    /**
-     * @return int
-     * Obtener Edad de la persona
-     */
-    public function getAgePerson(): ?int
-    {
-        return $this->agePerson;
-    }
-
-    /**
-     * @param int $agePerson
-     */
-    public function setAgePerson(?int $agePerson): void
-    {
-        $this->agePerson = $agePerson;
     }
 
     /**
@@ -302,36 +283,35 @@ class Person extends BasicModel{
     }
 
     /**
-     * @return mixed
+     * @return String
      * Obtener foto de la persona
      */
-    public function getPhotoPerson()
+    public function getPhotoPerson(): ?String
     {
         return $this->photoPerson;
     }
 
     /**
-     * @param mixed $photoPerson
+     * @param String $photoPerson
      */
-    public function setPhotoPerson($photoPerson): void
+    public function setPhotoPerson(?String $photoPerson): void
     {
         $this->photoPerson = $photoPerson;
     }
 
     //Creacion del metodo create
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.Person VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
+        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.Person VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
             $this->documentPerson,
             $this->namePerson,
             $this->dateBornPerson,
-            $this->agePerson,
             $this->rhPerson,
             $this->emailPerson,
             $this->phonePerson,
             $this->adressPerson,
             $this->generePerson,
-            $this->userPerson,
-            $this->passwordPerson,
+            $this->generateNameUser($this -> documentPerson , $this -> namePerson),
+            $this->documentPerson,
             $this->typePerson,
             $this->statePerson,
             $this->photoPerson
@@ -340,18 +320,30 @@ class Person extends BasicModel{
         $this->Disconnect();
         return $result;
     }
+    //Generar nomre de usuario
+    public function generateNameUser($documentPerson , $namePerson):String{
+        $finalUserName = "";
+        $userName = explode(" ",$namePerson);
+        foreach ($userName as $user){
+            $finalUserName .= $user[0];
+        }
+        return $finalUserName .= $documentPerson ;
+    }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.Person SET namePerson = ?,documentPerson = ?,emailPerson = ?,phonePerson = ?,adressPerson = ?,photoPerson = ?,statePerson = ? WHERE $idPerson = ?", array(
+        $result = $this->updateRow( "UPDATE Iteandes_Novatik.Person SET documentPerson = ?, namePerson = ?,dateBornPerson = ?, emailPerson = ?,phonePerson = ?,adressPerson = ?,statePerson = ?,photoPerson = ? WHERE idPerson = ?", array(
                 $this->documentPerson,
                 $this->namePerson,
+                $this->dateBornPerson,
+                $this->rhPerson,
                 $this->emailPerson,
                 $this->phonePerson,
                 $this->adressPerson,
                 $this->generePerson,
+                $this->typePerson,
                 $this->statePerson,
                 $this->photoPerson,
-                $this->$idPerson
+                $this-> idPerson
             )
         );
         $this->Disconnect();
@@ -375,7 +367,6 @@ class Person extends BasicModel{
             $Users->documentPerson = $value['documentPerson'];
             $Users->namePerson = $value['namePerson'];
             $Users->dateBornPerson = $value['dateBornPerson'];
-            $Users->agePerson = $value['agePerson'];
             $Users->rhPerson = $value['rhPerson'];
             $Users->emailPerson = $value['emailPerson'];
             $Users->phonePerson = $value['phonePerson'];
@@ -401,7 +392,6 @@ class Person extends BasicModel{
         $Users->documentPerson = $getrow['documentPerson'];
         $Users->namePerson = $getrow['namePerson'];
         $Users->dateBornPerson = $getrow['dateBornPerson'];
-        $Users->agePerson = $getrow['agePerson'];
         $Users->rhPerson = $getrow['rhPerson'];
         $Users->emailPerson = $getrow['emailPerson'];
         $Users->phonePerson = $getrow['phonePerson'];
@@ -421,7 +411,10 @@ class Person extends BasicModel{
     {
         return Person::search("SELECT * FROM Iteandes_Novatik.Person");
     }
-
+    public static function getForDocument($documentPerson) : array
+    {
+        return Person::search("SELECT idPerson,documentPerson,namePerson,dateBornPerson,rhPerson,emailPerson,phonePerson,adressPerson,generePerson,typePerson,statePerson,photoPerson FROM Iteandes_Novatik.Person WHERE documentPerson = ".$documentPerson);
+    }
     public static function userRegistration ($documentPerson) : bool
     {
         $result = Person::search("SELECT idPerson FROM Iteandes_Novatik.Person where documentPerson = ".$documentPerson);
@@ -431,10 +424,15 @@ class Person extends BasicModel{
             return false;
         }
     }
+    //Metodo generaRr edad
+    public function generateAge($dateBornPerson) : int{
+        $age = date_diff(date_create($dateBornPerson),date_create('now'))->y;
+        return $age;
+    }
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->documentPerson." ".$this->namePerson." ".$this->dateBornPerson." ".$this->agePerson." ".$this->rhPerson
+        return $this->documentPerson." ".$this->namePerson." ".$this->dateBornPerson." ".$this->rhPerson
             ." ".$this->emailPerson ." ".$this->phonePerson." ".$this->adressPerson." ".$this->generePerson." ".$this->userPerson
             ." ".$this->passwordPerson." ".$this->typePerson." ".$this->statePerson." ".$this->photoPerson;
     }
