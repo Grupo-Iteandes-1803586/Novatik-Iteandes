@@ -27,7 +27,7 @@ class TeacherStudies extends BasicModel{
     /**
      * @return int
      */
-    public function getIdTeacherStudies(): ?int
+    public function getIdTeacherStudies(): int
     {
         return $this->idTeacherStudies;
     }
@@ -35,7 +35,7 @@ class TeacherStudies extends BasicModel{
     /**
      * @param int $idTeacherStudies
      */
-    public function setIdTeacherStudies(?int $idTeacherStudies): void
+    public function setIdTeacherStudies(int $idTeacherStudies): void
     {
         $this->idTeacherStudies = $idTeacherStudies;
     }
@@ -43,7 +43,7 @@ class TeacherStudies extends BasicModel{
     /**
      * @return String
      */
-    public function getTitleTeacherStudies(): ?String
+    public function getTitleTeacherStudies(): String
     {
         return $this->titleTeacherStudies;
     }
@@ -51,7 +51,7 @@ class TeacherStudies extends BasicModel{
     /**
      * @param String $titleTeacherStudies
      */
-    public function setTitleTeacherStudies(?String $titleTeacherStudies): void
+    public function setTitleTeacherStudies(String $titleTeacherStudies): void
     {
         $this->titleTeacherStudies = $titleTeacherStudies;
     }
@@ -59,7 +59,7 @@ class TeacherStudies extends BasicModel{
     /**
      * @return int
      */
-    public function getYearStudyTeacher(): ?int
+    public function getYearStudyTeacher(): int
     {
         return $this->yearStudyTeacher;
     }
@@ -67,7 +67,7 @@ class TeacherStudies extends BasicModel{
     /**
      * @param int $yearStudyTeacher
      */
-    public function setYearStudyTeacher(?int $yearStudyTeacher): void
+    public function setYearStudyTeacher(int $yearStudyTeacher): void
     {
         $this->yearStudyTeacher = $yearStudyTeacher;
     }
