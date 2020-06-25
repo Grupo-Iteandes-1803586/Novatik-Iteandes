@@ -2,8 +2,7 @@
 namespace App\Models;
 require ('BasicModel.php');
 
-#Creacion de la clase
-class Semester Extends BasicModel{
+class Semester extends BasicModel{
     private $idSemester;
     private $nameSemester;
     private $startDate;
@@ -12,38 +11,32 @@ class Semester Extends BasicModel{
 
     /**
      * Semester constructor.
-     * @param $idSemester
-     * @param $nameSemester
-     * @param $startDate
-     * @param $endDate
-     * @param $statuSemester
      */
     public function __construct($semester = array())
     {
         parent::__construct();
-        $this->idSemester = $idSemester['$idSemester'] ?? null;
-        $this->nameSemester = $nameSemester['$nameSemester'] ?? null;
-        $this->startDate = $startDate['$startDate'] ?? null;
-        $this->endDate = $endDate['$endDate'] ?? null;
-        $this->statuSemester = $statuSemester['$statuSemester'] ?? null;
+        $this->idSemester = $semester['$idSemester'] ?? null;
+        $this->nameSemester = $semester['$nameSemester'] ?? null;
+        $this->startDate = $semester['$startDate'] ?? null;
+        $this->endDate = $semester['$endDate'] ?? null;
+        $this->statuSemester = $semester['$statuSemester'] ?? null;
     }
     /*Metodo destructor cierre de la conexion*/
     function __destruct(){
         $this->Disconnect();
     }
-    /*Metodos get y set*/
+
     /**
      * @return int
      */
-    public function getIdSemester(): ?int
+    public function getIdSemester(): int
     {
         return $this->idSemester;
     }
-
     /**
      * @param int $idSemester
      */
-    public function setIdSemester(?int $idSemester): void
+    public function setIdSemester(int $idSemester): void
     {
         $this->idSemester = $idSemester;
     }
@@ -51,7 +44,7 @@ class Semester Extends BasicModel{
     /**
      * @return String
      */
-    public function getNameSemester(): ?String
+    public function getNameSemester(): String
     {
         return $this->nameSemester;
     }
@@ -59,7 +52,7 @@ class Semester Extends BasicModel{
     /**
      * @param String $nameSemester
      */
-    public function setNameSemester(?String $nameSemester): void
+    public function setNameSemester(String $nameSemester): void
     {
         $this->nameSemester = $nameSemester;
     }
@@ -67,7 +60,7 @@ class Semester Extends BasicModel{
     /**
      * @return date
      */
-    public function getStartDate(): ?date
+    public function getStartDate(): date
     {
         return $this->startDate;
     }
@@ -75,7 +68,7 @@ class Semester Extends BasicModel{
     /**
      * @param date $startDate
      */
-    public function setStartDate(?date $startDate): void
+    public function setStartDate(date $startDate): void
     {
         $this->startDate = $startDate;
     }
@@ -83,7 +76,7 @@ class Semester Extends BasicModel{
     /**
      * @return date
      */
-    public function getEndDate(): ?date
+    public function getEndDate(): date
     {
         return $this->endDate;
     }
@@ -91,7 +84,7 @@ class Semester Extends BasicModel{
     /**
      * @param date $endDate
      */
-    public function setEndDate(?date $endDate): void
+    public function setEndDate(date $endDate): void
     {
         $this->endDate = $endDate;
     }
@@ -99,7 +92,7 @@ class Semester Extends BasicModel{
     /**
      * @return String
      */
-    public function getStatuSemester(): ?String
+    public function getStatuSemester(): String
     {
         return $this->statuSemester;
     }
@@ -107,7 +100,7 @@ class Semester Extends BasicModel{
     /**
      * @param String $statuSemester
      */
-    public function setStatuSemester(?String $statuSemester): void
+    public function setStatuSemester(String $statuSemester): void
     {
         $this->statuSemester = $statuSemester;
     }

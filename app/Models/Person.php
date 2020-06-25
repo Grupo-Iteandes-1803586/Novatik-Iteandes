@@ -62,12 +62,11 @@ class Person extends BasicModel{
     function __destruct(){
         $this->Disconnect();
     }
-    /*Metodos Get y Set*/
     /**
      * @return int
      * Obtener codigo de la persona
      */
-    public function getIdPerson(): ?int
+    public function getIdPerson(): int
     {
         return $this->idPerson;
     }
@@ -75,7 +74,7 @@ class Person extends BasicModel{
     /**
      * @param int $idPerson
      */
-    public function setCodePerson(?int $idPerson): void
+    public function setCodePerson(int $idPerson): void
     {
         $this->idPerson = $idPerson;
     }
@@ -84,7 +83,7 @@ class Person extends BasicModel{
      * @return int
      * Obtener Documento de la persona
      */
-    public function getDocumentPerson(): ?int
+    public function getDocumentPerson(): int
     {
         return $this->documentPerson;
     }
@@ -92,7 +91,7 @@ class Person extends BasicModel{
     /**
      * @param int $documentPerson
      */
-    public function setDocumentPerson(?int $documentPerson): void
+    public function setDocumentPerson(int $documentPerson): void
     {
         $this->documentPerson = $documentPerson;
     }
@@ -101,7 +100,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener Nombres de la persona
      */
-    public function getNamePerson(): ?String
+    public function getNamePerson(): String
     {
         return $this->namePerson;
     }
@@ -109,7 +108,7 @@ class Person extends BasicModel{
     /**
      * @param String $namePerson
      */
-    public function setNamePerson(?String $namePerson): void
+    public function setNamePerson(String $namePerson): void
     {
         $this->namePerson = $namePerson;
     }
@@ -117,7 +116,7 @@ class Person extends BasicModel{
      * @return date
      * Obtener Fecha de nacimiento de la persona
      */
-    public function getDateBornPerson(): ?date
+    public function getDateBornPerson(): date
     {
         return $this->dateBornPerson;
     }
@@ -125,7 +124,7 @@ class Person extends BasicModel{
     /**
      * @param date $dateBornPerson
      */
-    public function setDateBornPerson(?date $dateBornPerson): void
+    public function setDateBornPerson(date $dateBornPerson): void
     {
         $this->dateBornPerson = $dateBornPerson;
     }
@@ -134,7 +133,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener Rh de la persona
      */
-    public function getRhPerson(): ?String
+    public function getRhPerson(): String
     {
         return $this->rhPerson;
     }
@@ -142,7 +141,7 @@ class Person extends BasicModel{
     /**
      * @param String $rhPerson
      */
-    public function setRhPerson(?String $rhPerson): void
+    public function setRhPerson(String $rhPerson): void
     {
         $this->rhPerson = $rhPerson;
     }
@@ -151,7 +150,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener Usuario  de la persona
      */
-    public function getUserPerson(): ?String
+    public function getUserPerson(): String
     {
         return $this->userPerson;
     }
@@ -159,7 +158,7 @@ class Person extends BasicModel{
     /**
      * @param String $userPerson
      */
-    public function setUserPerson(?String $userPerson): void
+    public function setUserPerson(String $userPerson): void
     {
         $this->userPerson = $userPerson;
     }
@@ -168,7 +167,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener password de la persona
      */
-    public function getPasswordPerson(): ?String
+    public function getPasswordPerson(): String
     {
         return $this->passwordPerson;
     }
@@ -176,7 +175,7 @@ class Person extends BasicModel{
     /**
      * @param String $passwordPerson
      */
-    public function setPasswordPerson(?String $passwordPerson): void
+    public function setPasswordPerson(String $passwordPerson): void
     {
         $this->passwordPerson = $passwordPerson;
     }
@@ -185,7 +184,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener tipo de persona de la persona
      */
-    public function getTypePerson(): ?String
+    public function getTypePerson(): String
     {
         return $this->typePerson;
     }
@@ -193,7 +192,7 @@ class Person extends BasicModel{
     /**
      * @param String $typePerson
      */
-    public function setTypePerson(?String $typePerson): void
+    public function setTypePerson(String $typePerson): void
     {
         $this->typePerson = $typePerson;
     }
@@ -202,7 +201,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener estado de la persona
      */
-    public function getStatePerson(): ?String
+    public function getStatePerson(): String
     {
         return $this->statePerson;
     }
@@ -210,7 +209,7 @@ class Person extends BasicModel{
     /**
      * @param String $statePerson
      */
-    public function setStatePerson(?String $statePerson): void
+    public function setStatePerson(String $statePerson): void
     {
         $this->statePerson = $statePerson;
     }
@@ -218,7 +217,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener Email de la persona
      */
-    public function getEmailPerson(): ?String
+    public function getEmailPerson(): String
     {
         return $this->emailPerson;
     }
@@ -226,7 +225,7 @@ class Person extends BasicModel{
     /**
      * @param String $emailPerson
      */
-    public function setEmailPerson(?String $emailPerson): void
+    public function setEmailPerson(String $emailPerson): void
     {
         $this->emailPerson = $emailPerson;
     }
@@ -235,7 +234,7 @@ class Person extends BasicModel{
      * @return int
      * Obtener Telefono de la persona
      */
-    public function getPhonePerson(): ?int
+    public function getPhonePerson(): int
     {
         return $this->phonePerson;
     }
@@ -243,7 +242,7 @@ class Person extends BasicModel{
     /**
      * @param int $phonePerson
      */
-    public function setPhonePerson(?int $phonePerson): void
+    public function setPhonePerson(int $phonePerson): void
     {
         $this->phonePerson = $phonePerson;
     }
@@ -252,7 +251,7 @@ class Person extends BasicModel{
      * @return String
      * Otener Direccion
      */
-    public function getAdressPerson(): ?String
+    public function getAdressPerson(): String
     {
         return $this->adressPerson;
     }
@@ -260,7 +259,7 @@ class Person extends BasicModel{
     /**
      * @param String $adressPerson
      */
-    public function setAdressPerson(?String $adressPerson): void
+    public function setAdressPerson(String $adressPerson): void
     {
         $this->adressPerson = $adressPerson;
     }
@@ -269,7 +268,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener genero de la persona
      */
-    public function getGenerePerson(): ?String
+    public function getGenerePerson(): String
     {
         return $this->generePerson;
     }
@@ -277,7 +276,7 @@ class Person extends BasicModel{
     /**
      * @param String $generePerson
      */
-    public function setGenerePerson(?String $generePerson): void
+    public function setGenerePerson(String $generePerson): void
     {
         $this->generePerson = $generePerson;
     }
@@ -286,7 +285,7 @@ class Person extends BasicModel{
      * @return String
      * Obtener foto de la persona
      */
-    public function getPhotoPerson(): ?String
+    public function getPhotoPerson(): String
     {
         return $this->photoPerson;
     }
@@ -294,7 +293,7 @@ class Person extends BasicModel{
     /**
      * @param String $photoPerson
      */
-    public function setPhotoPerson(?String $photoPerson): void
+    public function setPhotoPerson(String $photoPerson): void
     {
         $this->photoPerson = $photoPerson;
     }
