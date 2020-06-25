@@ -32,12 +32,11 @@ class TrainingProgram extends BasicModel{
     function __destruct(){
         $this->Disconnect();
     }
-    /*Metodos Get y Set*/
     /**
      * @return int
      * obtener id del training program
      */
-    public function getIdTrainingProgram(): ? int
+    public function getIdTrainingProgram(): int
     {
         return $this->idTrainingProgram;
     }
@@ -45,7 +44,7 @@ class TrainingProgram extends BasicModel{
     /**
      * @param int $idTrainingProgram
      */
-    public function setIdTrainingProgram(?int $idTrainingProgram): void
+    public function setIdTrainingProgram(int $idTrainingProgram): void
     {
         $this->idTrainingProgram = $idTrainingProgram;
     }
@@ -54,7 +53,7 @@ class TrainingProgram extends BasicModel{
      * @return int
      * Obtener codigo del Training Program
      */
-    public function getCodeTrainingProgram(): ?int
+    public function getCodeTrainingProgram(): int
     {
         return $this->codeTrainingProgram;
     }
@@ -62,7 +61,7 @@ class TrainingProgram extends BasicModel{
     /**
      * @param int $codeTrainingProgram
      */
-    public function setCodeTrainingProgram(?int $codeTrainingProgram): void
+    public function setCodeTrainingProgram(int $codeTrainingProgram): void
     {
         $this->codeTrainingProgram = $codeTrainingProgram;
     }
@@ -71,7 +70,7 @@ class TrainingProgram extends BasicModel{
      * @return String
      * Obtener nombre del Training Program
      */
-    public function getNameTrainingProgram(): ?String
+    public function getNameTrainingProgram(): String
     {
         return $this->nameTrainingProgram;
     }
@@ -79,7 +78,7 @@ class TrainingProgram extends BasicModel{
     /**
      * @param String $nameTrainingProgram
      */
-    public function setNameTrainingProgram(?String $nameTrainingProgram): void
+    public function setNameTrainingProgram(String $nameTrainingProgram): void
     {
         $this->nameTrainingProgram = $nameTrainingProgram;
     }
@@ -88,7 +87,7 @@ class TrainingProgram extends BasicModel{
      * @return float
      * Obtener la version del Training Program
      */
-    public function getVersion(): ?float
+    public function getVersion(): float
     {
         return $this->version;
     }
@@ -96,7 +95,7 @@ class TrainingProgram extends BasicModel{
     /**
      * @param float $version
      */
-    public function setVersion(?float $version): void
+    public function setVersion(float $version): void
     {
         $this->version = $version;
     }
@@ -105,7 +104,7 @@ class TrainingProgram extends BasicModel{
      * @return String
      * Obtener estado del Training Program
      */
-    public function getStatusTrainingProgram(): ?String
+    public function getStatusTrainingProgram(): String
     {
         return $this->statusTrainingProgram;
     }
@@ -113,7 +112,7 @@ class TrainingProgram extends BasicModel{
     /**
      * @param String $statusTrainingProgram
      */
-    public function setStatusTrainingProgram(?String $statusTrainingProgram): void
+    public function setStatusTrainingProgram(String $statusTrainingProgram): void
     {
         $this->statusTrainingProgram = $statusTrainingProgram;
     }
