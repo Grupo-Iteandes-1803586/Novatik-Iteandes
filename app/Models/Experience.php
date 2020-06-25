@@ -30,9 +30,9 @@ class Experience extends BasicModel{
     }
     //metodos get y set
     /**
-     * @return int|null
+     * @return int
      */
-    public function getidExperience(): ?int
+    public function getIdExperience (): int
     {
         return $this->idExperience;
     }
@@ -40,7 +40,7 @@ class Experience extends BasicModel{
     /**
      * @param int |null $idExperience
      */
-    public function setIdExperience(?int $idExperience): void
+    public function setIdExperience(int $idExperience): void
     {
         $this->idExperience = $idExperience;
     }

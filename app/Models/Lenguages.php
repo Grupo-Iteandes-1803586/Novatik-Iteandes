@@ -24,7 +24,7 @@ class Lenguages extends BasicModel{
     /**
      * @return int
      */
-    public function getIdLenguages(): ? int
+    public function getIdLenguages():  int
     {
         return $this->idLenguages;
     }
@@ -32,7 +32,7 @@ class Lenguages extends BasicModel{
     /**
      * @param   int $idLenguages
      */
-    public function setIdLenguages(? int $idLenguages): void
+    public function setIdLenguages(int $idLenguages): void
     {
         $this->idLenguages = $idLenguages;
     }
@@ -40,7 +40,7 @@ class Lenguages extends BasicModel{
     /**
      * @return String
      */
-    public function getNameLenguages(): ? String
+    public function getNameLenguages(): String
     {
         return $this->nameLenguages;
     }
@@ -48,7 +48,7 @@ class Lenguages extends BasicModel{
     /**
      * @param String   $nameLenguages
      */
-    public function setNameLenguages(?String $nameLenguages): void
+    public function setNameLenguages(String $nameLenguages): void
     {
         $this->nameLenguages = $nameLenguages;
     }
