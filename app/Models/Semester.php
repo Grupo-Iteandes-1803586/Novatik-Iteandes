@@ -106,7 +106,7 @@ class Semester extends BasicModel{
     }
     //Creacion del metodo create
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.Semester VALUES (NULL, ?, ?, ?, ?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.semester VALUES (NULL, ?, ?, ?, ?)", array(
             $this->nameSemester = nameSemester,
             $this->startDate = startDate,
             $this->endDate = endDate,
@@ -118,7 +118,7 @@ class Semester extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.Semester SET nameSemester = ?,startDate = ?,endDate = ?,statuSemester? = WHERE idSemester = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.semester SET nameSemester = ?,startDate = ?,endDate = ?,statuSemester? = WHERE idSemester = ?", array(
                 $this->nameSemester = nameSemester,
                 $this->startDate = startDate,
                 $this->endDate = endDate,
@@ -160,7 +160,7 @@ class Semester extends BasicModel{
         $semestes= null;
         if(idSemester > 0) {
             $semestes = new TrainingProgram;
-            $getrow = $semestes->getRow("SELECT * FROM Iteandes_Novatik.Semester WHERE idSemester =?", array(idSemester));
+            $getrow = $semestes->getRow("SELECT * FROM iteandes_novatik.semester WHERE idSemester =?", array(idSemester));
             $semestes->idSemester =  $getrow['$idSemester'];
             $semestes->nameSemester =$getrow['$nameSemester'] ;
             $semestes->startDate = $getrow['$startDate'] ;
@@ -173,7 +173,7 @@ class Semester extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return Semester::search("SELECT * FROM Iteandes_Novatik.Semester");
+        return Semester::search("SELECT * FROM iteandes_novatik.semester");
     }
 
     //Metodo to string o cadena de texto

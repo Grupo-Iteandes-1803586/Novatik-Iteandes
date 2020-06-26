@@ -111,7 +111,7 @@ class Experience extends BasicModel{
 
     //creacion de metodos
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.Experience VALUES (NULL,?, ?,?,?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.experience VALUES (NULL,?, ?,?,?)", array(
             $this-> institutionExperience,
             $this-> dedicationExperience,
             $this-> startExperience,
@@ -125,7 +125,7 @@ class Experience extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.Experience SET institutionExperience = ?,dedicationExperience = ?,startExperience = ?,endExperince = ? WHERE idExperience = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.experience SET institutionExperience = ?,dedicationExperience = ?,startExperience = ?,endExperince = ? WHERE idExperience = ?", array(
                 $this-> institutionExperience,
                 $this-> dedicationExperience,
                 $this-> startExperience,
@@ -158,7 +158,7 @@ class Experience extends BasicModel{
         $experiences = null;
         if($idExperience > 0) {
             $experiences = new Experience;
-            $getrow = $experiences->getRow("SELECT * FROM Iteandes_Novatik.Experience WHERE idExperience =?", array($idExperience));
+            $getrow = $experiences->getRow("SELECT * FROM iteandes_novatik.experience WHERE idExperience =?", array($idExperience));
             $experiences->institutionExperience = $getrow['institutionExperience'];
             $experiences->dedicationExperience = $getrow['ndedicationExperience'];
             $experiences->startExperience = $getrow['startExperience'];
@@ -170,7 +170,7 @@ class Experience extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return Experince::search("SELECT * FROM Iteandes_Novatik.Experience");
+        return Experince::search("SELECT * FROM iteandes_novatik.experience");
     }
 
     //Metodo to string o cadena de texto

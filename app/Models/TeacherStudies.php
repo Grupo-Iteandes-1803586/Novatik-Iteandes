@@ -73,7 +73,7 @@ class TeacherStudies extends BasicModel{
     }
     //creacion de metodos
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.TacherStudies VALUES (NULL,?, ?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.teacherstudies VALUES (NULL,?, ?)", array(
                 $this-> $titleTeacherStudies,
                 $this-> $yearStudyTeacher
             )
@@ -84,7 +84,7 @@ class TeacherStudies extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.TeacherStudies SET titleTeacherStudie = ?,yearStudyTeache = ? WHERE idTeacherStudies = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.teacherstudies SET titleTeacherStudie = ?,yearStudyTeache = ? WHERE idTeacherStudies = ?", array(
             $this->titleTeacherStudies,
             $this->yearStudyTeache,
                 $this->idTeacherStudies,
@@ -114,7 +114,7 @@ class TeacherStudies extends BasicModel{
         $teacherStudie = null;
         if($idTeacherStudies > 0) {
             $teacherStudie = new TeacherStudies;
-            $getrow = $teacherStudie->getRow("SELECT * FROM Iteandes_Novatik.TeacherStudies WHERE idTeacherStudies =?", array($idTeacherStudies));
+            $getrow = $teacherStudie->getRow("SELECT * FROM iteandes_novatik.teacherstudies WHERE idTeacherStudies =?", array($idTeacherStudies));
             $teacherStudie->titleTeacherStudies = $getrow['titleTeacherStudies'];
             $teacherStudie->yearStudyTeache = $getrow['yearStudyTeache'];
         }
@@ -124,7 +124,7 @@ class TeacherStudies extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return TeacherStudies::search("SELECT * FROM Iteandes_Novatik.TeacherStudies");
+        return TeacherStudies::search("SELECT * FROM iteandes_novatik.teacherstudies");
     }
     //Metodo to string o cadena de texto
     public function __toString()
