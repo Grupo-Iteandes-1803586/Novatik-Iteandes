@@ -118,7 +118,7 @@ class TrainingProgram extends BasicModel{
     }
     //Creacion del metodo create
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.TrainingProgram VALUES (NULL, ?, ?, ?, ?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.trainingprogram VALUES (NULL, ?, ?, ?, ?)", array(
             $this->codeTrainingProgram,
             $this->nameTrainingProgram ,
             $this->version,
@@ -130,7 +130,7 @@ class TrainingProgram extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.TrainingProgram SET nameTrainingProgram = ?,version = ?,statusTrainingProgram = ? WHERE idTrainingProgram = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.trainingprogram SET nameTrainingProgram = ?,version = ?,statusTrainingProgram = ? WHERE idTrainingProgram = ?", array(
                 $this->codeTrainingProgram,
                 $this->nameTrainingProgram ,
                 $this->version,
@@ -172,7 +172,7 @@ class TrainingProgram extends BasicModel{
         $Program = null;
         if($idTrainingProgram > 0) {
             $Program = new TrainingProgram;
-            $getrow = $Program->getRow("SELECT * FROM Iteandes_Novatik.TrainingProgram WHERE idTrainingProgram =?", array(idTrainingProgram));
+            $getrow = $Program->getRow("SELECT * FROM iteandes_novatik.trainingprogram WHERE idTrainingProgram =?", array(idTrainingProgram));
             $Program->idTrainingProgram =  $getrow['$idTrainingProgram'];
             $Program->codeTrainingProgram =$getrow['$codeTrainingProgram'] ;
             $Program->nameTrainingProgram = $getrow['$nameTrainingProgram'] ;
@@ -185,12 +185,12 @@ class TrainingProgram extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return TrainingProgram::search("SELECT * FROM Iteandes_Novatik.TrainingProgram");
+        return TrainingProgram::search("SELECT * FROM iteandes_novatik.trainingprogram");
     }
 
     public static function programRegistration ($codeTrainingProgram) : bool
     {
-        $result = TrainingProgram::search("SELECT idTrainingProgram FROM Iteandes_Novatik.TrainingProgram where codeTrainingProgram = ".$codeTrainingProgram);
+        $result = TrainingProgram::search("SELECT idTrainingProgram FROM iteandes_novatik.trainingprogram where codeTrainingProgram = ".$codeTrainingProgram);
         if (count($result) > 0){
             return true;
         }else{

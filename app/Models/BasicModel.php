@@ -16,7 +16,7 @@ abstract class BasicModel{
     private $password="iteandesNovatik";
     private $host ="localhost";
     private $driver="mysql";//tipo de Base de datos a usar
-    private $dbname ="Iteandes_Novatik";//Nombre de la base de datos
+    private $dbname ="iteandes_novatik";//Nombre de la base de datos
 
     #Metodos abstractos para CRUD de clases que heredan
     abstract protected static function search($query);

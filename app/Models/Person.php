@@ -300,7 +300,7 @@ class Person extends BasicModel{
 
     //Creacion del metodo create
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.Person VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.person VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
             $this->documentPerson,
             $this->namePerson,
             $this->dateBornPerson,
@@ -330,7 +330,7 @@ class Person extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.Person SET documentPerson = ?, namePerson = ?,dateBornPerson = ?, emailPerson = ?,phonePerson = ?,adressPerson = ?,statePerson = ?,photoPerson = ? WHERE idPerson = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.person SET documentPerson = ?, namePerson = ?,dateBornPerson = ?, emailPerson = ?,phonePerson = ?,adressPerson = ?,statePerson = ?,photoPerson = ? WHERE idPerson = ?", array(
                 $this->documentPerson,
                 $this->namePerson,
                 $this->dateBornPerson,
@@ -387,7 +387,7 @@ class Person extends BasicModel{
     $Users = null;
     if($idPerson > 0) {
         $Users = new Person;
-        $getrow = $Users->getRow("SELECT * FROM Iteandes_Novatik.Person WHERE idPerson =?", array($idPerson));
+        $getrow = $Users->getRow("SELECT * FROM iteandes_novatik.person WHERE idPerson =?", array($idPerson));
         $Users->documentPerson = $getrow['documentPerson'];
         $Users->namePerson = $getrow['namePerson'];
         $Users->dateBornPerson = $getrow['dateBornPerson'];
@@ -408,15 +408,15 @@ class Person extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return Person::search("SELECT * FROM Iteandes_Novatik.Person");
+        return Person::search("SELECT * FROM iteandes_novatik.Person");
     }
     public static function getForDocument($documentPerson) : array
     {
-        return Person::search("SELECT idPerson,documentPerson,namePerson,dateBornPerson,rhPerson,emailPerson,phonePerson,adressPerson,generePerson,typePerson,statePerson,photoPerson FROM Iteandes_Novatik.Person WHERE documentPerson = ".$documentPerson);
+        return Person::search("SELECT idPerson,documentPerson,namePerson,dateBornPerson,rhPerson,emailPerson,phonePerson,adressPerson,generePerson,typePerson,statePerson,photoPerson FROM iteandes_novatik.person WHERE documentPerson = ".$documentPerson);
     }
     public static function userRegistration ($documentPerson) : bool
     {
-        $result = Person::search("SELECT idPerson FROM Iteandes_Novatik.Person where documentPerson = ".$documentPerson);
+        $result = Person::search("SELECT idPerson FROM iteandes_novatik.person where documentPerson = ".$documentPerson);
         if (count($result) > 0){
             return true;
         }else{

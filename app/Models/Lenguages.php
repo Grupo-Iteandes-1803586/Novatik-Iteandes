@@ -54,7 +54,7 @@ class Lenguages extends BasicModel{
     }
     //creacion de metodos
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.Lenguages VALUES (NULL, ?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.lenguages VALUES (NULL, ?)", array(
                 $this-> $nameLenguages
             )
         );
@@ -64,7 +64,7 @@ class Lenguages extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.Lenguages SET nameLenguages = ? WHERE idLenguages = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.lenguages SET nameLenguages = ? WHERE idLenguages = ?", array(
                 $this->nameLenguages,
                 $this ->idLenguages
             )
@@ -92,7 +92,7 @@ class Lenguages extends BasicModel{
         $lenguages= null;
         if(lenguages > 0) {
             $lenguages = new Lenguages;
-            $getrow = $lenguages->getRow("SELECT * FROM Iteandes_Novatik.Lenguages WHERE idLenguages =?", array($idLenguages));
+            $getrow = $lenguages->getRow("SELECT * FROM iteandes_novatik.lenguages WHERE idLenguages =?", array($idLenguages));
             $lenguages->nameLenguages = $getrow['nameLenguages'];
 
         }
@@ -102,7 +102,7 @@ class Lenguages extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return Lenguages::search("SELECT * FROM Iteandes_Novatik.Lenguages");
+        return Lenguages::search("SELECT * FROM iteandes_novatiks.lenguages");
     }
 
     //Metodo to string o cadena de texto
