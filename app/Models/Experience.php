@@ -179,4 +179,11 @@ class Experience extends BasicModel{
         return $this->institutionExperience ." ".$this->dedicationExperience." ".$this->startExperience ." ".$this->endExperince;
     }
 
+    public function delete($idExperience): bool
+    {
+        $experienceDelet = Experience::searchForId($idExperience);
+        $experienceDelet->setIdExperience($idExperience);
+        return $experienceDelet->update();
+    }
+
 }

@@ -30,11 +30,17 @@ class SemesterControllers{
 }
     //Funcion create Semestre
     static public function create(){
+        //var_dump($_POST);
         try{
             $arraySemeste = array();
-            $arraySemeste['nameSemester'] = $_POST['$nameSemester'];
-            $arraySemeste['startDate'] = $_POST['$startDate'];
-            $arraySemeste['endDate'] = $_POST['$endDate'];
+            $arraySemeste['nameSemester'] = $_POST['nameSemester'];
+            $arraySemeste['descriptionSemester'] = $_POST['descriptionSemester'];
+            $arraySemeste['startDate'] = $_POST['startDate'];
+            $arraySemeste['endDate'] = $_POST['endDate'];
+            $arraySemeste ['startDate50'] = $_POST['startDate50'];
+            $arraySemeste ['endDate50'] = $_POST['endDate50'];
+            $arraySemeste ['starDate2Semester'] = $_POST['starDate2Semester'] ;
+            $arraySemeste ['endDate2Semester'] = $_POST['endDate2Semester'] ;
             $arraySemeste['statuSemester'] ='Activo';
             //Validacion del registro del semestre
             $semester = new Semester($arraySemeste);
@@ -51,9 +57,14 @@ class SemesterControllers{
     static public function edit(){
         try{
             $arraySemeste = array();
-            $arraySemeste['nameSemester'] = $_POST['$nameSemester'];
-            $arraySemeste['startDate'] = $_POST['$startDate'];
-            $arraySemeste['endDate'] = $_POST['$endDate'];
+            $arraySemeste['nameSemester'] = $_POST['nameSemester'];
+            $arraySemeste['descriptionSemester'] = $_POST['descriptionSemester'];
+            $arraySemeste['startDate'] = $_POST['startDate'];
+            $arraySemeste['endDate'] = $_POST['endDate'];
+            $arraySemeste ['startDate50'] = $_POST['startDate50'];
+            $arraySemeste ['endDate50'] = $_POST['endDate50'];
+            $arraySemeste ['starDate2Semester'] = $_POST['starDate2Semester'] ;
+            $arraySemeste ['endDate2Semester'] = $_POST['endDate2Semester'] ;
             $arraySemeste['statuSemester'] =$_POST['$statuSemester'];
             $arraySemeste['idSemester'] = $_POST['$idSemester'];
 

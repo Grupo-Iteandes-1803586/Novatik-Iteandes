@@ -30,9 +30,9 @@ class TrainingProgramController{
     static public function create(){
         try{
             $arrayProgram= array();
-            $arrayProgram['codeTrainingProgram'] =$_POST['$codeTrainingProgram'];
-            $arrayProgram['nameTrainingProgram'] = $_POST['$nameTrainingProgram'];
-            $arrayProgram['version'] = $_POST['$version'];
+            $arrayProgram['codeTrainingProgram'] =$_POST['codeTrainingProgram'];
+            $arrayProgram['nameTrainingProgram'] = $_POST['nameTrainingProgram'];
+            $arrayProgram['version'] = $_POST['version'];
             $arrayProgram['statusTrainingProgram'] = 'Activo';
             //Validacion del registro del programma de formacion
             $program = new TrainingProgram($arrayProgram);
@@ -49,11 +49,11 @@ class TrainingProgramController{
     static public function edit(){
         try{
             $arrayProgram= array();
-            $arrayProgram['codeTrainingProgram'] =$_POST['$codeTrainingProgram'];
-            $arrayProgram['nameTrainingProgram'] = $_POST['$nameTrainingProgram'];
+            $arrayProgram['codeTrainingProgram'] =$_POST['codeTrainingProgram'];
+            $arrayProgram['nameTrainingProgram'] = $_POST['nameTrainingProgram'];
             $arrayProgram['version'] = $_POST['$version'];
             $arrayProgram['statusTrainingProgram'] = $_POST['statusTrainingProgram'];
-            $arrayProgram['$idTrainingProgram'] = $_POST['$idTrainingProgram'];
+            $arrayProgram['$idTrainingProgram'] = $_POST['idTrainingProgram'];
 
             $traProgram = new TrainingProgram($arrayProgram);
             $traProgram->update();

@@ -156,11 +156,11 @@ class TrainingProgram extends BasicModel{
 
         foreach($getrows as $value){
             $Program = new TrainingProgram();
-            $Program->idTrainingProgram =  $value['$idTrainingProgram'];
-            $Program->codeTrainingProgram =$value['$codeTrainingProgram'] ;
-            $Program->nameTrainingProgram = $value['$nameTrainingProgram'] ;
-            $Program->version = $value['$version'];
-            $Program->statusTrainingProgram = $value['$statusTrainingProgram'];
+            $Program->idTrainingProgram =  $value['idTrainingProgram'];
+            $Program->codeTrainingProgram =$value['codeTrainingProgram'] ;
+            $Program->nameTrainingProgram = $value['nameTrainingProgram'] ;
+            $Program->version = $value['version'];
+            $Program->statusTrainingProgram = $value['statusTrainingProgram'];
             $Program->Disconnect();
             array_push($arrProgram,$Program);
         }
@@ -172,12 +172,12 @@ class TrainingProgram extends BasicModel{
         $Program = null;
         if($idTrainingProgram > 0) {
             $Program = new TrainingProgram;
-            $getrow = $Program->getRow("SELECT * FROM iteandes_novatik.trainingprogram WHERE idTrainingProgram =?", array(idTrainingProgram));
-            $Program->idTrainingProgram =  $getrow['$idTrainingProgram'];
-            $Program->codeTrainingProgram =$getrow['$codeTrainingProgram'] ;
-            $Program->nameTrainingProgram = $getrow['$nameTrainingProgram'] ;
+            $getrow = $Program->getRow("SELECT * FROM iteandes_novatik.trainingprogram WHERE idTrainingProgram =?", array($idTrainingProgram));
+            $Program->idTrainingProgram =  $getrow['idTrainingProgram'];
+            $Program->codeTrainingProgram =$getrow['codeTrainingProgram'] ;
+            $Program->nameTrainingProgram = $getrow['nameTrainingProgram'] ;
             $Program->version = $getrow['$version'];
-            $Program->statusTrainingProgram = $getrow['$statusTrainingProgram'];
+            $Program->statusTrainingProgram = $getrow['statusTrainingProgram'];
         }
         $Program->Disconnect();
         return $Program;
@@ -203,4 +203,10 @@ class TrainingProgram extends BasicModel{
         return $this->codeTrainingProgram." ".$this->nameTrainingProgram." ".$this->version." ".$this->statusTrainingProgram;
     }
 
+    public function delete($idTrainingProgram): bool
+    {
+        $programDelet = TrainingProgram::searchForId($idTrainingProgram);
+        $programDelet->setStatusTrainingProgram("Inactivo");
+        return $programDelet->update();
+    }
 }
