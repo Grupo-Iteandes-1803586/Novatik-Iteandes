@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use http\QueryString;
-
-require ('BasicModel.php');
+require('BasicModel.php');
 #Creacion de la clase con herencia de la clase Basic Model
 class Person extends BasicModel{
     private $idPerson;
@@ -434,5 +433,12 @@ class Person extends BasicModel{
         return $this->documentPerson." ".$this->namePerson." ".$this->dateBornPerson." ".$this->rhPerson
             ." ".$this->emailPerson ." ".$this->phonePerson." ".$this->adressPerson." ".$this->generePerson." ".$this->userPerson
             ." ".$this->passwordPerson." ".$this->typePerson." ".$this->statePerson." ".$this->photoPerson;
+    }
+
+    public function delete($idPerson): bool
+    {
+        $personDelet = Person::searchForId($idPerson);
+        $personDelet->setStatePerson("Inactivo");
+        return $personDelet->update();
     }
 }
