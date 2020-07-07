@@ -61,6 +61,35 @@ class ExperienceControllers
             var_dump($e);
         }
     }
+    static public function activate (){
+        try {
+            $Experience = Experience::searchForId($_GET['Id']);
+            $Experience->setEstado("Activo");
+            if($Experience->update()){
+                header("Location: ../../views/modules/Experience/index.php");
+            }else{
+                header("Location: ../../views/modules/Experience/index.php?respuesta=error&mensaje=Error al guardar");
+            }
+        } catch (\Exception $e) {
+            //var_dump($e);
+            header("Location: ../../views/modules/Experience/index.php?respuesta=error&mensaje=".$e->getMessage());
+        }
+    }
+
+    static public function inactivate (){
+        try {
+            $Experience = Experience::searchForId($_GET['Id']);
+            $Experience->setEstado("Inactivo");
+            if($Experience->update()){
+                header("Location: ../../views/modules/Experience/index.php");
+            }else{
+                header("Location: ../../views/modules/Experience/index.php?respuesta=error&mensaje=Error al guardar");
+            }
+        } catch (\Exception $e) {
+            //var_dump($e);
+            header("Location: ../../views/modules/Experience/index.php?respuesta=error");
+        }
+    }
 
     static public function getAll ()
     {

@@ -72,6 +72,12 @@ class Lenguages extends BasicModel{
         $this->Disconnect();
         return $result;
     }
+    //Creacion del la funcion eliminar o cambiar estado de Lenguages segun el Id
+    public function deleted($idLenguages) : bool{
+        $Lenguages = idLenguages::searchForId($idLenguages); //Buscando un usuario por el ID
+        $Lenguages->setStateLenguages("Inactivo"); //Cambia el estado del Usuario
+        return $Lenguages->update();
+    }
 
     //buscar por query
     public static function search($query) : array{
