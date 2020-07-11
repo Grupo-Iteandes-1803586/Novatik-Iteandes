@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <title><?= getenv('TITLE_SITE')?> | Semestre</title>
+    <title><?= getenv('TITLE_SITE')?> | Crear Semestre</title>
     <?php require("../../partials/head_imports.php") ;?>
     <?php require("../../partials/header.php");?>
 
@@ -102,7 +102,7 @@
                                 <input required type="date" class="form-control" id="endDate2Semester" name="endDate2Semester" placeholder="Ingrese la fecha de inicio">
                             </div>
                         </div>
-            </div>
+                    </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-info">Enviar</button>
