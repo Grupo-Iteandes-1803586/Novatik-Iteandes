@@ -136,6 +136,12 @@ class Experience extends BasicModel{
         $this->Disconnect();
         return $result;
     }
+    //Creacion del la funcion eliminar o cambiar estado de Experience segun el Id
+    public function deleted($idExperience) : bool{
+        $Experience = Experience::searchForId($idExperience); //Buscando un usuario por el ID
+        $Experience->setStateExperience("Inactivo"); //Cambia el estado del Usuario
+        return $Experience->update();
+    }
 
     //buscar por query
     public static function search($query) : array{

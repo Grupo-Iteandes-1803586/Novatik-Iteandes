@@ -93,6 +93,12 @@ class TeacherStudies extends BasicModel{
         $this->Disconnect();
         return $result;
     }
+    //Creacion del la funcion eliminar o cambiar estado de TeacherStudies segun el Id
+    public function deleted($idTeacherStudies) : bool{
+        $TeacherStudies = TeacherStudies::searchForId($idTeacherStudies); //Buscando un usuario por el ID
+        $TeacherStudies->setStateTeacherStudies("Inactivo"); //Cambia el estado del Usuario
+        return $TeacherStudies->update();
+    }
 
     //buscar por query
     public static function search($query) : array{

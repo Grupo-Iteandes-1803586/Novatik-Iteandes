@@ -54,6 +54,35 @@ class TeacherStudiesControllers
             header("Location: ../../views/modules/TeacherStudies/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
+    static public function activate (){
+        try {
+            $TeacherStudies = TeacherStudies::searchForId($_GET['Id']);
+            $TeacherStudies->setEstado("Activo");
+            if($TeacherStudies->update()){
+                header("Location: ../../views/modules/TeacherStudies/index.php");
+            }else{
+                header("Location: ../../views/modules/TeacherStudies/index.php?respuesta=error&mensaje=Error al guardar");
+            }
+        } catch (\Exception $e) {
+            //var_dump($e);
+            header("Location: ../../views/modules/TeacherStudies/index.php?respuesta=error&mensaje=".$e->getMessage());
+        }
+    }
+
+    static public function inactivate (){
+        try {
+            $Lenguages = Lenguages::searchForId($_GET['Id']);
+            $Lenguages->setEstado("Inactivo");
+            if($Lenguages->update()){
+                header("Location: ../../views/modules/Lenguages/index.php");
+            }else{
+                header("Location: ../../views/modules/Lenguages/index.php?respuesta=error&mensaje=Error al guardar");
+            }
+        } catch (\Exception $e) {
+            //var_dump($e);
+            header("Location: ../../views/modules/Lenguages/index.php?respuesta=error");
+        }
+    }
     static public function searchForID ($idTeacherStudies){
         try {
             return TeacherStudies::searchForId($idTeacherStudies);
