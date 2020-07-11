@@ -32,7 +32,8 @@ class Semester extends BasicModel{
         $this->statuSemester = $semester['statuSemester'] ?? null;
     }
     /*Metodo destructor cierre de la conexion*/
-    function __destruct(){
+    function __destruct()
+    {
         $this->Disconnect();
     }
 
@@ -268,7 +269,7 @@ class Semester extends BasicModel{
             $semeste->Disconnect();
             array_push($arrSemester,$semeste);
         }
-        $tmp->Disconnect;
+        $tmp->Disconnect();
         return $arrSemester;
     }
     //Buscar pot Id de semestre

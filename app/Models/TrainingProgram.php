@@ -164,7 +164,7 @@ class TrainingProgram extends BasicModel{
             $Program->Disconnect();
             array_push($arrProgram,$Program);
         }
-        $tmp->Disconnect;
+        $tmp->Disconnect();
         return $arrProgram;
     }
     //Buscar pot Id de TrainingProgram
