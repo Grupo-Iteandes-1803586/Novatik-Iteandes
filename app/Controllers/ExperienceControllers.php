@@ -15,9 +15,13 @@ class ExperienceControllers
         } else if ($action == "edit") {
             ExperienceControllers::edit();
         } else if ($action == "searchForID") {
-            ExperienceControllers::searchForID($_REQUEST['idExperience']);
+            ExperienceControllers::searchForID($_REQUEST['$idExperience']);
         } else if ($action == "searchAll") {
             ExperienceControllers::getAll();
+        }else if($action == "active"){
+            ExperienceControllers::active();
+        }else if($action =="inactive"){
+            ExperienceControllers::inactive();
         }
     }
     static public function create()
@@ -29,6 +33,7 @@ class ExperienceControllers
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
             $arrayExperience['startExperience'] = $_POST['startExperience'];
             $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['stateExperience'] = 'Activo';
             $Experience = new Experience ($arrayExperience);
             if($Experience->create()){
                 header("Location: ../../views/modules/Experience/create.php?respuesta=correcto");
@@ -42,9 +47,12 @@ class ExperienceControllers
     static public function edit (){
         try {
             $arrayExperience = array();
-            $arrayExperience['titleTeacherStudies'] = $_POST['titleTeacherStudies'];
-            $arrayExperience['yearStudyTeacher'] = $_POST['yearStudyTeacher'];
-            $arrayExperience['idTeacherStudies'] = $_POST['idTeacherStudies'];
+            $arrayExperience['idExperience'] = $_POST['idExperience'];
+            $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
+            $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
+            $arrayExperience['startExperience'] = $_POST['startExperience'];
+            $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['stateExperience'] = $_POST['stateExperience'];
             $Experience = new Experience($arrayExperience);
             $Experience->update();
 
@@ -63,7 +71,7 @@ class ExperienceControllers
     }
     static public function activate (){
         try {
-            $Experience = Experience::searchForId($_GET['Id']);
+            $Experience = Experience::searchForId($_GET['idExperience']);
             $Experience->setEstado("Activo");
             if($Experience->update()){
                 header("Location: ../../views/modules/Experience/index.php");
@@ -78,7 +86,7 @@ class ExperienceControllers
 
     static public function inactivate (){
         try {
-            $Experience = Experience::searchForId($_GET['Id']);
+            $Experience = Experience::searchForId($_GET['idExperience']);
             $Experience->setEstado("Inactivo");
             if($Experience->update()){
                 header("Location: ../../views/modules/Experience/index.php");

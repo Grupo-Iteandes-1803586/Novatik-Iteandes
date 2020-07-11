@@ -348,7 +348,7 @@ class Person extends BasicModel{
         return $result;
     }
     //Creacion del la funcion eliminar o cambiar estado de una persona segun el Id
-    public function deleted($idPerson) : bool{
+    public function delete($idPerson) : bool{
         $User = Person::searchForId($idPerson); //Buscando un usuario por el ID
         $User->setStatePerson("Inactivo"); //Cambia el estado del Usuario
         return $User->update();
@@ -435,10 +435,4 @@ class Person extends BasicModel{
             ." ".$this->passwordPerson." ".$this->typePerson." ".$this->statePerson." ".$this->photoPerson;
     }
 
-    public function delete($idPerson): bool
-    {
-        $personDelet = Person::searchForId($idPerson);
-        $personDelet->setStatePerson("Inactivo");
-        return $personDelet->update();
-    }
 }

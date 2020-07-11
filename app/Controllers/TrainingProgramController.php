@@ -66,7 +66,7 @@ class TrainingProgramController{
     //Funcion Activar estado del  programa de formacion
     static public function active(){
             try{
-                $ObjTrainingP = TrainingProgram::searchForId($_GET['$idTrainingProgram']);
+                $ObjTrainingP = TrainingProgram::searchForId($_GET['idTrainingProgram']);
                 $ObjTrainingP->setStatusTrainingProgram('Activo');
                 if($ObjTrainingP->update()){
                     header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=correcto");
@@ -80,7 +80,7 @@ class TrainingProgramController{
     //Funcion Inactivo del Programa de Formacion
     static public function inactive(){
         try{
-            $ObjTrainingP = TrainingProgram::searchForId($_GET['$idTrainingProgram']);
+            $ObjTrainingP = TrainingProgram::searchForId($_GET['idTrainingProgram']);
             $ObjTrainingP->setStatusTrainingProgram('Inactivo');
             if($ObjTrainingP->update()){
                 header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=correcto");
