@@ -1,9 +1,10 @@
-<?php require ("../../partials/routes.php");
-require ("../../../app/Controllers/PersonController.php");
-use App\Controllers\PersonController;
-?>
-<!doctype html>
-<html lang="en">
+<?php
+require ("../../partials/routes.php");
+require ("../../../app/Controllers/SemesterControllers.php");
+
+use App\Controllers\SemesterControllers;?>
+<!DOCTYPE html>
+<html>
 <head>
     <title><?= getenv('TITLE_SITE');?>| Consultar</title>
     <?php require ("../../partials/head_imports.php");?>
@@ -53,7 +54,7 @@ use App\Controllers\PersonController;
             <!-- Horizontal Form -->
             <div class="card card-info">
                 <?php if(!empty($_GET["idSemester"]) && isset($_GET["idSemester"])){
-                    $DataSemester = \App\Controllers\SemesterControllers::searchForID($_GET["idSemester"]);
+                    $DataSemester =  \App\Controllers\SemesterControllers::searchForID($_GET["idSemester"]);
                     if(!empty($DataSemester)){
                         ?>
                         <div class="card-header">
@@ -61,35 +62,37 @@ use App\Controllers\PersonController;
                         </div>
                         <div class="card-body">
                             <p>
-                                <strong><i class="fas fa-book mr-1"></i> Nombres</strong>
+                                <strong><i class="fas fa-book mr-1"></i> #</strong>
                             <p class="text-muted">
-                                <?= $DataSemester->getNameSemester() ?>
+                                <?= $DataSemester->getIdSemester(); ?>
                             </p>
+                            <hr>
+                            <strong><i class="fas fa-user mr-1"></i> Nombre</strong>
+                            <p class="text-muted"><?=$DataSemester->getNameSemester(); ?></p>
+                            <hr>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Fecha de inicio</strong>
-                            <p class="text-muted"><?=$DataSemester->getStartDate() ?></p>
+                            <p class="text-muted"><?=$DataSemester->getStartDate(); ?></p>
                             <hr>
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de cierre</strong>
-                            <p class="text-muted"><?= $DataSemester->getEndDate() ?></p>
+                            <p class="text-muted"><?= $DataSemester->getEndDate(); ?></p>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Fecha de inicio 1er 50</strong>
-                            <p class="text-muted"><?=$DataSemester->getStartDate50() ?></p>
+                            <p class="text-muted"><?=$DataSemester->getStartDate50(); ?></p>
                             <hr>
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de cierre 1er 50</strong>
-                            <p class="text-muted"><?= $DataSemester->getEndDate50() ?></p>
+                            <p class="text-muted"><?= $DataSemester->getEndDate50(); ?></p>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Fecha de inicio 2do 50</strong>
-                            <p class="text-muted"><?=$DataSemester->getStarDate2Semester() ?></p>
+                            <p class="text-muted"><?=$DataSemester->getStarDate2Semester(); ?></p>
                             <hr>
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de cierre 2do 50</strong>
-                            <p class="text-muted"><?= $DataSemester->getEndDate2Semester() ?></p>
+                            <p class="text-muted"><?= $DataSemester->getEndDate2Semester(); ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?= $DataSemester->getStatuSemester() ?></p>
+                            <p class="text-muted"><?= $DataSemester->getStatuSemester(); ?></p>
                             <hr>
                             </p>
-
-                        </div>
                         <!--Sub menu-->
                         <div class="card-footer">
                             <div class="row">
@@ -119,6 +122,7 @@ use App\Controllers\PersonController;
     </div>
     <?php require ("../../partials/footer.php");?>
     <!--</div>-->
+</div>
     <?php require ("../../partials/scripts.php");?>
 </body>
 </html>

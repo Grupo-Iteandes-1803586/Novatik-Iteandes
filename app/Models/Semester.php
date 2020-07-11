@@ -214,7 +214,6 @@ class Semester extends BasicModel{
 
     //Creacion del metodo create
     public function create() : bool{
-        var_dump($this);
         $result = $this->insertRow( "INSERT INTO iteandes_novatik.semester VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
             $this->nameSemester,
             $this->descriptionSemester,
@@ -249,7 +248,7 @@ class Semester extends BasicModel{
         return $result;
     }
     //buscar por query
-    public static function search($query) : array{
+    public static function search($query): array{
         $arrSemester = array();
         $tmp = new Semester();
         $getrows = $tmp->getRows($query);
@@ -257,14 +256,14 @@ class Semester extends BasicModel{
         foreach($getrows as $value){
             $semeste = new Semester();
             $semeste->idSemester =  $value['idSemester'];
-            $semeste->nameSemester =$value['nameSemester'] ;
+            $semeste->nameSemester = $value['nameSemester'] ;
             $semeste->descriptionSemester =$value['descriptionSemester'] ;
-            $semeste->startDate = $value['startDate'] ;
-            $semeste->endDate = $value['endDate'];
-            $semeste->startDate50 = $value['startDate50'];
-            $semeste->endDate50 = $value['endDate50'];
-            $semeste->starDate2Semester = $value['starDate2Semester'] ;
-            $semeste->endDate2Semester = $value['endDate2Semester'] ;
+            $semeste->startDate= date('Y-m-d',strtotime($value['startDate']));
+            $semeste->endDate = date('Y-m-d',strtotime($value['endDate']));
+            $semeste->startDate50 = date('Y-m-d',strtotime($value['startDate50']));
+            $semeste->endDate50 = date('Y-m-d',strtotime($value['endDate50']));
+            $semeste->starDate2Semester = date('Y-m-d',strtotime($value['starDate2Semester']));
+            $semeste->endDate2Semester = date('Y-m-d',strtotime($value['endDate2Semester']));
             $semeste->statuSemester = $value['statuSemester'];
             $semeste->Disconnect();
             array_push($arrSemester,$semeste);
@@ -275,8 +274,8 @@ class Semester extends BasicModel{
     //Buscar pot Id de semestre
     public static function searchForId($idSemester) : Semester{
         $semestes= null;
-        if(idSemester > 0) {
-            $semestes = new TrainingProgram;
+        if($idSemester > 0) {
+            $semestes = new Semester();
             $getrow = $semestes->getRow("SELECT * FROM iteandes_novatik.semester WHERE idSemester =?", array($idSemester));
             $semestes->idSemester =  $getrow['idSemester'];
             $semestes->nameSemester =$getrow['nameSemester'] ;

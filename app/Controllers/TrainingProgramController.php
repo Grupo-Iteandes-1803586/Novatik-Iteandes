@@ -51,13 +51,13 @@ class TrainingProgramController{
             $arrayProgram= array();
             $arrayProgram['codeTrainingProgram'] =$_POST['codeTrainingProgram'];
             $arrayProgram['nameTrainingProgram'] = $_POST['nameTrainingProgram'];
-            $arrayProgram['version'] = $_POST['$version'];
+            $arrayProgram['version'] = $_POST['version'];
             $arrayProgram['statusTrainingProgram'] = $_POST['statusTrainingProgram'];
-            $arrayProgram['$idTrainingProgram'] = $_POST['idTrainingProgram'];
+            $arrayProgram['idTrainingProgram'] = $_POST['idTrainingProgram'];
 
             $traProgram = new TrainingProgram($arrayProgram);
             $traProgram->update();
-            header ("Location: ../../views/modules/TrainingProgram/show.php?id=".$traProgram->getIdTrainingProgram()."&respuesta=correcto");
+            header ("Location: ../../views/modules/TrainningProgram/show.php?idTrainingProgram=".$traProgram->getIdTrainingProgram()."&respuesta=correcto");
         }catch (Exception $e){
             header("Location: ../../views/modules/TrainningProgram/edit.php?respuesta=error&mensaje" . $e-> getMessage());
         }

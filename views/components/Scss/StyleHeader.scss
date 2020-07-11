@@ -75,10 +75,43 @@
 .navbar-white {
     width: 81.4%;
 }
-
+.card-header {
+    background-color:  #7CFC00!important;
+}
+.card-title {
+    color: white;
+}
+.iconP{
+    color: white;
+}
+.btn-primary {
+    background-color: #191970 !important;
+    border-color: #191970 !important;
+}
+.btn-secondary {
+    background-color: #191970 !important;
+    border-color: #191970 !important;
+}
+.btn-danger {
+    background-color: #7CFC00!important;
+    border-color: #7CFC00!important;
+}
+.btn-warning {
+    color : white !important;
+    background-color: #008B8B!important;
+    border-color: #008B8B!important;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(#007bff,.05)!important;
+}
+.page-item.active .page-link {
+    background-color: #191970 !important;
+    border-color: #191970 !important;
+}
 @media (min-width: 992px){
     .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .main-footer, .sidebar-mini.sidebar-collapse .main-header {
         width: 90%;
     }
 }
+
 

@@ -53,13 +53,13 @@ abstract class BasicModel{
         $this->isConnected = false;
     }
     #Geting row devuelve en una sola fila el valor de la base de datos
-    public function getRow($query,$params=array()){
+    public function getRow($query, $params = array()){
         try{
             $stmt = $this->datab->prepare($query);
             $stmt->execute($params);
-            return $stmt->fetchAll();
-        }catch (PDOException $e){
-            throw new \Exception($e -> getMessage());
+            return $stmt->fetch();
+        }catch(PDOException $e){
+            throw new Exception($e->getMessage());
         }
     }
     #Getting multiple rows
@@ -95,7 +95,6 @@ abstract class BasicModel{
             throw new Exception($e->getMessage());
         }
     }
-
     //updating existing row
     public function updateRow($query, $params){
         return $this->insertRow($query, $params);

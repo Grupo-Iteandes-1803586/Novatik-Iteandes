@@ -22,11 +22,11 @@ class TrainingProgram extends BasicModel{
     public function __construct($trainingProgram = array())
     {
         parent::__construct();//se llama al constructor de la clase BasicModel
-        $this->idTrainingProgram =  $trainingProgram['$idTrainingProgram']?? null;
-        $this->codeTrainingProgram =$trainingProgram['$codeTrainingProgram'] ?? null;
-        $this->nameTrainingProgram = $trainingProgram['$nameTrainingProgram'] ?? null;
-        $this->version = $trainingProgram['$version'] ?? null;
-        $this->statusTrainingProgram = $trainingProgram['$statusTrainingProgram'] ?? null;
+        $this->idTrainingProgram =  $trainingProgram['idTrainingProgram']?? null;
+        $this->codeTrainingProgram =$trainingProgram['codeTrainingProgram'] ?? null;
+        $this->nameTrainingProgram = $trainingProgram['nameTrainingProgram'] ?? null;
+        $this->version = $trainingProgram['version'] ?? null;
+        $this->statusTrainingProgram = $trainingProgram['statusTrainingProgram'] ?? null;
     }
     /*Metodo destructor cierre de la conexion*/
     function __destruct(){
@@ -130,7 +130,7 @@ class TrainingProgram extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.trainingprogram SET nameTrainingProgram = ?,version = ?,statusTrainingProgram = ? WHERE idTrainingProgram = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.trainingprogram SET codeTrainingProgram =?,nameTrainingProgram = ?,version = ?,statusTrainingProgram = ? WHERE idTrainingProgram = ?", array(
                 $this->codeTrainingProgram,
                 $this->nameTrainingProgram ,
                 $this->version,
@@ -142,7 +142,7 @@ class TrainingProgram extends BasicModel{
         return $result;
     }
     //Creacion del la funcion eliminar o cambiar estado de un Training Program segun el Id
-    public function deleted($idTrainingProgram) : bool{
+    public function delete($idTrainingProgram) : bool{
         $Program = TrainingProgram::searchForId($idTrainingProgram); //Buscando un Programa por el ID
         $Program->setStatusTrainingProgram("Inactivo"); //Cambia el estado del Programa
         return $Program->update();
@@ -176,7 +176,7 @@ class TrainingProgram extends BasicModel{
             $Program->idTrainingProgram =  $getrow['idTrainingProgram'];
             $Program->codeTrainingProgram =$getrow['codeTrainingProgram'] ;
             $Program->nameTrainingProgram = $getrow['nameTrainingProgram'] ;
-            $Program->version = $getrow['$version'];
+            $Program->version = $getrow['version'];
             $Program->statusTrainingProgram = $getrow['statusTrainingProgram'];
         }
         $Program->Disconnect();
@@ -201,12 +201,5 @@ class TrainingProgram extends BasicModel{
     public function __toString()
     {
         return $this->codeTrainingProgram." ".$this->nameTrainingProgram." ".$this->version." ".$this->statusTrainingProgram;
-    }
-
-    public function delete($idTrainingProgram): bool
-    {
-        $programDelet = TrainingProgram::searchForId($idTrainingProgram);
-        $programDelet->setStatusTrainingProgram("Inactivo");
-        return $programDelet->update();
     }
 }
