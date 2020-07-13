@@ -103,7 +103,7 @@ class Semester extends BasicModel{
     /**
      * @return date
      */
-    public function getStartDate(): date
+    public function getStartDate()
     {
         return $this->startDate;
     }
@@ -119,7 +119,7 @@ class Semester extends BasicModel{
     /**
      * @return date
      */
-    public function getEndDate(): date
+    public function getEndDate()
     {
         return $this->endDate;
     }
@@ -151,7 +151,7 @@ class Semester extends BasicModel{
     /**
      * @return date
      */
-    public function getStartDate50(): date
+    public function getStartDate50()
     {
         return $this->startDate50;
     }
@@ -167,7 +167,7 @@ class Semester extends BasicModel{
     /**
      * @return date
      */
-    public function getEndDate50(): date
+    public function getEndDate50()
     {
         return $this->endDate50;
     }
@@ -183,7 +183,7 @@ class Semester extends BasicModel{
     /**
      * @return date
      */
-    public function getStarDate2Semester(): date
+    public function getStarDate2Semester()
     {
         return $this->starDate2Semester;
     }
@@ -199,7 +199,7 @@ class Semester extends BasicModel{
     /**
      * @return date
      */
-    public function getEndDate2Semester(): date
+    public function getEndDate2Semester()
     {
         return $this->endDate2Semester;
     }
