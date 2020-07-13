@@ -90,6 +90,7 @@ use App\Controllers\SemesterControllers;?>
                                     <th>Fecha Inicio 2er corte</th>
                                     <th>Fecha Fin 2do corte</th>
                                     <th>Estado</th>
+                                    <th>Opciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -101,8 +102,8 @@ use App\Controllers\SemesterControllers;?>
                                         <td><?php echo $semestre->getIdSemester(); ?></td>
                                         <td><?php echo $semestre->getNameSemester(); ?></td>
                                         <td><?php echo $semestre->getDescriptionSemester(); ?></td>
-                                        <td><?php echo $semestre->getStartDate(); ?></td>
-                                        <td><?php echo $semestre->getEndDate(); ?></td>
+                                        <td><?php echo $semestre->getStarDateSemester(); ?></td>
+                                        <td><?php echo $semestre->getEndDateSemester(); ?></td>
                                         <td><?php echo $semestre->getStartDate50(); ?></td>
                                         <td><?php echo $semestre->getEndDate50(); ?></td>
                                         <td><?php echo $semestre->getStarDate2Semester(); ?></td>

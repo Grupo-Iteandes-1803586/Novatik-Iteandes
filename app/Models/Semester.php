@@ -6,8 +6,8 @@ class Semester extends BasicModel{
     private $idSemester;
     private $nameSemester;
     private $descriptionSemester;
-    private $startDate;
-    private $endDate;
+    private $starDateSemester;
+    private $endDateSemester;
     private $startDate50;
     private $endDate50;
     private $starDate2Semester;
@@ -23,8 +23,8 @@ class Semester extends BasicModel{
         $this->idSemester = $semester['idSemester'] ?? null;
         $this->nameSemester = $semester['nameSemester'] ?? null;
         $this->descriptionSemester = $semester['descriptionSemester'] ?? null;
-        $this->startDate = $semester['startDate'] ?? null;
-        $this->endDate = $semester['endDate'] ?? null;
+        $this->starDateSemester = $semester['starDateSemester'] ?? null;
+        $this->endDateSemester = $semester['endDateSemester'] ?? null;
         $this->startDate50 = $semester['startDate50'] ?? null;
         $this->endDate50 = $semester['endDate50'] ?? null;
         $this->starDate2Semester = $semester['starDate2Semester'] ?? null;
@@ -103,33 +103,33 @@ class Semester extends BasicModel{
     /**
      * @return date
      */
-    public function getStartDate()
+    public function getStarDateSemester()
     {
-        return $this->startDate;
+        return $this->starDateSemester;
     }
 
     /**
-     * @param date $startDate
+     * @param date $starDateSemester
      */
-    public function setStartDate(date $startDate): void
+    public function setStarDateSemester(date $starDateSemester): void
     {
-        $this->startDate = $startDate;
+        $this->starDateSemester = $starDateSemester;
     }
 
     /**
      * @return date
      */
-    public function getEndDate()
+    public function getEndDateSemester()
     {
-        return $this->endDate;
+        return $this->endDateSemester;
     }
 
     /**
-     * @param date $endDate
+     * @param date $endDateSemester
      */
-    public function setEndDate(date $endDate): void
+    public function setEndDateSemester(date $endDateSemester): void
     {
-        $this->endDate = $endDate;
+        $this->endDateSemester = $endDateSemester;
     }
 
     /**
@@ -218,8 +218,8 @@ class Semester extends BasicModel{
         $result = $this->insertRow( "INSERT INTO iteandes_novatik.semester VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
             $this->nameSemester,
             $this->descriptionSemester,
-            $this->startDate,
-            $this->endDate,
+                $this->starDateSemester,
+                $this->endDateSemester,
             $this->startDate50,
             $this->endDate50,
             $this->starDate2Semester,
@@ -235,8 +235,8 @@ class Semester extends BasicModel{
         $result = $this->updateRow( "UPDATE iteandes_novatik.semester SET nameSemester = ?, descriptionSemester = ?,startDate = ?,endDate = ?,startDate50 = ?,endDate50 = ?,starDate2Semester = ?,endDate2Semester = ?, statuSemester? = WHERE idSemester = ?", array(
                 $this->nameSemester,
                 $this->descriptionSemester,
-                $this->startDate,
-                $this->endDate,
+                $this->starDateSemester,
+                $this->endDateSemester,
                 $this->startDate50,
                 $this->endDate50,
                 $this->starDate2Semester,
@@ -259,8 +259,8 @@ class Semester extends BasicModel{
             $semeste->idSemester =  $value['idSemester'];
             $semeste->nameSemester = $value['nameSemester'] ;
             $semeste->descriptionSemester =$value['descriptionSemester'] ;
-            $semeste->startDate= date('Y-m-d',strtotime($value['startDate']));
-            $semeste->endDate = date('Y-m-d',strtotime($value['endDate']));
+            $semeste->starDateSemester= date('Y-m-d',strtotime($value['starDateSemester']));
+            $semeste->endDateSemester = date('Y-m-d',strtotime($value['endDateSemester']));
             $semeste->startDate50 = date('Y-m-d',strtotime($value['startDate50']));
             $semeste->endDate50 = date('Y-m-d',strtotime($value['endDate50']));
             $semeste->starDate2Semester = date('Y-m-d',strtotime($value['starDate2Semester']));
@@ -281,8 +281,8 @@ class Semester extends BasicModel{
             $semestes->idSemester =  $getrow['idSemester'];
             $semestes->nameSemester =$getrow['nameSemester'] ;
             $semestes->descriptionSemester =$getrow['descriptionSemester'] ;
-            $semestes->startDate = $getrow['startDate'] ;
-            $semestes->endDate = $getrow['endDate'];
+            $semestes->starDateSemester = $getrow['starDateSemester'] ;
+            $semestes->endDateSemester = $getrow['endDateSemester'];
             $semestes->startDate50 = $getrow['startDate50'];
             $semestes->endDate50 = $getrow['endDate50'];
             $semestes->starDate2Semester = $getrow['starDate2Semester'] ;
@@ -301,7 +301,7 @@ class Semester extends BasicModel{
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->nameSemester." ".$this->descriptionSemester." ".$this->startDate." ".$this->endDate." ".$this->startDate50." ".$this->endDate50." ".$this->starDate2Semester." ".$this->endDate2Semester." ".$this->statuSemester;
+        return $this->nameSemester." ".$this->descriptionSemester." ".$this->starDateSemester." ".$this->endDateSemester." ".$this->startDate50." ".$this->endDate50." ".$this->starDate2Semester." ".$this->endDate2Semester." ".$this->statuSemester;
     }
 
     public function delete($idSemester): bool
