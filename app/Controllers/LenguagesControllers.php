@@ -1,4 +1,5 @@
 <?php
+namespace App\Controllers;
 require(__DIR__.'/../Models/Lenguages.php');
 use App\Models\Lenguages;
 use mysql_xdevapi\Exception;
@@ -35,12 +36,12 @@ class  LenguagesControllers
 
                 $Lenguages = new Lenguages  ($arrayLenguages);
                 if($Lenguages->create()){
-                    header("Location: ../../views/modules/Lenguages/create.php?respuesta=correcto");
+                    header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
                 } else{
-                header("Location: ../../views/modules/Lenguages/create.php?respuesta=error&mensaje=Lenguages ya registrado");
+                header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Lenguages ya registrado");
             }
         } catch (Exception $e) {
-            header("Location: ../../views/modules/Lenguages/create.php?respuesta=error&mensaje=" . $e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=" . $e->getMessage());
         }
     }
 
@@ -53,10 +54,10 @@ class  LenguagesControllers
             $Lenguages = new Lenguages($arrayLenguages );
             $Lenguages->update();
 
-            header("Location: ../../views/modules/Lenguages/show.php?id=".$Lenguages->getIdLenguages()."&respuesta=correcto");
+            header("Location: ../../views/modules/Person/Teacher/show.php?id=".$Lenguages->getIdLenguages()."&respuesta=correcto");
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/Lenguages/edit.php?respuesta=error&mensaje=".$e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
     static public function activate (){
@@ -64,13 +65,13 @@ class  LenguagesControllers
             $Lenguages = Lenguages::searchForId($_GET['idLenguages']);
             $Lenguages->setStateLenguague("Activo");
             if($Lenguages->update()){
-                header("Location: ../../views/modules/Lenguages/index.php");
+                header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
-                header("Location: ../../views/modules/Lenguages/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/Lenguages/index.php?respuesta=error&mensaje=".$e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
 
@@ -79,13 +80,13 @@ class  LenguagesControllers
             $Lenguages = Lenguages::searchForId($_GET['idLenguages']);
             $Lenguages->setStateLenguague("Inactivo");
             if($Lenguages->update()){
-                header("Location: ../../views/modules/Lenguages/index.php");
+                header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
-                header("Location: ../../views/modules/Lenguages/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/Lenguages/index.php?respuesta=error");
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
         }
     }
 
