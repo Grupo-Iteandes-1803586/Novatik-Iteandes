@@ -7,6 +7,7 @@ class Experience extends BasicModel{
     private $dedicationExperience;
     private $startExperience;
     private $endExperince;
+    private $stateExperience;
 
     /**
      * Experience constructor.
@@ -24,11 +25,30 @@ class Experience extends BasicModel{
         $this->dedicationExperience = $experience['dedicationExperience'] ?? null;
         $this->startExperience = $experience['startExperience'] ?? null;
         $this->endExperince = $experience['endExperince'] ?? null;
+        $this->stateExperience = $experience['stateExperience'] ?? null;
     }
     function __destruct(){
         $this->Disconnect();
     }
     //metodos get y set
+
+    /**
+     * @return String
+     */
+    public function getStateExperience() : String
+    {
+        return $this->stateExperience;
+    }
+
+    /**
+     * @param String $stateExperience
+     */
+    public function setStateExperience(String $stateExperience): void
+    {
+        $this->stateExperience = $stateExperience;
+    }
+
+
     /**
      * @return int
      */
@@ -38,7 +58,7 @@ class Experience extends BasicModel{
     }
 
     /**
-     * @param int |null $idExperience
+     * @param int  $idExperience
      */
     public function setIdExperience(int $idExperience): void
     {
@@ -48,7 +68,7 @@ class Experience extends BasicModel{
     /**
      * @return String
      */
-    public function getInstitutionExperience(): ?String
+    public function getInstitutionExperience(): String
     {
         return $this->institutionExperience;
     }
@@ -56,7 +76,7 @@ class Experience extends BasicModel{
     /**
      * @param String $institutionExperience
      */
-    public function setInstitutionExperience(?String $institutionExperience): void
+    public function setInstitutionExperience(String $institutionExperience): void
     {
         $this->institutionExperience = $institutionExperience;
     }
@@ -64,7 +84,7 @@ class Experience extends BasicModel{
     /**
      * @return iString
      */
-    public function getDedicationExperience(): ?String
+    public function getDedicationExperience(): String
     {
         return $this->dedicationExperience;
     }
@@ -72,7 +92,7 @@ class Experience extends BasicModel{
     /**
      * @param String $dedicationExperience
      */
-    public function setDedicationExperience(?String $dedicationExperience): void
+    public function setDedicationExperience(String $dedicationExperience): void
     {
         $this->dedicationExperience = $dedicationExperience;
     }
@@ -80,7 +100,7 @@ class Experience extends BasicModel{
     /**
      * @return date
      */
-    public function getStartExperience(): ?date
+    public function getStartExperience(): date
     {
         return $this->startExperience;
     }
@@ -88,7 +108,7 @@ class Experience extends BasicModel{
     /**
      * @param date $startExperience
      */
-    public function setStartExperience(?date $startExperience): void
+    public function setStartExperience(date $startExperience): void
     {
         $this->startExperience = $startExperience;
     }
@@ -96,7 +116,7 @@ class Experience extends BasicModel{
     /**
      * @return date
      */
-    public function getEndExperince(): ?date
+    public function getEndExperince(): date
     {
         return $this->endExperince;
     }
@@ -104,18 +124,19 @@ class Experience extends BasicModel{
     /**
      * @param date $endExperince
      */
-    public function setEndExperince(?date $endExperince): void
+    public function setEndExperince(date $endExperince): void
     {
         $this->endExperince = $endExperince;
     }
 
     //creacion de metodos
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.Experience VALUES (NULL,?, ?,?,?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.experience VALUES (NULL,?, ?,?,?,?)", array(
             $this-> institutionExperience,
             $this-> dedicationExperience,
             $this-> startExperience,
-            $this-> endExperince
+            $this-> endExperince,
+            $this-> stateExperience
 
             )
         );
@@ -125,19 +146,20 @@ class Experience extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.Experience SET institutionExperience = ?,dedicationExperience = ?,startExperience = ?,endExperince = ? WHERE idExperience = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.experience SET institutionExperience = ?,dedicationExperience = ?,startExperience = ?,endExperince = ?,stateExperience=? WHERE idExperience = ?", array(
                 $this-> institutionExperience,
                 $this-> dedicationExperience,
                 $this-> startExperience,
                 $this-> endExperince,
-                $this->idExperience
+                $this->idExperience,
+                $this->stateExperience
             )
         );
         $this->Disconnect();
         return $result;
     }
     //Creacion del la funcion eliminar o cambiar estado de Experience segun el Id
-    public function deleted($idExperience) : bool{
+    public function delete($idExperience) : bool{
         $Experience = Experience::searchForId($idExperience); //Buscando un usuario por el ID
         $Experience->setStateExperience("Inactivo"); //Cambia el estado del Usuario
         return $Experience->update();
@@ -155,6 +177,7 @@ class Experience extends BasicModel{
             $experience->dedicationExperience = $value['dedicationExperience'];
             $experience->startExperience= $value['startExperience'];
             $experience->endExperince= $value['endExperince'];
+            $experience->stateExperience= $value['stateExperience'];
         }
         $tmp->Disconnect;
         return $arrExperience;
@@ -164,11 +187,12 @@ class Experience extends BasicModel{
         $experiences = null;
         if($idExperience > 0) {
             $experiences = new Experience;
-            $getrow = $experiences->getRow("SELECT * FROM Iteandes_Novatik.Experience WHERE idExperience =?", array($idExperience));
+            $getrow = $experiences->getRow("SELECT * FROM iteandes_novatik.experience WHERE idExperience =?", array($idExperience));
             $experiences->institutionExperience = $getrow['institutionExperience'];
             $experiences->dedicationExperience = $getrow['ndedicationExperience'];
             $experiences->startExperience = $getrow['startExperience'];
             $experiences->endExperince= $getrow['endExperince'];
+            $experiences->stateExperience= $getrow['stateExperience'];
         }
         $experiences->Disconnect();
         return $experiences;
@@ -176,13 +200,13 @@ class Experience extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return Experince::search("SELECT * FROM Iteandes_Novatik.Experience");
+        return Experince::search("SELECT * FROM iteandes_novatik.experience");
     }
 
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->institutionExperience ." ".$this->dedicationExperience." ".$this->startExperience ." ".$this->endExperince;
+        return $this->institutionExperience ." ".$this->dedicationExperience." ".$this->startExperience ." ".$this->endExperince." ".stateExperience;
     }
 
 }

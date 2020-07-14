@@ -6,6 +6,7 @@ class TeacherStudies extends BasicModel{
     private $idTeacherStudies;
     private $titleTeacherStudies;
     private $yearStudyTeacher;
+    private $stateTeacherStudies;
 
     /**
      * TeacherStudies constructor.
@@ -18,6 +19,7 @@ class TeacherStudies extends BasicModel{
         $this->idTeacherStudies = $teacherStudies['idTeacherStudies'] ?? null;
         $this->titleTeacherStudies = $teacherStudies['titleTeacherStudies'] ?? null;
         $this->yearStudyTeacher = $teacherStudies['yearStudyTeacher'] ?? null;
+        $this->stateTeacherStudies = $teacherStudies['stateTeacherStudies'] ?? null;
     }
 
     function __destruct(){
@@ -38,6 +40,23 @@ class TeacherStudies extends BasicModel{
     public function setIdTeacherStudies(int $idTeacherStudies): void
     {
         $this->idTeacherStudies = $idTeacherStudies;
+    }
+
+
+    /**
+     * @return String
+     */
+    public function getStateTeacherStudies(): String
+    {
+        return $this->stateTeacherStudies;
+    }
+
+    /**
+     * @param String $stateTeacherStudies
+     */
+    public function setStateTeacherStudies(String $stateTeacherStudies): void
+    {
+        $this->stateTeacherStudies = $stateTeacherStudies;
     }
 
     /**
@@ -73,9 +92,10 @@ class TeacherStudies extends BasicModel{
     }
     //creacion de metodos
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO Iteandes_Novatik.TacherStudies VALUES (NULL,?, ?)", array(
-                $this-> $titleTeacherStudies,
-                $this-> $yearStudyTeacher
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.teacherstudies VALUES (NULL,?, ?,?)", array(
+                $this-> titleTeacherStudies,
+                $this-> yearStudyTeacher,
+                $this-> stateTeacherStudies
             )
         );
 
@@ -84,17 +104,18 @@ class TeacherStudies extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE Iteandes_Novatik.TeacherStudies SET titleTeacherStudie = ?,yearStudyTeache = ? WHERE idTeacherStudies = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.teacherstudies SET titleTeacherStudie = ?,yearStudyTeache = ?,stateTeacherStudies=? WHERE idTeacherStudies = ?", array(
             $this->titleTeacherStudies,
-            $this->yearStudyTeache,
-                $this->idTeacherStudies,
+            $this->yearStudyTeacher,
+                $this->stateTeacherStudies,
+                $this->idTeacherStudies
             )
         );
         $this->Disconnect();
         return $result;
     }
     //Creacion del la funcion eliminar o cambiar estado de TeacherStudies segun el Id
-    public function deleted($idTeacherStudies) : bool{
+    public function delete($idTeacherStudies) : bool{
         $TeacherStudies = TeacherStudies::searchForId($idTeacherStudies); //Buscando un usuario por el ID
         $TeacherStudies->setStateTeacherStudies("Inactivo"); //Cambia el estado del Usuario
         return $TeacherStudies->update();
@@ -108,7 +129,8 @@ class TeacherStudies extends BasicModel{
         foreach($getrows as $value){
             $teacherStudies = new Person();
             $teacherStudies-> titleTeacherStudies= $value['$titleTeacherStudies'];
-            $teacherStudies->yearStudyTeache = $value['yearStudyTeache'];
+            $teacherStudies->yearStudyTeacher = $value['yearStudyTeacher'];
+            $teacherStudies->stateTeacherStudies = $value['stateTeacherStudies'];
             $teacherStudies->Disconnect();
             array_push($arrTeacherStudies,$teacherStudies);
         }
@@ -120,9 +142,10 @@ class TeacherStudies extends BasicModel{
         $teacherStudie = null;
         if($idTeacherStudies > 0) {
             $teacherStudie = new TeacherStudies;
-            $getrow = $teacherStudie->getRow("SELECT * FROM Iteandes_Novatik.TeacherStudies WHERE idTeacherStudies =?", array($idTeacherStudies));
+            $getrow = $teacherStudie->getRow("SELECT * FROM iteandes_novatik.teacherstudies WHERE idTeacherStudies =?", array($idTeacherStudies));
             $teacherStudie->titleTeacherStudies = $getrow['titleTeacherStudies'];
-            $teacherStudie->yearStudyTeache = $getrow['yearStudyTeache'];
+            $teacherStudie->yearStudyTeacher = $getrow['yearStudyTeacher'];
+            $teacherStudie->stateTeacherStudies = $getrow['stateTeacherStudies'];
         }
         $teacherStudie->Disconnect();
         return $teacherStudie;
@@ -130,12 +153,12 @@ class TeacherStudies extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return TeacherStudies::search("SELECT * FROM Iteandes_Novatik.TeacherStudies");
+        return TeacherStudies::search("SELECT * FROM iteandes_novatik.teacherstudies");
     }
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->titleTeacherStudies." ".$this->yearStudyTeache." " ;
+        return $this->titleTeacherStudies." ".$this->yearStudyTeache." ".stateTeacherStudies ;
     }
 
 }

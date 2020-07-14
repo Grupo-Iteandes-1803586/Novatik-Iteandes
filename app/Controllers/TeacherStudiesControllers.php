@@ -18,6 +18,10 @@ class TeacherStudiesControllers
             TeacherStudiesControllers::searchForID($_REQUEST['idTeacherStudies']);
         } else if ($action == "searchAll") {
             TeacherStudiesControllers::getAll();
+        }else if($action == "active"){
+            TeacherStudiesControllers::active();
+        }else if($action =="inactive"){
+            TeacherStudiesControllers::inactive();
         }
     }
 
@@ -28,6 +32,7 @@ class TeacherStudiesControllers
             $arrayTeacherStudies['idTeacherStudies'] = $_POST['idTeacherStudies'];
             $arrayTeacherStudies['titleTeacherStudies'] = $_POST['titleTeacherStudies'];
             $arrayTeacherStudies['yearStudyTeacher'] = $_POST['yearStudyTeacher'];
+            $arrayTeacherStudies['stateTeacherStudies'] = 'Activo';
             $TeacherStudies = new TeacherStudies ($arrayTeacherStudies);
                 if($TeacherStudies->create()){
                     header("Location: ../../views/modules/TeacherStudies/create.php?respuesta=correcto");
@@ -42,9 +47,10 @@ class TeacherStudiesControllers
     static public function edit (){
         try {
             $arrayTeacherStudies = array();
+            $arrayTeacherStudies['idTeacherStudies'] = $_POST['idTeacherStudies'];
             $arrayTeacherStudies['titleTeacherStudies'] = $_POST['titleTeacherStudies'];
             $arrayTeacherStudies['yearStudyTeacher'] = $_POST['yearStudyTeacher'];
-            $arrayTeacherStudies['idTeacherStudies'] = $_POST['idTeacherStudies'];
+            $arrayTeacherStudies['stateTeacherStudies'] = $_POST['stateTeacherStudies'];
             $TeacherStudies = new TeacherStudies($arrayTeacherStudies);
             $TeacherStudies->update();
 
@@ -56,8 +62,8 @@ class TeacherStudiesControllers
     }
     static public function activate (){
         try {
-            $TeacherStudies = TeacherStudies::searchForId($_GET['Id']);
-            $TeacherStudies->setEstado("Activo");
+            $TeacherStudies = TeacherStudies::searchForId($_GET['idTeacherStudies']);
+            $TeacherStudies->setStateTeacherStudies("Activo");
             if($TeacherStudies->update()){
                 header("Location: ../../views/modules/TeacherStudies/index.php");
             }else{
@@ -71,8 +77,8 @@ class TeacherStudiesControllers
 
     static public function inactivate (){
         try {
-            $Lenguages = Lenguages::searchForId($_GET['Id']);
-            $Lenguages->setEstado("Inactivo");
+            $Lenguages = Lenguages::searchForId($_GET['idTeacherStudies']);
+            $Lenguages->setStateTeacherStudies("Inactivo");
             if($Lenguages->update()){
                 header("Location: ../../views/modules/Lenguages/index.php");
             }else{
