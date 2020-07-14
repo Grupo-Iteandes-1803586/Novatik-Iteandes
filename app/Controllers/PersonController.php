@@ -18,7 +18,7 @@ class PersonController{
         }else if($action == "edit"){
             PersonController::edit();
         }else if($action == "searchForId"){
-            PersonController::searchForId($_REQUEST['idPerson']);
+            PersonController::searchForId($_REQUEST['$idPerson']);
         }else if($action == "getAll"){
             PersonController::getAll();
         }else if($action == "active"){
@@ -33,6 +33,7 @@ class PersonController{
             $arrayPerson = array();
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
             $arrayPerson['namePerson'] = $_POST['namePerson'];
+            $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
             $arrayPerson['dateBornPerson']= $_POST['dateBornPerson'];
             $arrayPerson['rhPerson'] = $_POST['rhPerson'];
             $arrayPerson['emailPerson'] = $_POST['emailPerson'];
@@ -62,6 +63,7 @@ class PersonController{
             $arrayPerson = array();
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
             $arrayPerson['namePerson'] = $_POST['namePerson'];
+            $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
             $arrayPerson['dateBornPerson']= $_POST['dateBornPerson'];
             $arrayPerson['rhPerson'] = $_POST['rhPerson'];
             $arrayPerson['emailPerson'] = $_POST['emailPerson'];

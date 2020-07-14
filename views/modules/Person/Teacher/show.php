@@ -1,5 +1,5 @@
-<?php require ("../../partials/routes.php");
-require ("../../../app/Controllers/PersonController.php");
+<?php require ("../../../partials/routes.php");
+require ("../../../../app/Controllers/PersonController.php");
 use App\Controllers\PersonController;
 ?>
 
@@ -7,16 +7,16 @@ use App\Controllers\PersonController;
 <html lang="es">
     <head>
         <title><?= getenv('TITLE_SITE');?> | Consultar Docente</title>
-        <?php require ("../../partials/head_imports.php");?>
-        <?php require("../../partials/header.php");?>
+        <?php require ("../../../partials/head_imports.php");?>
+        <?php require("../../../partials/header.php");?>
     </head>
 <body class="hold-transition sidebar-mini">
 
     <!-- Site wrapper -->
 <div class="wrapper">
 
-    <?php require ("../../partials/navbar_customation.php");?>
-    <?php require ("../../partials/sliderbar_main_menu.php")?>
+    <?php require ("../../../partials/navbar_customation.php");?>
+    <?php require ("../../../partials/sliderbar_main_menu.php")?>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -122,8 +122,8 @@ use App\Controllers\PersonController;
             <!-- /.card -->
         </section>
     </div>
-    <?php require ("../../partials/footer.php");?>
+    <?php require ("../../../partials/footer.php");?>
     <!--</div>-->
-    <?php require ("../../partials/scripts.php");?>
+    <?php require ("../../../partials/scripts.php");?>
 </body>
 </html>

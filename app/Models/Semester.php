@@ -232,7 +232,7 @@ class Semester extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.semester SET nameSemester = ?, descriptionSemester = ?,startDate = ?,endDate = ?,startDate50 = ?,endDate50 = ?,starDate2Semester = ?,endDate2Semester = ?, statuSemester? = WHERE idSemester = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.semester SET nameSemester = ?, descriptionSemester = ?,starDateSemester = ?,endDateSemester = ?,startDate50 = ?,endDate50 = ?,starDate2Semester = ?,endDate2Semester = ?, statuSemester? = WHERE idSemester = ?", array(
                 $this->nameSemester,
                 $this->descriptionSemester,
                 $this->starDateSemester,
@@ -281,12 +281,12 @@ class Semester extends BasicModel{
             $semestes->idSemester =  $getrow['idSemester'];
             $semestes->nameSemester =$getrow['nameSemester'] ;
             $semestes->descriptionSemester =$getrow['descriptionSemester'] ;
-            $semestes->starDateSemester = $getrow['starDateSemester'] ;
-            $semestes->endDateSemester = $getrow['endDateSemester'];
-            $semestes->startDate50 = $getrow['startDate50'];
-            $semestes->endDate50 = $getrow['endDate50'];
-            $semestes->starDate2Semester = $getrow['starDate2Semester'] ;
-            $semestes->endDate2Semester = $getrow['endDate2Semester'] ;
+            $semestes->starDateSemester= date('Y-m-d',strtotime($getrow['starDateSemester']));
+            $semestes->endDateSemester = date('Y-m-d',strtotime($getrow['endDateSemester']));
+            $semestes->startDate50 = date('Y-m-d',strtotime($getrow['startDate50']));
+            $semestes->endDate50 = date('Y-m-d',strtotime($getrow['endDate50']));
+            $semestes->starDate2Semester = date('Y-m-d',strtotime($getrow['starDate2Semester']));
+            $semestes->endDate2Semester = date('Y-m-d',strtotime($getrow['endDate2Semester']));
             $semestes->statuSemester = $getrow['statuSemester'];
         }
         $semestes->Disconnect();

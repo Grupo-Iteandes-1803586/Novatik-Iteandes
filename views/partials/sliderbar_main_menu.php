@@ -34,13 +34,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= $baseURL ?>/views/modules/Person/show.php" class="nav-link">
+                            <a href="<?= $baseURL ?>/views/modules/Person/Teacher/show.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Consultar</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= $baseURL ?>/views/modules/Person/create.php" class="nav-link">
+                            <a href="<?= $baseURL ?>/views/modules/Person/Teacher/create.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Registrar</p>
                             </a>

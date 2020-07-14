@@ -19,7 +19,7 @@ class SemesterControllers{
         }else if($action == "edit"){
             SemesterControllers::edit();
         }else if($action == "searchForId"){
-            SemesterControllers::searchForId($_REQUEST['idSemester']);
+            SemesterControllers::searchForId($_REQUEST['$idSemester']);
         }else if($action == "getAll"){
             SemesterControllers::getAll();
         }else if($action == "active"){
@@ -35,8 +35,8 @@ class SemesterControllers{
             $arraySemeste = array();
             $arraySemeste['nameSemester'] = $_POST['nameSemester'];
             $arraySemeste['descriptionSemester'] = $_POST['descriptionSemester'];
-            $arraySemeste['startDate'] = $_POST['startDate'];
-            $arraySemeste['endDate'] = $_POST['endDate'];
+            $arraySemeste['starDateSemester'] = $_POST['starDateSemester'];
+            $arraySemeste['endDateSemester'] = $_POST['endDateSemester'];
             $arraySemeste ['startDate50'] = $_POST['startDate50'];
             $arraySemeste ['endDate50'] = $_POST['endDate50'];
             $arraySemeste ['starDate2Semester'] = $_POST['starDate2Semester'] ;
@@ -59,8 +59,8 @@ class SemesterControllers{
             $arraySemeste = array();
             $arraySemeste['nameSemester'] = $_POST['nameSemester'];
             $arraySemeste['descriptionSemester'] = $_POST['descriptionSemester'];
-            $arraySemeste['startDate'] = $_POST['startDate'];
-            $arraySemeste['endDate'] = $_POST['endDate'];
+            $arraySemeste['starDateSemester'] = $_POST['starDateSemester'];
+            $arraySemeste['endDateSemester'] = $_POST['endDateSemester'];
             $arraySemeste ['startDate50'] = $_POST['startDate50'];
             $arraySemeste ['endDate50'] = $_POST['endDate50'];
             $arraySemeste ['starDate2Semester'] = $_POST['starDate2Semester'] ;
@@ -70,7 +70,7 @@ class SemesterControllers{
 
             $semester =  new Semester($arraySemeste);
             $semester->update();
-            header ("Location: ../../views/modules/Semester/show.php?id=".$semester->getIdSemester()."&respuesta=correcto");
+            header ("Location: ../../views/modules/Semester/show.php?idSemester=".$semester->getIdSemester()."&respuesta=correcto");
         }catch (\Exception $ex){
             header("Location: ../../views/modules/Semester/edit.php?respuesta=error&mensaje" . $ex-> getMessage());
         }
