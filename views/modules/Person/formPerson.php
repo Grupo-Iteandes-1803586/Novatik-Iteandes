@@ -94,10 +94,16 @@
                     </select>
                 </div>
             </div>
+            <!--Creacion de la tabla estudios del docente agragacion del la tabla lenguajes-->
+            <?php
+            require ("Teacher/formTeacherStudies.php");
+                        /*Creacion de la tabla Experiencia*/
+            require ("Teacher/formExperiience.php");
+            ?>
         <!-- /.card-body -->
         <div class="card-footer">
             <button type="submit" class="btn btn-info">Enviar</button>
-            <a href="../modules/Person/index.php" role="button" class="btn btn-default float-right">Cancelar</a>
+            <a href="Teacher/index.php" role="button" class="btn btn-default float-right">Cancelar</a>
         </div>
         <!-- /.card-footer -->
     </form>

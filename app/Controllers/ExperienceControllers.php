@@ -28,20 +28,19 @@ class ExperienceControllers
     {
         try {
             $arrayExperience = array();
-            $arrayExperience['idExperience'] = $_POST['idExperience'];
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
             $arrayExperience['startExperience'] = $_POST['startExperience'];
             $arrayExperience['endExperince'] = $_POST['endExperince'];
             $arrayExperience['stateExperience'] = 'Activo';
-            $Experience = new Experience ($arrayExperience);
+            $Experience = new Experience($arrayExperience);
             if($Experience->create()){
-                header("Location: ../../views/modules/Experience/create.php?respuesta=correcto");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
             } else{
-                header("Location: ../../views/modules/Experience/create.php?respuesta=error&mensaje=Experience ya registrado");
+                header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Experience ya registrado");
             }
         } catch (Exception $e) {
-            header("Location: ../../views/modules/Experience/create.php?respuesta=error&mensaje=" . $e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=" . $e->getMessage());
         }
     }
     static public function edit (){
@@ -56,10 +55,10 @@ class ExperienceControllers
             $Experience = new Experience($arrayExperience);
             $Experience->update();
 
-            header("Location: ../../views/modules/Experience/show.php?id=".$Experience->getIdExperience()."&respuesta=correcto");
+            header("Location: ../../views/modules/Person/Teacher/show.php?id=".$Experience->getIdExperience()."&respuesta=correcto");
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/Experience/edit.php?respuesta=error&mensaje=".$e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
     static public function searchForID ($idExperience){
@@ -74,13 +73,13 @@ class ExperienceControllers
             $Experience = Experience::searchForId($_GET['idExperience']);
             $Experience->setEstado("Activo");
             if($Experience->update()){
-                header("Location: ../../views/modules/Experience/index.php");
+                header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
-                header("Location: ../../views/modules/Experience/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/Experience/index.php?respuesta=error&mensaje=".$e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
 
@@ -89,13 +88,13 @@ class ExperienceControllers
             $Experience = Experience::searchForId($_GET['idExperience']);
             $Experience->setEstado("Inactivo");
             if($Experience->update()){
-                header("Location: ../../views/modules/Experience/index.php");
+                header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
-                header("Location: ../../views/modules/Experience/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/Experience/index.php?respuesta=error");
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
         }
     }
 
