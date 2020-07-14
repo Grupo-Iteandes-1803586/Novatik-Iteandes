@@ -113,9 +113,9 @@ use App\Controllers\SemesterControllers;?>
                                             <a href="edit.php?idSemester=<?php echo $semestre->getIdSemester(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                                             <a href="show.php?idSemester=<?php echo $semestre->getIdSemester(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
                                             <?php if ($semestre->getStatuSemester() != "Activo"){ ?>
-                                                <a href="../../../app/Controllers/SemesterController.php?action=activate&idSemester=<?php echo $semestre->getIdSemester(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                                <a href="../../../app/Controllers/SemesterController.php?action=active&idSemester=<?php echo $semestre->getIdSemester(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                             <?php }else{ ?>
-                                                <a type="button" href="../../../app/Controllers/SemesterControllers.php?action=inactivate&idSemester=<?php echo $semestre->getIdSemester(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                                <a type="button" href="../../../app/Controllers/SemesterControllers.php?action=inactive&idSemester=<?php echo $semestre->getIdSemester(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                             <?php } ?>
                                         </td>
                                     </tr>

@@ -1,17 +1,17 @@
-<?php require ("../../partials/routes.php");?>
+<?php require ("../../../partials/routes.php");?>
 <!doctype html>
 <html lang="es">
 <head>
-    <title><?= getenv('TITLE_SITE');?> | Docente</title>
-    <?php require ("../../partials/head_imports.php");?>
-    <?php require("../../partials/header.php");?>
+    <title><?= getenv('TITLE_SITE');?> | Crear Docente</title>
+    <?php require ("../../../partials/head_imports.php");?>
+    <?php require("../../../partials/header.php");?>
 </head>
 <body class="hold-transition sidebar-mini">
 
 <!-- Site wrapper -->
     <div class="wrapper">
-        <?php require ("../../partials/navbar_customation.php");?>
-        <?php require ("../../partials/sliderbar_main_menu.php")?>
+        <?php require ("../../../partials/navbar_customation.php");?>
+        <?php require ("../../../partials/sliderbar_main_menu.php")?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -45,15 +45,15 @@
                 <?php } ?>
 
 
-                <?php require ("../../partials/formPerson.php");?>
+                <?php require ("../formPerson.php");?>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
 
 
-        <?php require ("../../partials/footer.php");?>
+        <?php require ("../../../partials/footer.php");?>
     <!--</div>-->
-<?php require ("../../partials/scripts.php");?>
+<?php require ("../../../partials/scripts.php");?>
 </body>
 </html>

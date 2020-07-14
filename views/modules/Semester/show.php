@@ -58,7 +58,7 @@ use App\Controllers\SemesterControllers;?>
                     if(!empty($DataSemester)){
                         ?>
                         <div class="card-header">
-                            <h3 class="card-title">Tabla de Datos</h3>
+                            <h3 class="card-title">Semestre Academico</h3>
                         </div>
                         <div class="card-body">
                             <p>
@@ -72,10 +72,10 @@ use App\Controllers\SemesterControllers;?>
                             <hr>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Fecha de inicio</strong>
-                            <p class="text-muted"><?=$DataSemester->getStartDate(); ?></p>
+                            <p class="text-muted"><?=$DataSemester->getStarDateSemester(); ?></p>
                             <hr>
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de cierre</strong>
-                            <p class="text-muted"><?= $DataSemester->getEndDate(); ?></p>
+                            <p class="text-muted"><?= $DataSemester->getEndDateSemester() ?></p>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Fecha de inicio 1er 50</strong>
                             <p class="text-muted"><?=$DataSemester->getStartDate50(); ?></p>

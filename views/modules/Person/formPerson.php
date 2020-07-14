@@ -7,6 +7,13 @@
     <!-- form start -->
     <form class="form-horizontal" method="post" id="frmCreatePerson" name="frmCreatePerson" action="../../../app/Controllers/PersonController.php?action=create">
         <div class="card-body">
+            <!--Documento del Docente-->
+            <div class="form-group row">
+                <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>
+                <div class="col-sm-10">
+                    <input required type="number" minlength="6" class="form-control" id="documentPerson" name="documentPerson" placeholder="Ingrese su documento">
+                </div>
+            </div>
             <!--Nombre del docente-->
             <div class="form-group row">
                 <label for="namePerson" class="col-sm-2 col-form-label">Nombres</label>
@@ -14,11 +21,11 @@
                     <input required type="text" class="form-control" id="namePerson" name="namePerson" placeholder="Ingresa los nombres">
                 </div>
             </div>
-            <!--Documento del Docente-->
+            <!--Apellidos del docente-->
             <div class="form-group row">
-                <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>
+                <label for="lastNamePerson" class="col-sm-2 col-form-label">Apellidos</label>
                 <div class="col-sm-10">
-                    <input required type="number" minlength="6" class="form-control" id="documentPerson" name="documentPerson" placeholder="Ingrese su documento">
+                    <input required type="text" class="form-control" id="lastNamePerson" name="lastNamePerson" placeholder="Ingresa los Apellidos">
                 </div>
             </div>
             <!--RH del docente-->
@@ -55,14 +62,14 @@
             <div class="form-group row">
                 <label for="dateBornPerson" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                 <div class="col-sm-10">
-                    <input required type="text" class="form-control" id="dateBornPerson" name="dateBornPerson" placeholder="Ingrese su Fecha de Nacimiento">
+                    <input required type="date" class="form-control" id="dateBornPerson" name="dateBornPerson" placeholder="Ingrese su Fecha de Nacimiento">
                 </div>
             </div>
             <!--Correo Electronico del Docente-->
             <div class="form-group row">
                 <label for="emailPerson" class="col-sm-2 col-form-label">Correo Electronico</label>
                 <div class="col-sm-10">
-                    <input required type="text" class="form-control" id="emailPerson" name="emailPerson" placeholder="Ingrese su Correo Electronico">
+                    <input required type="email" class="form-control" id="emailPerson" name="emailPerson" placeholder="Ingrese su Correo Electronico">
                 </div>
             </div>
             <!--Genero del Docente-->
@@ -90,7 +97,7 @@
         <!-- /.card-body -->
         <div class="card-footer">
             <button type="submit" class="btn btn-info">Enviar</button>
-            <a href="index.php" role="button" class="btn btn-default float-right">Cancelar</a>
+            <a href="../modules/Person/index.php" role="button" class="btn btn-default float-right">Cancelar</a>
         </div>
         <!-- /.card-footer -->
     </form>

@@ -1,12 +1,12 @@
 <?php
 require ("../../partials/routes.php");
-require ("../../../app/Controllers/TrainingProgramController.php");
+require ("../../../app/Controllers/PersonController.php");
 
-use App\Controllers\TrainingProgramController;?>
+use App\Controllers\PersonController;?>
 <!doctype html>
 <html lang="es">
 <head>
-    <title><?=getenv('TITLE_SITE');?> | Programa de Formacion</title>
+    <title><?=getenv('TITLE_SITE');?> | Docente</title>
     <?php
     require("../../partials/head_imports.php") ;
     require("../../partials/header.php") ;
@@ -29,7 +29,7 @@ use App\Controllers\TrainingProgramController;?>
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Consultar Programas de Formacion</h1>
+                        <h1>Consultar Docente</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -49,9 +49,9 @@ use App\Controllers\TrainingProgramController;?>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-check"></i> Correcto!</h5>
                         <?php if ($_GET['action'] == "create"){ ?>
-                            El Programa de Formacion ha sido creado con exito!
+                            El Semestre ha sido creado con exito!
                         <?php }else if($_GET['action'] == "update"){ ?>
-                            Los datos del Programa de Formacion han sido actualizados correctamente!
+                            Los datos del Docente de Formacion han sido actualizados correctamente!
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -60,7 +60,7 @@ use App\Controllers\TrainingProgramController;?>
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Gestionar Programa de Formacion</h3>
+                    <h3 class="card-title">Gestionar Docentes</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="iconP fas fa-minus"></i></button>
@@ -73,41 +73,60 @@ use App\Controllers\TrainingProgramController;?>
                         <div class="col-auto mr-auto"></div>
                         <div class="col-auto">
                             <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                <i class="fas fa-plus"></i> Crear Programa
+                                <i class="fas fa-plus"></i> Crear Docente
                             </a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <table id="tblTrainingProgram" class="datatable table table-bordered table-striped">
+                            <table id="tblTeacher" class="datatable table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Codigo</th>
-                                    <th>Nombre del Programa</th>
-                                    <th>Version</th>
+                                    <th>Documento</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Fecha de Nacimiento</th>
+                                    <th>Rh</th>
+                                    <th>E-mail</th>
+                                    <th>Celular</th>
+                                    <th>Direccion</th>
+                                    <th>Genero</th>
+                                    <th>Usuario</th>
+                                    <th>Password</th>
+                                    <th>Tipo Usuario</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                                $arrTrainning = \App\Controllers\TrainingProgramController::getAll();
-                                foreach ($arrTrainning as $trainingP){
+                                $arrPerson= \App\Controllers\PersonController::getAll();
+                                foreach ($arrPerson as $personC){
                                     ?>
                                     <tr>
-                                        <td><?php echo $trainingP->getIdTrainingProgram(); ?></td>
-                                        <td><?php echo $trainingP->getCodeTrainingProgram(); ?></td>
-                                        <td><?php echo $trainingP->getNameTrainingProgram(); ?></td>
-                                        <td><?php echo $trainingP->getVersion(); ?></td>
-                                        <td><?php echo $trainingP->getStatusTrainingProgram(); ?></td>
+                                        <td><?php echo $personC->getIdPerson(); ?></td>
+                                        <td><?php echo $personC->getDocumentPerson(); ?></td>
+                                        <td><?php echo $personC->getNamePerson(); ?></td>
+                                        <td><?php echo $personC->getLastNamePerson(); ?></td>
+                                        <td><?php echo $personC->getDateBornPerson(); ?></td>
+                                        <td><?php echo $personC->getRhPerson(); ?></td>
+                                        <td><?php echo $personC->getEmailPerson(); ?></td>
+                                        <td><?php echo $personC->getPhonePerson(); ?></td>
+                                        <td><?php echo $personC->getAdressPerson(); ?></td>
+                                        <td><?php echo $personC->getGenerePerson(); ?></td>
+                                        <td><?php echo $personC->getUserPerson(); ?></td>
+                                        <td><?php echo $personC->getPasswordPerson(); ?></td>
+                                        <td><?php echo $personC->getTypePerson(); ?></td>
+                                        <td><?php echo $personC->getStatePerson(); ?></td>
+
                                         <td>
-                                            <a href="edit.php?idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                                            <a href="show.php?idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
-                                            <?php if ($trainingP->getStatusTrainingProgram() != "Activo"){ ?>
-                                                <a href="../../../app/Controllers/TrainingProgramController.php?action=active&idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                            <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                            <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                            <?php if ($personC->getStatePerson() != "Activo"){ ?>
+                                                <a href="../../../app/Controllers/PersonController.php?action=active&idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                             <?php }else{ ?>
-                                                <a type="button" href="../../../app/Controllers/TrainingProgramController.php?action=inactive&idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                                <a type="button" href="../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                             <?php } ?>
                                         </td>
                                     </tr>
