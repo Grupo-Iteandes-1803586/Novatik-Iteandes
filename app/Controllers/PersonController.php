@@ -47,13 +47,13 @@ class PersonController{
             if(!Person::userRegistration($arrayPerson['documentPerson'])){
                 $person =new Person($arrayPerson);
                 if($person->create()){
-                    header("Location: ../../views/modules/Person/index.php?respuesta=correcto");
+                    header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
                 }
             }else{
-                header("Location: ../../views/modules/Person/create.php?respuesta=error&mensaje=Usuario ya registrado");
+                header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Usuario ya registrado");
             }
         }catch (\Exception $exc){
-            header("Location: ../../views/modules/Person/create.php?respuesta=error&mensaje" . $exc-> getMessage());
+            header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
     }
 
@@ -77,10 +77,10 @@ class PersonController{
 
             $person= new Person($arrayPerson);
             $person->update();
-            header ("Location: ../../views/modules/Person/show.php?id=".$person->getIdPerson()."&respuesta=correcto");
+            header ("Location: ../../views/modules/Person/Teacher/show.php?id=".$person->getIdPerson()."&respuesta=correcto");
 
         }catch (Exception $exc){
-            header("Location: ../../views/modules/Person/edit.php?respuesta=error&mensaje" . $exc-> getMessage());
+            header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
     }
     //Funcion activo de la Persona
@@ -89,12 +89,12 @@ class PersonController{
             $ObjPerson = Person::searchForId($_GET['idPerson']);
             $ObjPerson->setStatePerson('Activo');
             if($ObjPerson->update()){
-                header("Location: ../../views/modules/Person/index.php?respuesta=correcto");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
             }else{
-                header("Location: ../../views/modules/Person/index.php?respuesta=error&mensaje=Error al Guardar");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al Guardar");
             }
         }catch (\Exception $exc){
-            header("Location: ../../views/modules/Person/index.php?respuesta=error&mensaje" . $exc-> getMessage());
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
     }
 
@@ -104,12 +104,12 @@ class PersonController{
             $ObjPerson = Person::searchForId($_GET['idPerson']);
             $ObjPerson->setStatePerson('Inactivo');
             if($ObjPerson->update()){
-                header("Location: ../../views/modules/Person/index.php?respuesta=correcto");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
             }else{
-                header("Location: ../../views/modules/Person/index.php?respuesta=error&mensaje=Error al Guardar");
+                header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Error al Guardar");
             }
         }catch (\Exception $exc){
-            header("Location: ../../views/modules/Person/index.php?respuesta=error&mensaje" . $exc-> getMessage());
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
     }
     //Funcion obtener por Id de la persona

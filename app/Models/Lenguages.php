@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-require("BasicModel.php");
+require ('BasicModel.php');
 
 class Lenguages extends BasicModel{
     private $idLenguages ;
