@@ -20,6 +20,7 @@ class Experience extends BasicModel{
 
     public function __construct($experience = array())
     {
+        parent::__construct();//se llama al constructor de la clase BasicModel
         $this->idExperience = $experience['idExperience'] ?? null;
         $this->institutionExperience = $experience['institutionExperience'] ?? null;
         $this->dedicationExperience = $experience['dedicationExperience'] ?? null;
@@ -100,7 +101,7 @@ class Experience extends BasicModel{
     /**
      * @return date
      */
-    public function getStartExperience(): date
+    public function getStartExperience()
     {
         return $this->startExperience;
     }
@@ -116,7 +117,7 @@ class Experience extends BasicModel{
     /**
      * @return date
      */
-    public function getEndExperince(): date
+    public function getEndExperince()
     {
         return $this->endExperince;
     }
@@ -137,7 +138,6 @@ class Experience extends BasicModel{
             $this-> startExperience,
             $this-> endExperince,
             $this-> stateExperience
-
             )
         );
 
@@ -175,8 +175,8 @@ class Experience extends BasicModel{
             $experience = new Experience();
             $experience->institutionExperience = $value['institutionExperience'];
             $experience->dedicationExperience = $value['dedicationExperience'];
-            $experience->startExperience= $value['startExperience'];
-            $experience->endExperince= $value['endExperince'];
+            $experience->startExperience= date('Y-m-d',strtotime($value['startExperience'])) ;
+            $experience->endExperince= date('Y-m-d',strtotime($value['endExperince']));
             $experience->stateExperience= $value['stateExperience'];
         }
         $tmp->Disconnect;

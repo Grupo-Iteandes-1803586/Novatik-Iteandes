@@ -46,6 +46,8 @@
 
 
                 <?php require ("../formPerson.php");?>
+
+
             </section>
             <!-- /.content -->
         </div>

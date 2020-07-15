@@ -108,6 +108,23 @@
   background-color: #191970 !important;
   border-color: #191970 !important; }
 
+#icon-iconos {
+  margin-right: 10px; }
+
+.list-Dates {
+  list-style: none;
+  font-size: 16px; }
+
+#movimiento {
+  margin-top: 15px;
+  margin-bottom: -5px; }
+
+hr {
+  background-color: #7CFC00 !important;
+  border: 2px solid #7CFC00 !important;
+  margin-left: 0px;
+  width: 80%; }
+
 @media (min-width: 320px) and (max-width: 480px) {
   .container-left {
     display: none !important; }

@@ -35,12 +35,12 @@ class TeacherStudiesControllers
             $arrayTeacherStudies['stateTeacherStudies'] = 'Activo';
             $TeacherStudies = new TeacherStudies ($arrayTeacherStudies);
                 if($TeacherStudies->create()){
-                    header("Location: ../../views/modules/TeacherStudies/create.php?respuesta=correcto");
+                    header("Location: ../../views/modules/Person/Teacher/index.php.php?respuesta=correcto");
                 } else{
-                header("Location: ../../views/modules/TeacherStudies/create.php?respuesta=error&mensaje=TeacherStudies ya registrado");
+                header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=TeacherStudies ya registrado");
             }
         } catch (Exception $e) {
-            header("Location: ../../views/modules/TeacherStudies/create.php?respuesta=error&mensaje=" . $e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=" . $e->getMessage());
         }
     }
 
@@ -54,10 +54,10 @@ class TeacherStudiesControllers
             $TeacherStudies = new TeacherStudies($arrayTeacherStudies);
             $TeacherStudies->update();
 
-            header("Location: ../../views/modules/TeacherStudies/show.php?id=".$TeacherStudies->getIdTeacherStudies()."&respuesta=correcto");
+            header("Location: ../../views/modules/Person/Teacher/show.php?id=".$TeacherStudies->getIdTeacherStudies()."&respuesta=correcto");
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/TeacherStudies/edit.php?respuesta=error&mensaje=".$e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
     static public function activate (){
@@ -65,13 +65,13 @@ class TeacherStudiesControllers
             $TeacherStudies = TeacherStudies::searchForId($_GET['idTeacherStudies']);
             $TeacherStudies->setStateTeacherStudies("Activo");
             if($TeacherStudies->update()){
-                header("Location: ../../views/modules/TeacherStudies/index.php");
+                header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
-                header("Location: ../../views/modules/TeacherStudies/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/TeacherStudies/index.php?respuesta=error&mensaje=".$e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
 
@@ -80,13 +80,13 @@ class TeacherStudiesControllers
             $Lenguages = Lenguages::searchForId($_GET['idTeacherStudies']);
             $Lenguages->setStateTeacherStudies("Inactivo");
             if($Lenguages->update()){
-                header("Location: ../../views/modules/Lenguages/index.php");
+                header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
-                header("Location: ../../views/modules/Lenguages/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
             //var_dump($e);
-            header("Location: ../../views/modules/Lenguages/index.php?respuesta=error");
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
         }
     }
     static public function searchForID ($idTeacherStudies){

@@ -1,15 +1,21 @@
 <?php
 require ("../../../partials/routes.php");
 require ("../../../../app/Controllers/PersonController.php");
+require ("../../../../app/Controllers/TeacherStudiesControllers.php");
+require ("../../../../app/Controllers/LenguagesControllers.php");
+require ("../../../../app/Controllers/ExperienceControllers.php");
 
-use App\Controllers\PersonController;?>
+use App\Controllers\PersonController;
+use App\Controllers\TeacherStudiesControllers;
+use App\Controllers\LenguagesControllers;
+use App\Controllers\ExperienceControllers;?>
 <!doctype html>
 <html lang="es">
 <head>
     <title><?=getenv('TITLE_SITE');?> | Docente</title>
     <?php
-    require("../../partials/head_imports.php") ;
-    require("../../partials/header.php") ;
+    require("../../../partials/head_imports.php") ;
+    require("../../../partials/header.php") ;
     ?>
     <!-- DataTables -->
     <link rel="stylesheet" href="<?= $adminlteURL ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
@@ -19,8 +25,8 @@ use App\Controllers\PersonController;?>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
-    <?php require ("../../partials/navbar_customation.php");?>
-    <?php require ("../../partials/sliderbar_main_menu.php");?>
+    <?php require ("../../../partials/navbar_customation.php");?>
+    <?php require ("../../../partials/sliderbar_main_menu.php");?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -51,7 +57,7 @@ use App\Controllers\PersonController;?>
                         <?php if ($_GET['action'] == "create"){ ?>
                             El Docente ha sido creado con exito!
                         <?php }else if($_GET['action'] == "update"){ ?>
-                            Los datos del Docente han sido actualizados correctamente!
+                            Los datos del Docente de Formacion han sido actualizados correctamente!
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -96,7 +102,27 @@ use App\Controllers\PersonController;?>
                                     <th>Password</th>
                                     <th>Tipo Usuario</th>
                                     <th>Estado</th>
+                                    th>Opciones</th>
+                                    <!--Datos de TacherStudies-->
+                                    <th>#</th>
+                                    <th>Titulo Univercitario</th>
+                                    <th>Año</th>
+                                    <th>Estado</th>
+                                    th>Opciones</th>
+                                    <!--Datos de Experiencia-->
+                                    <th>#</th>
+                                    <th>Intitucion Educativa</th>
+                                    <th>Dedicacion</th>
+                                    <th>Fecha de Inicio</th>
+                                    <th>Fecha Finalizacion</th>
+                                    <th>Estado</th>
+                                    th>Opciones</th>
+                                    <!--Datos Idiomas-->
+                                    <th>#</th>
+                                    <th>Idioma</th>
+                                    <th>Estado</th>
                                     <th>Opciones</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -131,6 +157,76 @@ use App\Controllers\PersonController;?>
                                         </td>
                                     </tr>
                                 <?php } ?>
+                                        <!-- Llamando Los Datos de TeacherStudies-->
+                                        <?php
+                                        $arrStudies= \App\Controllers\TeacherStudiesControllers::getAll();
+                                        foreach ($arrStudies as $Studies){
+                                        ?>
+                                    <tr>
+                                        <td><?php echo $Studies->getIdTeacherStudies(); ?></td>
+                                        <td><?php echo $Studies->getTitleTeacherStudies(); ?></td>
+                                        <td><?php echo $Studies->getYearStudyTeacher(); ?></td>
+                                        <td><?php echo $Studies->getStateTeacherStudies(); ?></td>
+                                    <td>
+                                            <a href="edit.php?idTeacherStudies=<?php echo $Studies->getIdTeacherStudies(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                            <a href="show.php?idTeacherStudies=<?php echo $Studies->getIdTeacherStudies(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                            <?php if ($Studies->getStateTeacherStudies() != "Activo"){ ?>
+                                                <a href="../../../../app/Controllers/TeacherStudiesControllers.php?action=active&idTeacherStudies=<?php echo $Studies->getIdTeacherStudies(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                            <?php }else{ ?>
+                                                <a type="button" href="../../../../app/Controllers/TeacherStudiesControllers.php?action=inactive&idTeacherStudies=<?php echo $Studies->getIdTeacherStudies(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                            <?php } ?>
+                                        </td>
+
+                                    </tr>
+                                <?php } ?>
+
+                                <!--Llamando Los Datos de  Experiencia-->
+                                <?php
+                                $arrExperience= \App\Controllers\ExperienceControllers::getAll();
+                                foreach ($arrExperience as $Experience){
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $Experience->getIdExperience(); ?></td>
+                                        <td><?php echo $Experience->getInstitutionExperience(); ?></td>
+                                        <td><?php echo $Experience->getDedicationExperience(); ?></td>
+                                        <td><?php echo $Experience->getStartExperience(); ?></td>
+                                        <td><?php echo $Experience->getEndExperince(); ?></td>
+                                        <td><?php echo $Experience->getstateExperience(); ?></td>
+
+                                        <td>
+                                            <a href="edit.php?idExperience=<?php echo $Experience->getIdTeacherStudies(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                            <a href="show.php?idExperience=<?php echo $Experience->getIdTeacherStudies(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                            <?php if ($Experience->getstateExperience() != "Activo"){ ?>
+                                                <a href="../../../../app/Controllers/ExperienceControllers.php?action=active&idExperience=<?php echo $Experience->getIdExperience(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                            <?php }else{ ?>
+                                                <a type="button" href="../../../../app/Controllers/ExperienceControllers.php?action=inactive&idExperience=<?php echo $Experience->getIdExperience(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                                            <!--Llamando Los Datos de Lenguaje-->
+                                            <?php
+                                            $arrLenguages= \App\Controllers\LenguagesControllers ::getAll();
+                                            foreach ($arrLenguages as $Lenguages){
+                                            ?>
+                                    <tr>
+                                        <td><?php echo $Lenguages->getIdLenguages(); ?></td>
+                                        <td><?php echo $Lenguages->getNameLenguages(); ?></td>
+                                        <td><?php echo $Lenguages->getsetStateLenguague(); ?></td>
+
+                                        <td>
+                                            <a href="edit.php?idLenguages=<?php echo $Lenguages->getIdLenguages(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                            <a href="show.php?idLenguages=<?php echo $Lenguages->getIdLenguages(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                            <?php if ($Lenguages->getStateLenguages() != "Activo"){ ?>
+                                                <a href="../../../../app/Controllers/LenguagesController.php?action=active&idExperience=<?php echo $Lenguages->getIdLenguages(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                            <?php }else{ ?>
+                                                <a type="button" href="../../../../app/Controllers/LenguagesController.php?action=inactive&idExperience=<?php echo $Lenguages->getIdLenguages(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                            <?php } ?>
+                                        </td>
+
+                                    </tr>
+                                <?php } ?>
+
                                 </tbody>
                             </table>
                         </div>

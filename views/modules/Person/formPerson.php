@@ -7,7 +7,6 @@
     <!-- form start -->
     <form class="form-horizontal" method="post" id="frmCreatePerson" name="frmCreatePerson" action="../../../app/Controllers/PersonController.php?action=create">
         <div class="card-body">
-            <li class="list-Dates"><i class="fas fa-phone-alt" id="icon-iconos"></i>Datos Basicos</li>
             <!--Documento del Docente-->
             <div class="form-group row">
                 <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>
@@ -95,13 +94,12 @@
                     </select>
                 </div>
             </div>
-            <!--Foto-->
-            <div class="form-group row">
-                <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
-                <div class="col-sm-10">
-                    <input  class="form-control" id="photoPerson" name="photoPerson" placeholder="Foto">
-                </div>
-            </div>
+            <!--Creacion de la tabla estudios del docente agragacion del la tabla lenguajes-->
+            <?php
+            require ("Teacher/formTeacherStudies.php");
+                        /*Creacion de la tabla Experiencia*/
+            require ("Teacher/formExperiience.php");
+            ?>
         <!-- /.card-body -->
         <div class="card-footer">
             <button type="submit" class="btn btn-info">Enviar</button>

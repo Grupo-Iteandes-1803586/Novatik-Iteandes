@@ -106,7 +106,7 @@ class PersonController{
             if($ObjPerson->update()){
                 header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
             }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al Guardar");
+                header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Error al Guardar");
             }
         }catch (\Exception $exc){
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje" . $exc-> getMessage());
