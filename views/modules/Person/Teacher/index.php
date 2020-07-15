@@ -1,6 +1,6 @@
 <?php
-require ("../../partials/routes.php");
-require ("../../../app/Controllers/PersonController.php");
+require ("../../../partials/routes.php");
+require ("../../../../app/Controllers/PersonController.php");
 
 use App\Controllers\PersonController;?>
 <!doctype html>
@@ -49,9 +49,9 @@ use App\Controllers\PersonController;?>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-check"></i> Correcto!</h5>
                         <?php if ($_GET['action'] == "create"){ ?>
-                            El Semestre ha sido creado con exito!
+                            El Docente ha sido creado con exito!
                         <?php }else if($_GET['action'] == "update"){ ?>
-                            Los datos del Docente de Formacion han sido actualizados correctamente!
+                            Los datos del Docente han sido actualizados correctamente!
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -124,9 +124,9 @@ use App\Controllers\PersonController;?>
                                             <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                                             <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
                                             <?php if ($personC->getStatePerson() != "Activo"){ ?>
-                                                <a href="../../../app/Controllers/PersonController.php?action=active&idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                                <a href="../../../../app/Controllers/PersonController.php?action=active&idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                             <?php }else{ ?>
-                                                <a type="button" href="../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                                <a type="button" href="../../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                             <?php } ?>
                                         </td>
                                     </tr>
@@ -144,10 +144,10 @@ use App\Controllers\PersonController;?>
     </div>
     <!-- /.content-wrapper -->
 
-    <?php require ('../../partials/footer.php');?>
+    <?php require ('../../../partials/footer.php');?>
 </div>
 <!-- ./wrapper -->
-<?php require ('../../partials/scripts.php');?>
+<?php require ('../../../partials/scripts.php');?>
 <!-- DataTables -->
 <script src="<?= $adminlteURL ?>/plugins/datatables/jquery.dataTables.js"></script>
 <script src="<?= $adminlteURL ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
