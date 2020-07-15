@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-require("BasicModel.php");
+require_once("BasicModel.php");
 class TeacherStudies extends BasicModel{
     private $idTeacherStudies;
     private $titleTeacherStudies;
@@ -92,7 +92,7 @@ class TeacherStudies extends BasicModel{
     }
     //creacion de metodos
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO iteandes_novatik.teacherstudies VALUES (NULL,?, ?,?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.TeacherStudies VALUES (NULL,?, ?,?)", array(
                 $this-> titleTeacherStudies,
                 $this-> yearStudyTeacher,
                 $this-> stateTeacherStudies
@@ -104,7 +104,7 @@ class TeacherStudies extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.teacherstudies SET titleTeacherStudie = ?,yearStudyTeache = ?,stateTeacherStudies=? WHERE idTeacherStudies = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.TeacherStudies SET titleTeacherStudie = ?,yearStudyTeache = ?,stateTeacherStudies=? WHERE idTeacherStudies = ?", array(
             $this->titleTeacherStudies,
             $this->yearStudyTeacher,
                 $this->stateTeacherStudies,
@@ -127,22 +127,24 @@ class TeacherStudies extends BasicModel{
         $tmp = new TeacherStudies();
         $getrows = $tmp->getRows($query);
         foreach($getrows as $value){
-            $teacherStudies = new Person();
-            $teacherStudies-> titleTeacherStudies= $value['$titleTeacherStudies'];
+            $teacherStudies = new TeacherStudies();
+            $teacherStudies->idTeacherStudies = $value['idTeacherStudies'];
+            $teacherStudies->titleTeacherStudies= $value['titleTeacherStudies'];
             $teacherStudies->yearStudyTeacher = $value['yearStudyTeacher'];
             $teacherStudies->stateTeacherStudies = $value['stateTeacherStudies'];
             $teacherStudies->Disconnect();
             array_push($arrTeacherStudies,$teacherStudies);
         }
-        $tmp->Disconnect;
+        $tmp->Disconnect();
         return $arrTeacherStudies;
     }
+
     //Buscar pot Id de TeacherStudies
     public static function searchForId($idTeacherStudies) : TeacherStudies{
         $teacherStudie = null;
         if($idTeacherStudies > 0) {
             $teacherStudie = new TeacherStudies;
-            $getrow = $teacherStudie->getRow("SELECT * FROM iteandes_novatik.teacherstudies WHERE idTeacherStudies =?", array($idTeacherStudies));
+            $getrow = $teacherStudie->getRow("SELECT * FROM iteandes_novatik.TeacherStudies WHERE idTeacherStudies =?", array($idTeacherStudies));
             $teacherStudie->titleTeacherStudies = $getrow['titleTeacherStudies'];
             $teacherStudie->yearStudyTeacher = $getrow['yearStudyTeacher'];
             $teacherStudie->stateTeacherStudies = $getrow['stateTeacherStudies'];
@@ -153,12 +155,12 @@ class TeacherStudies extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return TeacherStudies::search("SELECT * FROM iteandes_novatik.teacherstudies");
+        return TeacherStudies::search("SELECT * FROM iteandes_novatik.TeacherStudies");
     }
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->titleTeacherStudies." ".$this->yearStudyTeache." ".stateTeacherStudies ;
+        return $this->getIdTeacherStudies()." ".$this->titleTeacherStudies." ".$this->yearStudyTeache." ".stateTeacherStudies ;
     }
 
 }

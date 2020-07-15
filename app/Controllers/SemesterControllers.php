@@ -37,10 +37,10 @@ class SemesterControllers{
             $arraySemeste['descriptionSemester'] = $_POST['descriptionSemester'];
             $arraySemeste['starDateSemester'] = $_POST['starDateSemester'];
             $arraySemeste['endDateSemester'] = $_POST['endDateSemester'];
-            $arraySemeste ['startDate50'] = $_POST['startDate50'];
-            $arraySemeste ['endDate50'] = $_POST['endDate50'];
-            $arraySemeste ['starDate2Semester'] = $_POST['starDate2Semester'] ;
-            $arraySemeste ['endDate2Semester'] = $_POST['endDate2Semester'] ;
+            $arraySemeste['startDate50'] = $_POST['startDate50'];
+            $arraySemeste['endDate50'] = $_POST['endDate50'];
+            $arraySemeste['starDate2Semester'] = $_POST['starDate2Semester'] ;
+            $arraySemeste['endDate2Semester'] = $_POST['endDate2Semester'] ;
             $arraySemeste['statuSemester'] ='Activo';
             //Validacion del registro del semestre
             $semester = new Semester($arraySemeste);
@@ -61,12 +61,12 @@ class SemesterControllers{
             $arraySemeste['descriptionSemester'] = $_POST['descriptionSemester'];
             $arraySemeste['starDateSemester'] = $_POST['starDateSemester'];
             $arraySemeste['endDateSemester'] = $_POST['endDateSemester'];
-            $arraySemeste ['startDate50'] = $_POST['startDate50'];
-            $arraySemeste ['endDate50'] = $_POST['endDate50'];
-            $arraySemeste ['starDate2Semester'] = $_POST['starDate2Semester'] ;
-            $arraySemeste ['endDate2Semester'] = $_POST['endDate2Semester'] ;
-            $arraySemeste['statuSemester'] =$_POST['$statuSemester'];
-            $arraySemeste['idSemester'] = $_POST['$idSemester'];
+            $arraySemeste['startDate50'] = $_POST['startDate50'];
+            $arraySemeste['endDate50'] = $_POST['endDate50'];
+            $arraySemeste['starDate2Semester'] = $_POST['starDate2Semester'] ;
+            $arraySemeste['endDate2Semester'] = $_POST['endDate2Semester'] ;
+            $arraySemeste['statuSemester'] =$_POST['statuSemester'];
+            $arraySemeste['idSemester'] = $_POST['idSemester'];
 
             $semester =  new Semester($arraySemeste);
             $semester->update();
@@ -80,7 +80,7 @@ class SemesterControllers{
     static public function active(){
         try{
             $ObjSemester = Semester::searchForId($_GET['idSemester']);
-            $ObjSemester->setStatuSemester("Activo");
+            $ObjSemester->setStatuSemester('Activo');
             if($ObjSemester->update()){
                 header("Location: ../../views/modules/Semester/index.php?respuesta=correcto");
             }else{
@@ -94,7 +94,7 @@ class SemesterControllers{
     static public function inactive(){
         try{
             $ObjSemester = Semester::searchForId($_GET['idSemester']);
-            $ObjSemester->setStatuSemester("Inactivo");
+            $ObjSemester->setStatuSemester('Inactivo');
             if($ObjSemester->update()){
                 header("Location: ../../views/modules/Semester/index.php?respuesta=correcto");
             }else{

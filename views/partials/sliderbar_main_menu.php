@@ -34,7 +34,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= $baseURL ?>/views/modules/Person/Teacher/show.php" class="nav-link">
+                            <a href="<?= $baseURL ?>/views/modules/Person/Teacher/index.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Consultar</p>
                             </a>
