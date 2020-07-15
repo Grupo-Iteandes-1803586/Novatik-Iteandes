@@ -1,9 +1,9 @@
 <?php
-require ("../../../partials/routes.php");
-require ("../../../../app/Controllers/PersonController.php");
-require ("../../../../app/Controllers/TeacherStudiesControllers.php");
-require ("../../../../app/Controllers/LenguagesControllers.php");
-require ("../../../../app/Controllers/ExperienceControllers.php");
+require_once("../../../partials/routes.php");
+require_once("../../../../app/Controllers/PersonController.php");
+require_once("../../../../app/Controllers/TeacherStudiesControllers.php");
+require_once("../../../../app/Controllers/LenguagesControllers.php");
+require_once("../../../../app/Controllers/ExperienceControllers.php");
 
 use App\Controllers\PersonController;
 use App\Controllers\TeacherStudiesControllers;
@@ -57,7 +57,7 @@ use App\Controllers\ExperienceControllers;?>
                         <?php if ($_GET['action'] == "create"){ ?>
                             El Docente ha sido creado con exito!
                         <?php }else if($_GET['action'] == "update"){ ?>
-                            Los datos del Docente de Formacion han sido actualizados correctamente!
+                            Los datos del Docente se han sido actualizados correctamente!
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -102,13 +102,13 @@ use App\Controllers\ExperienceControllers;?>
                                     <th>Password</th>
                                     <th>Tipo Usuario</th>
                                     <th>Estado</th>
-                                    th>Opciones</th>
+                                    <th>Opciones</th>
                                     <!--Datos de TacherStudies-->
                                     <th>#</th>
                                     <th>Titulo Univercitario</th>
                                     <th>Año</th>
                                     <th>Estado</th>
-                                    th>Opciones</th>
+                                    <th>Opciones</th>
                                     <!--Datos de Experiencia-->
                                     <th>#</th>
                                     <th>Intitucion Educativa</th>
@@ -116,7 +116,7 @@ use App\Controllers\ExperienceControllers;?>
                                     <th>Fecha de Inicio</th>
                                     <th>Fecha Finalizacion</th>
                                     <th>Estado</th>
-                                    th>Opciones</th>
+                                    <th>Opciones</th>
                                     <!--Datos Idiomas-->
                                     <th>#</th>
                                     <th>Idioma</th>
@@ -145,8 +145,7 @@ use App\Controllers\ExperienceControllers;?>
                                         <td><?php echo $personC->getPasswordPerson(); ?></td>
                                         <td><?php echo $personC->getTypePerson(); ?></td>
                                         <td><?php echo $personC->getStatePerson(); ?></td>
-
-                                        <td>
+                                        <td><?php echo $personC->getPhotoPerson(); ?></td> <td>
                                             <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                                             <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
                                             <?php if ($personC->getStatePerson() != "Activo"){ ?>

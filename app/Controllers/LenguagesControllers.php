@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-require(__DIR__.'/../Models/Lenguages.php');
+require_once(__DIR__.'/../Models/Lenguages.php');
 use App\Models\Lenguages;
 use mysql_xdevapi\Exception;
 

@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-require("BasicModel.php");
+require_once("BasicModel.php");
 class Experience extends BasicModel{
     private $idExperience;
     private $institutionExperience;

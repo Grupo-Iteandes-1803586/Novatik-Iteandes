@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-require(__DIR__.'/../Models/TeacherStudies.php');
+require_once(__DIR__.'/../Models/TeacherStudies.php');
 use App\Models\TeacherStudies;
 
 if(!empty($_GET['action'])){
