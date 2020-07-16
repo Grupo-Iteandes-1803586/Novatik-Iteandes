@@ -16,6 +16,7 @@ class TeacherStudies extends BasicModel{
      */
     public function __construct($teacherStudies = array())
     {
+        parent::__construct();
         $this->idTeacherStudies = $teacherStudies['idTeacherStudies'] ?? null;
         $this->titleTeacherStudies = $teacherStudies['titleTeacherStudies'] ?? null;
         $this->yearStudyTeacher = $teacherStudies['yearStudyTeacher'] ?? null;

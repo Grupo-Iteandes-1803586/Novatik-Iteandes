@@ -15,41 +15,25 @@ class Lenguages extends BasicModel{
      */
     public function __construct($lengus  = array())
     {
+        parent::__construct();
         $this->idLenguages = $lengus;['idLenguages'] ?? null;
-        $this->nameLenguages = $lengus;['inameLenguages'] ?? null;
+        $this->nameLenguages = $lengus;['nameLenguages'] ?? null;
         $this->stateLenguague = $lengus;['stateLenguague'] ?? null;
     }
     function __destruct(){
         $this->Disconnect();
     }
-    //metodos get y set
-    /**
-     * @return String
-     */
-    public function getStateLenguague() : String
-    {
-        return $this->stateLenguague;
-    }
-
-    /**
-     * @param String $stateLenguague
-     */
-    public function setStateLenguague(String $stateLenguague): void
-    {
-        $this->stateLenguague = $stateLenguague;
-    }
-
-
+//metodos get y set
     /**
      * @return int
      */
-    public function getIdLenguages():  int
+    public function getIdLenguages(): int
     {
         return $this->idLenguages;
     }
 
     /**
-     * @param   int $idLenguages
+     * @param int $idLenguages
      */
     public function setIdLenguages(int $idLenguages): void
     {
@@ -65,12 +49,30 @@ class Lenguages extends BasicModel{
     }
 
     /**
-     * @param String   $nameLenguages
+     * @param String $nameLenguages
      */
     public function setNameLenguages(String $nameLenguages): void
     {
         $this->nameLenguages = $nameLenguages;
     }
+
+    /**
+     * @return String
+     */
+    public function getStateLenguague(): String
+    {
+        return $this->stateLenguague;
+    }
+
+    /**
+     * @param String $stateLenguague
+     */
+    public function setStateLenguague(String $stateLenguague): void
+    {
+        $this->stateLenguague = $stateLenguague;
+    }
+
+
     //creacion de metodos
     public function create() : bool{
         $result = $this->insertRow( "INSERT INTO iteandes_novatik.lenguages VALUES (NULL, ?, ?)", array(
@@ -94,8 +96,8 @@ class Lenguages extends BasicModel{
     }
     //Creacion del la funcion eliminar o cambiar estado de Lenguages segun el Id
     public function delete($idLenguages) : bool{
-        $Lenguages = idLenguages::searchForId($idLenguages); //Buscando un usuario por el ID
-        $Lenguages->setStateLenguages("Inactivo"); //Cambia el estado del Usuario
+        $Lenguages = Lenguages::searchForId($idLenguages); //Buscando un usuario por el ID
+        $Lenguages->setStateLenguague("Inactivo"); //Cambia el estado del Usuario
         return $Lenguages->update();
     }
 
@@ -106,12 +108,13 @@ class Lenguages extends BasicModel{
         $getrows = $tmp->getRows($query);
         foreach($getrows as $value){
             $lenguage = new Lenguages();
-            $lenguage-> nameLenguages= $value['$nameLenguages'];
+            $lenguage-> idLenguages= $value['idLenguages'];
+            $lenguage-> nameLenguages= $value['nameLenguages'];
             $lenguage-> stateLenguague= $value['stateLenguague'];
             $lenguage->Disconnect();
             array_push($arrLenguages,$lenguage);
         }
-        $tmp->Disconnect;
+        $tmp->Disconnect();
         return $arrLenguages;
     }
     //Buscar pot Id de Lenguages
@@ -122,6 +125,7 @@ class Lenguages extends BasicModel{
             $getrow = $lenguages->getRow("SELECT * FROM iteandes_novatik.lenguages WHERE idLenguages =?", array($idLenguages));
             $lenguages->nameLenguages = $getrow['nameLenguages'];
             $lenguages->stateLenguague = $getrow['stateLenguague'];
+            $lenguages->idLenguages = $getrow['idLenguages'];
         }
         $lenguages->Disconnect();
         return lenguages;
@@ -129,7 +133,7 @@ class Lenguages extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return Lenguages::search("SELECT * FROM iteandes_novatiks.lenguages");
+        return Lenguages::search("SELECT * FROM iteandes_novatik.lenguages");
     }
 
     //Metodo to string o cadena de texto

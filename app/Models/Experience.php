@@ -179,7 +179,7 @@ class Experience extends BasicModel{
             $experience->endExperince= date('Y-m-d',strtotime($value['endExperince']));
             $experience->stateExperience= $value['stateExperience'];
         }
-        $tmp->Disconnect;
+        $tmp->Disconnect();
         return $arrExperience;
     }
     //Buscar pot Id de Experience
@@ -200,7 +200,7 @@ class Experience extends BasicModel{
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
-        return Experince::search("SELECT * FROM iteandes_novatik.experience");
+        return Experience::search("SELECT * FROM iteandes_novatik.experience");
     }
 
     //Metodo to string o cadena de texto
