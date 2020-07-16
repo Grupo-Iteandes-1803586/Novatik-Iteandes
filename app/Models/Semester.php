@@ -215,7 +215,7 @@ class Semester extends BasicModel{
 
     //Creacion del metodo create
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO iteandes_novatik.semester VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
+    $result = $this->insertRow( "INSERT INTO iteandes_novatik.semester VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
             $this->nameSemester,
             $this->descriptionSemester,
             $this->starDateSemester,
@@ -225,14 +225,14 @@ class Semester extends BasicModel{
             $this->starDate2Semester,
             $this->endDate2Semester,
             $this->statuSemester
-            )
-        );
-        $this->Disconnect();
-        return $result;
-    }
+        )
+    );
+    $this->Disconnect();
+    return $result;
+}
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.semester  SET nameSemester = ?, descriptionSemester = ?,starDateSemester = ?,endDateSemester = ?,startDate50 = ?,endDate50 = ?,starDate2Semester = ?,endDate2Semester = ?, statuSemester? = WHERE idSemester = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.semester  SET nameSemester = ?, descriptionSemester = ?,starDateSemester = ?,endDateSemester = ?,startDate50 = ?,endDate50 = ?,starDate2Semester = ?,endDate2Semester = ?, statuSemester?  WHERE idSemester = ?", array(
                 $this->nameSemester,
                 $this->descriptionSemester,
                 $this->starDateSemester,
