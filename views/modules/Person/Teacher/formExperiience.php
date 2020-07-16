@@ -1,5 +1,4 @@
-<form id ="movimiento ts" class="form-horizontal" method="post" id="frmCreateExperience" name="frmCreateExperience" action="../../../../app/Controllers/ExperienceControllers.php?action=create">
-    <div class="card-body">
+<div class="card-body">
         <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Experiencia</li>
         <hr>
 
@@ -32,20 +31,4 @@
                 <input required type="date" class="form-control" id="endExperince" name="endExperince" placeholder="Fecha de Determinacion">
             </div>
         </div>
-
-
-        <!--Idiomas-->
-        <form id ="movimiento ts" class="form-horizontal" method="post" id="frmCreateLenguages" name="frmCreateLenguages" action="../../../../app/Controllers/LenguagesControllers.php?action=create">
-            <div class="card-body">
-                <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Idiomas</li>
-                <hr>
-
-                <!--Idiomas-->
-                <div class="form-group row">
-                    <label for="nameLenguages" class="col-sm-2 col-form-label">Idiomas</label>
-                    <div class="col-sm-10">
-                        <input required type="text" class="form-control" id="nameLenguages" name="nameLenguages" placeholder="Idiomas">
-                    </div>
-                </div>
-    </div>
-</form>
+</div>

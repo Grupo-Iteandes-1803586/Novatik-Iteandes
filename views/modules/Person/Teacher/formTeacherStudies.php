@@ -1,5 +1,4 @@
-<form id ="movimiento" class="form-horizontal" method="post" id="frmCreateTeacherStudies" name="frmCreateTeacherStudies" action="../../../../app/Controllers/TeacherStudiesControllers.php?action=create">
-    <div class="card-body">
+<div class="card-body">
         <li class="list-Dates"><i class ="fas fa-book mr-1"id="icon-iconos"></i>Datos de Estudio</li>
         <hr>
         <!--Titulo Universitario-->
@@ -18,4 +17,3 @@
             </div>
         </div>
     </div>
-</form>

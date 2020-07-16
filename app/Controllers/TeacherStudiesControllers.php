@@ -29,7 +29,6 @@ class TeacherStudiesControllers
     {
         try {
             $arrayTeacherStudies = array();
-            $arrayTeacherStudies['idTeacherStudies'] = $_POST['idTeacherStudies'];
             $arrayTeacherStudies['titleTeacherStudies'] = $_POST['titleTeacherStudies'];
             $arrayTeacherStudies['yearStudyTeacher'] = $_POST['yearStudyTeacher'];
             $arrayTeacherStudies['stateTeacherStudies'] = 'Activo';
