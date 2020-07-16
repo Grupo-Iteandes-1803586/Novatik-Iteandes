@@ -101,7 +101,9 @@ use App\Controllers\ExperienceControllers;?>
                                     <th>Usuario</th>
                                     <th>Password</th>
                                     <th>Tipo Usuario</th>
+                                    <th>Edad</th>
                                     <th>Estado</th>
+                                    <th>Foto</th>
                                     <th>Opciones</th>
                                     <!--Datos de TacherStudies-->
                                     <th>#</th>
@@ -144,6 +146,7 @@ use App\Controllers\ExperienceControllers;?>
                                         <td><?php echo $personC->getUserPerson(); ?></td>
                                         <td><?php echo $personC->getPasswordPerson(); ?></td>
                                         <td><?php echo $personC->getTypePerson(); ?></td>
+                                        <td><?php echo $personC->generateAge($personC->getDateBornPerson());?></td>
                                         <td><?php echo $personC->getStatePerson(); ?></td>
                                         <td><?php echo $personC->getPhotoPerson(); ?></td> <td>
                                             <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
@@ -153,15 +156,13 @@ use App\Controllers\ExperienceControllers;?>
                                             <?php }else{ ?>
                                                 <a type="button" href="../../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                             <?php } ?>
-                                        </td>
-                                    </tr>
+                                        </td></tr>
                                 <?php } ?>
                                         <!-- Llamando Los Datos de TeacherStudies-->
                                         <?php
                                         $arrStudies= \App\Controllers\TeacherStudiesControllers::getAll();
                                         foreach ($arrStudies as $Studies){
                                         ?>
-                                    <tr>
                                         <td><?php echo $Studies->getIdTeacherStudies(); ?></td>
                                         <td><?php echo $Studies->getTitleTeacherStudies(); ?></td>
                                         <td><?php echo $Studies->getYearStudyTeacher(); ?></td>
@@ -176,7 +177,7 @@ use App\Controllers\ExperienceControllers;?>
                                             <?php } ?>
                                         </td>
 
-                                    </tr>
+
                                 <?php } ?>
 
                                 <!--Llamando Los Datos de  Experiencia-->
@@ -184,7 +185,6 @@ use App\Controllers\ExperienceControllers;?>
                                 $arrExperience= \App\Controllers\ExperienceControllers::getAll();
                                 foreach ($arrExperience as $Experience){
                                     ?>
-                                    <tr>
                                         <td><?php echo $Experience->getIdExperience(); ?></td>
                                         <td><?php echo $Experience->getInstitutionExperience(); ?></td>
                                         <td><?php echo $Experience->getDedicationExperience(); ?></td>
@@ -201,17 +201,15 @@ use App\Controllers\ExperienceControllers;?>
                                                 <a type="button" href="../../../../app/Controllers/ExperienceControllers.php?action=inactive&idExperience=<?php echo $Experience->getIdExperience(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                             <?php } ?>
                                         </td>
-                                    </tr>
                                 <?php } ?>
                                             <!--Llamando Los Datos de Lenguaje-->
                                             <?php
                                             $arrLenguages= \App\Controllers\LenguagesControllers ::getAll();
                                             foreach ($arrLenguages as $Lenguages){
                                             ?>
-                                    <tr>
                                         <td><?php echo $Lenguages->getIdLenguages(); ?></td>
                                         <td><?php echo $Lenguages->getNameLenguages(); ?></td>
-                                        <td><?php echo $Lenguages->getsetStateLenguague(); ?></td>
+                                        <td><?php echo $Lenguages->getStateLenguague(); ?></td>
 
                                         <td>
                                             <a href="edit.php?idLenguages=<?php echo $Lenguages->getIdLenguages(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>

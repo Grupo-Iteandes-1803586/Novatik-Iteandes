@@ -1,6 +1,12 @@
 <?php require ("../../../partials/routes.php");
 require ("../../../../app/Controllers/PersonController.php");
+require ("../../../../app/Controllers/LenguagesControllers.php");
+require ("../../../../app/Controllers/ExperienceControllers.php");
+require ("../../../../app/Controllers/TeacherStudiesControllers.php");
 use App\Controllers\PersonController;
+use App\Controllers\LenguagesControllers;
+use App\Controllers\ExperienceControllers;
+use App\Controllers\TeacherStudiesControllers;
 ?>
 
 <!doctype html>
@@ -96,6 +102,66 @@ use App\Controllers\PersonController;
                             </p>
 
                         </div>
+                        <!--datos TeacherStudies -->
+                <?php if(!empty($_GET["idTeacherStudies"]) && isset($_GET["idTeacherStudies"])){
+                    $DataTeacher = \App\Controllers\TeacherStudiesControllers::searchForID($_GET["idTeacherStudies"]);
+                    if(!empty($DataTeacher)){
+                        ?>
+                        <div class="card-header">
+                            <h3 class="card-title">Estudios</h3>
+                        </div>
+                        <div class="card-body">
+                            <strong><i class="fas fa-user mr-1"></i> idTeacherStudies</strong>
+                            <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                            <hr>
+                            <p>
+                                <strong><i class="fas fa-book mr-1"></i> titulo</strong>
+                            <p class="text-muted">
+                                <?= $DataTeacher->getTitleTeacherStudies()?>
+                            </p>
+                            <hr>
+                            <strong><i class="fas fa-user mr-1"></i> año</strong>
+                            <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                            <hr>
+                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
+                            <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                            <hr>
+
+                        </div>
+                        <?php }
+                        } ?>
+                        <!--Lenguajes -->
+                        <?php if(!empty($_GET["idLenguages"]) && isset($_GET["idLenguages"])){
+                            $DataTeacher = \App\Controllers\LenguagesControllers::searchForID($_GET["idLenguages"]);
+                            if(!empty($DataTeacher)){
+                                ?>
+                                <div class="card-header">
+                                    <h3 class="card-title">Idioma</h3>
+                                </div>
+                                <div class="card-body">
+                                    <strong><i class="fas fa-user mr-1"></i> idLenguages</strong>
+                                    <p class="text-muted"><?=$DataTeacher->getIdLenguages()?></p>
+                                    <hr>
+                                    <p>
+                                        <strong><i class="fas fa-book mr-1"></i> Idioma</strong>
+                                    <p class="text-muted">
+                                        <?= $DataTeacher->getNameLenguages()?>
+                                    <hr>
+                                    <strong><i class="fas fa-user mr-1"></i> Estado</strong>
+                                    <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                                    <hr>
+                                    </p>
+                                </div>
+                            <?php }
+                        } ?>
+                        <!--Experince -->
+
+4
+                        
+
+
+
+                        <!---->
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-auto mr-auto">

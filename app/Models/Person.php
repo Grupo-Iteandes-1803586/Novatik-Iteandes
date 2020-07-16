@@ -340,11 +340,15 @@ class Person extends BasicModel{
     //Generar nomre de usuario
     public function generateNameUser($documentPerson , $namePerson,$lastNamePerson):String{
         $finalUserName = "";
-        $userName = explode(" ",$namePerson,$lastNamePerson);
+        $userName = explode(" ",$namePerson);
         foreach ($userName as $user){
             $finalUserName .= $user[0];
         }
-        return $finalUserName .= $documentPerson ;
+        $userName = explode(" ",$lastNamePerson);
+        foreach ($userName as $user){
+            $finalUserName .= $user[0];
+        }
+        return $finalUserName .= substr($documentPerson,-4) ;
     }
     //Creacion del metodo actualizar
     public function update(): bool{

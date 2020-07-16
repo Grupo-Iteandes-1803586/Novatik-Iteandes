@@ -232,7 +232,7 @@ class Semester extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.semester  SET nameSemester = ?, descriptionSemester = ?,starDateSemester = ?,endDateSemester = ?,startDate50 = ?,endDate50 = ?,starDate2Semester = ?,endDate2Semester = ?, statuSemester? = WHERE idSemester = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.semester  SET nameSemester = ?, descriptionSemester = ?,starDateSemester = ?,endDateSemester = ?,startDate50 = ?,endDate50 = ?,starDate2Semester = ?,endDate2Semester = ?, statuSemester =? WHERE idSemester = ?", array(
                 $this->nameSemester,
                 $this->descriptionSemester,
                 $this->starDateSemester,
