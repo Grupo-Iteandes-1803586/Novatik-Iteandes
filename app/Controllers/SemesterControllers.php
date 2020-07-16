@@ -72,7 +72,8 @@ class SemesterControllers{
             $semester->update();
             header ("Location: ../../views/modules/Semester/show.php?idSemester=".$semester->getIdSemester()."&respuesta=correcto");
         }catch (\Exception $ex){
-            header("Location: ../../views/modules/Semester/edit.php?respuesta=error&mensaje" . $ex-> getMessage());
+            var_dump($ex);
+            //header("Location: ../../views/modules/Semester/edit.php?respuesta=error&mensaje" . $ex-> getMessage());
         }
     }
 

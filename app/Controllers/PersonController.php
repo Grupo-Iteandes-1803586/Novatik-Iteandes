@@ -1,7 +1,14 @@
 <?php
 namespace App\Controllers;
 require(__DIR__.'/../Models/Person.php') ;
+require(__DIR__.'/../Models/Experience.php') ;
+require(__DIR__.'/../Models/Lenguages.php') ;
+require(__DIR__.'/../Models/TeacherStudies.php') ;
+
+use App\Models\Experience;
+use App\Models\Lenguages;
 use App\Models\Person;
+use App\Models\TeacherStudies;
 use mysql_xdevapi\Exception;
 
 //Metodo Get para recibir la accion
@@ -13,6 +20,7 @@ if(!empty($_GET['action'])){
 class PersonController{
     //Metodo main
     static function main($action){
+        //Acciones de la clase Teacher
         if($action == "create"){
             PersonController::create();
         }else if($action == "edit"){
@@ -40,14 +48,41 @@ class PersonController{
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
             $arrayPerson['adressPerson'] = $_POST['adressPerson'];
             $arrayPerson['generePerson'] = $_POST['generePerson'];
-            $arrayPerson['typePerson'] = $_POST['typePerson'];
+            $arrayPerson['typePerson'] = 'Docente';
             $arrayPerson['statePerson'] = 'Activo';
             $arrayPerson['photoPerson']= $_POST['photoPerson'];
+            //datos de experiencia
+            $arrayExperience = array();
+            $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
+            $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
+            $arrayExperience['startExperience'] = $_POST['startExperience'];
+            $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['stateExperience'] = 'Activo';
+            $Experience = new Experience($arrayExperience);
+            //Datos de Lenguaje
+            $arrayLenguages = array();
+            $arrayLenguages['nameLenguages'] = $_POST['nameLenguages'];
+            $arrayLenguages['stateLenguague'] = 'Activo';
+            $lenguages = new Lenguages($arrayLenguages);
+            //Datos de estudio
+            $arrayTeacherStudies = array();
+            $arrayTeacherStudies['titleTeacherStudies'] = $_POST['titleTeacherStudies'];
+            $arrayTeacherStudies['yearStudyTeacher'] = $_POST['yearStudyTeacher'];
+            $arrayTeacherStudies['stateTeacherStudies'] = 'Activo';
+            $TeacherStudies = new TeacherStudies($arrayTeacherStudies);
+
             //Validar registro del Usuario
             if(!Person::userRegistration($arrayPerson['documentPerson'])){
                 $person =new Person($arrayPerson);
                 if($person->create()){
-                    header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
+                    if($Experience->create()) {
+                        if($TeacherStudies->create()) {
+                            if($lenguages->create()){
+                                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
+                            }
+
+                        }
+                    }
                 }
             }else{
                 header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Usuario ya registrado");
