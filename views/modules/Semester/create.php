@@ -67,15 +67,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="startDate" class="col-sm-2 col-form-label">Fecha de Inicio del semestre</label>
+                            <label for="starDateSemester" class="col-sm-2 col-form-label">Fecha de Inicio del semestre</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="startDate" name="startDate" placeholder="Ingrese la fecha de inicio">
+                                <input required type="date" class="form-control" id="starDateSemester" name="starDateSemester" placeholder="Ingrese la fecha de inicio">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="endDate" class="col-sm-2 col-form-label">Fecha de cierre del semestre</label>
+                            <label for="endDateSemester" class="col-sm-2 col-form-label">Fecha de cierre del semestre</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="endDate" name="endDate" placeholder="Ingrese la fecha de cierre">
+                                <input required type="date" class="form-control" id="endDateSemester" name="endDateSemester" placeholder="Ingrese la fecha de cierre">
                             </div>
                         </div>
                         <div class="form-group row">

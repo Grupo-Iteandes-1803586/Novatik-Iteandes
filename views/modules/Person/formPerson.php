@@ -7,6 +7,8 @@
     <!-- form start -->
     <form class="form-horizontal" method="post" id="frmCreatePerson" name="frmCreatePerson" action="../../../app/Controllers/PersonController.php?action=create">
         <div class="card-body">
+            <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Datos Basicos</li>
+            <hr>
             <!--Documento del Docente-->
             <div class="form-group row">
                 <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>

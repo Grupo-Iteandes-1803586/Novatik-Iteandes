@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-require(__DIR__.'/../Models/Experience.php');
+require_once(__DIR__.'/../Models/Experience.php');
 use App\Models\Experience;
 
 if(!empty($_GET['action'])){
