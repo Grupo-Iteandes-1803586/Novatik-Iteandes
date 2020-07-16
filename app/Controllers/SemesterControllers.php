@@ -55,7 +55,6 @@ class SemesterControllers{
     }
     //Funcion Edit Semester
     static public function edit(){
-        //var_dump($_POST);
         try{
             $arraySemeste = array();
             $arraySemeste['nameSemester'] = $_POST['nameSemester'];
@@ -67,13 +66,14 @@ class SemesterControllers{
             $arraySemeste['starDate2Semester'] = $_POST['starDate2Semester'] ;
             $arraySemeste['endDate2Semester'] = $_POST['endDate2Semester'] ;
             $arraySemeste['statuSemester'] =$_POST['statuSemester'];
-            $arraySemeste['idSemester'] =$_POST['idSemester'];
-            //Validacion del editar del semestre
-            $semester = new Semester($arraySemeste);
+            $arraySemeste['idSemester'] = $_POST['idSemester'];
+
+            $semester =  new Semester($arraySemeste);
             $semester->update();
-            header("Location: ../../views/modules/Semester/show.php?respuesta?idSemester=".$semester->getIdSemester()."&respuesta=correcto");
-        }catch(Exception $ex){
-            header("Location: ../../views/modules/Semester/create.php?respuesta=error&mensaje" . $ex-> getMessage());
+            header ("Location: ../../views/modules/Semester/show.php?idSemester=".$semester->getIdSemester()."&respuesta=correcto");
+        }catch (\Exception $ex){
+            var_dump($ex);
+            //header("Location: ../../views/modules/Semester/edit.php?respuesta=error&mensaje" . $ex-> getMessage());
         }
     }
 

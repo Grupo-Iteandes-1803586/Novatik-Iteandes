@@ -30,7 +30,6 @@ class  LenguagesControllers
     {
         try {
             $arrayLenguages = array();
-            $arrayLenguages['idLenguages'] = $_POST['idLenguages'];
             $arrayLenguages['nameLenguages'] = $_POST['nameLenguages'];
             $arrayLenguages['stateLenguague'] = 'Activo';
 

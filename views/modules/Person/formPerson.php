@@ -5,7 +5,7 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form class="form-horizontal" method="post" id="frmCreatePerson" name="frmCreatePerson" action="../../../app/Controllers/PersonController.php?action=create">
+    <form class="form-horizontal" method="post" id="frmCreatePerson" name="frmCreatePerson" action="../../../../app/Controllers/PersonController.php?action=create">
         <div class="card-body">
             <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Datos Basicos</li>
             <hr>
@@ -85,15 +85,11 @@
                     </select>
                 </div>
             </div>
-            <!--Tipo  del Docente-->
+            <!--Correo Electronico del Docente-->
             <div class="form-group row">
-                <label for="typePerson class="col-sm-2 col-form-label">Tipo de Usuario</label>
+                <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
                 <div class="col-sm-10">
-                    <select id="typePerson" name="typePerson" class="custom-select">
-                        <option value="Docente">Docente</option>
-                        <option value="Estudiante">Estudiante</option>
-                        <option value="Secretaria">Secretaria</option>
-                    </select>
+                    <input required type="text" class="form-control" id="photoPerson" name="photoPerson" placeholder="Ingrese su Correo Electronico">
                 </div>
             </div>
             <!--Creacion de la tabla estudios del docente agragacion del la tabla lenguajes-->
@@ -101,6 +97,8 @@
             require ("Teacher/formTeacherStudies.php");
                         /*Creacion de la tabla Experiencia*/
             require ("Teacher/formExperiience.php");
+            /*Tabla de Lenguajes*/
+            require ("Teacher/formLenguagues.php");
             ?>
         <!-- /.card-body -->
         <div class="card-footer">

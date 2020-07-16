@@ -67,7 +67,7 @@ use App\Controllers\TrainingProgramController; ?>
                             <h3 class="card-title"><?= $DataPrograming->getNameTrainingProgram();?></h3>
                         </div>
                         <div class="card-body">
-                            <strong><i class="fas fa-book mr-1"></i> #</strong>
+                            <strong><i class="fas fa-keyboard mr-1"></i> #</strong>
                                 <p class="text-muted">
                                     <?= $DataPrograming->getIdTrainingProgram();?>
                                 </p>
