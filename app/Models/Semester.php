@@ -111,7 +111,7 @@ class Semester extends BasicModel{
     /**
      * @param date $starDateSemester
      */
-    public function setStarDateSemester(date $starDateSemester): void
+    public function setStarDateSemester($starDateSemester): void
     {
         $this->starDateSemester = $starDateSemester;
     }
@@ -127,7 +127,7 @@ class Semester extends BasicModel{
     /**
      * @param date $endDateSemester
      */
-    public function setEndDateSemester(date $endDateSemester): void
+    public function setEndDateSemester($endDateSemester): void
     {
         $this->endDateSemester = $endDateSemester;
     }
@@ -159,7 +159,7 @@ class Semester extends BasicModel{
     /**
       @param date $startDate50
      */
-    public function setStartDate50(date $startDate50): void
+    public function setStartDate50($startDate50): void
     {
         $this->startDate50 = $startDate50;
     }
@@ -175,7 +175,7 @@ class Semester extends BasicModel{
     /**
      * @param date $endDate50
      */
-    public function setEndDate50(date $endDate50): void
+    public function setEndDate50($endDate50): void
     {
         $this->endDate50 = $endDate50;
     }
@@ -191,7 +191,7 @@ class Semester extends BasicModel{
     /**
      * @param date $starDate2Semester
      */
-    public function setStarDate2Semester(date $starDate2Semester): void
+    public function setStarDate2Semester($starDate2Semester): void
     {
         $this->starDate2Semester = $starDate2Semester;
     }
@@ -207,7 +207,7 @@ class Semester extends BasicModel{
     /**
      * @param date $endDate2Semester
      */
-    public function setEndDate2Semester(date $endDate2Semester): void
+    public function setEndDate2Semester($endDate2Semester): void
     {
         $this->endDate2Semester = $endDate2Semester;
     }
@@ -259,12 +259,12 @@ class Semester extends BasicModel{
             $semeste->idSemester =  $value['idSemester'];
             $semeste->nameSemester = $value['nameSemester'] ;
             $semeste->descriptionSemester =$value['descriptionSemester'] ;
-            $semeste->starDateSemester= date('Y-m-d',strtotime($value['starDateSemester']));
-            $semeste->endDateSemester = date('Y-m-d',strtotime($value['endDateSemester']));
-            $semeste->startDate50 = date('Y-m-d',strtotime($value['startDate50']));
-            $semeste->endDate50 = date('Y-m-d',strtotime($value['endDate50']));
-            $semeste->starDate2Semester = date('Y-m-d',strtotime($value['starDate2Semester']));
-            $semeste->endDate2Semester = date('Y-m-d',strtotime($value['endDate2Semester']));
+            $semeste->starDateSemester=$value['starDateSemester'];
+            $semeste->endDateSemester =$value['endDateSemester'];
+            $semeste->startDate50 =$value['startDate50'];
+            $semeste->endDate50 =$value['endDate50'];
+            $semeste->starDate2Semester =$value['starDate2Semester'];
+            $semeste->endDate2Semester =$value['endDate2Semester'];
             $semeste->statuSemester = $value['statuSemester'];
             $semeste->Disconnect();
             array_push($arrSemester,$semeste);
@@ -281,12 +281,12 @@ class Semester extends BasicModel{
             $semestes->idSemester =  $getrow['idSemester'];
             $semestes->nameSemester =$getrow['nameSemester'] ;
             $semestes->descriptionSemester =$getrow['descriptionSemester'] ;
-            $semestes->starDateSemester= date('Y-m-d',strtotime($getrow['starDateSemester']));
-            $semestes->endDateSemester = date('Y-m-d',strtotime($getrow['endDateSemester']));
-            $semestes->startDate50 = date('Y-m-d',strtotime($getrow['startDate50']));
-            $semestes->endDate50 = date('Y-m-d',strtotime($getrow['endDate50']));
-            $semestes->starDate2Semester = date('Y-m-d',strtotime($getrow['starDate2Semester']));
-            $semestes->endDate2Semester = date('Y-m-d',strtotime($getrow['endDate2Semester']));
+            $semestes->starDateSemester=$getrow['starDateSemester'];
+            $semestes->endDateSemester = $getrow['endDateSemester'];
+            $semestes->startDate50 = $getrow['startDate50'];
+            $semestes->endDate50 = $getrow['endDate50'];
+            $semestes->starDate2Semester = $getrow['starDate2Semester'];
+            $semestes->endDate2Semester = $getrow['endDate2Semester'];
             $semestes->statuSemester = $getrow['statuSemester'];
         }
         $semestes->Disconnect();
