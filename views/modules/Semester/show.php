@@ -59,6 +59,7 @@ use App\Controllers\SemesterControllers;?>
                         ?>
                         <div class="card-header">
                             <h3 class="card-title">Semestre Academico</h3>
+                            <?php require("../../partials/optionMenu.php") ;?>
                         </div>
                         <div class="card-body">
                             <p>

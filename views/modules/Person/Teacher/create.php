@@ -44,9 +44,33 @@
                     <?php } ?>
                 <?php } ?>
 
+                <!-- Horizontal Form -->
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Formulario de Registro del Docente</h3>
+                        <?php require("../../../partials/optionMenu.php") ;?>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" method="post" id="frmCreatePerson" name="frmCreatePerson" action="../../../../app/Controllers/PersonController.php?action=create">
 
-                <?php require ("../formPerson.php");?>
-
+                    <?php
+                    require ("../formPerson.php");
+                        //Creacion de la tabla estudios del docente agragacion del la tabla lenguajes
+                    require ("formTeacherStudies.php");
+                        /*Creacion de la tabla Experiencia*/
+                    require ("formExperiience.php");
+                        /*Tabla de Lenguajes*/
+                    require ("formLenguagues.php");
+                    ?>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info">Enviar</button>
+                            <a href="index.php" role="button" class="btn btn-default float-right">Cancelar</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </form>
+                </div>
 
             </section>
             <!-- /.content -->
