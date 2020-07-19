@@ -65,6 +65,7 @@ use App\Controllers\TrainingProgramController; ?>
                         ?>
                         <div class="card-header">
                             <h3 class="card-title"><?= $DataPrograming->getNameTrainingProgram();?></h3>
+                            <?php require("../../partials/optionMenu.php") ;?>
                         </div>
                         <div class="card-body">
                             <strong><i class="fas fa-keyboard mr-1"></i> #</strong>

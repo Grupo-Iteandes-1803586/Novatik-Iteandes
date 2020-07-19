@@ -67,6 +67,7 @@ use App\Controllers\TeacherStudiesControllers;
                         ?>
                         <div class="card-header">
                             <h3 class="card-title"><?= $DataPerson->getNamePerson()  ?></h3>
+                            <?php require("../../../partials/optionMenu.php") ;?>
                         </div>
                         <div class="card-body">
                             <p>

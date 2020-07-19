@@ -1,12 +1,4 @@
-<!-- Horizontal Form -->
-<div class="card card-info">
-    <div class="card-header">
-        <h3 class="card-title">Formulario de Registro del Docente</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    <form class="form-horizontal" method="post" id="frmCreatePerson" name="frmCreatePerson" action="../../../../app/Controllers/PersonController.php?action=create">
-        <div class="card-body">
+<div class="card-body">
             <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Datos Basicos</li>
             <hr>
             <!--Documento del Docente-->
@@ -92,20 +84,5 @@
                     <input required type="text" class="form-control" id="photoPerson" name="photoPerson" placeholder="Ingrese su Correo Electronico">
                 </div>
             </div>
-            <!--Creacion de la tabla estudios del docente agragacion del la tabla lenguajes-->
-            <?php
-            require ("Teacher/formTeacherStudies.php");
-                        /*Creacion de la tabla Experiencia*/
-            require ("Teacher/formExperiience.php");
-            /*Tabla de Lenguajes*/
-            require ("Teacher/formLenguagues.php");
-            ?>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <button type="submit" class="btn btn-info">Enviar</button>
-            <a href="Teacher/index.php" role="button" class="btn btn-default float-right">Cancelar</a>
-        </div>
-        <!-- /.card-footer -->
-    </form>
 </div>
 <!-- /.card -->
