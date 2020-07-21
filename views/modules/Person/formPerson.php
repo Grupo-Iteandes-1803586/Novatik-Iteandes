@@ -5,7 +5,7 @@
             <div class="form-group row">
                 <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>
                 <div class="col-sm-10">
-                    <input required type="number" minlength="6" class="form-control" id="documentPerson" name="documentPerson" placeholder="Ingrese su documento">
+                    <input required type="number" minlength="6" maxlength="11" class="form-control" id="documentPerson" name="documentPerson" placeholder="Ingrese su documento">
                 </div>
             </div>
             <!--Nombre del docente-->
@@ -42,7 +42,7 @@
             <div class="form-group row">
                 <label for="phonePerson" class="col-sm-2 col-form-label">Telefono</label>
                 <div class="col-sm-10">
-                    <input required type="number" minlength="6" class="form-control" id="phonePerson" name="phonePerson" placeholder="Ingrese su telefono">
+                    <input required type="number" minlength="6"  maxlength="10" class="form-control" id="phonePerson" name="phonePerson" placeholder="Ingrese su telefono">
                 </div>
             </div>
             <!--Direccion del Docente-->
@@ -81,7 +81,7 @@
             <div class="form-group row">
                 <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
                 <div class="col-sm-10">
-                    <input required type="text" class="form-control" id="photoPerson" name="photoPerson" placeholder="Ingrese su Correo Electronico">
+                    <input required type="text" class="form-control" id="photoPerson" name="photoPerson" placeholder="Ingrese su Foto">
                 </div>
             </div>
 </div>

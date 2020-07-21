@@ -99,9 +99,9 @@ class TeacherControllers
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
         }
     }
-    static public function searchForID ($id){
+    static public function searchForID ($idTeacher){
         try {
-            return Teacher ::searchForId($id);
+            return Teacher ::searchForId($idTeacher);
         } catch (\Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
             //header("Location: ../../views/modules/Person/Teacher/manager.php?respuesta=error");

@@ -23,9 +23,9 @@ class  Teacher Extends BasicModel{
     {
         parent::__construct();
         $this->idTeacher = $teacher['idTeacher'] ?? null;
-        $this->Experience_idExperience = $teacher ['Experience_idExperience '] ?? null;
-        $this->TeacherStudies_idTeacherStudies = $teacher['TeacherStudies_idTeacherStudies '] ?? null;
-        $this->Person_idPerson = $teacher['Person_idPerson '] ?? null;
+        $this->Experience_idExperience = $teacher ['Experience_idExperience'] ?? null;
+        $this->TeacherStudies_idTeacherStudies = $teacher['TeacherStudies_idTeacherStudies'] ?? null;
+        $this->Person_idPerson = $teacher['Person_idPerson'] ?? null;
         $this->stateTeacher = $teacher['stateTeacher'] ?? null;
     }
 
@@ -52,7 +52,7 @@ class  Teacher Extends BasicModel{
     }
 
     /**
-     * @return int|
+     * @return int
      */
     public function getExperienceIdExperience(): int
     {
@@ -126,12 +126,12 @@ class  Teacher Extends BasicModel{
         foreach ($getrows as $value) {
             $Teacher = new Teacher();
             $Teacher->idTeacher = $value['idTeacher'];
-            $Teacher->Experience_idExperience = $value['Experience_idExperience'];
+            $Teacher->Experience_idExperience = Experience::searchForId($value['Experience_idExperience']);
             $Teacher->TeacherStudies_idTeacherStudies = TeacherStudies::searchForId($value['TeacherStudies_idTeacherStudies']);
             $Teacher->Person_idPerson = Person::searchForId($value['Person_idPerson']);
             $Teacher->stateTeacher = $value['stateTeacher'];
             $Teacher->Disconnect();
-            array_push($arrTeacher, $value);
+            array_push($arrTeacher, $Teacher);
         }
         $tmp->Disconnect();
         return $arrTeacher;
@@ -139,7 +139,7 @@ class  Teacher Extends BasicModel{
     //Buscar toda la informacion de la tabla
     public static function getAll()
     {
-        return Teacher::search("SELECT * FROM iteande_novatik.Teacher");
+        return Teacher::search("SELECT * FROM iteandes_novatik.Teacher");
     }
 //Buscar por id Teacher
     /**
@@ -151,7 +151,7 @@ class  Teacher Extends BasicModel{
         $teacher = null;
         if ($idTeacher  > 0) {
             $teacher= new Teacher();
-            $getrow = $teacher->getRow("SELECT * FROM iteande_novatik.Teacher WHERE idTeacher =?", array($idTeacher));
+            $getrow = $teacher->getRow("SELECT * FROM iteandes_novatik.Teacher WHERE idTeacher =?", array($idTeacher));
             $teacher->idTeacher = $getrow['idTeacher'];
             $teacher->Experience_idExperience = $getrow['Experience_idExperience'];
             $teacher->TeacherStudies_idTeacherStudies = TeacherStudies::searchForId($getrow['TeacherStudies_idTeacherStudies']);
@@ -164,12 +164,11 @@ class  Teacher Extends BasicModel{
 /////////////////////////////////crear a un docente
     public function create()
     {
-        $result = $this->insertRow("INSERT INTO iteande_novatik VALUES (NULL, ?, ?, ?, ?)", array(
-                $this->Experience_idExperience,
-                $this->TeacherStudies_idTeacherStudies->getIdTeacher(),
-                $this->Person_idPerson->getIdTeacher(),
-                $this->stateTeacher,
-
+        $result = $this->insertRow("INSERT INTO iteandes_novatik.Teacher VALUES (NULL, ?, ?, ?, ?)", array(
+                $this->Experience_idExperience->getIdExperience(),
+                $this->TeacherStudies_idTeacherStudies->getIdTeacherStudies(),
+                $this->Person_idPerson->getIdPerson(),
+                $this->stateTeacher
             )
         );
         $this->setIdTeacher(($result) ? $this->getLastId() : null);
@@ -179,7 +178,7 @@ class  Teacher Extends BasicModel{
 ///////////////////Actualizar  un docente
     public function update()
     {
-        $result = $this->updateRow("UPDATE iteande_novatik  SET Experience_idExperience = ?, TeacherStudies_idTeacherStudies = ?, Person_idPerson= ?, stateTeacher = ? WHERE idTeacher = ?", array(
+        $result = $this->updateRow("UPDATE iteandes_novatik.Teacher  SET Experience_idExperience = ?, TeacherStudies_idTeacherStudies = ?, Person_idPerson= ?, stateTeacher = ? WHERE idTeacher = ?", array(
                 $this->Experience_idExperience,
                 $this->TeacherStudies_idTeacherStudies->getIdTeacher(),
                 $this->Person_idPerson->getIdTeacher(),

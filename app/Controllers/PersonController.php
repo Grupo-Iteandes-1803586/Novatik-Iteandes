@@ -6,11 +6,13 @@ require(__DIR__.'/../Models/Lenguages.php') ;
 require(__DIR__.'/../Models/TeacherStudies.php') ;
 require(__DIR__.'/../Models/Student.php') ;
 require(__DIR__.'/../Models/Teacher.php') ;
+require(__DIR__.'/../Models/TeacherLenguages.php') ;
 
 use App\Models\Experience;
 use App\Models\Lenguages;
 use App\Models\Person;
 use App\Models\Teacher;
+use App\Models\TeacherLenguages;
 use App\Models\TeacherStudies;
 use App\Models\Student;
 use mysql_xdevapi\Exception;
@@ -88,22 +90,30 @@ class PersonController{
             $arrayLenguages['nameLenguages'] = $_POST['nameLenguages'];
             $arrayLenguages['stateLenguague'] = 'Activo';
             $lenguages = new Lenguages($arrayLenguages);
+
             //Validar registro del Usuario
             if(!Person::userRegistration($arrayPerson['documentPerson'])){
                 $person =new Person($arrayPerson);
                 if($person->create()){
                     if($Experience->create()) {
                         if($TeacherStudies->create()) {
-                            if($lenguages->create()){
-                                //Datos de Teacher
-                                $arrayTeacher = array();
-                                $arrayTeacher['Experience_idExperience'] = Experience::searchForId($_POST['Experience_idExperience']);
-                                $arrayTeacher['TeacherStudies_idTeacherStudies'] = TeacherStudies::searchForId($_POST['TeacherStudies_idTeacherStudies']);
-                                $arrayTeacher['Person_idPerson'] = Person ::searchForId ($_POST['Person_idPerson']);
-                                $arrayTeacher['stateTeacher'] = 'Activo';
-                                $Teacher= new Teacher($arrayTeacher);
-                                if($Teacher->create()) {
-                                    header("Location: ../../views/modules/Person/Teacher/show.php?respuesta=correcto");
+                            //Datos de Teacher
+                            $arrayTeacher = array();
+                            $arrayTeacher['Experience_idExperience'] = $Experience;
+                            $arrayTeacher['TeacherStudies_idTeacherStudies'] = $TeacherStudies;
+                            $arrayTeacher['Person_idPerson'] =$person;
+                            $arrayTeacher['stateTeacher'] = 'Activo';
+                            $Teacher= new Teacher($arrayTeacher);
+                            if($Teacher->create()) {
+                                if($lenguages->create()){
+                                    $arrayTeacherLenguages = array();
+                                    $arrayTeacherLenguages ['Teacher_idTeacher'] =$Teacher;
+                                    $arrayTeacherLenguages ['Lenguages_idLenguages'] = $lenguages;
+                                    $arrayTeacherLenguages ['stateTeacherLenguages'] = 'Activo';
+                                    $TeacherLenguages = new TeacherLenguages($arrayTeacherLenguages);
+                                    if ($TeacherLenguages->create()) {
+                                        header("Location: ../../views/modules/Person/Teacher/show.php?respuesta=correcto");
+                                    }
                                 }
                             }
                         }
@@ -170,7 +180,18 @@ class PersonController{
                             $arrayTeacher['idTeacher'] = $_POST['idTeacher'];
                             $Teacher = new Teacher( $arrayTeacher);
                             if($Teacher->update()) {
-                                header("Location: ../../views/modules/Person/Teacher/show.php?idPerson=".$person->getIdPerson()."&respuesta=correcto");
+                                $arrayTeacherLenguages = array();
+                                $arrayTeacherLenguages['Teacher_idTeacher'] = Teacher::searchForId($_POST['Teacher_idTeacher']);
+                                $arrayTeacherLenguages['Lenguages_idLenguages'] = Lenguages::searchForId($_POST['Lenguages_idLenguages']);
+                                $arrayTeacherLenguages['stateTeacherLenguages'] = $_POST['stateTeacherLenguages'];
+                                $arrayTeacherLenguages['idTeacherLenguages'] = $_POST['idTeacherLenguages'];
+
+                                $TeacherLenguages = new TeacherLenguages( $arrayTeacherLenguages);
+                                if ($TeacherLenguages->update()){
+                                    header("Location: ../../views/modules/Person/Teacher/show.php?idPerson=".$person->getIdPerson()."&respuesta=correcto");
+                                }
+
+
                             }
                         }
 

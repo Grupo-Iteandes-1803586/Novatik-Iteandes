@@ -334,6 +334,8 @@ class Person extends BasicModel{
             $this->photoPerson
             )
         );
+
+        $this->setIdPerson(($result) ? $this->getLastId() : null);
         $this->Disconnect();
         return $result;
     }
