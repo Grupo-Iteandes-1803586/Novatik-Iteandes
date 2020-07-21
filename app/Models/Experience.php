@@ -140,7 +140,7 @@ class Experience extends BasicModel{
             $this-> stateExperience
             )
         );
-
+        $this->setIdExperience(($result) ? $this->getLastId() : null);
         $this->Disconnect();
         return $result;
     }
@@ -190,7 +190,7 @@ class Experience extends BasicModel{
             $getrow = $experiences->getRow("SELECT * FROM iteandes_novatik.experience WHERE idExperience =?", array($idExperience));
             $experiences->idExperience = $getrow['idExperience'];
             $experiences->institutionExperience = $getrow['institutionExperience'];
-            $experiences->dedicationExperience = $getrow['ndedicationExperience'];
+            $experiences->dedicationExperience = $getrow['dedicationExperience'];
             $experiences->startExperience = $getrow['startExperience'];
             $experiences->endExperince= $getrow['endExperince'];
             $experiences->stateExperience= $getrow['stateExperience'];
