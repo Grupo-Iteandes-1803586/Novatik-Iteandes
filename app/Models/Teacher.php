@@ -22,7 +22,7 @@ class  Teacher Extends BasicModel{
     public function __construct($teacher = array())
     {
         parent::__construct();
-        $this->idTeacher = $teacher['$idTeacher'] ?? null;
+        $this->idTeacher = $teacher['idTeacher'] ?? null;
         $this->Experience_idExperience = $teacher ['Experience_idExperience '] ?? null;
         $this->TeacherStudies_idTeacherStudies = $teacher['TeacherStudies_idTeacherStudies '] ?? null;
         $this->Person_idPerson = $teacher['Person_idPerson '] ?? null;

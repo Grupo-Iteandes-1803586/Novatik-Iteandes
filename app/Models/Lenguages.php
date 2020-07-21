@@ -10,7 +10,7 @@ class Lenguages extends BasicModel{
 
     /**
      * Lenguages constructor.
-     * @param $idLenguages
+     * @param $idLenguages0
      * @param $nameLenguages
      */
     public function __construct($lengus  = array())
