@@ -67,6 +67,7 @@ use App\Controllers\ExperienceControllers;?>
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Gestionar Docentes</h3>
+                    <?php require("../../../partials/optionMenu.php") ;?>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="iconP fas fa-minus"></i></button>

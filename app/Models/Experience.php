@@ -188,6 +188,7 @@ class Experience extends BasicModel{
         if($idExperience > 0) {
             $experiences = new Experience;
             $getrow = $experiences->getRow("SELECT * FROM iteandes_novatik.experience WHERE idExperience =?", array($idExperience));
+            $experiences->idExperience = $getrow['idExperience'];
             $experiences->institutionExperience = $getrow['institutionExperience'];
             $experiences->dedicationExperience = $getrow['ndedicationExperience'];
             $experiences->startExperience = $getrow['startExperience'];

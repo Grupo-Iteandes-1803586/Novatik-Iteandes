@@ -49,6 +49,7 @@
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Crear Semestre Academico</h3>
+                    <?php require("../../partials/optionMenu.php") ;?>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->

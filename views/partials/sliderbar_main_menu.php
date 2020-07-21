@@ -15,17 +15,20 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview"> <?= strpos($_SERVER['REQUEST_URI'],'datos') ? 'menu-open' : '' ?>
+                    <a href="#" class="nav-link"><?= strpos($_SERVER['REQUEST_URI'],'datos') ? 'active' : '' ?>
                         <i class="nav-icon far fa-user"></i>
                         <p>
                            Datos Personales
                         </p>
                     </a>
                 </li>
+                </li>
                 <li class="nav-header">Modulos Principales</li>
                 <!--Gestionar Docente-->
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'docente') ? 'menu-open' : '' ?>
+                    <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'docente') ? 'active' : '' ?>
                         <i class="nav-icon far fa-user"></i>
                         <p>
                             Gestionar Docentes
@@ -47,9 +50,37 @@
                         </li>
                     </ul>
                 </li>
+                </li>
+                <!--Modulo gestionar estudiante-->
+                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'student') ? 'menu-open' : '' ?>
+                    <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'student') ? 'active' : '' ?>
+                        <i class="nav-icon far fa-user"></i>
+                        <p>
+                            Gestionar Estudiante
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $baseURL ?>/views/modules/Person/Student/index.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Consultar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $baseURL ?>/views/modules/Person/Student/create.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Registrar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                </li>
                 <!--Modulo Gestionar Semestre-->
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'semester') ? 'menu-open' : '' ?>
+                    <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'semester') ? 'active' : '' ?>
                         <i class="nav-icon far fa-user"></i>
                         <p>
                             Gestionar Semestre
@@ -71,9 +102,11 @@
                         </li>
                     </ul>
                 </li>
+                </li>
                 <!--Modulo Gestionar Programa de Formacion-->
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'program') ? 'menu-open' : '' ?>
+                    <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'program') ? 'active' : '' ?>
                         <i class="nav-icon far fa-user"></i>
                         <p>
                             Gestionar Programa
@@ -94,6 +127,7 @@
                             </a>
                         </li>
                     </ul>
+                </li>
                 </li>
             </ul>
 
