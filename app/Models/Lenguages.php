@@ -10,15 +10,15 @@ class Lenguages extends BasicModel{
 
     /**
      * Lenguages constructor.
-     * @param $idLenguages
+     * @param $idLenguages0
      * @param $nameLenguages
      */
     public function __construct($lengus  = array())
     {
         parent::__construct();
-        $this->idLenguages = $lengus;['idLenguages'] ?? null;
-        $this->nameLenguages = $lengus;['nameLenguages'] ?? null;
-        $this->stateLenguague = $lengus;['stateLenguague'] ?? null;
+        $this->idLenguages = $lengus['idLenguages'] ?? null;
+        $this->nameLenguages = $lengus['nameLenguages'] ?? null;
+        $this->stateLenguague = $lengus['stateLenguague'] ?? null;
     }
     function __destruct(){
         $this->Disconnect();
@@ -80,6 +80,7 @@ class Lenguages extends BasicModel{
                 $this-> stateLenguague
             )
         );
+        $this->setIdLenguages(($result) ? $this->getLastId() : null);
         $this->Disconnect();
         return $result;
     }
@@ -120,7 +121,7 @@ class Lenguages extends BasicModel{
     //Buscar pot Id de Lenguages
     public static function searchForId($idLenguages) : Lenguages{
         $lenguages= null;
-        if(lenguages > 0) {
+        if($idLenguages > 0) {
             $lenguages = new Lenguages;
             $getrow = $lenguages->getRow("SELECT * FROM iteandes_novatik.lenguages WHERE idLenguages =?", array($idLenguages));
             $lenguages->nameLenguages = $getrow['nameLenguages'];
@@ -128,7 +129,7 @@ class Lenguages extends BasicModel{
             $lenguages->idLenguages = $getrow['idLenguages'];
         }
         $lenguages->Disconnect();
-        return lenguages;
+        return $lenguages;
     }
     //  Obtener toda la informacion de la BD
     public static function getAll() : array

@@ -99,7 +99,7 @@ class TeacherStudies extends BasicModel{
                 $this-> stateTeacherStudies
             )
         );
-
+        $this->setIdTeacherStudies(($result) ? $this->getLastId() : null);
         $this->Disconnect();
         return $result;
     }
@@ -149,6 +149,7 @@ class TeacherStudies extends BasicModel{
             $teacherStudie->titleTeacherStudies = $getrow['titleTeacherStudies'];
             $teacherStudie->yearStudyTeacher = $getrow['yearStudyTeacher'];
             $teacherStudie->stateTeacherStudies = $getrow['stateTeacherStudies'];
+            $teacherStudie->idTeacherStudies = $getrow['idTeacherStudies'];
         }
         $teacherStudie->Disconnect();
         return $teacherStudie;
