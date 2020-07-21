@@ -61,6 +61,7 @@ use App\Controllers\TrainingProgramController; ?>
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Programa de formacion</h3>
+                    <?php require("../../partials/optionMenu.php") ;?>
                 </div>
                 <!-- /.card-header -->
                 <?php if(!empty($_GET["idTrainingProgram"]) && isset($_GET["idTrainingProgram"])){ ?>
