@@ -42,7 +42,7 @@
             <div class="form-group row">
                 <label for="phonePerson" class="col-sm-2 col-form-label">Telefono</label>
                 <div class="col-sm-10">
-                    <input required type="number" minlength="6"  maxlength="10" class="form-control" id="phonePerson" name="phonePerson" placeholder="Ingrese su telefono">
+                    <input required type="number" minlength="6"  maxlength="11" class="form-control" id="phonePerson" name="phonePerson" placeholder="Ingrese su telefono">
                 </div>
             </div>
             <!--Direccion del Docente-->

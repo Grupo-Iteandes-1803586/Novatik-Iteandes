@@ -68,12 +68,6 @@ use App\Controllers\ExperienceControllers;?>
                 <div class="card-header">
                     <h3 class="card-title">Gestionar Docentes</h3>
                     <?php require("../../../partials/optionMenu.php") ;?>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="iconP fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                            <i class="iconP fas fa-times"></i></button>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -215,7 +209,7 @@ use App\Controllers\ExperienceControllers;?>
                                         <td>
                                             <a href="edit.php?idLenguages=<?php echo $Lenguages->getIdLenguages(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                                             <a href="show.php?idLenguages=<?php echo $Lenguages->getIdLenguages(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
-                                            <?php if ($Lenguages->getStateLenguages() != "Activo"){ ?>
+                                            <?php if ($Lenguages->getStateLenguague() != "Activo"){ ?>
                                                 <a href="../../../../app/Controllers/LenguagesController.php?action=active&idExperience=<?php echo $Lenguages->getIdLenguages(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                             <?php }else{ ?>
                                                 <a type="button" href="../../../../app/Controllers/LenguagesController.php?action=inactive&idExperience=<?php echo $Lenguages->getIdLenguages(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
