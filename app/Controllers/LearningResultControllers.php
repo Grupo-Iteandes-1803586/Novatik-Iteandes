@@ -47,4 +47,22 @@ class LearningResultControllers
             header("Location: ../../views/modules/LearningResult/create.php?respuesta=error&mensaje=" . $e->getMessage());
         }
     }
+    static public function edit (){
+        try {
+            $arrayLearningResult  = array();
+            $arrayLearningResult ['idLearningResult'] = $_POST['idLearningResult'];
+            $arrayLearningResult ['LearningResult'] = $_POST['LearningResult'];
+            $arrayLearningResult ['nameLearningResult'] = $_POST['nameLearningResult'];
+            $arrayLearningResult ['durationLearningResult'] = $_POST['durationLearningResult'];
+            $arrayLearningResult ['statuLearningResult'] = $_POST['statuLearningResult'];
+            $arrayLearningResult['TrainingCompetition_idTrainingCompetition'] = TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
+            $LearningResult = new LearningResult($arrayLearningResult );
+            $LearningResult->update();
+
+            header("Location: ../../views/modules/LearningResult/create.php?id=".$LearningResult->getIdLenguages()."&respuesta=correcto");
+        } catch (\Exception $e) {
+            //var_dump($e);
+            header("Location: ../../views/modules/LearningResult/create.php?respuesta=error&mensaje=".$e->getMessage());
+        }
+    }
 }
