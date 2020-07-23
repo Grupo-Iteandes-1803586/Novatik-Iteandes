@@ -43,7 +43,7 @@ class TeacherControllers
             $arrayTeacher['stateTeacher'] = 'Activo';
             $Teacher= new Teacher($arrayTeacher);
             if($Teacher->create()){
-                header("Location: ../../views/modules/Person/Teacher/create.php?idTeacher=".$Teacher->getIdTeacher());
+                header("Location: ../../views/modules/Person/Teacher/show.php?respuesta=correcto");
             }
         } catch (Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
@@ -75,19 +75,19 @@ class TeacherControllers
             $ObjTeacher = Teacher::searchForId($_GET['idTeacher']);
             $ObjTeacher->setStateTeacher('Activo');
             if($ObjTeacher->update()){
-                header("Location: ../../views/Person/Teacher/index.php");
+                header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
-                header("Location: ../../views/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
            // GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
+            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
     ///Estado Inactivo
     static public function inactivate (){
         try {
-            $Teacher  = Teacher ::searchForId($_GET['idTeacher']);
+            $Teacher  = Teacher::searchForId($_GET['idTeacher']);
             $Teacher ->setStateTeacher("Inactivo");
             if($Teacher ->update()){
                 header("Location: ../../views/modules/Person/Teacher/index.php");
@@ -101,7 +101,7 @@ class TeacherControllers
     }
     static public function searchForID ($idTeacher){
         try {
-            return Teacher ::searchForId($idTeacher);
+            return Teacher::searchForId($idTeacher);
         } catch (\Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
             //header("Location: ../../views/modules/Person/Teacher/manager.php?respuesta=error");
