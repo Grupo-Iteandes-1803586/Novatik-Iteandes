@@ -1,12 +1,18 @@
 <?php
 require("../../../partials/routes.php");
-require("../../../../app/Controllers/PersonController.php");
-require("../../../../app/Controllers/TeacherControllers.php");
-require("../../../../app/Controllers/TeacherStudiesControllers.php");
-require("../../../../app/Controllers/ExperienceControllers.php");
-require("../../../../app/Controllers/LenguagesControllers.php");
+require_once("../../../../app/Controllers/PersonController.php");
+require_once("../../../../app/Controllers/TeacherControllers.php");
+require_once("../../../../app/Models/Teacher.php");
+require_once("../../../../app/Controllers/TeacherStudiesControllers.php");
+require_once("../../../../app/Controllers/ExperienceControllers.php");
+require_once("../../../../app/Controllers/LenguagesControllers.php");
 
-use App\Controllers\TrainingProgramController; ?>
+use App\Controllers\PersonController;
+use App\Controllers\TeacherControllers;
+use App\Models\Teacher;
+use App\Controllers\TeacherStudiesControllers;
+use App\Controllers\ExperienceControllers;
+use App\Controllers\LenguagesControllers; ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -174,7 +180,11 @@ use App\Controllers\TrainingProgramController; ?>
                                 </div>
                                 <!-- _______________________________Experiencia________________________-->
                                 <?php
-                                $DataExperience= \App\Controllers\ExperienceControllers::searchForID($_GET["idExperience"]);
+                                $dataTeacher= Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =".$_GET["idPerson"]);
+                                foreach ($dataTeacher as $teacherD){
+                                    $DataExperience= \App\Controllers\ExperienceControllers::searchForID($teacherD->getExperienceIdExperience()->getIdExperience());
+
+                                }
                                 if(!empty($DataExperience)){?>
                                     <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Experiencia</li>
                                     <hr>
