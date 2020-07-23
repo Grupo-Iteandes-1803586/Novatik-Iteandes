@@ -53,7 +53,7 @@ class  LenguagesControllers
             $Lenguages = new Lenguages($arrayLenguages );
             $Lenguages->update();
 
-            header("Location: ../../views/modules/Person/Teacher/show.php?id=".$Lenguages->getIdLenguages()."&respuesta=correcto");
+            header("Location: ../../views/modules/Person/Teacher/show.php?idLenguages=".$Lenguages->getIdLenguages()."&respuesta=correcto");
         } catch (\Exception $e) {
             //var_dump($e);
             header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje=".$e->getMessage());

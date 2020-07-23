@@ -54,7 +54,7 @@ class  Teacher Extends BasicModel{
     /**
      * @return int
      */
-    public function getExperienceIdExperience(): int
+    public function getExperienceIdExperience(): Experience
     {
         return $this->Experience_idExperience;
     }

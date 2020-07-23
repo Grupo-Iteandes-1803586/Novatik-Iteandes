@@ -22,6 +22,7 @@ class Note extends BasicModel{
      */
     public function __construct($note = array())
     {
+        parent::__construct();
         $this->idNote = $note['idNote'] ?? null;
         $this->dateNote = $note['dateNote'] ?? null;
         $this->valueNote = $note['valueNote'] ?? null;
@@ -146,7 +147,7 @@ class Note extends BasicModel{
         return $result;
     }
 
-    //Actualizar  un horario
+    //Actualizar  una Nota
     public function update()
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Note  SET dateNote = ?, valueNote = ?, Activity_idActivity= ?, Teacher_idTeacher = ?, stateNote=? WHERE idNote = ?", array(
@@ -165,8 +166,8 @@ class Note extends BasicModel{
 //inactivar un horario
     public function delete($idNote)
     {
-        $note = Note::searchForId($idNote); //Buscando un Teacher por el ID
-        $note->setStateNote("Inactivo"); //Cambia el estado del Teacher
+        $note = Note::searchForId($idNote); //Buscando un Nota por el ID
+        $note->setStateNote("Inactivo"); //Cambia el estado del Nota
         return $note->update();                    //Guarda los cambios..
     }
 
@@ -213,6 +214,6 @@ class Note extends BasicModel{
         }
         $note->Disconnect();
         return $note;
-    }
+}
 
 }

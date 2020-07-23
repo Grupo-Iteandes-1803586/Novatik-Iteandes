@@ -1,65 +1,63 @@
 <?php
 namespace App\Controllers;
-require_once (__DIR__.'/../Models/Note.php');
-require_once (__DIR__.'/../Models/Teacher.php');
+require_once (__DIR__.'/../Models/Archive.php');
 require_once (__DIR__.'/../Models/Activity.php');
 
-use App\Models\Note;
+
 use App\Models\Teacher;
 use App\Models\Activity;
 
 if(!empty($_GET['action'])){
-    NoteControllers::main($_GET['action']);
+    ArchiveControllers::main($_GET['action']);
 }
-
-class NoteControllers{
-    static function main($action){
+class ArchiveControllers
+{
+    static function main($action)
+    {
         if ($action == "create") {
-            NoteControllers::create();
+            ArchiveControllers::create();
         } else if ($action == "edit") {
-            NoteControllers::edit();
+            ArchiveControllers::edit();
         } else if ($action == "searchForID") {
-            NoteControllers::searchForID($_REQUEST['idNote']);
+            ArchiveControllers::searchForID($_REQUEST['idArchive']);
         } else if ($action == "searchAll") {
-            NoteControllers::getAll();
+            ArchiveControllers::getAll();
         } else if ($action == "activate") {
-            NoteControllers::activate();
+            ArchiveControllers::activate();
         } else if ($action == "inactivate") {
-            NoteControllers::inactivate();
+            ArchiveControllers::inactivate();
         }
     }
-
-    //Crear una nota
+    //Crear una Archive
     static public function create()
     {
         try {
-            $arrayNote['dateNote'] = $_POST['dateNote'];
-            $arrayNote['valueNote'] = $_POST['valueNote'];
-            $arrayNote['Activity_idActivity'] = Activity::searchForId($_POST['Activity_idActivity']);
-            $arrayNote['Teacher_idTeacher'] = Teacher::searchForId($_POST['Teacher_idTeacher']);
-            $arrayNote['stateNote'] = 'Activo';
-            $Note = new Note($arrayNote);
+            $arrayArchive['nameArchive'] = $_POST['nameArchive'];
+            $arrayArchive['descriptionArchive'] = $_POST['descriptionArchive'];
+            $arrayArchive['rutaArchive'] = $_POST['rutaArchive'];
+            $arrayArchive['Activity_idActivity'] = Activity::searchForId($_POST['Activity_idActivity']);
+            $arrayArchive['stateArchive'] = 'Activo';
+            $Archive = new Archive($arrayArchive);
 
-            if ($Note->create()) {
-                header("Location: ../../views/modules/Note/create.php?idNote=" . $Note->getIdNote());
+            if ($Archive->create()) {
+                header("Location: ../../views/modules/Note/create.php?idArchive=" . $Archive->getIdNote());
             }
         } catch (Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Note/create.php?respuesta=error&mensaje=" . $e->getMessage());
         }
     }
-
-    //Editar un Note
+    //Editar un Archive
     static public function edit (){
         try {
-            $arrayNote['idNote'] = $_POST['idNote'];
-            $arrayNote['dateNote'] = $_POST['dateNote'];
-            $arrayNote['valueNote'] = $_POST['valueNote'];
-            $arrayNote['Activity_idActivity'] = Activity::searchForId($_POST['Activity_idActivity']);
-            $arrayNote['Teacher_idTeacher'] = Teacher::searchForId($_POST['Teacher_idTeacher']);
-            $arrayNote['stateNote'] = $_POST['stateNote'];
-            $Note = new Note($arrayNote);
-            $Note->update();
+            $arrayArchive['idArchive'] = $_POST['idArchive'];
+            $arrayArchive['nameArchive'] = $_POST['nameArchive'];
+            $arrayArchive['descriptionArchive'] = $_POST['descriptionArchive'];
+            $arrayArchive['rutaArchive'] = $_POST['rutaArchive'];
+            $arrayArchive['Activity_idActivity'] = Activity::searchForId($_POST['Activity_idActivity']);
+            $arrayArchive['stateArchive'] = $_POST['stateNote'];
+            $Archive = new Archive ($arrayArchive);
+            $Archive->update();
 
             header("Location: ../../views/modules/Note/show.php?respuesta=correcto");
         } catch (\Exception $e) {
@@ -71,9 +69,9 @@ class NoteControllers{
     //Estado activo
     static public function activate (){
         try {
-            $ObjNote = Note::searchForId($_GET['idNote']);
-            $ObjNote->setStateNote('Activo');
-            if($ObjNote->update()){
+            $ObjArchive = Archive::searchForId($_GET['idArchive']);
+            $ObjArchive->setStateArchive('Activo');
+            if($ObjArchive->update()){
                 header("Location: ../../views/modules/Note/index.php");
             }else{
                 header("Location: ../../views/modules/Note/index.php?respuesta=error&mensaje=Error al guardar");
@@ -86,9 +84,9 @@ class NoteControllers{
     ///Estado Inactivo
     static public function inactivate (){
         try {
-            $note  = Note::searchForId($_GET['idNote']);
-            $note ->setStateNote("Inactivo");
-            if($note ->update()){
+            $Archive  = Archive::searchForId($_GET['idArchive']);
+            $Archive ->setStateArchive("Inactivo");
+            if($Archive ->update()){
                 header("Location: ../../views/modules/Note/index.php");
             }else{
                 header("Location: ../../views/modules/Note/index.php?respuesta=error&mensaje=Error al guardar");
@@ -98,10 +96,10 @@ class NoteControllers{
             header("Location: ../../views/modules/Note/index.php?respuesta=error");
         }
     }
-//Buscar por id
-    static public function searchForID ($idNote){
+    //Buscar por id
+    static public function searchForID ($idArchive){
         try {
-            return Note::searchForId($idNote);
+            return Archive::searchForId($idArchive);
         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
             //header("Location: ../../views/modules/Note/manager.php?respuesta=error");
@@ -109,7 +107,7 @@ class NoteControllers{
     }
     static public function getAll (){
         try {
-            return Note::getAll();
+            return Archive::getAll();
         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'log', 'errorStack');
             header("Location: ../Vista/modules/Note/manager.php?respuesta=error");

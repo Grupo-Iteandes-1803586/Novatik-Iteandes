@@ -1,65 +1,67 @@
 <?php
 namespace App\Controllers;
-require_once (__DIR__.'/../Models/Note.php');
-require_once (__DIR__.'/../Models/Teacher.php');
 require_once (__DIR__.'/../Models/Activity.php');
+require_once (__DIR__.'/../Models/LearningResult.php');
 
+
+use App\Models\LearningResult;
 use App\Models\Note;
 use App\Models\Teacher;
 use App\Models\Activity;
 
 if(!empty($_GET['action'])){
-    NoteControllers::main($_GET['action']);
+    ActivityControllers::main($_GET['action']);
 }
-
-class NoteControllers{
-    static function main($action){
+class ActivityControllers
+{
+    static function main($action)
+    {
         if ($action == "create") {
-            NoteControllers::create();
+            ActivityControllers::create();
         } else if ($action == "edit") {
-            NoteControllers::edit();
+            ActivityControllers::edit();
         } else if ($action == "searchForID") {
-            NoteControllers::searchForID($_REQUEST['idNote']);
+            ActivityControllers::searchForID($_REQUEST['idActivity']);
         } else if ($action == "searchAll") {
-            NoteControllers::getAll();
+            ActivityControllers::getAll();
         } else if ($action == "activate") {
-            NoteControllers::activate();
+            ActivityControllers::activate();
         } else if ($action == "inactivate") {
-            NoteControllers::inactivate();
+            ActivityControllers::inactivate();
         }
     }
-
-    //Crear una nota
+    //Crear una Activity
     static public function create()
     {
         try {
-            $arrayNote['dateNote'] = $_POST['dateNote'];
-            $arrayNote['valueNote'] = $_POST['valueNote'];
-            $arrayNote['Activity_idActivity'] = Activity::searchForId($_POST['Activity_idActivity']);
-            $arrayNote['Teacher_idTeacher'] = Teacher::searchForId($_POST['Teacher_idTeacher']);
-            $arrayNote['stateNote'] = 'Activo';
-            $Note = new Note($arrayNote);
+            $arrayActivity['codeActivity'] = $_POST['codeActivity'];
+            $arrayActivity['nameActivity'] = $_POST['nameActivity'];
+            $arrayActivity['descriptionActivity'] = $_POST['descriptionActivity'];
+            $arrayActivity['typeActivity'] = $_POST['typeActivity'];
+            $arrayActivity['LearningResult_idLearningResult'] = LearningResult::searchForId($_POST['LearningResult_idLearningResult']);
+            $arrayActivity['stateActivity'] = 'Activo';
+            $Activity = new Activity($arrayActivity);
 
-            if ($Note->create()) {
-                header("Location: ../../views/modules/Note/create.php?idNote=" . $Note->getIdNote());
+            if ($Activity->create()) {
+                header("Location: ../../views/modules/Note/create.php?idActivity=" . $Activity->getIdActivity());
             }
         } catch (Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Note/create.php?respuesta=error&mensaje=" . $e->getMessage());
         }
     }
-
-    //Editar un Note
+    //Editar una Activity
     static public function edit (){
         try {
-            $arrayNote['idNote'] = $_POST['idNote'];
-            $arrayNote['dateNote'] = $_POST['dateNote'];
-            $arrayNote['valueNote'] = $_POST['valueNote'];
-            $arrayNote['Activity_idActivity'] = Activity::searchForId($_POST['Activity_idActivity']);
-            $arrayNote['Teacher_idTeacher'] = Teacher::searchForId($_POST['Teacher_idTeacher']);
-            $arrayNote['stateNote'] = $_POST['stateNote'];
-            $Note = new Note($arrayNote);
-            $Note->update();
+            $arrayActivity['idActivity'] = $_POST['idActivity'];
+            $arrayActivity['codeActivity'] = $_POST['codeActivity'];
+            $arrayActivity['nameActivity'] = $_POST['nameActivity'];
+            $arrayActivity['descriptionActivity'] = $_POST['descriptionActivity'];
+            $arrayActivity['typeActivity'] = $_POST['typeActivity'];
+            $arrayActivity['LearningResult_idLearningResult'] = LearningResult::searchForId($_POST['LearningResult_idLearningResult']);
+            $arrayActivity['stateActivity'] = $_POST['stateActivity'];
+            $Activity = new Activity($arrayActivity);
+            $Activity->update();
 
             header("Location: ../../views/modules/Note/show.php?respuesta=correcto");
         } catch (\Exception $e) {
@@ -67,13 +69,12 @@ class NoteControllers{
             header("Location: ../../views/modules/Note/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
-
     //Estado activo
     static public function activate (){
         try {
-            $ObjNote = Note::searchForId($_GET['idNote']);
-            $ObjNote->setStateNote('Activo');
-            if($ObjNote->update()){
+            $ObjActivity = Activity::searchForId($_GET['idActivity']);
+            $ObjActivity->setStateActivity('Activo');
+            if($ObjActivity->update()){
                 header("Location: ../../views/modules/Note/index.php");
             }else{
                 header("Location: ../../views/modules/Note/index.php?respuesta=error&mensaje=Error al guardar");
@@ -86,9 +87,9 @@ class NoteControllers{
     ///Estado Inactivo
     static public function inactivate (){
         try {
-            $note  = Note::searchForId($_GET['idNote']);
-            $note ->setStateNote("Inactivo");
-            if($note ->update()){
+            $Activity  = Activity::searchForId($_GET['idActivity']);
+            $Activity ->setStateActivity("Inactivo");
+            if($Activity ->update()){
                 header("Location: ../../views/modules/Note/index.php");
             }else{
                 header("Location: ../../views/modules/Note/index.php?respuesta=error&mensaje=Error al guardar");
@@ -98,10 +99,10 @@ class NoteControllers{
             header("Location: ../../views/modules/Note/index.php?respuesta=error");
         }
     }
-//Buscar por id
-    static public function searchForID ($idNote){
+    //Buscar por id
+    static public function searchForID ($idActivity){
         try {
-            return Note::searchForId($idNote);
+            return Activity::searchForId($idActivity);
         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
             //header("Location: ../../views/modules/Note/manager.php?respuesta=error");
@@ -109,7 +110,7 @@ class NoteControllers{
     }
     static public function getAll (){
         try {
-            return Note::getAll();
+            return Activity::getAll();
         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'log', 'errorStack');
             header("Location: ../Vista/modules/Note/manager.php?respuesta=error");

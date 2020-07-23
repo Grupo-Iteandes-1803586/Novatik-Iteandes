@@ -195,7 +195,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`LearningResult` (
   `idLearningResult` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `codeLearningResult` BIGINT NOT NULL,
+  `LearningResult` BIGINT NOT NULL,
   `nameLearningResult` VARCHAR(500) NOT NULL,
   `durationLearningResult` TINYINT NOT NULL,
   `statuLearningResult` ENUM('Activo', 'Inactivo') NOT NULL,
