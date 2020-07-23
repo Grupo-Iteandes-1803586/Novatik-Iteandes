@@ -153,7 +153,7 @@ class  Teacher Extends BasicModel{
             $teacher= new Teacher();
             $getrow = $teacher->getRow("SELECT * FROM iteandes_novatik.Teacher WHERE idTeacher =?", array($idTeacher));
             $teacher->idTeacher = $getrow['idTeacher'];
-            $teacher->Experience_idExperience = $getrow['Experience_idExperience'];
+            $teacher->Experience_idExperience = Experience::searchForId($getrow['Experience_idExperience']);
             $teacher->TeacherStudies_idTeacherStudies = TeacherStudies::searchForId($getrow['TeacherStudies_idTeacherStudies']);
             $teacher->Person_idPerson = Person::searchForId($getrow['Person_idPerson']);
             $teacher->stateTeacher = $getrow['stateTeacher'];
