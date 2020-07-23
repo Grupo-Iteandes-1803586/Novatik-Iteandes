@@ -1,10 +1,8 @@
 <?php
 namespace App\Models;
 
-require_once ('BasicModel.php');
-
+require_once('BasicModel.php');
 //Clase Student
-
 class Student extends BasicModel{
     //Atributos de la clase Student
     private $idStudent;
@@ -145,7 +143,7 @@ class Student extends BasicModel{
                 $this->gradeYear,
                 $this->modality,
                 $this->Institution,
-                $this->Person_idPerson->getIdStudent(),
+                $this->Person_idPerson->getIdPerson(),
                 $this->stateStudent
             )
         );
@@ -197,7 +195,7 @@ class Student extends BasicModel{
     public static function searchForId($idStudent) : Student{
         $Student = null;
         if($idStudent > 0) {
-            $Student = new TrainingProgram;
+            $Student = new Student();
             $getrow = $Student->getRow("SELECT * FROM iteandes_novatik.Student WHERE idStudent =?", array($idStudent));
             $Student->idStudent = $getrow['idStudent'];
             $Student->gradeYear = $getrow['gradeYear'];
