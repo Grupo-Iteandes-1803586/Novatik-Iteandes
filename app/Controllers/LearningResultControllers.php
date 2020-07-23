@@ -36,7 +36,7 @@ class LearningResultControllers
             $arrayLearningResult['codeLearningResult'] =$_POST['codeLearningResult'];
             $arrayLearningResult['nameLearningResult'] =$_POST['nameLearningResult'];
             $arrayLearningResult['durationLearningResult'] =$_POST['durationLearningResult'];
-            $arrayLearningResult['TrainingCompetition_idTrainingCompetition'] = LearningResult::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
+            $arrayLearningResult['TrainingCompetition_idTrainingCompetition'] = TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
             $arrayLearningResult['statuLearningResult'] = 'Activo';
             $LearningResult= new LearningResult($arrayLearningResult);
             if($LearningResult->create()){
