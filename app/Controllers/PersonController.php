@@ -147,7 +147,7 @@ class PersonController{
             $person= new Person($arrayPerson);
             //Datos de la Experiencia
             $arrayExperience = array();
-            $arrayExperience['idExperience'] = $_POST['idExperience'];
+            $arrayExperience['idExperience'] = Experience::searchForId($_POST['idExperience']);
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
             $arrayExperience['startExperience'] = $_POST['startExperience'];
@@ -156,14 +156,14 @@ class PersonController{
             $Experience = new Experience($arrayExperience);
             //Datos de estudio
             $arrayTeacherStudies = array();
-            $arrayTeacherStudies['idTeacherStudies'] = $_POST['idTeacherStudies'];
+            $arrayTeacherStudies['idTeacherStudies'] = TeacherStudies::searchForId($_POST['idTeacherStudies']);
             $arrayTeacherStudies['titleTeacherStudies'] = $_POST['titleTeacherStudies'];
             $arrayTeacherStudies['yearStudyTeacher'] = $_POST['yearStudyTeacher'];
             $arrayTeacherStudies['stateTeacherStudies'] =$_POST['stateTeacherStudies'];
             $TeacherStudies = new TeacherStudies($arrayTeacherStudies);
             //Datos de Lenguaje
             $arrayLenguages = array();
-            $arrayLenguages['idLenguages'] = $_POST['idLenguages'];
+            $arrayLenguages['idLenguages'] = Lenguages::searchForId($_POST['idLenguages']);
             $arrayLenguages['nameLenguages'] = $_POST['nameLenguages'];
             $arrayLenguages['stateLenguague'] = $_POST['stateLenguague'];
             $lenguages = new Lenguages($arrayLenguages);
@@ -190,8 +190,6 @@ class PersonController{
                                 if ($TeacherLenguages->update()){
                                     header("Location: ../../views/modules/Person/Teacher/show.php?idPerson=".$person->getIdPerson()."&respuesta=correcto");
                                 }
-
-
                             }
                         }
 
@@ -276,11 +274,11 @@ class PersonController{
                     $arrayStudent['gradeYear'] = $_POST['gradeYear'];
                     $arrayStudent['modality'] = $_POST['modality'];
                     $arrayStudent['Institution'] = $_POST['Institution'];
-                    $arrayStudent['Person_idPerson'] = Person::searchForId($_POST['Person_idPerson']);
+                    $arrayStudent['Person_idPerson'] = $person;
                     $arrayStudent['stateStudent'] = 'Activo';
                     $student = new Student($arrayStudent);
                     if($student->create()) {
-                        header("Location: ../../views/modules/Person/Student/index.php?respuesta=correcto");
+                        header("Location: ../../views/modules/Person/Student/show.php?respuesta=correcto");
                     }
                 }
             }else{
@@ -315,7 +313,7 @@ class PersonController{
                 $arrayStudent['gradeYear'] = $_POST['gradeYear'];
                 $arrayStudent['modality'] = $_POST['modality'];
                 $arrayStudent['Institution'] = $_POST['Institution'];
-                $arrayStudent['Person_idPerson'] = Student::searchForId($_POST['Person_idPerson']);
+                $arrayStudent['Person_idPerson'] = Person::searchForId($_POST['Person_idPerson']);
                 $arrayStudent['stateStudent'] = $_POST['stateStudent'];
                 $arrayStudent['idStudent'] = $_POST['idStudent'];
                 $student = new Student($arrayStudent);

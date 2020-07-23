@@ -1,10 +1,8 @@
 <?php
 namespace App\Controllers;
 require_once(__DIR__.'/../Models/Student.php');
-require_once(__DIR__.'/../Models/Person.php');
 
 use App\Models\Student;
-use App\Models\Person;
 
 //Metodo Get para recibir la accion
 if(!empty($_GET['action'])){
@@ -37,7 +35,7 @@ class StudentControllers
             $arrayStudent['gradeYear'] = $_POST['gradeYear'];
             $arrayStudent['modality'] = $_POST['modality'];
             $arrayStudent['Institution'] = $_POST['Institution'];
-            $arrayStudent['Person_idPerson'] = Student::searchForId($_POST['Person_idPerson']);
+            $arrayStudent['Person_idPerson'] = Person::searchForId($_POST['Person_idPerson']);
             $arrayStudent['stateStudent'] = 'Activo';
             $student = new Student($arrayStudent);
             if($student->create()){
@@ -56,7 +54,7 @@ class StudentControllers
             $arrayStudent['gradeYear'] = $_POST['gradeYear'];
             $arrayStudent['modality'] = $_POST['modality'];
             $arrayStudent['Institution'] = $_POST['Institution'];
-            $arrayStudent['Person_idPerson'] = Student::searchForId($_POST['Person_idPerson']);
+            $arrayStudent['Person_idPerson'] = Person::searchForId($_POST['Person_idPerson']);
             $arrayStudent['stateStudent'] = $_POST['stateStudent'];
             $student = new Student($arrayStudent);
             $student->update();
@@ -116,7 +114,7 @@ class StudentControllers
     //Funcion buscar toda la informacion
     static public function getAll(){
         try{
-            return TrainingProgram::getAll();
+            return Student::getAll();
         }catch (\Exception $e){
             var_dump($e);
             //header("Location: ../../views/modules/Person/Student/index.php?respuesta=error&mensaje" . $e-> getMessage());
