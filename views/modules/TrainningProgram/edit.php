@@ -6,7 +6,7 @@ use App\Controllers\TrainingProgramController; ?>
 <!doctype html>
 <html lang="es">
 <head>
-    <title>Document</title>
+    <title><?= getenv('TITLE_SITE')?> | Editar Programa</title>
     <?php
     require ("../../partials/head_imports.php");
     require ("../../partials/header.php");
