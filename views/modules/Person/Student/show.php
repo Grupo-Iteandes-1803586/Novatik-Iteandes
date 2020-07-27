@@ -1,7 +1,7 @@
 <?php
 require ("../../../partials/routes.php");
-require ("../../../../app/Controllers/StudentControllers.php");
-require("../../../../app/Controllers/PersonController.php");
+require_once("../../../../app/Controllers/StudentControllers.php");
+require_once("../../../../app/Controllers/PersonController.php");
 
 use App\Controllers\StudentControllers;
 use App\Controllers\PersonController;?>

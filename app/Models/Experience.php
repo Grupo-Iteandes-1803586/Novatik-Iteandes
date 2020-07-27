@@ -146,14 +146,15 @@ class Experience extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.experience SET institutionExperience = ?,dedicationExperience = ?,startExperience = ?,endExperince = ?,stateExperience=? WHERE idExperience = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.experience SET institutionExperience = ?, dedicationExperience = ?, startExperience = ?, endExperince = ?, stateExperience=? WHERE idExperience = ?", array(
                 $this-> institutionExperience,
                 $this-> dedicationExperience,
                 $this-> startExperience,
                 $this-> endExperince,
-                $this->idExperience,
-                $this->stateExperience
-            )
+                $this->stateExperience,
+                $this->idExperience
+
+        )
         );
         $this->Disconnect();
         return $result;
@@ -207,7 +208,7 @@ class Experience extends BasicModel{
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->institutionExperience ." ".$this->dedicationExperience." ".$this->startExperience ." ".$this->endExperince." ".stateExperience;
+        return $this->institutionExperience ." ".$this->dedicationExperience." ".$this->startExperience ." ".$this->endExperince." ".$this->stateExperience;
     }
 
 }
