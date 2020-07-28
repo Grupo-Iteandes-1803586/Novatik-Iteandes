@@ -1,13 +1,22 @@
-<?php require ("../../../partials/routes.php");
-require ("../../../../app/Controllers/PersonController.php");
-require ("../../../../app/Controllers/LenguagesControllers.php");
-require ("../../../../app/Controllers/ExperienceControllers.php");
-require ("../../../../app/Controllers/TeacherStudiesControllers.php");
+<?php
+require("../../../partials/routes.php");
+require_once("../../../../app/Controllers/PersonController.php");
+require_once("../../../../app/Controllers/TeacherControllers.php");
+require_once("../../../../app/Models/Teacher.php");
+require_once("../../../../app/Models/TeacherLenguages.php");
+require_once("../../../../app/Controllers/TeacherStudiesControllers.php");
+require_once("../../../../app/Controllers/TeacherLenguagesControllers.php");
+require_once("../../../../app/Controllers/ExperienceControllers.php");
+require_once("../../../../app/Controllers/LenguagesControllers.php");
+
 use App\Controllers\PersonController;
-use App\Controllers\LenguagesControllers;
-use App\Controllers\ExperienceControllers;
+use App\Controllers\TeacherControllers;
+use App\Models\Teacher;
+use App\Models\TeacherLenguages;
 use App\Controllers\TeacherStudiesControllers;
-?>
+use App\Controllers\TeacherLenguagesControllers;
+use App\Controllers\ExperienceControllers;
+use App\Controllers\LenguagesControllers; ?>
 
 <!doctype html>
 <html lang="es">
@@ -100,32 +109,38 @@ use App\Controllers\TeacherStudiesControllers;
                             <strong><i class="fas fa-phone mr-1"></i> Genero</strong>
                                 <p class="text-muted"><?= $DataPerson->getGenerePerson() ?></p>
                             <hr>
+                            <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
+                            <p class="text-muted"><?= $DataPerson->getStatePerson() ?></p>
+                            <hr>
                             </p>
 
                         </div>
                         <!--datos TeacherStudies -->
-                <?php if(!empty($_GET["idTeacherStudies"]) && isset($_GET["idTeacherStudies"])){
-                    $DataTeacher = \App\Controllers\TeacherStudiesControllers::searchForID($_GET["idTeacherStudies"]);
-                    if(!empty($DataTeacher)){
+                <?php if(!empty($_GET["idPerson"])){
+                            $dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" . $_GET["idPerson"]);
+                            foreach ($dataTeacher as $teacherD) {
+                                $DataTeacherS = \App\Controllers\TeacherStudiesControllers::searchForID($teacherD->getTeacherStudiesIdTeacherStudies()->getIdTeacherStudies());
+                            }
+                    if(!empty($DataTeacherS)){
                         ?>
                         <div class="card-header">
                             <h3 class="card-title">Estudios</h3>
                         </div>
                         <div class="card-body">
                             <strong><i class="fas fa-user mr-1"></i> #</strong>
-                            <p class="text-muted"><?=$DataTeacher->getIdTeacherStudies()?></p>
+                            <p class="text-muted"><?=$DataTeacherS->getIdTeacherStudies()?></p>
                             <hr>
                             <p>
                                 <strong><i class="fas fa-book mr-1"></i> titulo</strong>
                             <p class="text-muted">
-                                <?= $DataTeacher->getTitleTeacherStudies()?>
+                                <?= $DataTeacherS->getTitleTeacherStudies()?>
                             </p>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> año</strong>
-                            <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                            <p class="text-muted"><?=$DataTeacherS->getYearStudyTeacher()?></p>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?=$DataTeacher->getStateTeacherStudies()?></p>
+                            <p class="text-muted"><?=$DataTeacherS->getStateTeacherStudies()?></p>
                             <hr>
 
                         </div>
@@ -134,23 +149,27 @@ use App\Controllers\TeacherStudiesControllers;
 
                         <!--Experince -->
                         <?php
-                        if (!empty($_GET["idExperience"]) && isset($_GET["idExperience"])) {
-                        $DataExperience= \App\Controllers\ExperienceControllers::searchForID($_GET["idExperience"]);
+                        if (!empty($_GET["idPerson"])) {
+                            $dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" . $_GET["idPerson"]);
+                            foreach ($dataTeacher as $teacherD) {
+                                $DataExperience = \App\Controllers\ExperienceControllers::searchForID($teacherD->getExperienceIdExperience()->getIdExperience());
+                                $idT = $teacherD->getIdTeacher();
+                            }
                         if(!empty($DataExperience)){?>
                             <div class="card-header">
                                 <h3 class="card-title">Experiencia</h3>
                             </div>
                             <div class="card-body">
-                                <strong><i class="fas fa-user mr-1"></i> idEx</strong>
+                                <strong><i class="fas fa-user mr-1"></i> #</strong>
                                 <p class="text-muted"><?=$DataExperience->getIdExperience()?></p>
                                 <hr>
                                 <p>
-                                    <strong><i class="fas fa-book mr-1"></i> Ocupacion</strong>
+                                        <strong><i class="fas fa-book mr-1"></i> Instituto</strong>
                                 <p class="text-muted">
                                     <?= $DataExperience->getInstitutionExperience()?>
                                 <hr>
-                                <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
-                                <p class="text-muted"><?=$DataExperience->getInstitutionExperience()?></p>
+                                <strong><i class="fas fa-user mr-1"></i>Dedicacion</strong>
+                                <p class="text-muted"><?=$DataExperience->getDedicationExperience()?></p>
                                 <hr>
                                 </p>
                                 <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
@@ -162,36 +181,39 @@ use App\Controllers\TeacherStudiesControllers;
                                 <hr>
                                 </p>
                                 <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                                <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
-                                <hr>
-                                </p>
-                                <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                                <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                                <p class="text-muted"><?=$DataExperience->getStateExperience()?></p>
                                 <hr>
                                 </p>
                             </div>
-                        <?php }?>
+                            <?php }?>
                         <?php }?>
                         <!---->
                         <!--Lenguajes -->
-                        <?php if(!empty($_GET["idLenguages"]) && isset($_GET["idLenguages"])){
-                            $DataTeacher = \App\Controllers\LenguagesControllers::searchForID($_GET["idLenguages"]);
-                            if(!empty($DataTeacher)){
+                        <?php if(!empty($_GET["idPerson"])){
+                            $DataT = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$_GET["idPerson"]);
+                            $teacher=$DataT[0];
+                            $DataTeacherleng = TeacherLenguages::search("SELECT * FROM TeacherLenguages WHERE Teacher_idTeacher =" .$teacher->getIdTeacher());
+                            foreach ($DataTeacherleng as $teacherLen){
+                                $lenguajes = $teacherLen->getLenguagesIdLenguages();
+                                $idTeachLen = $teacherLen->getIdTeacherLenguages();
+                                $DataLenguagues = \App\Controllers\LenguagesControllers::searchForID($lenguajes->getIdLenguages());
+                            }
+                            if(!empty($DataLenguagues)){
                                 ?>
                                 <div class="card-header">
                                     <h3 class="card-title">Idioma</h3>
                                 </div>
                                 <div class="card-body">
-                                    <strong><i class="fas fa-user mr-1"></i> idLenguages</strong>
-                                    <p class="text-muted"><?=$DataTeacher->getIdLenguages()?></p>
+                                    <strong><i class="fas fa-user mr-1"></i> #</strong>
+                                    <p class="text-muted"><?=$DataLenguagues->getIdLenguages()?></p>
                                     <hr>
                                     <p>
                                         <strong><i class="fas fa-book mr-1"></i> Idioma</strong>
                                     <p class="text-muted">
-                                        <?= $DataTeacher->getNameLenguages()?>
+                                        <?= $DataLenguagues->getNameLenguages()?>
                                     <hr>
                                     <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                                    <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                                    <p class="text-muted"><?=$DataLenguagues->getStateLenguague()?></p>
                                     <hr>
                                     </p>
                                 </div>

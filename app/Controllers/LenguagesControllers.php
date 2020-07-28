@@ -74,15 +74,15 @@ class  LenguagesControllers
         }
     }
 
-    static public function inactivate (){
+    static public function inactive (){
         try {
-            $Lenguages = Lenguages::searchForId($_GET['idLenguages']);
+            /*$Lenguages = Lenguages::searchForId($_GET['idLenguages']);
             $Lenguages->setStateLenguague("Inactivo");
             if($Lenguages->update()){
                 header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
                 header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
+            }*/
         } catch (\Exception $e) {
             //var_dump($e);
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");

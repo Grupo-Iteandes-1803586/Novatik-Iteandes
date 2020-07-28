@@ -107,4 +107,5 @@ abstract class BasicModel{
         return $this->insertRow($query, $params);
     }
 
+
 }

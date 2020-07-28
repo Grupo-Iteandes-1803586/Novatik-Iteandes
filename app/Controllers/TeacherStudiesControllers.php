@@ -19,7 +19,7 @@ class TeacherStudiesControllers
         } else if ($action == "searchAll") {
             TeacherStudiesControllers::getAll();
         }else if($action == "active"){
-            TeacherStudiesControllers::active();
+            TeacherStudiesControllers::activate();
         }else if($action =="inactive"){
             TeacherStudiesControllers::inactive();
         }
@@ -74,15 +74,15 @@ class TeacherStudiesControllers
         }
     }
 
-    static public function inactivate (){
+    static public function inactive (){
         try {
-            $Lenguages = Lenguages::searchForId($_GET['idTeacherStudies']);
+           /* $Lenguages = TeacherStudies::searchForId($_GET['idTeacherStudies']);
             $Lenguages->setStateTeacherStudies("Inactivo");
             if($Lenguages->update()){
                 header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
                 header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
+            }*/
         } catch (\Exception $e) {
             //var_dump($e);
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");

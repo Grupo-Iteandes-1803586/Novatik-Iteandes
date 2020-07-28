@@ -1,15 +1,13 @@
 <?php
 namespace App\Controllers;
+require_once(__DIR__.'/../Models/TeacherLenguages.php');
 require_once(__DIR__.'/../Models/Teacher.php');
 require_once(__DIR__.'/../Models/Lenguages.php');
 
 
 use App\Models\Lenguages;
 use App\Models\Teacher;
-use App\Models\Experience;
 use App\Models\TeacherLenguages;
-use App\Models\TeacherStudies;
-use App\Models\Person;
 
 if(!empty($_GET['action'])){
     TeacherLenguagesControllers::main($_GET['action']);
@@ -68,41 +66,42 @@ class TeacherLenguagesControllers
             header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
-    /////Estado activo
+    //Estado activo
     static public function activate (){
         try {
-            $ObjTeacherLenguages = TeacherLenguages::searchForId($_GET['idTeacher']);
-            $ObjTeacherLenguages->setStateTeacher('Activo');
+            $ObjTeacherLenguages = TeacherLenguages::searchForId($_GET['idTeacherLenguages']);
+            $ObjTeacherLenguages->setStateTeacherLenguages('Activo');
             if($ObjTeacherLenguages->update()){
                 header("Location: ../../views/Person/Teacher/index.php");
             }else{
                 header("Location: ../../views/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
-            // GeneralFunctions::console( $e, 'error', 'errorStack');
+            GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
+
     ///Estado Inactivo
     static public function inactivate (){
         try {
-            $TeacherLenguages  = TeacherLenguages ::searchForId($_GET['idTeacher']);
-            $TeacherLenguages ->setStateTeacher("Inactivo");
+            $TeacherLenguages  = TeacherLenguages ::searchForId($_GET['idTeacherLenguages']);
+            $TeacherLenguages ->setStateTeacherLenguages("Inactivo");
             if($TeacherLenguages ->update()){
                 header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
                 header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
-            // GeneralFunctions::console( $e, 'error', 'errorStack');
+            GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
         }
     }
     static public function searchForID ($idTeacherLenguages){
         try {
-            return TeacherLenguages ::searchForId($idTeacherLenguages);
+            return TeacherLenguages::searchForId($idTeacherLenguages);
         } catch (\Exception $e) {
-            //GeneralFunctions::console( $e, 'error', 'errorStack');
+            GeneralFunctions::console( $e, 'error', 'errorStack');
             //header("Location: ../../views/modules/Person/Teacher/manager.php?respuesta=error");
         }
     }
