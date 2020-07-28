@@ -80,7 +80,7 @@ class TeacherControllers
                 header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
-           // GeneralFunctions::console( $e, 'error', 'errorStack');
+           GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }

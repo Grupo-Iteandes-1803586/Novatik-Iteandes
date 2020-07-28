@@ -125,28 +125,28 @@ use App\Controllers\LenguagesControllers; ?>
                             <label for="rhPerson" class=" col-sm-2 col-form-label">RH</label>
                             <div class="col-sm-10">
                                 <select id="rhPerson" name="rhPerson" class="custom-select">
-                                    <option <?= ($DataPersonT->getRhPerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getRhPerson() == "A+") ? "selected" : ""; ?>
                                             value="A+">A+
                                     </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getRhPerson() == "A-") ? "selected" : ""; ?>
                                             value="A-">A-
                                     </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getRhPerson() == "B+") ? "selected" : ""; ?>
                                             value="B+">B+
                                     </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getRhPerson() == "B-") ? "selected" : ""; ?>
                                             value="B-">B-
                                     </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getRhPerson() == "O+") ? "selected" : ""; ?>
                                             value="O+">O+
                                     </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getRhPerson() == "O-") ? "selected" : ""; ?>
                                             value="O-">O-
                                     </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getRhPerson() == "AB+") ? "selected" : ""; ?>
                                             value="AB+">AB+
                                     </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getRhPerson() == "AB-") ? "selected" : ""; ?>
                                             value="AB-">AB-
                                     </option>
                                 </select>
@@ -193,13 +193,13 @@ use App\Controllers\LenguagesControllers; ?>
                             <label for="generePerson" class=" col-sm-2 col-form-label">Genero</label>
                             <div class="col-sm-10">
                                 <select id="generePerson" name="generePerson" class="custom-select">
-                                    <option <?= ($DataPersonT->getGenerePerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getGenerePerson() == "Masculino") ? "selected" : ""; ?>
                                             value="Masculino">Masculino
                                     </option>
-                                    <option <?= ($DataPersonT->getGenerePerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getGenerePerson() == "Femenino") ? "selected" : ""; ?>
                                             value="Femenino">Femenino
                                     </option>
-                                    <option <?= ($DataPersonT->getGenerePerson() == "Activo") ? "selected" : ""; ?>
+                                    <option <?= ($DataPersonT->getGenerePerson() == "Otro") ? "selected" : ""; ?>
                                             value="Otro">Otro
                                     </option>
                                 </select>
@@ -296,20 +296,6 @@ use App\Controllers\LenguagesControllers; ?>
                                            placeholder="Fecha de Determinacion">
                                 </div>
                             </div>
-                            <!--Estado de la experiencia-->
-                            <div class="form-group row">
-                                <label for="stateExperience" class="col-sm-2 col-form-label">Estado</label>
-                                <div class="col-sm-10">
-                                    <select id="stateExperience" name="stateExperience" class="custom-select">
-                                        <option <?= ($DataExperience->getStateExperience() == "Activo") ? "selected" : ""; ?>
-                                                value="Activo">Activo
-                                        </option>
-                                        <option <?= ($DataExperience->getStateExperience() == "Inactivo") ? "selected" : ""; ?>
-                                                value="Inactivo">Inactivo
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
                         <?php } ?>
                         <!-- _____________________Datos de Estudio___________________________________________-->
 
@@ -348,29 +334,13 @@ use App\Controllers\LenguagesControllers; ?>
                                            placeholder="Año de Graduacion">
                                 </div>
                             </div>
-                            <!--Estado de los estudios-->
-                            <div class="form-group row">
-                                <label for="stateTeacherStudies" class="col-sm-2 col-form-label">Estado</label>
-                                <div class="col-sm-10">
-                                    <select id="stateTeacherStudies" name="stateTeacherStudies" class="custom-select">
-                                        <option <?= ($DataTeacherS->getStateTeacherStudies() == "Activo") ? "selected" : ""; ?>
-                                                value="Activo">Activo
-                                        </option>
-                                        <option <?= ($DataTeacherS->getStateTeacherStudies() == "Inactivo") ? "selected" : ""; ?>
-                                                value="Inactivo">Inactivo
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+
                         <?php } ?>
                         <!-- _________________________________Idiomas_________________________-->
                         <?php
                         $DataT = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$_GET["idPerson"]);
                         $teacher=$DataT[0];
-                        //$DataTen = \App\Controllers\TeacherControllers::searchForID($teacher->getIdTeacher());
                         $DataTeacherleng = TeacherLenguages::search("SELECT * FROM TeacherLenguages WHERE Teacher_idTeacher =" .$teacher->getIdTeacher());
-
-                        //$DataTe = \App\Models\Lenguages::search("SELECT l.idLenguages,l.nameLenguages,l.stateLenguague FROM teacherlenguages tea INNER JOIN teacher t ON tea.idTeacherLenguages=t.idTeacher INNER JOIN lenguages l ON tea.idTeacherLenguages=l.idLenguages where tea.idTeacherLenguages=".$DataTeacherleng->getIdTeacherStudies());
                         foreach ($DataTeacherleng as $teacherLen){
                             $lenguajes = $teacherLen->getLenguagesIdLenguages();
                             $idTeachLen = $teacherLen->getIdTeacherLenguages();
@@ -386,26 +356,16 @@ use App\Controllers\LenguagesControllers; ?>
                             <div class="form-group row">
                                 <label for="nameLenguages" class="col-sm-2 col-form-label">Idioma</label>
                                 <div class="col-sm-10">
+                                    <input id="idTeacherLenguages" name="idTeacherLenguages"
+                                           value="<?php echo $idTeachLen; ?>" hidden
+                                           required="required" type="text">
                                     <input required type="text" minlength="6" class="form-control"
                                            id="nameLenguages" name="nameLenguages"
                                            value="<?php echo $DataLenguagues->getNameLenguages(); ?>"
                                            placeholder="Idioma">
                                 </div>
                             </div>
-                            <!--Estado -->
-                            <div class="form-group row">
-                                <label for="stateLenguague" class="col-sm-2 col-form-label">Estado</label>
-                                <div class="col-sm-10">
-                                    <select id="stateLenguague" name="stateLenguague" class="custom-select">
-                                        <option <?= ($DataLenguagues->getStateLenguague() == "Activo") ? "selected" : ""; ?>
-                                            value="Activo">Activo
-                                        </option>
-                                        <option <?= ($DataLenguagues->getStateLenguague() == "Inactivo") ? "selected" : ""; ?>
-                                            value="Inactivo">Inactivo
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+
                             <?php } ?>
                         </div>
                         <!-- /.card-body -->

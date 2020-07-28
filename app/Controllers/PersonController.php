@@ -1,12 +1,15 @@
 <?php
 namespace App\Controllers;
-require(__DIR__.'/../Models/Person.php') ;
-require(__DIR__.'/../Models/Experience.php') ;
-require(__DIR__.'/../Models/Lenguages.php') ;
-require(__DIR__.'/../Models/TeacherStudies.php') ;
-require(__DIR__.'/../Models/Student.php') ;
-require(__DIR__.'/../Models/Teacher.php') ;
-require(__DIR__.'/../Models/TeacherLenguages.php') ;
+require_once(__DIR__.'/../Models/Person.php') ;
+require_once(__DIR__.'/../Models/Experience.php') ;
+require_once(__DIR__.'/../Models/Lenguages.php') ;
+require_once(__DIR__.'/../Models/TeacherStudies.php') ;
+require_once(__DIR__.'/../Models/Student.php') ;
+require_once(__DIR__.'/../Models/Teacher.php') ;
+require_once(__DIR__.'/../Models/TeacherLenguages.php') ;
+require_once(__DIR__.'/ExperienceControllers.php');
+require_once(__DIR__.'/TeacherStudiesControllers.php') ;
+require_once(__DIR__.'/LenguagesControllers.php') ;
 
 use App\Models\Experience;
 use App\Models\Lenguages;
@@ -207,8 +210,47 @@ class PersonController{
         try{
             $ObjPerson = Person::searchForId($_GET['idPerson']);
             $ObjPerson->setStatePerson('Activo');
+
+            /*$dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$ObjPerson->getIdPerson());
+            foreach ($dataTeacher as $teacherD) {
+                $DataExperience = \App\Controllers\ExperienceControllers::searchForID($teacherD->getExperienceIdExperience()->getIdExperience());
+                $Experience = Experience::searchForId($DataExperience->getIdExperience());
+                $Experience->setStateExperience('Activo');
+                //Teacher Studies
+                $DataTeacherS = \App\Controllers\TeacherStudiesControllers::searchForID($teacherD->getTeacherStudiesIdTeacherStudies()->getIdTeacherStudies());
+                $idT = $teacherD->getIdTeacher();
+                $TeacherStudies = TeacherStudies::searchForId($DataTeacherS->getIdTeacherStudies());
+                $TeacherStudies->setStateTeacherStudies('Activo');
+                $DataT = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$_GET["idPerson"]);
+                $teacher=$DataT[0];
+                $DataTeacherleng = TeacherLenguages::search("SELECT * FROM TeacherLenguages WHERE Teacher_idTeacher =" .$teacher->getIdTeacher());
+                foreach ($DataTeacherleng as $teacherLen){
+                    $lenguajes = $teacherLen->getLenguagesIdLenguages();
+                    $idTeachLen = $teacherLen->getIdTeacherLenguages();
+                    //lenguaje
+                    $DataLenguagues = \App\Controllers\LenguagesControllers::searchForID($lenguajes->getIdLenguages());
+                    $Lenguages = Lenguages::searchForId($DataLenguagues->getIdLenguages());
+                    $Lenguages->setStateLenguague('Activo');
+                    //Teacher
+                    $ObjTeacher = Teacher::searchForId($idT);
+                    $ObjTeacher->setStateTeacher('Activo');
+                    //TeacherLenguagues
+                    $ObjTeacherLenguages = TeacherLenguages::searchForId($idTeachLen);
+                    $ObjTeacherLenguages->setStateTeacherLenguages('Activo');
+                }
+            }*/
             if($ObjPerson->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
+                /*if($Experience->update()) {
+                    if($TeacherStudies->update()) {
+                        if($Lenguages->update()) {
+                            if($ObjTeacher->update()) {
+                                if($ObjTeacherLenguages->update()) {*/
+                                    header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
+                                /*}
+                            }
+                        }
+                    }
+                }*/
             }else{
                 header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al Guardar");
             }
@@ -220,13 +262,20 @@ class PersonController{
     //Funcion inactivo de la Persona
     static public function inactive(){
         try{
-            $ObjPerson = Person::searchForId($_GET['idPerson']);
-            $ObjPerson->setStatePerson('Inactivo');
-            if($ObjPerson->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Error al Guardar");
-            }
+            var_dump($_GET['idPerson']);
+            Teacher::updateNew($_GET['idPerson']);
+
+            //$ObjPerson = Person::searchForId($_GET['idPerson']);
+           // $ObjPerson->setStatePerson('Inactivo');
+
+          //  Teacher::updateNew(37);
+            //var_dump($ObjPerson->getIdPerson());
+
+            // if($ObjPerson->update()){
+            //      header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
+            //  }else{
+            //      header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Error al Guardar");
+            //  }
         }catch (\Exception $exc){
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje" . $exc-> getMessage());
         }

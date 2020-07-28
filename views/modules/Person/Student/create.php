@@ -68,7 +68,7 @@
                         </div>
                         <!--Modalidad de grado-->
                         <div class="form-group row">
-                            <label for="modality class="col-sm-2 col-form-label">Modalidad</label>
+                            <label for="modality" class="col-sm-2 col-form-label">Modalidad</label>
                             <div class="col-sm-10">
                                 <select id="modality" name="modality" class="custom-select">
                                     <option value="Bachiler">Bachiller</option>

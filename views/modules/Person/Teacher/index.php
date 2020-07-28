@@ -1,14 +1,22 @@
 <?php
 require_once("../../../partials/routes.php");
 require_once("../../../../app/Controllers/PersonController.php");
+require_once("../../../../app/Controllers/TeacherControllers.php");
+require_once("../../../../app/Models/Teacher.php");
+require_once("../../../../app/Models/TeacherLenguages.php");
 require_once("../../../../app/Controllers/TeacherStudiesControllers.php");
-require_once("../../../../app/Controllers/LenguagesControllers.php");
+require_once("../../../../app/Controllers/TeacherLenguagesControllers.php");
 require_once("../../../../app/Controllers/ExperienceControllers.php");
+require_once("../../../../app/Controllers/LenguagesControllers.php");
 
 use App\Controllers\PersonController;
+use App\Controllers\TeacherControllers;
+use App\Models\Teacher;
+use App\Models\TeacherLenguages;
 use App\Controllers\TeacherStudiesControllers;
-use App\Controllers\LenguagesControllers;
-use App\Controllers\ExperienceControllers;?>
+use App\Controllers\TeacherLenguagesControllers;
+use App\Controllers\ExperienceControllers;
+use App\Controllers\LenguagesControllers; ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -133,11 +141,9 @@ use App\Controllers\ExperienceControllers;?>
                                 <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button"
                                    data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i
                                             class="fa fa-eye"></i></a>
-                                <?php if ($personC->getStatePerson() != "Activo") { ?>
+                                <?php if ($personC->getStatePerson() != "Activo") {?>
                                     <a href="../../../../app/Controllers/PersonController.php?action=active&idPerson=<?php echo $personC->getIdPerson(); ?>"
-                                       type="button" data-toggle="tooltip" title="Activar"
-                                       class="btn docs-tooltip btn-success btn-xs"><i
-                                                class="fa fa-check-square"></i></a>
+                                     type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                 <?php } else { ?>
                                     <a type="button"
                                        href="../../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>"

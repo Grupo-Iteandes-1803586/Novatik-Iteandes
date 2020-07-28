@@ -46,6 +46,7 @@ class  TeacherLenguages Extends BasicModel
         $this->stateTeacherLenguages = $stateTeacherLenguages;
     }
 
+
     /**
      * @return int
      */
@@ -97,12 +98,11 @@ class  TeacherLenguages Extends BasicModel
 
     public static function search($query)
     {
-
         $arrTeacherLenguages = array();
-        $tmp = new Teacher();
+        $tmp = new TeacherLenguages();
         $getrows = $tmp->getRows($query);
         foreach ($getrows as $value) {
-            $TeacherLenguages = new Teacher();
+            $TeacherLenguages = new TeacherLenguages();
             $TeacherLenguages->idTeacherLenguages = $value['idTeacherLenguages'];
             $TeacherLenguages->Lenguages_idLenguages = Lenguages::searchForId($value['Lenguages_idLenguages']);
             $TeacherLenguages->Teacher_idTeacher = Teacher::searchForId($value['Teacher_idTeacher']);
@@ -128,7 +128,7 @@ class  TeacherLenguages Extends BasicModel
     {
         $teacher = null;
         if ($idTeacherLenguages > 0) {
-            $teacher = new Teacher();
+            $teacher = new TeacherLenguages();
             $getrow = $teacher->getRow("SELECT * FROM iteandes_novatik.TeacherLenguages WHERE idTeacherLenguages =?", array($idTeacherLenguages));
             $teacher->idTeacherLenguages = $getrow['idTeacherLenguages'];
             $teacher->Teacher_idTeacher = Teacher::searchForId($getrow['Teacher_idTeacher']);
@@ -154,9 +154,9 @@ class  TeacherLenguages Extends BasicModel
     //////////////////Actualizar  un docente
     public function update()
     {
-        $result = $this->updateRow("UPDATE iteandes_novatik.TeacherLenguages  SET  TeacherStudies_idTeacherStudies = ?, Lenguages_idLenguages= ?, stateTeacherLenguages = ? WHERE idTeacherLenguages = ?", array(
-                $this->TeacherStudies_idTeacherStudies->getIdTeacherLenguages(),
-                $this->Lenguages_idLenguages->getIdTeacherLenguages(),
+        $result = $this->updateRow("UPDATE iteandes_novatik.TeacherLenguages  SET  Teacher_idTeacher = ?, Lenguages_idLenguages= ?, stateTeacherLenguages = ? WHERE idTeacherLenguages = ?", array(
+                $this->Teacher_idTeacher->getIdTeacher(),
+                $this->Lenguages_idLenguages->getIdLenguages(),
                 $this->stateTeacherLenguages,
                 $this->idTeacherLenguages
             )
