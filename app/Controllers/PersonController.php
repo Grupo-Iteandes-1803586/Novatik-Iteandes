@@ -147,25 +147,25 @@ class PersonController{
             $person= new Person($arrayPerson);
             //Datos de la Experiencia
             $arrayExperience = array();
-            $arrayExperience['idExperience'] = Experience::searchForId($_POST['idExperience']);
+            $arrayExperience['idExperience'] = $_POST['idExperience'];
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
             $arrayExperience['startExperience'] = $_POST['startExperience'];
             $arrayExperience['endExperince'] = $_POST['endExperince'];
-            $arrayExperience['stateExperience'] = $_POST['stateExperience'];;
+            $arrayExperience['stateExperience'] = $person->getStatePerson();
             $Experience = new Experience($arrayExperience);
             //Datos de estudio
             $arrayTeacherStudies = array();
-            $arrayTeacherStudies['idTeacherStudies'] = TeacherStudies::searchForId($_POST['idTeacherStudies']);
+            $arrayTeacherStudies['idTeacherStudies'] = $_POST['idTeacherStudies'];
             $arrayTeacherStudies['titleTeacherStudies'] = $_POST['titleTeacherStudies'];
             $arrayTeacherStudies['yearStudyTeacher'] = $_POST['yearStudyTeacher'];
-            $arrayTeacherStudies['stateTeacherStudies'] =$_POST['stateTeacherStudies'];
+            $arrayTeacherStudies['stateTeacherStudies'] =$person->getStatePerson();
             $TeacherStudies = new TeacherStudies($arrayTeacherStudies);
             //Datos de Lenguaje
             $arrayLenguages = array();
-            $arrayLenguages['idLenguages'] = Lenguages::searchForId($_POST['idLenguages']);
+            $arrayLenguages['idLenguages'] = $_POST['idLenguages'];
             $arrayLenguages['nameLenguages'] = $_POST['nameLenguages'];
-            $arrayLenguages['stateLenguague'] = $_POST['stateLenguague'];
+            $arrayLenguages['stateLenguague'] = $person->getStatePerson();
             $lenguages = new Lenguages($arrayLenguages);
             if($person->update()){
                 if($Experience->update()) {
@@ -173,22 +173,23 @@ class PersonController{
                         if($lenguages->update()){
                             //Datos del Docente
                             $arrayTeacher = array();
-                            $arrayTeacher['Experience_idExperience'] = Experience::searchForId($_POST['Experience_idExperience']);
-                            $arrayTeacher['TeacherStudies_idTeacherStudies'] = TeacherStudies::searchForId($_POST['TeacherStudies_idTeacherStudies']);
-                            $arrayTeacher['Person_idPerson'] = Person ::searchForId ($_POST['Person_idPerson']);
-                            $arrayTeacher['stateTeacher'] = $_POST['stateTeacher'];
+                            $arrayTeacher['Experience_idExperience'] =$Experience;
+                            $arrayTeacher['TeacherStudies_idTeacherStudies'] = $TeacherStudies;
+                            $arrayTeacher['Person_idPerson'] = $person;
+                            $arrayTeacher['stateTeacher'] = $person->getStatePerson();
                             $arrayTeacher['idTeacher'] = $_POST['idTeacher'];
                             $Teacher = new Teacher( $arrayTeacher);
                             if($Teacher->update()) {
                                 $arrayTeacherLenguages = array();
-                                $arrayTeacherLenguages['Teacher_idTeacher'] = Teacher::searchForId($_POST['Teacher_idTeacher']);
-                                $arrayTeacherLenguages['Lenguages_idLenguages'] = Lenguages::searchForId($_POST['Lenguages_idLenguages']);
-                                $arrayTeacherLenguages['stateTeacherLenguages'] = $_POST['stateTeacherLenguages'];
+                                $arrayTeacherLenguages['Teacher_idTeacher'] = $Teacher;
+                                $arrayTeacherLenguages['Lenguages_idLenguages'] = $lenguages;
+                                $arrayTeacherLenguages['stateTeacherLenguages'] = $person->getStatePerson();
                                 $arrayTeacherLenguages['idTeacherLenguages'] = $_POST['idTeacherLenguages'];
 
                                 $TeacherLenguages = new TeacherLenguages( $arrayTeacherLenguages);
                                 if ($TeacherLenguages->update()){
                                     header("Location: ../../views/modules/Person/Teacher/show.php?idPerson=".$person->getIdPerson()."&respuesta=correcto");
+
                                 }
                             }
                         }
@@ -197,6 +198,7 @@ class PersonController{
                 }
             }
         }catch (Exception $exc){
+            GeneralFunctions::console( $exc, 'error', 'errorStack');
             header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
     }

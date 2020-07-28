@@ -24,7 +24,7 @@
             </div>
             <!--RH del docente-->
             <div class="form-group row">
-                <label for="rhPerson class="col-sm-2 col-form-label">RH</label>
+                <label for="rhPerson" class="col-sm-2 col-form-label">RH</label>
                 <div class="col-sm-10">
                     <select id="rhPerson" name="rhPerson" class="custom-select">
                         <option value="A+">A+</option>
@@ -68,7 +68,7 @@
             </div>
             <!--Genero del Docente-->
             <div class="form-group row">
-                <label for="generePerson class="col-sm-2 col-form-label">Genero</label>
+                <label for="generePerson" class="col-sm-2 col-form-label">Genero</label>
                 <div class="col-sm-10">
                     <select id="generePerson" name="generePerson" class="custom-select">
                         <option value="Masculino">Masculino</option>

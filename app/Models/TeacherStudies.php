@@ -105,7 +105,7 @@ class TeacherStudies extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.TeacherStudies SET titleTeacherStudie = ?,yearStudyTeache = ?,stateTeacherStudies=? WHERE idTeacherStudies = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.TeacherStudies SET titleTeacherStudies = ?,yearStudyTeacher = ?,stateTeacherStudies=? WHERE idTeacherStudies = ?", array(
             $this->titleTeacherStudies,
             $this->yearStudyTeacher,
                 $this->stateTeacherStudies,
@@ -162,7 +162,7 @@ class TeacherStudies extends BasicModel{
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->getIdTeacherStudies()." ".$this->titleTeacherStudies." ".$this->yearStudyTeache." ".stateTeacherStudies ;
+        return $this->idTeacherStudies." ".$this->titleTeacherStudies." ".$this->yearStudyTeacher." ".$this->stateTeacherStudies ;
     }
 
 }

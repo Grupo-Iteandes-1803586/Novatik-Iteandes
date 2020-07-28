@@ -79,9 +79,9 @@ class  TeacherLenguages Extends BasicModel
     }
 
     /**
-     * @return int
+     * @return Lenguages
      */
-    public function getLenguagesIdLenguages(): int
+    public function getLenguagesIdLenguages(): Lenguages
     {
         return $this->Lenguages_idLenguages;
     }
@@ -101,15 +101,14 @@ class  TeacherLenguages Extends BasicModel
         $arrTeacherLenguages = array();
         $tmp = new Teacher();
         $getrows = $tmp->getRows($query);
-
         foreach ($getrows as $value) {
             $TeacherLenguages = new Teacher();
             $TeacherLenguages->idTeacherLenguages = $value['idTeacherLenguages'];
-            $TeacherLenguages->Lenguages_idLenguages = Lenguages::searchForId($value['TeacherStudies_idTeacherStudies']);
+            $TeacherLenguages->Lenguages_idLenguages = Lenguages::searchForId($value['Lenguages_idLenguages']);
             $TeacherLenguages->Teacher_idTeacher = Teacher::searchForId($value['Teacher_idTeacher']);
             $TeacherLenguages->stateTeacherLenguages = $value['stateTeacherLenguages'];
             $TeacherLenguages->Disconnect();
-            array_push($TeacherLenguages, $arrTeacherLenguages);
+            array_push($arrTeacherLenguages,$TeacherLenguages );
         }
         $tmp->Disconnect();
         return $arrTeacherLenguages;

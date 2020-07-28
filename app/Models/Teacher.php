@@ -52,7 +52,7 @@ class  Teacher Extends BasicModel{
     }
 
     /**
-     * @return int
+     * @return Experience
      */
     public function getExperienceIdExperience(): Experience
     {
@@ -68,9 +68,9 @@ class  Teacher Extends BasicModel{
     }
 
     /**
-     * @return int
+     * @return TeacherStudies
      */
-    public function getTeacherStudiesIdTeacherStudies(): int
+    public function getTeacherStudiesIdTeacherStudies(): TeacherStudies
     {
         return $this->TeacherStudies_idTeacherStudies;
     }
@@ -179,9 +179,9 @@ class  Teacher Extends BasicModel{
     public function update()
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Teacher  SET Experience_idExperience = ?, TeacherStudies_idTeacherStudies = ?, Person_idPerson= ?, stateTeacher = ? WHERE idTeacher = ?", array(
-                $this->Experience_idExperience,
-                $this->TeacherStudies_idTeacherStudies->getIdTeacher(),
-                $this->Person_idPerson->getIdTeacher(),
+                $this->Experience_idExperience->getIdExperience(),
+                $this->TeacherStudies_idTeacherStudies->getIdTeacherStudies(),
+                $this->Person_idPerson->getIdPerson(),
                 $this->stateTeacher,
                 $this->idTeacher
             )
