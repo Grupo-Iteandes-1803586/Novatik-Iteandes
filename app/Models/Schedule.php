@@ -104,7 +104,7 @@ class Schedule extends BasicModel{
     }
 
     /**
-     * @return time
+     * @return date
      */
     public function getStartHourSchedule()
     {
@@ -112,15 +112,15 @@ class Schedule extends BasicModel{
     }
 
     /**
-     * @param time $startHourSchedule
+     * @param date $startHourSchedule
      */
-    public function setStartHourSchedule(time $startHourSchedule): void
+    public function setStartHourSchedule(date $startHourSchedule): void
     {
         $this->startHourSchedule = $startHourSchedule;
     }
 
     /**
-     * @return time
+     * @return date
      */
     public function getEndHourSchedule()
     {
@@ -128,9 +128,9 @@ class Schedule extends BasicModel{
     }
 
     /**
-     * @param time $endHourSchedule
+     * @param date $endHourSchedule
      */
-    public function setEndHourSchedule(time $endHourSchedule): void
+    public function setEndHourSchedule(date $endHourSchedule): void
     {
         $this->endHourSchedule = $endHourSchedule;
     }

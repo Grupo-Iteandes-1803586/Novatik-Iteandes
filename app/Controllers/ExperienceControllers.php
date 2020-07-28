@@ -18,8 +18,8 @@ class ExperienceControllers
             ExperienceControllers::searchForID($_REQUEST['$idExperience']);
         } else if ($action == "searchAll") {
             ExperienceControllers::getAll();
-        }else if($action == "active"){
-            ExperienceControllers::active();
+        }else if($action == "activate"){
+            ExperienceControllers::activate();
         }else if($action =="inactive"){
             ExperienceControllers::inactive();
         }
@@ -71,7 +71,7 @@ class ExperienceControllers
     static public function activate (){
         try {
             $Experience = Experience::searchForId($_GET['idExperience']);
-            $Experience->setEstado("Activo");
+            $Experience->setStateExperience("Activo");
             if($Experience->update()){
                 header("Location: ../../views/modules/Person/Teacher/index.php");
             }else{
@@ -83,15 +83,9 @@ class ExperienceControllers
         }
     }
 
-    static public function inactivate (){
+    static public function inactive (){
         try {
-            $Experience = Experience::searchForId($_GET['idExperience']);
-            $Experience->setEstado("Inactivo");
-            if($Experience->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php");
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
+
         } catch (\Exception $e) {
             //var_dump($e);
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");

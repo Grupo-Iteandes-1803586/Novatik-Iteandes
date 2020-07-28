@@ -144,7 +144,7 @@ class TeacherStudies extends BasicModel{
     public static function searchForId($idTeacherStudies) : TeacherStudies{
         $teacherStudie = null;
         if($idTeacherStudies > 0) {
-            $teacherStudie = new TeacherStudies;
+            $teacherStudie = new TeacherStudies();
             $getrow = $teacherStudie->getRow("SELECT * FROM iteandes_novatik.TeacherStudies WHERE idTeacherStudies =?", array($idTeacherStudies));
             $teacherStudie->titleTeacherStudies = $getrow['titleTeacherStudies'];
             $teacherStudie->yearStudyTeacher = $getrow['yearStudyTeacher'];
