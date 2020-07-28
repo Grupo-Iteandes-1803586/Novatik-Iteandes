@@ -112,8 +112,8 @@ use App\Controllers\TeacherStudiesControllers;
                             <h3 class="card-title">Estudios</h3>
                         </div>
                         <div class="card-body">
-                            <strong><i class="fas fa-user mr-1"></i> idTeacherStudies</strong>
-                            <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                            <strong><i class="fas fa-user mr-1"></i> #</strong>
+                            <p class="text-muted"><?=$DataTeacher->getIdTeacherStudies()?></p>
                             <hr>
                             <p>
                                 <strong><i class="fas fa-book mr-1"></i> titulo</strong>
@@ -125,12 +125,54 @@ use App\Controllers\TeacherStudiesControllers;
                             <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                            <p class="text-muted"><?=$DataTeacher->getStateTeacherStudies()?></p>
                             <hr>
 
                         </div>
                         <?php }
                         } ?>
+
+                        <!--Experince -->
+                        <?php
+                        if (!empty($_GET["idExperience"]) && isset($_GET["idExperience"])) {
+                        $DataExperience= \App\Controllers\ExperienceControllers::searchForID($_GET["idExperience"]);
+                        if(!empty($DataExperience)){?>
+                            <div class="card-header">
+                                <h3 class="card-title">Experiencia</h3>
+                            </div>
+                            <div class="card-body">
+                                <strong><i class="fas fa-user mr-1"></i> idEx</strong>
+                                <p class="text-muted"><?=$DataExperience->getIdExperience()?></p>
+                                <hr>
+                                <p>
+                                    <strong><i class="fas fa-book mr-1"></i> Ocupacion</strong>
+                                <p class="text-muted">
+                                    <?= $DataExperience->getInstitutionExperience()?>
+                                <hr>
+                                <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
+                                <p class="text-muted"><?=$DataExperience->getInstitutionExperience()?></p>
+                                <hr>
+                                </p>
+                                <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
+                                <p class="text-muted"><?=$DataExperience->getStartExperience()?></p>
+                                <hr>
+                                </p>
+                                <strong><i class="fas fa-user mr-1"></i> Fecha fin</strong>
+                                <p class="text-muted"><?=$DataExperience->getEndExperince()?></p>
+                                <hr>
+                                </p>
+                                <strong><i class="fas fa-user mr-1"></i> Estado</strong>
+                                <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                                <hr>
+                                </p>
+                                <strong><i class="fas fa-user mr-1"></i> Estado</strong>
+                                <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
+                                <hr>
+                                </p>
+                            </div>
+                        <?php }?>
+                        <?php }?>
+                        <!---->
                         <!--Lenguajes -->
                         <?php if(!empty($_GET["idLenguages"]) && isset($_GET["idLenguages"])){
                             $DataTeacher = \App\Controllers\LenguagesControllers::searchForID($_GET["idLenguages"]);
@@ -155,45 +197,7 @@ use App\Controllers\TeacherStudiesControllers;
                                 </div>
                             <?php }
                         } ?>
-                            <!--Experince -->
-                        <?php
-                        $DataExperience= \App\Controllers\ExperienceControllers::searchForID($_GET["idExperience"]);
-                        if(!empty($DataExperience)){?>
-                        <div class="card-header">
-                            <h3 class="card-title">Experiencia</h3>
-                        </div>
-                        <div class="card-body">
-                            <strong><i class="fas fa-user mr-1"></i> idEx</strong>
-                            <p class="text-muted"><?=$DataExperience->getIdExperience()?></p>
-                            <hr>
-                            <p>
-                                <strong><i class="fas fa-book mr-1"></i> Ocupacion</strong>
-                            <p class="text-muted">
-                                <?= $DataExperience->getInstitutionExperience()?>
-                            <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
-                            <p class="text-muted"><?=$DataExperience->getInstitutionExperience()?></p>
-                            <hr>
-                            </p>
-                            <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
-                            <p class="text-muted"><?=$DataExperience->getStartExperience()?></p>
-                            <hr>
-                            </p>
-                            <strong><i class="fas fa-user mr-1"></i> Fecha fin</strong>
-                            <p class="text-muted"><?=$DataExperience->getEndExperince()?></p>
-                            <hr>
-                            </p>
-                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
-                            <hr>
-                            </p>
-                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?=$DataTeacher->getYearStudyTeacher()?></p>
-                            <hr>
-                            </p>
-                        </div>
-                        <?php }?>
-                        <!---->
+
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-auto mr-auto">

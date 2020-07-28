@@ -354,7 +354,7 @@ class Person extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.person SET documentPerson = ?, namePerson = ?,lastNamePerson=?,dateBornPerson = ?, emailPerson = ?,phonePerson = ?,adressPerson = ?,statePerson = ?,photoPerson = ? WHERE idPerson = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.person SET documentPerson = ?, namePerson = ?,lastNamePerson=?,dateBornPerson = ?,rhPerson = ?, emailPerson = ?,phonePerson = ?,adressPerson = ?,generePerson = ?,typePerson = ?,statePerson = ?,photoPerson = ? WHERE idPerson = ?", array(
                 $this->documentPerson,
                 $this->namePerson,
                 $this->lastNamePerson,
