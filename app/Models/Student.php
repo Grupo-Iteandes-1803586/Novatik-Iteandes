@@ -107,7 +107,7 @@ class Student extends BasicModel{
     /**
      * @return int
      */
-    public function getPersonIdPerson(): int
+    public function getPersonIdPerson(): Person
     {
         return $this->Person_idPerson;
     }
@@ -157,7 +157,7 @@ class Student extends BasicModel{
                 $this->gradeYear,
                 $this->modality,
                 $this->Institution,
-                $this->Person_idPerson->getIdStudent(),
+                $this->Person_idPerson->getIdPerson(),
                 $this->stateStudent,
                 $this->idStudent
             )

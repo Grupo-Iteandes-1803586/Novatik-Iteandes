@@ -8,7 +8,7 @@ use App\Controllers\PersonController;?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?= getenv('TITLE_SITE');?>| Consultar</title>
+    <title><?= getenv('TITLE_SITE');?>| Consultar Estudiante</title>
     <?php require ("../../../partials/head_imports.php");?>
     <?php require("../../../partials/header.php");?>
 </head>
@@ -56,8 +56,8 @@ use App\Controllers\PersonController;?>
             <!-- Horizontal Form -->
             <div class="card card-info">
                 <?php if(!empty($_GET["idPerson"]) && isset($_GET["idPerson"])){
-                    $DataPerson = \App\Controllers\PersonController::searchForIdStudent($_GET["idPerson"]);
-                    if(!empty($DataPerson)){
+                $DataPerson = PersonController::searchForID($_GET["idPerson"]);
+                if(!empty($DataPerson)){
                 ?>
                 <div class="card-header">
                     <h3 class="card-title"><?= $DataPerson->getNamePerson()  ?></h3>
@@ -94,12 +94,18 @@ use App\Controllers\PersonController;?>
                     <strong><i class="fas fa-phone mr-1"></i> Genero</strong>
                     <p class="text-muted"><?= $DataPerson->getGenerePerson() ?></p>
                     <hr>
+                    <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
+                    <p class="text-muted"><?= $DataPerson->getStatePerson() ?></p>
+                    <hr>
                     </p>
 
                 </div>
                 <!--Datos de formacion-->
-                <?php if(!empty($_GET["idStudent"]) && isset($_GET["idStudent"])){
-                $DataStudent =  \App\Controllers\StudentControllers::searchForID($_GET["idStudent"]);
+                <?php if(!empty($_GET["idPerson"])){
+                $dataStu = \App\Models\Student::search("SELECT * FROM Student WHERE Person_idPerson =" . $_GET["idPerson"]);
+                foreach ($dataStu as $studentD) {
+                    $DataStudent =  \App\Controllers\StudentControllers::searchForID($studentD->getIdStudent());
+                }
                 if(!empty($DataStudent)){
                 ?>
                 <div class="card-header">
@@ -115,15 +121,11 @@ use App\Controllers\PersonController;?>
                     <strong><i class="fas fa-user mr-1"></i> Modalidad</strong>
                     <p class="text-muted"><?=$DataStudent->getModality(); ?></p>
                     <hr>
-                    <hr>
                     <strong><i class="fas fa-user mr-1"></i>Año de Grado</strong>
                     <p class="text-muted"><?=$DataStudent->getGradeYear(); ?></p>
                     <hr>
                     <strong><i class="fas fa-map-marker-alt mr-1"></i>Institucion Educativa</strong>
                     <p class="text-muted"><?= $DataStudent->getInstitution()?></p>
-                    <hr>
-                    <strong><i class="fas fa-user mr-1"></i> #</strong>
-                    <p class="text-muted"><?=$DataStudent->getPersonIdPerson(); ?></p>
                     <hr>
                     <strong><i class="fas fa-map-marker-alt mr-1"></i>Estado</strong>
                     <p class="text-muted"><?= $DataStudent->getStateStudent(); ?></p>
