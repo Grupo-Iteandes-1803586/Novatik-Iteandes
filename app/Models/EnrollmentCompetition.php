@@ -196,4 +196,8 @@ class EnrollmentCompetition extends BasicModel
         $EnrollmentCompetition->Disconnect();
         return $EnrollmentCompetition;
     }
+    public function __toString()
+    {
+        return "id: $this->idEnrollmentCompetition,matricula: $this->Enrollment_idEnrollment, horario: $this->Schedule_idSchedule , programa: $this->TrainingCompetition_idTrainingCompetition, estado: $this->stateEnrollmentCompetition";
+    }
 }

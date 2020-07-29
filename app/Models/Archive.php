@@ -217,5 +217,8 @@ class Archive extends BasicModel
         return  $Archive;
     }
 
-
+    public function __toString()
+    {
+        return "id: $this->idArchive,nombre: $this->nameArchive, descripcion: $this->descriptionArchive , ruta: $this->rutaArchive,  actividad: $this->Activity_idActivity, estado: $this->stateArchive";
+    }
 }
