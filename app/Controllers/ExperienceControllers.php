@@ -2,6 +2,7 @@
 namespace App\Controllers;
 require_once(__DIR__.'/../Models/Experience.php');
 use App\Models\Experience;
+use Carbon\Carbon;
 
 if(!empty($_GET['action'])){
     ExperienceControllers::main($_GET['action']);
@@ -30,8 +31,8 @@ class ExperienceControllers
             $arrayExperience = array();
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
-            $arrayExperience['startExperience'] = $_POST['startExperience'];
-            $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['startExperience'] = Carbon::parse($_POST['startExperience']);
+            $arrayExperience['endExperince'] = Carbon::parse($_POST['endExperince']);
             $arrayExperience['stateExperience'] = 'Activo';
             $Experience = new Experience($arrayExperience);
             if($Experience->create()){
@@ -49,8 +50,8 @@ class ExperienceControllers
             $arrayExperience['idExperience'] = $_POST['idExperience'];
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
-            $arrayExperience['startExperience'] = $_POST['startExperience'];
-            $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['startExperience'] = Carbon::parse($_POST['startExperience']);
+            $arrayExperience['endExperince'] = Carbon::parse($_POST['endExperince']);
             $arrayExperience['stateExperience'] = $_POST['stateExperience'];
             $Experience = new Experience($arrayExperience);
             $Experience->update();

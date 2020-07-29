@@ -4,13 +4,14 @@ namespace App\Models;
 
 use http\QueryString;
 require_once('BasicModel.php');
+use Carbon\Carbon;
 #Creacion de la clase con herencia de la clase Basic Model
 class Person extends BasicModel{
     private $idPerson;
     private $documentPerson;
     private $namePerson;
     private $lastNamePerson;
-    private $dateBornPerson;
+    private Carbon $dateBornPerson;
     private $agePerson;
     private $rhPerson;
     private $emailPerson;
@@ -46,7 +47,7 @@ class Person extends BasicModel{
         $this->documentPerson = $person['documentPerson'] ?? null;
         $this->namePerson = $person['namePerson'] ?? null;
         $this->lastNamePerson = $person['lastNamePerson'] ?? null;
-        $this->dateBornPerson = $person['dateBornPerson'] ?? null;
+        $this->dateBornPerson = $person['dateBornPerson'] ??  new Carbon();
         $this->rhPerson = $person['rhPerson'] ?? null;
         $this->emailPerson = $person['emailPerson'] ?? null;
         $this->phonePerson = $person['phonePerson'] ?? null;
@@ -130,18 +131,18 @@ class Person extends BasicModel{
         $this->namePerson = $namePerson;
     }
     /**
-     * @return date
+     * @return Carbon
      * Obtener Fecha de nacimiento de la persona
      */
-    public function getDateBornPerson()
+    public function getDateBornPerson() : Carbon
     {
-        return $this->dateBornPerson;
+        return $this->dateBornPerson->locale('es');;
     }
 
     /**
-     * @param date $dateBornPerson
+     * @param Carbon $dateBornPerson
      */
-    public function setDateBornPerson(date $dateBornPerson): void
+    public function setDateBornPerson(Carbon $dateBornPerson): void
     {
         $this->dateBornPerson = $dateBornPerson;
     }
@@ -321,7 +322,7 @@ class Person extends BasicModel{
             $this->documentPerson,
             $this->namePerson,
             $this->lastNamePerson,
-            $this->dateBornPerson,
+            $this->dateBornPerson->toDateString(), //YYYY-MM-DD,
             $this->rhPerson,
             $this->emailPerson,
             $this->phonePerson,
@@ -358,7 +359,7 @@ class Person extends BasicModel{
                 $this->documentPerson,
                 $this->namePerson,
                 $this->lastNamePerson,
-                $this->dateBornPerson,
+                $this->dateBornPerson->toDateString(), //YYYY-MM-DD,
                 $this->rhPerson,
                 $this->emailPerson,
                 $this->phonePerson,
@@ -392,7 +393,7 @@ class Person extends BasicModel{
             $Users->documentPerson = $value['documentPerson'];
             $Users->namePerson = $value['namePerson'];
             $Users->lastNamePerson = $value['lastNamePerson'];
-            $Users->dateBornPerson = $value['dateBornPerson'];
+            $Users->dateBornPerson = Carbon::parse($value['dateBornPerson']);
             $Users->rhPerson = $value['rhPerson'];
             $Users->emailPerson = $value['emailPerson'];
             $Users->phonePerson = $value['phonePerson'];
@@ -419,7 +420,7 @@ class Person extends BasicModel{
         $Users->documentPerson = $getrow['documentPerson'];
         $Users->namePerson = $getrow['namePerson'];
         $Users->lastNamePerson = $getrow['lastNamePerson'];
-        $Users->dateBornPerson = $getrow['dateBornPerson'];
+        $Users->dateBornPerson = Carbon::parse($getrow['dateBornPerson']);
         $Users->rhPerson = $getrow['rhPerson'];
         $Users->emailPerson = $getrow['emailPerson'];
         $Users->phonePerson = $getrow['phonePerson'];
@@ -460,7 +461,7 @@ class Person extends BasicModel{
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->documentPerson." ".$this->namePerson." ".$this->lastNamePerson." ".$this->dateBornPerson." ".$this->rhPerson
+        return $this->documentPerson." ".$this->namePerson." ".$this->lastNamePerson." ".$this->dateBornPerson->toDateString()." ".$this->rhPerson
             ." ".$this->emailPerson ." ".$this->phonePerson." ".$this->adressPerson." ".$this->generePerson." ".$this->userPerson
             ." ".$this->passwordPerson." ".$this->typePerson." ".$this->statePerson." ".$this->photoPerson;
     }

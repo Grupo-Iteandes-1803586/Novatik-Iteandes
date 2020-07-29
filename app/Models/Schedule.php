@@ -3,15 +3,16 @@
 namespace  App\Models;
 
 require_once ('BasicModel.php');
+use Carbon\Carbon;
 
 class Schedule extends BasicModel{
 
     private $idSchedule;
-    private $startDateSchedule;
-    private $endDateSchedule;
+    private Carbon $startDateSchedule;
+    private Carbon $endDateSchedule;
     private $cantHours;
-    private $startHourSchedule;
-    private $endHourSchedule;
+    private Carbon $startHourSchedule;
+    private Carbon $endHourSchedule;
     private $stateSchedule;
     private $Group_idGroup;
 
@@ -30,11 +31,11 @@ class Schedule extends BasicModel{
     {
         parent::__construct();
         $this->idSchedule = $schedule['idSchedule'] ?? null;
-        $this->startDateSchedule = $schedule['startDateSchedule'] ?? nulle;
-        $this->endDateSchedule = $schedule['endDateSchedule'] ?? null;
+        $this->startDateSchedule = $schedule['startDateSchedule'] ?? new Carbon();
+        $this->endDateSchedule = $schedule['endDateSchedule'] ?? new Carbon();
         $this->cantHours = $schedule['cantHours'] ?? null;
-        $this->startHourSchedule = $schedule['startHourSchedule'] ?? null;
-        $this->endHourSchedule = $schedule['endHourSchedule'] ?? null;
+        $this->startHourSchedule = $schedule['startHourSchedule'] ?? new Carbon();
+        $this->endHourSchedule = $schedule['endHourSchedule'] ?? new Carbon();
         $this->stateSchedule = $schedule['stateSchedule'] ?? null;
         $this->Group_idGroup = $schedule['Group_idGroup'] ?? null;
     }
@@ -56,33 +57,33 @@ class Schedule extends BasicModel{
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getStartDateSchedule()
+    public function getStartDateSchedule(): Carbon
     {
         return $this->startDateSchedule;
     }
 
     /**
-     * @param date $startDateSchedule
+     * @param Carbon $startDateSchedule
      */
-    public function setStartDateSchedule(date $startDateSchedule): void
+    public function setStartDateSchedule(Carbon $startDateSchedule): void
     {
         $this->startDateSchedule = $startDateSchedule;
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getEndDateSchedule()
+    public function getEndDateSchedule(): Carbon
     {
         return $this->endDateSchedule;
     }
 
     /**
-     * @param date $endDateSchedule
+     * @param Carbon $endDateSchedule
      */
-    public function setEndDateSchedule(date $endDateSchedule): void
+    public function setEndDateSchedule(Carbon $endDateSchedule): void
     {
         $this->endDateSchedule = $endDateSchedule;
     }
@@ -104,33 +105,33 @@ class Schedule extends BasicModel{
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getStartHourSchedule()
+    public function getStartHourSchedule(): Carbon
     {
         return $this->startHourSchedule;
     }
 
     /**
-     * @param date $startHourSchedule
+     * @param Carbon $startHourSchedule
      */
-    public function setStartHourSchedule(date $startHourSchedule): void
+    public function setStartHourSchedule(Carbon $startHourSchedule): void
     {
         $this->startHourSchedule = $startHourSchedule;
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getEndHourSchedule()
+    public function getEndHourSchedule(): Carbon
     {
         return $this->endHourSchedule;
     }
 
     /**
-     * @param date $endHourSchedule
+     * @param Carbon $endHourSchedule
      */
-    public function setEndHourSchedule(date $endHourSchedule): void
+    public function setEndHourSchedule(Carbon $endHourSchedule): void
     {
         $this->endHourSchedule = $endHourSchedule;
     }
@@ -171,11 +172,11 @@ class Schedule extends BasicModel{
     public function create()
     {
         $result = $this->insertRow("INSERT INTO iteandes_novatik.Schedule VALUES (NULL, ?, ?, ?, ?,?,?,?)", array(
-                $this->startDateSchedule,
-                $this->endDateSchedule,
+                $this->startDateSchedule->toDateString(), //YYYY-MM-DD,
+                $this->endDateSchedule->toDateString(), //YYYY-MM-DD,
                 $this->cantHours,
-                $this->startHourSchedule,
-                $this->endHourSchedule,
+                $this->startHourSchedule->toDateTimeString(), //YYYY-MM-DD HH:MM:SS,
+                $this->endHourSchedule->toDateTimeString(), //YYYY-MM-DD HH:MM:SS,
                 $this->stateSchedule,
                 $this->Group_idGroup->getIdGroup()
             )
@@ -190,11 +191,11 @@ class Schedule extends BasicModel{
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Schedule  SET startDateSchedule = ?, endDateSchedule = ?, cantHours= ?, startHourSchedule = ? ,endHourSchedule=?, stateSchedule=?, Group_idGroup =? WHERE idSchedule = ?", array(
                 $this->idSchedule,
-                $this->startDateSchedule,
-                $this->endDateSchedule,
+                $this->startDateSchedule->toDateString(), //YYYY-MM-DD,,
+                $this->endDateSchedule->toDateString(), //YYYY-MM-DD,,
                 $this->cantHours,
-                $this->startHourSchedule,
-                $this->endHourSchedule,
+                $this->startHourSchedule->toDateTimeString(), //YYYY-MM-DD HH:MM:SS,
+                $this->endHourSchedule->toDateTimeString(), //YYYY-MM-DD HH:MM:SS,
                 $this->stateSchedule,
                 $this->Group_idGroup->getIdGroup()
             )
@@ -221,11 +222,11 @@ class Schedule extends BasicModel{
         foreach ($getrows as $value) {
             $schedule= new Schedule();
             $schedule->idSchedule=  $value['idSchedule'];
-            $schedule->startDateSchedule=  $value['startDateSchedule'];
-            $schedule->endDateSchedule=  $value['endDateSchedule'];
+            $schedule->startDateSchedule=  Carbon::parse($value['startDateSchedule']);
+            $schedule->endDateSchedule=  Carbon::parse($value['endDateSchedule']);
             $schedule->cantHours=  $value['cantHours'];
-            $schedule->startHourSchedule=  $value['startHourSchedule'];
-            $schedule->endHourSchedule=  $value['endHourSchedule'];
+            $schedule->startHourSchedule=  Carbon::parse($value['startHourSchedule']);
+            $schedule->endHourSchedule=  Carbon::parse($value['endHourSchedule']);
             $schedule->stateSchedule=  $value['stateSchedule'];
             $schedule->Group_idGroup=  Group::searchForId($value['Group_idGroup']);
             $schedule->Disconnect();
@@ -246,11 +247,11 @@ class Schedule extends BasicModel{
             $schedule= new Schedule();
             $getrow = $teacher->getRow("SELECT * FROM iteandes_novatik.Schedule WHERE idSchedule =?", array($idSchedule));
             $schedule->idSchedule=  $getrow['idSchedule'];
-            $schedule->startDateSchedule=  $getrow['startDateSchedule'];
-            $schedule->endDateSchedule=  $getrow['endDateSchedule'];
+            $schedule->startDateSchedule=  Carbon::parse($getrow['startDateSchedule']);
+            $schedule->endDateSchedule=  Carbon::parse($getrow['endDateSchedule']);
             $schedule->cantHours=  $getrow['cantHours'];
-            $schedule->startHourSchedule=  $getrow['startHourSchedule'];
-            $schedule->endHourSchedule=  $getrow['endHourSchedule'];
+            $schedule->startHourSchedule=  Carbon::parse($getrow['startHourSchedule']);
+            $schedule->endHourSchedule=  Carbon::parse($getrow['endHourSchedule']);
             $schedule->stateSchedule=  $getrow['stateSchedule'];
             $schedule->Group_idGroup=  Group::searchForId($getrow['Group_idGroup']);
         }
@@ -261,6 +262,6 @@ class Schedule extends BasicModel{
     //metodo to String
     public function __toString()
     {
-        return "dia: $this->startDateSchedule, dia fin: $this->endDateSchedule, cant Horas: $this->cantHours , hora Inicio: $this->startHourSchedule,  hora Fin: $this->endHourSchedule, estado $this->stateSchedule, grupo $this->Group_idGroup";
+        return "dia: $this->startDateSchedule->toDateString(), dia fin: $this->endDateSchedule->toDateString(), cant Horas: $this->cantHours , hora Inicio: $this->startHourSchedule->toDateTimeString(),  hora Fin: $this->endHourSchedule->toDateTimeString(), estado $this->stateSchedule, grupo $this->Group_idGroup";
     }
 }

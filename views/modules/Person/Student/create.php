@@ -1,4 +1,5 @@
-<?php require ("../../../partials/routes.php");?>
+<?php require ("../../../partials/routes.php");
+use Carbon\Carbon;?>
 <!doctype html>
 <html lang="es">
 <head>

@@ -1,17 +1,17 @@
 <?php
 namespace App\Models;
 require ('BasicModel.php');
-
+use Carbon\Carbon;
 class Semester extends BasicModel{
     private $idSemester;
     private $nameSemester;
     private $descriptionSemester;
-    private $starDateSemester;
-    private $endDateSemester;
-    private $startDate50;
-    private $endDate50;
-    private $starDate2Semester;
-    private $endDate2Semester;
+    private Carbon $starDateSemester;
+    private Carbon $endDateSemester;
+    private Carbon $startDate50;
+    private Carbon $endDate50;
+    private Carbon $starDate2Semester;
+    private Carbon $endDate2Semester;
     private $statuSemester;
 
     /**
@@ -23,12 +23,12 @@ class Semester extends BasicModel{
         $this->idSemester = $semester['idSemester'] ?? null;
         $this->nameSemester = $semester['nameSemester'] ?? null;
         $this->descriptionSemester = $semester['descriptionSemester'] ?? null;
-        $this->starDateSemester = $semester['starDateSemester'] ?? null;
-        $this->endDateSemester = $semester['endDateSemester'] ?? null;
-        $this->startDate50 = $semester['startDate50'] ?? null;
-        $this->endDate50 = $semester['endDate50'] ?? null;
-        $this->starDate2Semester = $semester['starDate2Semester'] ?? null;
-        $this->endDate2Semester = $semester['endDate2Semester'] ?? null;
+        $this->starDateSemester = $semester['starDateSemester'] ?? new Carbon();
+        $this->endDateSemester = $semester['endDateSemester'] ?? new Carbon();
+        $this->startDate50 = $semester['startDate50'] ?? new Carbon();
+        $this->endDate50 = $semester['endDate50'] ?? new Carbon();
+        $this->starDate2Semester = $semester['starDate2Semester'] ?? new Carbon();
+        $this->endDate2Semester = $semester['endDate2Semester'] ?? new Carbon();
         $this->statuSemester = $semester['statuSemester'] ?? null;
     }
     /*Metodo destructor cierre de la conexion*/
@@ -101,33 +101,33 @@ class Semester extends BasicModel{
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getStarDateSemester()
+    public function getStarDateSemester() : Carbon
     {
         return $this->starDateSemester;
     }
 
     /**
-     * @param date $starDateSemester
+     * @param Carbon $starDateSemester
      */
-    public function setStarDateSemester(date $starDateSemester): void
+    public function setStarDateSemester(Carbon $starDateSemester): void
     {
         $this->starDateSemester = $starDateSemester;
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getEndDateSemester()
+    public function getEndDateSemester() : Carbon
     {
         return $this->endDateSemester;
     }
 
     /**
-     * @param date $endDateSemester
+     * @param Carbon $endDateSemester
      */
-    public function setEndDateSemester(date $endDateSemester): void
+    public function setEndDateSemester(Carbon $endDateSemester): void
     {
         $this->endDateSemester = $endDateSemester;
     }
@@ -149,65 +149,65 @@ class Semester extends BasicModel{
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getStartDate50()
+    public function getStartDate50() : Carbon
     {
         return $this->startDate50;
     }
 
     /**
-      @param date $startDate50
+      @param Carbon $startDate50
      */
-    public function setStartDate50(date $startDate50): void
+    public function setStartDate50(Carbon $startDate50): void
     {
         $this->startDate50 = $startDate50;
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getEndDate50()
+    public function getEndDate50() : Carbon
     {
         return $this->endDate50;
     }
 
     /**
-     * @param date $endDate50
+     * @param Carbon $endDate50
      */
-    public function setEndDate50(date $endDate50): void
+    public function setEndDate50(Carbon $endDate50): void
     {
         $this->endDate50 = $endDate50;
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getStarDate2Semester()
+    public function getStarDate2Semester() : Carbon
     {
         return $this->starDate2Semester;
     }
 
     /**
-     * @param date $starDate2Semester
+     * @param Carbon $starDate2Semester
      */
-    public function setStarDate2Semester(date $starDate2Semester): void
+    public function setStarDate2Semester(Carbon $starDate2Semester): void
     {
         $this->starDate2Semester = $starDate2Semester;
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getEndDate2Semester()
+    public function getEndDate2Semester() : Carbon
     {
         return $this->endDate2Semester;
     }
 
     /**
-     * @param date $endDate2Semester
+     * @param Carbon $endDate2Semester
      */
-    public function setEndDate2Semester(date $endDate2Semester): void
+    public function setEndDate2Semester(Carbon $endDate2Semester): void
     {
         $this->endDate2Semester = $endDate2Semester;
     }
@@ -218,12 +218,12 @@ class Semester extends BasicModel{
         $result = $this->insertRow( "INSERT INTO iteandes_novatik.semester VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array(
             $this->nameSemester,
             $this->descriptionSemester,
-            $this->starDateSemester,
-            $this->endDateSemester,
-            $this->startDate50,
-            $this->endDate50,
-            $this->starDate2Semester,
-            $this->endDate2Semester,
+            $this->starDateSemester->toDateString(), //YYYY-MM-DD,
+            $this->endDateSemester->toDateString(), //YYYY-MM-DD,
+            $this->startDate50->toDateString(), //YYYY-MM-DD,
+            $this->endDate50->toDateString(), //YYYY-MM-DD,
+            $this->starDate2Semester->toDateString(), //YYYY-MM-DD,
+            $this->endDate2Semester->toDateString(), //YYYY-MM-DD,
             $this->statuSemester
             )
         );
@@ -235,12 +235,12 @@ class Semester extends BasicModel{
         $result = $this->updateRow( "UPDATE iteandes_novatik.semester  SET nameSemester = ?, descriptionSemester = ?,starDateSemester = ?,endDateSemester = ?,startDate50 = ?,endDate50 = ?,starDate2Semester = ?,endDate2Semester = ?, statuSemester =? WHERE idSemester = ?", array(
                 $this->nameSemester,
                 $this->descriptionSemester,
-                $this->starDateSemester,
-                $this->endDateSemester,
-                $this->startDate50,
-                $this->endDate50,
-                $this->starDate2Semester,
-                $this->endDate2Semester,
+                $this->starDateSemester->toDateString(), //YYYY-MM-DD,
+                $this->endDateSemester->toDateString(), //YYYY-MM-DD,
+                $this->startDate50->toDateString(), //YYYY-MM-DD,
+                $this->endDate50->toDateString(), //YYYY-MM-DD,
+                $this->starDate2Semester->toDateString(), //YYYY-MM-DD,
+                $this->endDate2Semester->toDateString(), //YYYY-MM-DD,
                 $this->statuSemester,
                 $this->idSemester
             )
@@ -259,12 +259,12 @@ class Semester extends BasicModel{
             $semeste->idSemester =  $value['idSemester'];
             $semeste->nameSemester = $value['nameSemester'] ;
             $semeste->descriptionSemester =$value['descriptionSemester'] ;
-            $semeste->starDateSemester= date('Y-m-d',strtotime($value['starDateSemester']));
-            $semeste->endDateSemester = date('Y-m-d',strtotime($value['endDateSemester']));
-            $semeste->startDate50 = date('Y-m-d',strtotime($value['startDate50']));
-            $semeste->endDate50 = date('Y-m-d',strtotime($value['endDate50']));
-            $semeste->starDate2Semester = date('Y-m-d',strtotime($value['starDate2Semester']));
-            $semeste->endDate2Semester = date('Y-m-d',strtotime($value['endDate2Semester']));
+            $semeste->starDateSemester= Carbon::parse($value['starDateSemester']);
+            $semeste->endDateSemester = Carbon::parse($value['endDateSemester']);
+            $semeste->startDate50 = Carbon::parse($value['startDate50']);
+            $semeste->endDate50 = Carbon::parse($value['endDate50']);
+            $semeste->starDate2Semester = Carbon::parse($value['starDate2Semester']);
+            $semeste->endDate2Semester = Carbon::parse($value['endDate2Semester']);
             $semeste->statuSemester = $value['statuSemester'];
             $semeste->Disconnect();
             array_push($arrSemester,$semeste);
@@ -281,12 +281,12 @@ class Semester extends BasicModel{
             $semestes->idSemester =  $getrow['idSemester'];
             $semestes->nameSemester =$getrow['nameSemester'] ;
             $semestes->descriptionSemester =$getrow['descriptionSemester'] ;
-            $semestes->starDateSemester= date('Y-m-d',strtotime($getrow['starDateSemester']));
-            $semestes->endDateSemester = date('Y-m-d',strtotime($getrow['endDateSemester']));
-            $semestes->startDate50 = date('Y-m-d',strtotime($getrow['startDate50']));
-            $semestes->endDate50 = date('Y-m-d',strtotime($getrow['endDate50']));
-            $semestes->starDate2Semester = date('Y-m-d',strtotime($getrow['starDate2Semester']));
-            $semestes->endDate2Semester = date('Y-m-d',strtotime($getrow['endDate2Semester']));
+            $semestes->starDateSemester= Carbon::parse($getrow['starDateSemester']);
+            $semestes->endDateSemester = Carbon::parse($getrow['endDateSemester']);
+            $semestes->startDate50 = Carbon::parse($getrow['startDate50']);
+            $semestes->endDate50 = Carbon::parse($getrow['endDate50']);
+            $semestes->starDate2Semester = Carbon::parse($getrow['starDate2Semester']);
+            $semestes->endDate2Semester = Carbon::parse($getrow['endDate2Semester']);
             $semestes->statuSemester = $getrow['statuSemester'];
         }
         $semestes->Disconnect();
@@ -301,7 +301,7 @@ class Semester extends BasicModel{
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->nameSemester." ".$this->descriptionSemester." ".$this->starDateSemester." ".$this->endDateSemester." ".$this->startDate50." ".$this->endDate50." ".$this->starDate2Semester." ".$this->endDate2Semester." ".$this->statuSemester;
+        return $this->nameSemester." ".$this->descriptionSemester." ".$this->starDateSemester->toDateString()." ".$this->endDateSemester->toDateString()." ".$this->startDate50->toDateString()." ".$this->endDate50->toDateString()." ".$this->starDate2Semester->toDateString()." ".$this->endDate2Semester->toDateString()." ".$this->statuSemester;
     }
 
     public function delete($idSemester): bool

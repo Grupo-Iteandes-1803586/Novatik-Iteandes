@@ -5,7 +5,7 @@ require_once("../../../../app/Controllers/PersonController.php");
 
 use App\Controllers\StudentControllers;
 use App\Controllers\PersonController;
-?>
+use Carbon\Carbon;?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -163,8 +163,8 @@ use App\Controllers\PersonController;
                                 <div class="form-group row">
                                     <label for="dateBornPerson" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" class="form-control" id="dateBornPerson"
-                                               name="dateBornPerson" value="<?= $DataPersonT->getDateBornPerson(); ?>"
+                                        <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>"  class="form-control" id="dateBornPerson"
+                                               name="dateBornPerson" value="<?= $DataPersonT->getDateBornPerson()->toDateString(); ?>"
                                                placeholder="Ingrese su Fecha de Nacimiento">
                                     </div>
                                 </div>

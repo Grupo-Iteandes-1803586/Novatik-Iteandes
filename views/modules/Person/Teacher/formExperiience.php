@@ -21,14 +21,14 @@
         <div class="form-group row">
             <label for="startExperience" class="col-sm-2 col-form-label">Fecha de Inicio de Contrato</label>
             <div class="col-sm-10">
-                <input required type="date" class="form-control" id="startExperience" name="startExperience" placeholder="Fecha de Inicio de Contrato">
+                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="startExperience" name="startExperience" placeholder="Fecha de Inicio de Contrato">
             </div>
         </div>
         <!--Fecha de Determinacion  de Contrato-->
         <div class="form-group row">
             <label for="endExperince" class="col-sm-2 col-form-label">Fecha de Determinacion</label>
             <div class="col-sm-10">
-                <input required type="date" class="form-control" id="endExperince" name="endExperince" placeholder="Fecha de Determinacion">
+                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="endExperince" name="endExperince" placeholder="Fecha de Determinacion">
             </div>
         </div>
 </div>

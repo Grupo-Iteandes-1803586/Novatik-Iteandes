@@ -1,10 +1,10 @@
 <?php
 namespace App\Models;
 require_once ('BasicModel.php');
-
+use Carbon\Carbon;
 class Enrollment extends BasicModel{
     private $idEnrollment;
-    private $dateEnrollment;
+    private Carbon $dateEnrollment;
     private $stateEnrollment;
     private $Student_idStudent;
     private $Semester_idSemester;
@@ -23,7 +23,7 @@ class Enrollment extends BasicModel{
 {
     parent::__construct();
     $this->idEnrollment = $enrollment['idEnrollment'] ?? null;
-    $this->dateEnrollment = $enrollment['dateEnrollment'] ?? null;
+    $this->dateEnrollment = $enrollment['dateEnrollment'] ?? new Carbon();
     $this->stateEnrollment = $enrollment['stateEnrollment'] ?? null;
     $this->Student_idStudent = $enrollment['Student_idStudent'] ?? null;
     $this->Semester_idSemester = $enrollment['Semester_idSemester'] ?? null;
@@ -52,17 +52,17 @@ class Enrollment extends BasicModel{
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getDateEnrollment()
+    public function getDateEnrollment() : Carbon
     {
         return $this->dateEnrollment;
     }
 
     /**
-     * @param date $dateEnrollment
+     * @param Carbon $dateEnrollment
      */
-    public function setDateEnrollment(date $dateEnrollment): void
+    public function setDateEnrollment(Carbon $dateEnrollment): void
     {
         $this->dateEnrollment = $dateEnrollment;
     }
@@ -135,7 +135,7 @@ class Enrollment extends BasicModel{
     public function create()
     {
         $result = $this->insertRow("INSERT INTO iteandes_novatik.Enrollment VALUES (NULL, ?, ?, ?, ?,?)", array(
-            $this->dateEnrollment,
+            $this->dateEnrollment->toDateString(), //YYYY-MM-DD,
             $this->stateEnrollment,
             $this->Student_idStudent->getIdStudent(),
             $this->Semester_idSemester->getIdSemester(),
@@ -152,7 +152,7 @@ class Enrollment extends BasicModel{
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Enrollment  SET dateEnrollment = ?, stateEnrollment = ?, Student_idStudent= ?, Semester_idSemester = ?,TrainingProgram_idTrainingProgram=? WHERE idEnrollment = ?", array(
                 $this->idEnrollment,
-                $this->dateEnrollment,
+                $this->dateEnrollment->toDateString(), //YYYY-MM-DD,
                 $this->stateEnrollment,
                 $this->Student_idStudent->getIdStudent(),
                 $this->Semester_idSemester->getIdSemester(),
@@ -183,7 +183,7 @@ class Enrollment extends BasicModel{
             $enrolment= new Enrollment();
 
             $enrolment->idEnrollment = $value['idEnrollment'];
-            $enrolment->dateEnrollment = $value['dateEnrollment'];
+            $enrolment->dateEnrollment = Carbon::parse($value['dateEnrollment']);
             $enrolment->stateEnrollment = $value['stateEnrollment'];
             $enrolment->Student_idStudent = Student::searchForId($value['Student_idStudent']);
             $enrolment->Semester_idSemester= Semester::searchForId($value['Semester_idSemester']);
@@ -207,7 +207,7 @@ class Enrollment extends BasicModel{
             $enrollment= new Enrollment();
             $getrow = $enrollment->getRow("SELECT * FROM iteandes_novatik.Enrollment WHERE idEnrollment =?", array($idEnrollment));
             $enrollment->idEnrollment = $getrow['idEnrollment'];
-            $enrollment->dateEnrollment = $getrow['dateEnrollment'];
+            $enrollment->Carbon::parse($getrow['dateEnrollment']);
             $enrollment->stateEnrollment = $getrow['stateEnrollment'];
             $enrollment->Student_idStudent = Student::searchForId($getrow['Student_idStudent']);
             $enrollment->Semester_idSemester= Semester::searchForId($getrow['Semester_idSemester']);
@@ -215,5 +215,9 @@ class Enrollment extends BasicModel{
         }
         $enrollment->Disconnect();
         return $enrollment;
+    }
+    public function __toString()
+    {
+        return "id: $this->idEnrollment,fecha: $this->dateEnrollment->toDateString(), estudiante: $this->Student_idStudent , semeste: $this->Semester_idSemester,  programa: $this->TrainingProgram_idTrainingProgram, estado: $this->stateEnrollment";
     }
 }

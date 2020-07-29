@@ -10,6 +10,7 @@ use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\TrainingProgram;
 use App\Models\Semester;
+use Carbon\Carbon;
 
 if(!empty($_GET['action'])){
     EnrollmentControllers::main($_GET['action']);
@@ -38,7 +39,7 @@ class EnrollmentControllers{
         try {
 
             $arrEnrollment= array();
-            $arrEnrollment->dateEnrollment = $_POST['dateEnrollment'];
+            $arrEnrollment->dateEnrollment = Carbon::now(); //Fecha Actual;
             $arrEnrollment->stateEnrollment = $_POST['stateEnrollment'];
             $arrEnrollment->Student_idStudent = Student::searchForId($_POST['Student_idStudent']);
             $arrEnrollment->Semester_idSemester= Semester::searchForId($_POST['Semester_idSemester']);
@@ -57,7 +58,7 @@ class EnrollmentControllers{
         try {
             $arrEnrollment= array();
             $arrEnrollment->idEnrollment = $_POST['idEnrollment'];
-            $arrEnrollment->dateEnrollment = $_POST['dateEnrollment'];
+            $arrEnrollment->dateEnrollment = Carbon::now(); //Fecha Actual;
             $arrEnrollment->stateEnrollment = $_POST['stateEnrollment'];
             $arrEnrollment->Student_idStudent = Student::searchForId($_POST['Student_idStudent']);
             $arrEnrollment->Semester_idSemester= Semester::searchForId($_POST['Semester_idSemester']);

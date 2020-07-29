@@ -2,10 +2,11 @@
 
 namespace App\Models;
 require_once ('BasicModel.php');
+use Carbon\Carbon;
 
 class Note extends BasicModel{
     private $idNote;
-    private $dateNote;
+    private Carbon $dateNote;
     private $valueNote;
     private $Activity_idActivity;
     private $Teacher_idTeacher;
@@ -24,7 +25,7 @@ class Note extends BasicModel{
     {
         parent::__construct();
         $this->idNote = $note['idNote'] ?? null;
-        $this->dateNote = $note['dateNote'] ?? null;
+        $this->dateNote = $note['dateNote'] ?? new Carbon();
         $this->valueNote = $note['valueNote'] ?? null;
         $this->Activity_idActivity = $note['Activity_idActivity'] ?? null;
         $this->Teacher_idTeacher = $note['Teacher_idTeacher'] ?? null;
@@ -52,17 +53,17 @@ class Note extends BasicModel{
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getDateNote()
+    public function getDateNote() : Carbon
     {
         return $this->dateNote;
     }
 
     /**
-     * @param date $dateNote
+     * @param Carbon $dateNote
      */
-    public function setDateNote(date $dateNote): void
+    public function setDateNote(Carbon $dateNote): void
     {
         $this->dateNote = $dateNote;
     }
@@ -135,7 +136,7 @@ class Note extends BasicModel{
     public function create()
     {
         $result = $this->insertRow("INSERT INTO iteandes_novatik.Note VALUES (NULL, ?, ?, ?, ?,?)", array(
-                $this->dateNote,
+                $this->dateNote->toDateString(), //YYYY-MM-DD,
                 $this->valueNote,
                 $this->Activity_idActivity->getIdActivity(),
                 $this->Teacher_idTeacher->getIdTeacher(),
@@ -152,7 +153,7 @@ class Note extends BasicModel{
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Note  SET dateNote = ?, valueNote = ?, Activity_idActivity= ?, Teacher_idTeacher = ?, stateNote=? WHERE idNote = ?", array(
                 $this->idNote,
-                $this->dateNote,
+                $this->dateNote->toDateString(), //YYYY-MM-DD,
                 $this->valueNote,
                 $this->Activity_idActivity->getIdActivity(),
                 $this->Teacher_idTeacher->getIdTeacher(),
@@ -182,7 +183,7 @@ class Note extends BasicModel{
         foreach ($getrows as $value) {
             $note= new Note();
             $note->idNote = $value['idNote'];
-            $note->dateNote = $value['dateNote'];
+            $note->dateNote = Carbon::parse($value['dateNote']);
             $note->valueNote = $value['valueNote'];
             $note->Activity_idActivity= Activity::searchForId($value['Activity_idActivity']);
             $note->Teacher_idTeacher = Teacher::searchForId($value['Teacher_idTeacher']);
@@ -206,7 +207,7 @@ class Note extends BasicModel{
             $note= new Note();
             $getrow = $note->getRow("SELECT * FROM iteandes_novatik.Note WHERE idNote =?", array($idNote));
             $note->idNote = $getrow['idNote'];
-            $note->dateNote = $getrow['dateNote'];
+            $note->dateNote = Carbon::parse($getrow['dateNote']);
             $note->valueNote = $getrow['valueNote'];
             $note->Activity_idActivity= Activity::searchForId($getrow['Activity_idActivity']);
             $note->Teacher_idTeacher = Teacher::searchForId($getrow['Teacher_idTeacher']);
@@ -215,5 +216,9 @@ class Note extends BasicModel{
         $note->Disconnect();
         return $note;
 }
+    public function __toString()
+    {
+        return "id: $this->idNote,fecha: $this->dateNote->toDateString(), nota: $this->valueNote , actividad: $this->Activity_idActivity,  docente: $this->Teacher_idTeacher, estado: $this->stateNote";
+    }
 
 }

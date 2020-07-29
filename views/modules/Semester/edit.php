@@ -1,7 +1,8 @@
 <?php
-    require ("../../partials/routes.php");
-    require ("../../../app/Controllers/SemesterControllers.php");
+require ("../../partials/routes.php");
+require ("../../../app/Controllers/SemesterControllers.php");
 use App\Controllers\SemesterControllers;
+use Carbon\Carbon;
 ?>
 <!doctype html>
 <html lang="es">
@@ -87,37 +88,37 @@ use App\Controllers\SemesterControllers;
                                 <div class="form-group row">
                                     <label for="starDateSemester" class="col-sm-2 col-form-label">Fecha de Inicio</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" class="form-control" id="starDateSemester" name="starDateSemester" value="<?= $DataSemester->getStarDateSemester() ?>" placeholder="Ingrese la fecha de Inicio">
+                                        <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="starDateSemester" name="starDateSemester" value="<?= $DataSemester->getStarDateSemester()->toDateString() ?>" placeholder="Ingrese la fecha de Inicio">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="endDateSemester" class="col-sm-2 col-form-label">Fecha de Finalizacion</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" class="form-control" id="endDateSemester" name="endDateSemester" value="<?= $DataSemester->getEndDateSemester() ?>" placeholder="Ingrese la fecha de Finalizacion Academica">
+                                        <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="endDateSemester" name="endDateSemester" value="<?= $DataSemester->getEndDateSemester()->toDateString() ?>" placeholder="Ingrese la fecha de Finalizacion Academica">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="startDate50" class="col-sm-2 col-form-label">Fecha de Inicio Primer Corte Academico</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" class="form-control" id="startDate50" name="startDate50" value="<?= $DataSemester->getStartDate50() ?>" placeholder="Ingrese la fecha de Inicio del primer corte">
+                                        <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="startDate50" name="startDate50" value="<?= $DataSemester->getStartDate50()->toDateString() ?>" placeholder="Ingrese la fecha de Inicio del primer corte">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="endDate50" class="col-sm-2 col-form-label">Fecha de Finalizacion Primer Corte Academico</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" class="form-control" id="endDate50" name="endDate50" value="<?= $DataSemester->getEndDate50()?>" placeholder="Ingrese la fecha de Finalizacion del primer corte">
+                                        <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="endDate50" name="endDate50" value="<?= $DataSemester->getEndDate50()->toDateString()?>" placeholder="Ingrese la fecha de Finalizacion del primer corte">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="starDate2Semester" class="col-sm-2 col-form-label">Fecha de Inicio Segundo Corte Academico</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" class="form-control" id="starDate2Semester" name="starDate2Semester" value="<?= $DataSemester->getStarDate2Semester()?>" placeholder="Ingrese la fecha de Inicio del 2do corte">
+                                        <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="starDate2Semester" name="starDate2Semester" value="<?= $DataSemester->getStarDate2Semester()->toDateString()?>" placeholder="Ingrese la fecha de Inicio del 2do corte">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="endDate2Semester" class="col-sm-2 col-form-label">Fecha de Finalizacion 2do Corte</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" class="form-control" id="endDate2Semester" name="endDate2Semester" value="<?= $DataSemester->getEndDate2Semester() ?>" placeholder="Ingrese la fecha de Finalizacion del 2do corte">
+                                        <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="endDate2Semester" name="endDate2Semester" value="<?= $DataSemester->getEndDate2Semester()->toDateString() ?>" placeholder="Ingrese la fecha de Finalizacion del 2do corte">
                                     </div>
                                 </div>
                                 <div class="form-group row">
