@@ -5,6 +5,7 @@ require_once (__DIR__.'/../Models/Schedule.php');
 require_once (__DIR__.'App\Models\Group');
 use App\Models\Schedule;
 use App\Models\Group;
+use Carbon\Carbon;
 
 if(!empty($_GET['action'])){
     ScheduleControllers::main($_GET['action']);
@@ -31,11 +32,11 @@ class ScheduleControllers{
     {
         try {
             $arrschedule= array();
-            $arrschedule->startDateSchedule=  $_POST['startDateSchedule'];
-            $arrschedule->endDateSchedule=  $_POST['endDateSchedule'];
+            $arrschedule->startDateSchedule=  Carbon::parse($_POST['startDateSchedule']);
+            $arrschedule->endDateSchedule=  Carbon::parse($_POST['endDateSchedule']);
             $arrschedule->cantHours=  $_POST['cantHours'];
-            $arrschedule->startHourSchedule=  $_POST['startHourSchedule'];
-            $arrschedule->endHourSchedule=  $_POST['endHourSchedule'];
+            $arrschedule->startHourSchedule=  Carbon::parse($_POST['startHourSchedule']);
+            $arrschedule->endHourSchedule=  Carbon::parse($_POST['endHourSchedule']);
             $arrschedule->stateSchedule= 'Activo';
             $arrschedule->Group_idGroup=  Group::searchForId($_POST['Group_idGroup']);
             $schedule = new Schedule($arrschedule);
@@ -53,11 +54,11 @@ class ScheduleControllers{
         try {
             $arrschedule= array();
             $arrschedule->idSchedule=  $_POST['idSchedule'];
-            $arrschedule->startDateSchedule=  $_POST['startDateSchedule'];
-            $arrschedule->endDateSchedule=  $_POST['endDateSchedule'];
+            $arrschedule->startDateSchedule=  Carbon::parse($_POST['startDateSchedule']);
+            $arrschedule->endDateSchedule=  Carbon::parse($_POST['endDateSchedule']);
             $arrschedule->cantHours=  $_POST['cantHours'];
-            $arrschedule->startHourSchedule=  $_POST['startHourSchedule'];
-            $arrschedule->endHourSchedule=  $_POST['endHourSchedule'];
+            $arrschedule->startHourSchedule=  Carbon::parse($_POST['startHourSchedule']);
+            $arrschedule->endHourSchedule=  Carbon::parse($_POST['endHourSchedule']);
             $arrschedule->stateSchedule= $_POST['stateSchedule'];
             $arrschedule->Group_idGroup=  Group::searchForId($_POST['Group_idGroup']);
             $schedule = new Schedule($arrschedule);

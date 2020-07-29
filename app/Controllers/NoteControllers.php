@@ -7,6 +7,7 @@ require_once (__DIR__.'/../Models/Activity.php');
 use App\Models\Note;
 use App\Models\Teacher;
 use App\Models\Activity;
+use Carbon\Carbon;
 
 if(!empty($_GET['action'])){
     NoteControllers::main($_GET['action']);
@@ -33,7 +34,7 @@ class NoteControllers{
     static public function create()
     {
         try {
-            $arrayNote['dateNote'] = $_POST['dateNote'];
+            $arrayNote['dateNote'] = Carbon::now(); //Fecha Actual;
             $arrayNote['valueNote'] = $_POST['valueNote'];
             $arrayNote['Activity_idActivity'] = Activity::searchForId($_POST['Activity_idActivity']);
             $arrayNote['Teacher_idTeacher'] = Teacher::searchForId($_POST['Teacher_idTeacher']);
@@ -53,7 +54,7 @@ class NoteControllers{
     static public function edit (){
         try {
             $arrayNote['idNote'] = $_POST['idNote'];
-            $arrayNote['dateNote'] = $_POST['dateNote'];
+            $arrayNote['dateNote'] = Carbon::now(); //Fecha Actual;
             $arrayNote['valueNote'] = $_POST['valueNote'];
             $arrayNote['Activity_idActivity'] = Activity::searchForId($_POST['Activity_idActivity']);
             $arrayNote['Teacher_idTeacher'] = Teacher::searchForId($_POST['Teacher_idTeacher']);

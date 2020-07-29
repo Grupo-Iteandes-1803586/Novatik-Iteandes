@@ -4,6 +4,7 @@ namespace App\Controllers;
 require(__DIR__.'/../Models/Semester.php');
 use App\Models\Semester;
 use mysql_xdevapi\Exception;
+use Carbon\Carbon;
 
 //Metodo POST para recibir la accion
 if(!empty($_GET['action'])){
@@ -35,12 +36,12 @@ class SemesterControllers{
             $arraySemeste = array();
             $arraySemeste['nameSemester'] = $_POST['nameSemester'];
             $arraySemeste['descriptionSemester'] = $_POST['descriptionSemester'];
-            $arraySemeste['starDateSemester'] = $_POST['starDateSemester'];
-            $arraySemeste['endDateSemester'] = $_POST['endDateSemester'];
-            $arraySemeste['startDate50'] = $_POST['startDate50'];
-            $arraySemeste['endDate50'] = $_POST['endDate50'];
-            $arraySemeste['starDate2Semester'] = $_POST['starDate2Semester'] ;
-            $arraySemeste['endDate2Semester'] = $_POST['endDate2Semester'] ;
+            $arraySemeste['starDateSemester'] = Carbon::parse($_POST['starDateSemester']);
+            $arraySemeste['endDateSemester'] = Carbon::parse($_POST['endDateSemester']);
+            $arraySemeste['startDate50'] = Carbon::parse($_POST['startDate50']);
+            $arraySemeste['endDate50'] = Carbon::parse($_POST['endDate50']);
+            $arraySemeste['starDate2Semester'] = Carbon::parse($_POST['starDate2Semester']) ;
+            $arraySemeste['endDate2Semester'] = Carbon::parse($_POST['endDate2Semester']) ;
             $arraySemeste['statuSemester'] ='Activo';
             //Validacion del registro del semestre
             $semester = new Semester($arraySemeste);
@@ -59,12 +60,12 @@ class SemesterControllers{
             $arraySemeste = array();
             $arraySemeste['nameSemester'] = $_POST['nameSemester'];
             $arraySemeste['descriptionSemester'] = $_POST['descriptionSemester'];
-            $arraySemeste['starDateSemester'] = $_POST['starDateSemester'];
-            $arraySemeste['endDateSemester'] = $_POST['endDateSemester'];
-            $arraySemeste['startDate50'] = $_POST['startDate50'];
-            $arraySemeste['endDate50'] = $_POST['endDate50'];
-            $arraySemeste['starDate2Semester'] = $_POST['starDate2Semester'] ;
-            $arraySemeste['endDate2Semester'] = $_POST['endDate2Semester'] ;
+            $arraySemeste['starDateSemester'] = Carbon::parse($_POST['starDateSemester']);
+            $arraySemeste['endDateSemester'] = Carbon::parse($_POST['endDateSemester']);
+            $arraySemeste['startDate50'] = Carbon::parse($_POST['startDate50']);
+            $arraySemeste['endDate50'] = Carbon::parse($_POST['endDate50']);
+            $arraySemeste['starDate2Semester'] = Carbon::parse($_POST['starDate2Semester']) ;
+            $arraySemeste['endDate2Semester'] = Carbon::parse($_POST['endDate2Semester'] );
             $arraySemeste['statuSemester'] =$_POST['statuSemester'];
             $arraySemeste['idSemester'] = $_POST['idSemester'];
 

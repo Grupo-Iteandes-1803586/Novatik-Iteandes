@@ -19,6 +19,7 @@ use App\Models\TeacherLenguages;
 use App\Models\TeacherStudies;
 use App\Models\Student;
 use mysql_xdevapi\Exception;
+use Carbon\Carbon;
 
 //Metodo Get para recibir la accion
 if(!empty($_GET['action'])){
@@ -65,7 +66,7 @@ class PersonController{
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
             $arrayPerson['namePerson'] = $_POST['namePerson'];
             $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
-            $arrayPerson['dateBornPerson']= $_POST['dateBornPerson'];
+            $arrayPerson['dateBornPerson']= Carbon::parse($_POST['dateBornPerson']);
             $arrayPerson['rhPerson'] = $_POST['rhPerson'];
             $arrayPerson['emailPerson'] = $_POST['emailPerson'];
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
@@ -78,8 +79,8 @@ class PersonController{
             $arrayExperience = array();
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
-            $arrayExperience['startExperience'] = $_POST['startExperience'];
-            $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['startExperience'] = Carbon::parse($_POST['startExperience']);
+            $arrayExperience['endExperince'] = Carbon::parse($_POST['endExperince']);
             $arrayExperience['stateExperience'] = 'Activo';
             $Experience = new Experience($arrayExperience);
             //Datos de estudio
@@ -137,7 +138,7 @@ class PersonController{
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
             $arrayPerson['namePerson'] = $_POST['namePerson'];
             $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
-            $arrayPerson['dateBornPerson']= $_POST['dateBornPerson'];
+            $arrayPerson['dateBornPerson']= Carbon::parse($_POST['dateBornPerson']);
             $arrayPerson['rhPerson'] = $_POST['rhPerson'];
             $arrayPerson['emailPerson'] = $_POST['emailPerson'];
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
@@ -153,8 +154,8 @@ class PersonController{
             $arrayExperience['idExperience'] = $_POST['idExperience'];
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
-            $arrayExperience['startExperience'] = $_POST['startExperience'];
-            $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['startExperience'] = Carbon::parse($_POST['startExperience']);
+            $arrayExperience['endExperince'] = Carbon::parse($_POST['endExperince']);
             $arrayExperience['stateExperience'] = $person->getStatePerson();
             $Experience = new Experience($arrayExperience);
             //Datos de estudio
