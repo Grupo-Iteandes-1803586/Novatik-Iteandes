@@ -20,7 +20,7 @@ use App\Controllers\LenguagesControllers; ?>
 <!doctype html>
 <html lang="es">
 <head>
-    <title>Document</title>
+    <title><?= getenv('TITLE_SITE');?>| Editar Docente</title>
     <?php
     require ("../../../partials/head_imports.php");
     require ("../../../partials/header.php");
@@ -371,7 +371,7 @@ use App\Controllers\LenguagesControllers; ?>
                         <!-- /.card-body -->
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-info">Enviar</button>
-                                <a href="index.php" role="button" class="btn btn-default float-right">Cancelar</a>
+                                <a href="show.php" role="button" class="btn btn-default float-right">Cancelar</a>
                             </div>
                             <!-- /.card-footer -->
                         </form>

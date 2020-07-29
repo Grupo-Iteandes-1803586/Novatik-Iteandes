@@ -430,7 +430,6 @@ class Person extends BasicModel{
         $Users->typePerson = $getrow['typePerson'];
         $Users->statePerson = $getrow['statePerson'];
         $Users->photoPerson = $getrow['photoPerson'];
-
     }
     $Users->Disconnect();
     return $Users;
