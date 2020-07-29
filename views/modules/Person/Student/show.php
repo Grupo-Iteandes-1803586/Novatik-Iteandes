@@ -86,7 +86,8 @@ use App\Controllers\PersonController;?>
                     <p class="text-muted"><?= $DataPerson->getEmailPerson() ?></p>
                     <hr>
                     <strong><i class="fas fa-phone mr-1"></i> Fecha de Nacimiento</strong>
-                    <p class="text-muted"><?= $DataPerson->getDateBornPerson() ?></p>
+                    <p class="text-muted"><?= $DataPerson->getDateBornPerson()->translatedFormat('l, j \\de F Y')  ?></p>
+                    <p class="text-muted">Tienes <?= $DataPerson->getDateBornPerson()->diffInYears(); ?> Años</p>
                     <hr>
                     <strong><i class="fas fa-phone mr-1"></i> Celular</strong>
                     <p class="text-muted"><?= $DataPerson->getPhonePerson() ?></p>

@@ -16,7 +16,8 @@ use App\Models\TeacherLenguages;
 use App\Controllers\TeacherStudiesControllers;
 use App\Controllers\TeacherLenguagesControllers;
 use App\Controllers\ExperienceControllers;
-use App\Controllers\LenguagesControllers; ?>
+use App\Controllers\LenguagesControllers;
+use Carbon\Carbon;?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -174,8 +175,8 @@ use App\Controllers\LenguagesControllers; ?>
                         <div class="form-group row">
                             <label for="dateBornPerson" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="dateBornPerson"
-                                       name="dateBornPerson" value="<?= $DataPersonT->getDateBornPerson(); ?>"
+                                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="dateBornPerson"
+                                       name="dateBornPerson" value="<?= $DataPersonT->getDateBornPerson()->toDateString(); ?>"
                                        placeholder="Ingrese su Fecha de Nacimiento">
                             </div>
                         </div>
@@ -281,9 +282,9 @@ use App\Controllers\LenguagesControllers; ?>
                                 <label for="startExperience" class="col-sm-2 col-form-label">Fecha de Inicio de
                                     Contrato</label>
                                 <div class="col-sm-10">
-                                    <input required type="date" class="form-control" id="startExperience"
+                                    <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="startExperience"
                                            name="startExperience"
-                                           value="<?php echo $DataExperience->getStartExperience(); ?>"
+                                           value="<?php echo $DataExperience->getStartExperience()->toDateString(); ?>"
                                            placeholder="Fecha de Inicio de Contrato">
                                 </div>
                             </div>
@@ -291,8 +292,8 @@ use App\Controllers\LenguagesControllers; ?>
                             <div class="form-group row">
                                 <label for="endExperince" class="col-sm-2 col-form-label">Fecha de Determinacion</label>
                                 <div class="col-sm-10">
-                                    <input required type="date" class="form-control" id="endExperince"
-                                           name="endExperince" value="<?php echo $DataExperience->getEndExperince(); ?>"
+                                    <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="endExperince"
+                                           name="endExperince" value="<?php echo $DataExperience->getEndExperince()->toDateString(); ?>"
                                            placeholder="Fecha de Determinacion">
                                 </div>
                             </div>

@@ -111,7 +111,7 @@ use App\Controllers\StudentControllers;?>
                                         <td><?php echo $personC->getDocumentPerson(); ?></td>
                                         <td><?php echo $personC->getNamePerson(); ?></td>
                                         <td><?php echo $personC->getLastNamePerson(); ?></td>
-                                        <td><?php echo $personC->getDateBornPerson(); ?></td>
+                                        <td><?php echo $personC->getDateBornPerson()->translatedFormat('l, j \\de F Y'); ?></td>
                                         <td><?php echo $personC->getRhPerson(); ?></td>
                                         <td><?php echo $personC->getEmailPerson(); ?></td>
                                         <td><?php echo $personC->getPhonePerson(); ?></td>
