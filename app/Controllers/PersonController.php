@@ -131,7 +131,7 @@ class PersonController{
         }
     }
 
-  //Funcion Edit de una persona
+    //Funcion Edit de una persona
     static public function edit(){
         try{
             $arrayPerson = array();
@@ -211,12 +211,9 @@ class PersonController{
         try{
             $ObjPerson = Person::searchForId($_GET['idPerson']);
             $ObjPerson->setStatePerson('Activo');
-
-
-
             if($ObjPerson->update()){
 
-                                    header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
+                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
 
             }else{
                 header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al Guardar");
