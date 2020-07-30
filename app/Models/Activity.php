@@ -234,5 +234,9 @@ class Activity extends BasicModel
         $Activity->Disconnect();
         return $Activity;
     }
+    public function __toString()
+    {
+        return "id: $this->idActivity,codigo: $this->codeActivity, nombre: $this->nameActivity, descripcion: $this->descriptionActivity , tipo de actividad: $this->typeActivity,  resultado: $this->LearningResult_idLearningResult, estado: $this->stateActivity";
+    }
 
 }

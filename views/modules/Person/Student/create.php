@@ -1,4 +1,5 @@
-<?php require ("../../../partials/routes.php");?>
+<?php require ("../../../partials/routes.php");
+use Carbon\Carbon;?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -71,9 +72,8 @@
                             <label for="modality" class="col-sm-2 col-form-label">Modalidad</label>
                             <div class="col-sm-10">
                                 <select id="modality" name="modality" class="custom-select">
-                                    <option value="Bachiler">Bachiller</option>
-                                    <option value="Tecnico">Tecnico</option>
-                                    <option value="Otro">Otro</option>
+                                    <option value="Bachiller Academico">Bachiller Academico</option>
+                                    <option value="Bachiller Tecnico">Bachiller Tecnico</option>
                                 </select>
                             </div>
                         </div>

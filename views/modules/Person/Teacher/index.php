@@ -78,97 +78,97 @@ use App\Controllers\LenguagesControllers; ?>
                     <?php require("../../../partials/optionMenu.php") ;?>
                 </div>
                 <div class="card-body">
-    <div class="row">
-        <div class="col-auto mr-auto"></div>
-        <div class="col-auto">
-            <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
-                <i class="fas fa-plus"></i> Crear Docente
-            </a>
-        </div>
+                    <div class="row">
+                        <div class="col-auto mr-auto"></div>
+                        <div class="col-auto">
+                            <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-plus"></i> Crear Docente
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <table id="tblTeacher" class="datatable table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Documento</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Fecha de Nacimiento</th>
+                                    <th>Rh</th>
+                                    <th>E-mail</th>
+                                    <th>Celular</th>
+                                    <th>Direccion</th>
+                                    <th>Genero</th>
+                                    <th>Usuario</th>
+                                    <th>Password</th>
+                                    <th>Tipo Usuario</th>
+                                    <th>Edad</th>
+                                    <th>Estado</th>
+                                    <th>Foto</th>
+                                    <th>Opciones</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $arrPerson= \App\Controllers\PersonController::getAll();
+                                foreach ($arrPerson as $personC) {
+                                    if ($personC->getTypePerson() == "Docente") {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $personC->getIdPerson(); ?></td>
+                                            <td><?php echo $personC->getDocumentPerson(); ?></td>
+                                            <td><?php echo $personC->getNamePerson(); ?></td>
+                                            <td><?php echo $personC->getLastNamePerson(); ?></td>
+                                            <td><?php echo $personC->getDateBornPerson()->translatedFormat('l, j \\de F Y'); ?></td>
+                                            <td><?php echo $personC->getRhPerson(); ?></td>
+                                            <td><?php echo $personC->getEmailPerson(); ?></td>
+                                            <td><?php echo $personC->getPhonePerson(); ?></td>
+                                            <td><?php echo $personC->getAdressPerson(); ?></td>
+                                            <td><?php echo $personC->getGenerePerson(); ?></td>
+                                            <td><?php echo $personC->getUserPerson(); ?></td>
+                                            <td><?php echo $personC->getPasswordPerson(); ?></td>
+                                            <td><?php echo $personC->getTypePerson(); ?></td>
+                                            <td><?php echo $personC->generateAge($personC->getDateBornPerson()); ?></td>
+                                            <td><?php echo $personC->getStatePerson(); ?></td>
+                                            <td><?php echo $personC->getPhotoPerson(); ?></td>
+                                            <td>
+                                                <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button"
+                                                   data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i
+                                                            class="fa fa-edit"></i></a>
+                                                <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button"
+                                                   data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i
+                                                            class="fa fa-eye"></i></a>
+                                                <?php if ($personC->getStatePerson() != "Activo") {?>
+                                                    <a href="../../../../app/Controllers/PersonController.php?action=active&idPerson=<?php echo $personC->getIdPerson(); ?>"
+                                                       type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                                <?php } else { ?>
+                                                    <a type="button"
+                                                       href="../../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>"
+                                                       data-toggle="tooltip" title="Inactivar"
+                                                       class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                }?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
     </div>
-    <div class="row">
-        <div class="col">
-            <table id="tblTeacher" class="datatable table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Documento</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Rh</th>
-                    <th>E-mail</th>
-                    <th>Celular</th>
-                    <th>Direccion</th>
-                    <th>Genero</th>
-                    <th>Usuario</th>
-                    <th>Password</th>
-                    <th>Tipo Usuario</th>
-                    <th>Edad</th>
-                    <th>Estado</th>
-                    <th>Foto</th>
-                    <th>Opciones</th>
+    <!-- /.content-wrapper -->
 
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $arrPerson= \App\Controllers\PersonController::getAll();
-                foreach ($arrPerson as $personC) {
-                    if ($personC->getTypePerson() == "Docente") {
-                        ?>
-                        <tr>
-                            <td><?php echo $personC->getIdPerson(); ?></td>
-                            <td><?php echo $personC->getDocumentPerson(); ?></td>
-                            <td><?php echo $personC->getNamePerson(); ?></td>
-                            <td><?php echo $personC->getLastNamePerson(); ?></td>
-                            <td><?php echo $personC->getDateBornPerson(); ?></td>
-                            <td><?php echo $personC->getRhPerson(); ?></td>
-                            <td><?php echo $personC->getEmailPerson(); ?></td>
-                            <td><?php echo $personC->getPhonePerson(); ?></td>
-                            <td><?php echo $personC->getAdressPerson(); ?></td>
-                            <td><?php echo $personC->getGenerePerson(); ?></td>
-                            <td><?php echo $personC->getUserPerson(); ?></td>
-                            <td><?php echo $personC->getPasswordPerson(); ?></td>
-                            <td><?php echo $personC->getTypePerson(); ?></td>
-                            <td><?php echo $personC->generateAge($personC->getDateBornPerson()); ?></td>
-                            <td><?php echo $personC->getStatePerson(); ?></td>
-                            <td><?php echo $personC->getPhotoPerson(); ?></td>
-                            <td>
-                                <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button"
-                                   data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i
-                                            class="fa fa-edit"></i></a>
-                                <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button"
-                                   data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i
-                                            class="fa fa-eye"></i></a>
-                                <?php if ($personC->getStatePerson() != "Activo") {?>
-                                    <a href="../../../../app/Controllers/PersonController.php?action=active&idPerson=<?php echo $personC->getIdPerson(); ?>"
-                                     type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
-                                <?php } else { ?>
-                                    <a type="button"
-                                       href="../../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>"
-                                       data-toggle="tooltip" title="Inactivar"
-                                       class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    <?php }
-                }?>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<!-- /.card-body -->
-</div>
-<!-- /.card -->
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-
-<?php require ('../../../partials/footer.php');?>
+    <?php require ('../../../partials/footer.php');?>
 </div>
 <!-- ./wrapper -->
 <?php require ('../../../partials/scripts.php');?>

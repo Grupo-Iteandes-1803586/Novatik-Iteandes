@@ -193,7 +193,6 @@ class  Teacher Extends BasicModel{
     //Update new
     public static function updateNew($idPerson){
         $teacher= new Teacher();
-        var_dump($type);
         $result = $teacher-> getRow("CALL UpdatePerson($idPerson)",array($teacher));
         $teacher->Disconnect();
         return $result;

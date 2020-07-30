@@ -1,12 +1,13 @@
 <?php
 namespace App\Models;
 require_once("BasicModel.php");
+use Carbon\Carbon;
 class Experience extends BasicModel{
     private $idExperience;
     private $institutionExperience;
     private $dedicationExperience;
-    private $startExperience;
-    private $endExperince;
+    private Carbon $startExperience;
+    private Carbon $endExperince;
     private $stateExperience;
 
     /**
@@ -24,8 +25,8 @@ class Experience extends BasicModel{
         $this->idExperience = $experience['idExperience'] ?? null;
         $this->institutionExperience = $experience['institutionExperience'] ?? null;
         $this->dedicationExperience = $experience['dedicationExperience'] ?? null;
-        $this->startExperience = $experience['startExperience'] ?? null;
-        $this->endExperince = $experience['endExperince'] ?? null;
+        $this->startExperience = $experience['startExperience'] ?? new Carbon();
+        $this->endExperince = $experience['endExperince'] ?? new Carbon();
         $this->stateExperience = $experience['stateExperience'] ?? null;
     }
     function __destruct(){
@@ -99,33 +100,33 @@ class Experience extends BasicModel{
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getStartExperience()
+    public function getStartExperience() : Carbon
     {
         return $this->startExperience;
     }
 
     /**
-     * @param date $startExperience
+     * @param Carbon $startExperience
      */
-    public function setStartExperience(date $startExperience): void
+    public function setStartExperience(Carbon $startExperience): void
     {
         $this->startExperience = $startExperience;
     }
 
     /**
-     * @return date
+     * @return Carbon
      */
-    public function getEndExperince()
+    public function getEndExperince(): Carbon
     {
         return $this->endExperince;
     }
 
     /**
-     * @param date $endExperince
+     * @param Carbon $endExperince
      */
-    public function setEndExperince(date $endExperince): void
+    public function setEndExperince(Carbon $endExperince): void
     {
         $this->endExperince = $endExperince;
     }
@@ -135,8 +136,8 @@ class Experience extends BasicModel{
         $result = $this->insertRow( "INSERT INTO iteandes_novatik.experience VALUES (NULL,?, ?,?,?,?)", array(
             $this-> institutionExperience,
             $this-> dedicationExperience,
-            $this-> startExperience,
-            $this-> endExperince,
+            $this-> startExperience->toDateString(), //YYYY-MM-DD,
+            $this-> endExperince->toDateString(), //YYYY-MM-DD,
             $this-> stateExperience
             )
         );
@@ -149,8 +150,8 @@ class Experience extends BasicModel{
         $result = $this->updateRow( "UPDATE iteandes_novatik.experience SET institutionExperience = ?, dedicationExperience = ?, startExperience = ?, endExperince = ?, stateExperience=? WHERE idExperience = ?", array(
                 $this-> institutionExperience,
                 $this-> dedicationExperience,
-                $this-> startExperience,
-                $this-> endExperince,
+                $this-> startExperience->toDateString(), //YYYY-MM-DD,
+                $this-> endExperince->toDateString(), //YYYY-MM-DD,
                 $this->stateExperience,
                 $this->idExperience
 
@@ -176,8 +177,8 @@ class Experience extends BasicModel{
             $experience = new Experience();
             $experience->institutionExperience = $value['institutionExperience'];
             $experience->dedicationExperience = $value['dedicationExperience'];
-            $experience->startExperience= date('Y-m-d',strtotime($value['startExperience'])) ;
-            $experience->endExperince= date('Y-m-d',strtotime($value['endExperince']));
+            $experience->startExperience= Carbon::parse($value['startExperience']) ;
+            $experience->endExperince= Carbon::parse($value['endExperince']);
             $experience->stateExperience= $value['stateExperience'];
         }
         $tmp->Disconnect();
@@ -192,8 +193,8 @@ class Experience extends BasicModel{
             $experiences->idExperience = $getrow['idExperience'];
             $experiences->institutionExperience = $getrow['institutionExperience'];
             $experiences->dedicationExperience = $getrow['dedicationExperience'];
-            $experiences->startExperience = $getrow['startExperience'];
-            $experiences->endExperince= $getrow['endExperince'];
+            $experiences->startExperience = Carbon::parse($getrow['startExperience']);
+            $experiences->endExperince= Carbon::parse($getrow['endExperince']);
             $experiences->stateExperience= $getrow['stateExperience'];
         }
         $experiences->Disconnect();
@@ -208,7 +209,7 @@ class Experience extends BasicModel{
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->institutionExperience ." ".$this->dedicationExperience." ".$this->startExperience ." ".$this->endExperince." ".$this->stateExperience;
+        return $this->institutionExperience ." ".$this->dedicationExperience." ".$this->startExperience->toDateString() ." ".$this->endExperince->toDateTimeString()." ".$this->stateExperience;
     }
 
 }

@@ -1,4 +1,5 @@
-<?php require ("../../partials/routes.php");?>
+<?php require ("../../partials/routes.php");
+use Carbon\Carbon;?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -70,37 +71,37 @@
                         <div class="form-group row">
                             <label for="starDateSemester" class="col-sm-2 col-form-label">Fecha de Inicio del semestre</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="starDateSemester" name="starDateSemester" placeholder="Ingrese la fecha de inicio">
+                                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>"  class="form-control" id="starDateSemester" name="starDateSemester" placeholder="Ingrese la fecha de inicio">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="endDateSemester" class="col-sm-2 col-form-label">Fecha de cierre del semestre</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="endDateSemester" name="endDateSemester" placeholder="Ingrese la fecha de cierre">
+                                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>"  class="form-control" id="endDateSemester" name="endDateSemester" placeholder="Ingrese la fecha de cierre">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="startDate50" class="col-sm-2 col-form-label">Fecha de Inicio del 1er 50</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="startDate50" name="startDate50" placeholder="Ingrese la fecha de inicio">
+                                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>"  class="form-control" id="startDate50" name="startDate50" placeholder="Ingrese la fecha de inicio">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="endDate50" class="col-sm-2 col-form-label">Fecha de cierre del 1er 50</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="endDate50" name="endDate50" placeholder="Ingrese la fecha de inicio">
+                                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>"  class="form-control" id="endDate50" name="endDate50" placeholder="Ingrese la fecha de inicio">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="starDate2Semester" class="col-sm-2 col-form-label">Fecha de Inicio del 2do 50</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="starDate2Semester" name="starDate2Semester" placeholder="Ingrese la fecha de inicio">
+                                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>"  class="form-control" id="starDate2Semester" name="starDate2Semester" placeholder="Ingrese la fecha de inicio">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="endDate2Semester" class="col-sm-2 col-form-label">Fecha de Inicio de cierre del 2do 50</label>
                             <div class="col-sm-10">
-                                <input required type="date" class="form-control" id="endDate2Semester" name="endDate2Semester" placeholder="Ingrese la fecha de inicio">
+                                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>"  class="form-control" id="endDate2Semester" name="endDate2Semester" placeholder="Ingrese la fecha de inicio">
                             </div>
                         </div>
                     </div>

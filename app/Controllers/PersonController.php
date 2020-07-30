@@ -19,6 +19,7 @@ use App\Models\TeacherLenguages;
 use App\Models\TeacherStudies;
 use App\Models\Student;
 use mysql_xdevapi\Exception;
+use Carbon\Carbon;
 
 //Metodo Get para recibir la accion
 if(!empty($_GET['action'])){
@@ -65,7 +66,7 @@ class PersonController{
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
             $arrayPerson['namePerson'] = $_POST['namePerson'];
             $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
-            $arrayPerson['dateBornPerson']= $_POST['dateBornPerson'];
+            $arrayPerson['dateBornPerson']= Carbon::parse($_POST['dateBornPerson']);
             $arrayPerson['rhPerson'] = $_POST['rhPerson'];
             $arrayPerson['emailPerson'] = $_POST['emailPerson'];
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
@@ -78,8 +79,8 @@ class PersonController{
             $arrayExperience = array();
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
-            $arrayExperience['startExperience'] = $_POST['startExperience'];
-            $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['startExperience'] = Carbon::parse($_POST['startExperience']);
+            $arrayExperience['endExperince'] = Carbon::parse($_POST['endExperince']);
             $arrayExperience['stateExperience'] = 'Activo';
             $Experience = new Experience($arrayExperience);
             //Datos de estudio
@@ -115,7 +116,7 @@ class PersonController{
                                     $arrayTeacherLenguages ['stateTeacherLenguages'] = 'Activo';
                                     $TeacherLenguages = new TeacherLenguages($arrayTeacherLenguages);
                                     if ($TeacherLenguages->create()) {
-                                        header("Location: ../../views/modules/Person/Teacher/show.php?respuesta=correcto");
+                                        header("Location: ../../views/modules/Person/Teacher/show.php?idPerson=".$person->getIdPerson()."&respuesta=correcto");
                                     }
                                 }
                             }
@@ -137,7 +138,7 @@ class PersonController{
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
             $arrayPerson['namePerson'] = $_POST['namePerson'];
             $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
-            $arrayPerson['dateBornPerson']= $_POST['dateBornPerson'];
+            $arrayPerson['dateBornPerson']= Carbon::parse($_POST['dateBornPerson']);
             $arrayPerson['rhPerson'] = $_POST['rhPerson'];
             $arrayPerson['emailPerson'] = $_POST['emailPerson'];
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
@@ -153,8 +154,8 @@ class PersonController{
             $arrayExperience['idExperience'] = $_POST['idExperience'];
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
             $arrayExperience['dedicationExperience'] = $_POST['dedicationExperience'];
-            $arrayExperience['startExperience'] = $_POST['startExperience'];
-            $arrayExperience['endExperince'] = $_POST['endExperince'];
+            $arrayExperience['startExperience'] = Carbon::parse($_POST['startExperience']);
+            $arrayExperience['endExperince'] = Carbon::parse($_POST['endExperince']);
             $arrayExperience['stateExperience'] = $person->getStatePerson();
             $Experience = new Experience($arrayExperience);
             //Datos de estudio
@@ -211,46 +212,12 @@ class PersonController{
             $ObjPerson = Person::searchForId($_GET['idPerson']);
             $ObjPerson->setStatePerson('Activo');
 
-            /*$dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$ObjPerson->getIdPerson());
-            foreach ($dataTeacher as $teacherD) {
-                $DataExperience = \App\Controllers\ExperienceControllers::searchForID($teacherD->getExperienceIdExperience()->getIdExperience());
-                $Experience = Experience::searchForId($DataExperience->getIdExperience());
-                $Experience->setStateExperience('Activo');
-                //Teacher Studies
-                $DataTeacherS = \App\Controllers\TeacherStudiesControllers::searchForID($teacherD->getTeacherStudiesIdTeacherStudies()->getIdTeacherStudies());
-                $idT = $teacherD->getIdTeacher();
-                $TeacherStudies = TeacherStudies::searchForId($DataTeacherS->getIdTeacherStudies());
-                $TeacherStudies->setStateTeacherStudies('Activo');
-                $DataT = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$_GET["idPerson"]);
-                $teacher=$DataT[0];
-                $DataTeacherleng = TeacherLenguages::search("SELECT * FROM TeacherLenguages WHERE Teacher_idTeacher =" .$teacher->getIdTeacher());
-                foreach ($DataTeacherleng as $teacherLen){
-                    $lenguajes = $teacherLen->getLenguagesIdLenguages();
-                    $idTeachLen = $teacherLen->getIdTeacherLenguages();
-                    //lenguaje
-                    $DataLenguagues = \App\Controllers\LenguagesControllers::searchForID($lenguajes->getIdLenguages());
-                    $Lenguages = Lenguages::searchForId($DataLenguagues->getIdLenguages());
-                    $Lenguages->setStateLenguague('Activo');
-                    //Teacher
-                    $ObjTeacher = Teacher::searchForId($idT);
-                    $ObjTeacher->setStateTeacher('Activo');
-                    //TeacherLenguagues
-                    $ObjTeacherLenguages = TeacherLenguages::searchForId($idTeachLen);
-                    $ObjTeacherLenguages->setStateTeacherLenguages('Activo');
-                }
-            }*/
+
+
             if($ObjPerson->update()){
-                /*if($Experience->update()) {
-                    if($TeacherStudies->update()) {
-                        if($Lenguages->update()) {
-                            if($ObjTeacher->update()) {
-                                if($ObjTeacherLenguages->update()) {*/
+
                                     header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
-                                /*}
-                            }
-                        }
-                    }
-                }*/
+
             }else{
                 header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al Guardar");
             }
@@ -264,18 +231,6 @@ class PersonController{
         try{
             var_dump($_GET['idPerson']);
             Teacher::updateNew($_GET['idPerson']);
-
-            //$ObjPerson = Person::searchForId($_GET['idPerson']);
-           // $ObjPerson->setStatePerson('Inactivo');
-
-          //  Teacher::updateNew(37);
-            //var_dump($ObjPerson->getIdPerson());
-
-            // if($ObjPerson->update()){
-            //      header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
-            //  }else{
-            //      header("Location: ../../views/modules/Person/Teacher/create.php?respuesta=error&mensaje=Error al Guardar");
-            //  }
         }catch (\Exception $exc){
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
@@ -329,7 +284,7 @@ class PersonController{
                     $arrayStudent['stateStudent'] = 'Activo';
                     $student = new Student($arrayStudent);
                     if($student->create()) {
-                        header("Location: ../../views/modules/Person/Student/show.php?respuesta=correcto");
+                        header("Location: ../../views/modules/Person/Student/show.php?idPerson=".$person->getIdPerson()."&respuesta=correcto");
                     }
                 }
             }else{
@@ -364,16 +319,16 @@ class PersonController{
                 $arrayStudent['gradeYear'] = $_POST['gradeYear'];
                 $arrayStudent['modality'] = $_POST['modality'];
                 $arrayStudent['Institution'] = $_POST['Institution'];
-                $arrayStudent['Person_idPerson'] = Person::searchForId($_POST['Person_idPerson']);
-                $arrayStudent['stateStudent'] = $_POST['stateStudent'];
+                $arrayStudent['Person_idPerson'] = $person;
+                $arrayStudent['stateStudent'] =$person->getStatePerson();
                 $arrayStudent['idStudent'] = $_POST['idStudent'];
                 $student = new Student($arrayStudent);
                 if ($student->update()) {
-                    header("Location: ../../views/modules/Person/Student/show.php?respuesta=correcto");
+                    header("Location: ../../views/modules/Person/Student/show.php?idPerson=".$person->getIdPerson()."&respuesta=correcto");
                 }
             }
         }catch (Exception $e){
-            header("Location: ../../views/modules/TrainningProgram/edit.php?respuesta=error&mensaje" . $e-> getMessage());
+            header("Location: ../../views/modules/Person/Student/edit.php?respuesta=error&mensaje" . $e-> getMessage());
         }
     }
 

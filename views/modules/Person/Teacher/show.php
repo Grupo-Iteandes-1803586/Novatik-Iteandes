@@ -89,28 +89,29 @@ use App\Controllers\LenguagesControllers; ?>
                                 <p class="text-muted"><?=$DataPerson->getDocumentPerson() ?></p>
                             <hr>
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Rh</strong>
-                                <p class="text-muted"><?= $DataPerson->getRhPerson() ?></p>
+                                <p class="text-muted"><?= $DataPerson->getRhPerson(); ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Direccion</strong>
-                                <p class="text-muted"><?= $DataPerson->getAdressPerson() ?></p>
+                                <p class="text-muted"><?= $DataPerson->getAdressPerson() ;?></p>
                             <hr>
                             <strong><i class="far fa-file-alt mr-1"></i> Estado y Rol</strong>
                                 <p class="text-muted"><?= $DataPerson->getStatePerson()." - ".$DataPerson->getTypePerson() ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Email</strong>
-                                <p class="text-muted"><?= $DataPerson->getEmailPerson() ?></p>
+                                <p class="text-muted"><?= $DataPerson->getEmailPerson(); ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Fecha de Nacimiento</strong>
-                                <p class="text-muted"><?= $DataPerson->getDateBornPerson() ?></p>
+                                <p class="text-muted"><?= $DataPerson->getDateBornPerson()->translatedFormat('l, j \\de F Y') ?></p>
+                                <p class="text-muted">Tienes <?= $DataPerson->getDateBornPerson()->diffInYears(); ?> Años</p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Celular</strong>
-                                <p class="text-muted"><?= $DataPerson->getPhonePerson() ?></p>
+                                <p class="text-muted"><?= $DataPerson->getPhonePerson() ;?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Genero</strong>
-                                <p class="text-muted"><?= $DataPerson->getGenerePerson() ?></p>
+                                <p class="text-muted"><?= $DataPerson->getGenerePerson(); ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?= $DataPerson->getStatePerson() ?></p>
+                            <p class="text-muted"><?= $DataPerson->getStatePerson(); ?></p>
                             <hr>
                             </p>
 
@@ -161,27 +162,27 @@ use App\Controllers\LenguagesControllers; ?>
                             </div>
                             <div class="card-body">
                                 <strong><i class="fas fa-user mr-1"></i> #</strong>
-                                <p class="text-muted"><?=$DataExperience->getIdExperience()?></p>
+                                <p class="text-muted"><?=$DataExperience->getIdExperience();?></p>
                                 <hr>
                                 <p>
                                         <strong><i class="fas fa-book mr-1"></i> Instituto</strong>
                                 <p class="text-muted">
-                                    <?= $DataExperience->getInstitutionExperience()?>
+                                    <?= $DataExperience->getInstitutionExperience();?>
                                 <hr>
                                 <strong><i class="fas fa-user mr-1"></i>Dedicacion</strong>
-                                <p class="text-muted"><?=$DataExperience->getDedicationExperience()?></p>
+                                <p class="text-muted"><?=$DataExperience->getDedicationExperience();?></p>
                                 <hr>
                                 </p>
                                 <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
-                                <p class="text-muted"><?=$DataExperience->getStartExperience()?></p>
+                                <p class="text-muted"><?=$DataExperience->getStartExperience()->translatedFormat('l, j \\de F Y');?></p>
                                 <hr>
                                 </p>
                                 <strong><i class="fas fa-user mr-1"></i> Fecha fin</strong>
-                                <p class="text-muted"><?=$DataExperience->getEndExperince()?></p>
+                                <p class="text-muted"><?=$DataExperience->getEndExperince()->translatedFormat('l, j \\de F Y');?></p>
                                 <hr>
                                 </p>
                                 <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                                <p class="text-muted"><?=$DataExperience->getStateExperience()?></p>
+                                <p class="text-muted"><?=$DataExperience->getStateExperience();?></p>
                                 <hr>
                                 </p>
                             </div>

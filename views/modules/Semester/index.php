@@ -97,12 +97,12 @@ use App\Controllers\SemesterControllers;?>
                                         <td><?php echo $semestre->getIdSemester(); ?></td>
                                         <td><?php echo $semestre->getNameSemester(); ?></td>
                                         <td><?php echo $semestre->getDescriptionSemester(); ?></td>
-                                        <td><?php echo $semestre->getStarDateSemester(); ?></td>
-                                        <td><?php echo $semestre->getEndDateSemester(); ?></td>
-                                        <td><?php echo $semestre->getStartDate50(); ?></td>
-                                        <td><?php echo $semestre->getEndDate50(); ?></td>
-                                        <td><?php echo $semestre->getStarDate2Semester(); ?></td>
-                                        <td><?php echo $semestre->getEndDate2Semester(); ?></td>
+                                        <td><?php echo $semestre->getStarDateSemester()->translatedFormat('l, j \\de F Y'); ?></td>
+                                        <td><?php echo $semestre->getEndDateSemester()->translatedFormat('l, j \\de F Y'); ?></td>
+                                        <td><?php echo $semestre->getStartDate50()->translatedFormat('l, j \\de F Y'); ?></td>
+                                        <td><?php echo $semestre->getEndDate50()->translatedFormat('l, j \\de F Y'); ?></td>
+                                        <td><?php echo $semestre->getStarDate2Semester()->translatedFormat('l, j \\de F Y'); ?></td>
+                                        <td><?php echo $semestre->getEndDate2Semester()->translatedFormat('l, j \\de F Y'); ?></td>
                                         <td><?php echo $semestre->getStatuSemester(); ?></td>
                                         <td>
                                             <a href="edit.php?idSemester=<?php echo $semestre->getIdSemester(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
