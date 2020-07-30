@@ -191,9 +191,9 @@ class  Teacher Extends BasicModel{
     }
 
     //Update new
-    public static function updateNew($idPerson){
+    public static function updateNew($idPerson, $typeState){
         $teacher= new Teacher();
-        $result = $teacher-> getRow("CALL UpdatePerson($idPerson)",array($teacher));
+        $result = $teacher-> insertRow("CALL UpdatePerson(?,?)",array($idPerson, $typeState));
         $teacher->Disconnect();
         return $result;
     }

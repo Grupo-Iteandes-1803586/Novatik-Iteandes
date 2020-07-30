@@ -1,4 +1,5 @@
-<?php require ("../../../partials/routes.php");
+<?php
+require ("../../../partials/routes.php");
 use Carbon\Carbon;?>
 
 <!doctype html>
@@ -57,11 +58,11 @@ use Carbon\Carbon;?>
                     <form class="form-horizontal" method="post" id="frmCreatePerson" name="frmCreatePerson" action="../../../../app/Controllers/PersonController.php?action=create">
 
                     <?php
-                    require ("../formPerson.php");
+                    require_once ("../formPerson.php");
                         //Creacion de la tabla estudios del docente agragacion del la tabla lenguajes
                     require ("formTeacherStudies.php");
                         /*Creacion de la tabla Experiencia*/
-                    require ("formExperiience.php");
+                    require_once ("formExperiience.php");
                         /*Tabla de Lenguajes*/
                     require ("formLenguagues.php");
                     ?>

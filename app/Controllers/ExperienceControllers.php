@@ -19,10 +19,6 @@ class ExperienceControllers
             ExperienceControllers::searchForID($_REQUEST['$idExperience']);
         } else if ($action == "searchAll") {
             ExperienceControllers::getAll();
-        }else if($action == "activate"){
-            ExperienceControllers::activate();
-        }else if($action =="inactive"){
-            ExperienceControllers::inactive();
         }
     }
     static public function create()
@@ -67,29 +63,6 @@ class ExperienceControllers
             return Experience::searchForId($idExperience);
         } catch (\Exception $e) {
             var_dump($e);
-        }
-    }
-    static public function activate (){
-        try {
-            $Experience = Experience::searchForId($_GET['idExperience']);
-            $Experience->setStateExperience("Activo");
-            if($Experience->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php");
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
-        } catch (\Exception $e) {
-            //var_dump($e);
-            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
-        }
-    }
-
-    static public function inactive (){
-        try {
-
-        } catch (\Exception $e) {
-            //var_dump($e);
-            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
         }
     }
 

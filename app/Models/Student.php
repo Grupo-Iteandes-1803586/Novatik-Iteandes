@@ -212,6 +212,13 @@ class Student extends BasicModel{
     {
         return Student::search("SELECT * FROM iteandes_novatik.Student");
     }
+    //updateStudent
+    public static function updateStudent($idPerson, $typeState){
+        $student= new Student();
+        $result = $student-> insertRow("CALL UpdateStudent(?,?)",array($idPerson, $typeState));
+        $student->Disconnect();
+        return $result;
+    }
     //Metodo to string o cadena de texto
     public function __toString()
     {
