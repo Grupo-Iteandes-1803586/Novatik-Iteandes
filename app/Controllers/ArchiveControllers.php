@@ -4,7 +4,7 @@ require_once (__DIR__.'/../Models/Archive.php');
 require_once (__DIR__.'/../Models/Activity.php');
 
 
-use App\Models\Teacher;
+use App\Models\Archive;
 use App\Models\Activity;
 
 if(!empty($_GET['action'])){
