@@ -131,7 +131,7 @@ class PersonController{
         }
     }
 
-  //Funcion Edit de una persona
+    //Funcion Edit de una persona
     static public function edit(){
         try{
             $arrayPerson = array();
@@ -209,18 +209,8 @@ class PersonController{
     //Funcion activo de la Persona
     static public function active(){
         try{
-            $ObjPerson = Person::searchForId($_GET['idPerson']);
-            $ObjPerson->setStatePerson('Activo');
-
-
-
-            if($ObjPerson->update()){
-
-                                    header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=correcto");
-
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al Guardar");
-            }
+            Teacher::updateNew($_GET['idPerson'],"Activo");
+            header("Location: ../../views/modules/Person/Teacher/index.php");
         }catch (\Exception $exc){
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
@@ -229,8 +219,8 @@ class PersonController{
     //Funcion inactivo de la Persona
     static public function inactive(){
         try{
-            var_dump($_GET['idPerson']);
-            Teacher::updateNew($_GET['idPerson']);
+            Teacher::updateNew($_GET['idPerson'],"Inactivo");
+            header("Location: ../../views/modules/Person/Teacher/index.php");
         }catch (\Exception $exc){
             header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
@@ -335,13 +325,8 @@ class PersonController{
     //Funcion activo de la Persona
     static public function activeStudent(){
         try{
-            $ObjStudent = Student::searchForId($_GET['idStudent']);
-            $ObjStudent->setStateStudent('Activo');
-            if($ObjStudent->update()){
-                header("Location: ../../views/modules/Person/Student/index.php?respuesta=correcto");
-            }else{
-                header("Location: ../../views/modules/Person/Student/index.php?respuesta=error&mensaje=Error al Guardar");
-            }
+            Student::updateStudent($_GET['idPerson'],"Activo");
+            header("Location: ../../views/modules/Person/Student/index.php");
         }catch (\Exception $exc){
             header("Location: ../../views/modules/Person/Student/index.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
@@ -350,15 +335,10 @@ class PersonController{
     //Funcion inactivo de la Persona
     static public function inactiveStudent(){
         try{
-            $ObjStudent = Student::searchForId($_GET['idStudent']);
-            $ObjStudent->setStateStudent('Inactivo');
-            if($ObjStudent->update()){
-                header("Location: ../../views/modules/Person/Student/index.php?respuesta=correcto");
-            }else{
-                header("Location: ../../views/modules/Person/Student/create.php?respuesta=error&mensaje=Error al Guardar");
-            }
+            Student::updateStudent($_GET['idPerson'],"Inactivo");
+            header("Location: ../../views/modules/Person/Student/index.php");
         }catch (\Exception $exc){
-            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje" . $exc-> getMessage());
+            header("Location: ../../views/modules/Person/Student/index.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
     }
     //Funcion obtener por Id de la persona

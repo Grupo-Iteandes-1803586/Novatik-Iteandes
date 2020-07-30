@@ -18,10 +18,6 @@ class TeacherStudiesControllers
             TeacherStudiesControllers::searchForID($_REQUEST['idTeacherStudies']);
         } else if ($action == "searchAll") {
             TeacherStudiesControllers::getAll();
-        }else if($action == "active"){
-            TeacherStudiesControllers::activate();
-        }else if($action =="inactive"){
-            TeacherStudiesControllers::inactive();
         }
     }
 
@@ -57,35 +53,6 @@ class TeacherStudiesControllers
         } catch (\Exception $e) {
             //var_dump($e);
             header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje=".$e->getMessage());
-        }
-    }
-    static public function activate (){
-        try {
-            $TeacherStudies = TeacherStudies::searchForId($_GET['idTeacherStudies']);
-            $TeacherStudies->setStateTeacherStudies("Activo");
-            if($TeacherStudies->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php");
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
-        } catch (\Exception $e) {
-            //var_dump($e);
-            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
-        }
-    }
-
-    static public function inactive (){
-        try {
-           /* $Lenguages = TeacherStudies::searchForId($_GET['idTeacherStudies']);
-            $Lenguages->setStateTeacherStudies("Inactivo");
-            if($Lenguages->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php");
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }*/
-        } catch (\Exception $e) {
-            //var_dump($e);
-            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
         }
     }
     static public function searchForID ($idTeacherStudies){

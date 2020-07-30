@@ -106,32 +106,32 @@ use App\Controllers\StudentControllers;?>
                                 foreach ($arrPerson as $personC){
                                     if($personC->getTypePerson() == "Estudiante"){
                                         ?>
-                                    <tr>
-                                        <td><?php echo $personC->getIdPerson(); ?></td>
-                                        <td><?php echo $personC->getDocumentPerson(); ?></td>
-                                        <td><?php echo $personC->getNamePerson(); ?></td>
-                                        <td><?php echo $personC->getLastNamePerson(); ?></td>
-                                        <td><?php echo $personC->getDateBornPerson()->translatedFormat('l, j \\de F Y'); ?></td>
-                                        <td><?php echo $personC->getRhPerson(); ?></td>
-                                        <td><?php echo $personC->getEmailPerson(); ?></td>
-                                        <td><?php echo $personC->getPhonePerson(); ?></td>
-                                        <td><?php echo $personC->getAdressPerson(); ?></td>
-                                        <td><?php echo $personC->getGenerePerson(); ?></td>
-                                        <td><?php echo $personC->getUserPerson(); ?></td>
-                                        <td><?php echo $personC->getPasswordPerson(); ?></td>
-                                        <td><?php echo $personC->getTypePerson(); ?></td>
-                                        <td><?php echo $personC->generateAge($personC->getDateBornPerson());?></td>
-                                        <td><?php echo $personC->getStatePerson(); ?></td>
-                                        <td><?php echo $personC->getPhotoPerson(); ?></td> <td>
-                                            <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                                            <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
-                                            <?php if ($personC->getStatePerson() != "Activo"){ ?>
-                                                <a href="../../../../app/Controllers/PersonController.php?action=active&idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
-                                            <?php }else{ ?>
-                                                <a type="button" href="../../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
-                                            <?php } ?>
-                                        </td></tr>
-                                <?php } ?>
+                                        <tr>
+                                            <td><?php echo $personC->getIdPerson(); ?></td>
+                                            <td><?php echo $personC->getDocumentPerson(); ?></td>
+                                            <td><?php echo $personC->getNamePerson(); ?></td>
+                                            <td><?php echo $personC->getLastNamePerson(); ?></td>
+                                            <td><?php echo $personC->getDateBornPerson()->translatedFormat('l, j \\de F Y'); ?></td>
+                                            <td><?php echo $personC->getRhPerson(); ?></td>
+                                            <td><?php echo $personC->getEmailPerson(); ?></td>
+                                            <td><?php echo $personC->getPhonePerson(); ?></td>
+                                            <td><?php echo $personC->getAdressPerson(); ?></td>
+                                            <td><?php echo $personC->getGenerePerson(); ?></td>
+                                            <td><?php echo $personC->getUserPerson(); ?></td>
+                                            <td><?php echo $personC->getPasswordPerson(); ?></td>
+                                            <td><?php echo $personC->getTypePerson(); ?></td>
+                                            <td><?php echo $personC->generateAge($personC->getDateBornPerson());?></td>
+                                            <td><?php echo $personC->getStatePerson(); ?></td>
+                                            <td><?php echo $personC->getPhotoPerson(); ?></td> <td>
+                                                <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                                <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                                <?php if ($personC->getStatePerson() != "Activo"){ ?>
+                                                    <a href="../../../../app/Controllers/PersonController.php?action=activeStudent&idPerson=<?php echo $personC->getIdPerson(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                                <?php }else{ ?>
+                                                    <a type="button" href="../../../../app/Controllers/PersonController.php?action=inactiveStudent&idPerson=<?php echo $personC->getIdPerson(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                                <?php } ?>
+                                            </td></tr>
+                                    <?php } ?>
                                 <?php } ?>
 
 
