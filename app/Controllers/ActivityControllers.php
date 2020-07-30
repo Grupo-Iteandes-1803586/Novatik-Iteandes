@@ -43,11 +43,21 @@ class ActivityControllers
             $Activity = new Activity($arrayActivity);
 
             if ($Activity->create()) {
-                header("Location: ../../views/modules/Note/create.php?idActivity=" . $Activity->getIdActivity());
+                //archive
+                $arrayArchive['nameArchive'] = $_POST['nameArchive'];
+                $arrayArchive['descriptionArchive'] = $_POST['descriptionArchive'];
+                $arrayArchive['rutaArchive'] = $_POST['rutaArchive'];
+                $arrayArchive['Activity_idActivity'] =$Activity;
+                $arrayArchive['stateArchive'] = 'Activo';
+                $Archive = new Archive($arrayArchive);
+
+                if ($Archive->create()) {
+                    header("Location: ../../views/modules/Activity/show.php?idActivity=" . $Activity->getIdActivity());
+                }
             }
         } catch (Exception $e) {
-            //GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/modules/Note/create.php?respuesta=error&mensaje=" . $e->getMessage());
+            GeneralFunctions::console( $e, 'error', 'errorStack');
+            header("Location: ../../views/modules/Activity/create.php?respuesta=error&mensaje=" . $e->getMessage());
         }
     }
     //Editar una Activity

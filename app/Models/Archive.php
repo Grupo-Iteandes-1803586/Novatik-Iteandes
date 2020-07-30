@@ -119,7 +119,7 @@ class Archive extends BasicModel
     /**
      * @return int
      */
-    public function getActivityIdActivity(): int
+    public function getActivityIdActivity(): Activity
     {
         return $this->Activity_idActivity;
     }
