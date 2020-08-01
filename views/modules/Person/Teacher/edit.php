@@ -84,292 +84,292 @@ use Carbon\Carbon;?>
                     <?php
                     $DataPersonT= \App\Controllers\PersonController::searchForID($_GET["idPerson"]);
                     if(!empty($DataPersonT)){
-                    ?>
+                        ?>
                         <!-- form start -->
-                <form class="form-horizontal" method="post" id="frmEditPersonT" name="frmEditPersonT"
-                      action="../../../../app/Controllers/PersonController.php?action=edit">
-                    <input id="idPerson" name="idPerson" value="<?php echo $DataPersonT->getIdPerson(); ?>" hidden
-                           required="required" type="text">
-                    <div class="card-body">
-                        <!--Datos Basicos-->
-                        <li class="list-Dates"><i class="fas fa-address-book" id="icon-iconos"></i>Datos Basicos</li>
-                        <hr>
-                        <!--Documento del Docente-->
-                        <div class="form-group row">
-                            <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>
-                            <div class="col-sm-10">
-                                <input required type="number" minlength="6" maxlength="11" class="form-control"
-                                       id="documentPerson" name="documentPerson"
-                                       value="<?= $DataPersonT->getDocumentPerson(); ?>"
-                                       placeholder="Ingrese su documento">
-                            </div>
-                        </div>
-                        <!--Nombre del docente-->
-                        <div class="form-group row">
-                            <label for="namePerson" class="col-sm-2 col-form-label">Nombres</label>
-                            <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="namePerson" name="namePerson"
-                                       value="<?= $DataPersonT->getNamePerson(); ?>" placeholder="Ingresa los nombres">
-                            </div>
-                        </div>
-                        <!--Apellidos del docente-->
-                        <div class="form-group row">
-                            <label for="lastNamePerson" class="col-sm-2 col-form-label">Apellidos</label>
-                            <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="lastNamePerson"
-                                       name="lastNamePerson" value="<?= $DataPersonT->getLastNamePerson(); ?>"
-                                       placeholder="Ingresa los Apellidos">
-                            </div>
-                        </div>
-                        <!--RH del docente-->
-                        <div class="form-group row">
-                            <label for="rhPerson" class=" col-sm-2 col-form-label">RH</label>
-                            <div class="col-sm-10">
-                                <select id="rhPerson" name="rhPerson" class="custom-select">
-                                    <option <?= ($DataPersonT->getRhPerson() == "A+") ? "selected" : ""; ?>
-                                            value="A+">A+
-                                    </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "A-") ? "selected" : ""; ?>
-                                            value="A-">A-
-                                    </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "B+") ? "selected" : ""; ?>
-                                            value="B+">B+
-                                    </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "B-") ? "selected" : ""; ?>
-                                            value="B-">B-
-                                    </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "O+") ? "selected" : ""; ?>
-                                            value="O+">O+
-                                    </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "O-") ? "selected" : ""; ?>
-                                            value="O-">O-
-                                    </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "AB+") ? "selected" : ""; ?>
-                                            value="AB+">AB+
-                                    </option>
-                                    <option <?= ($DataPersonT->getRhPerson() == "AB-") ? "selected" : ""; ?>
-                                            value="AB-">AB-
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <!--Telefono del Docente-->
-                        <div class="form-group row">
-                            <label for="phonePerson" class="col-sm-2 col-form-label">Telefono</label>
-                            <div class="col-sm-10">
-                                <input required type="number" minlength="6" maxlength="11" class="form-control"
-                                       id="phonePerson" name="phonePerson"
-                                       value="<?= $DataPersonT->getPhonePerson(); ?>" placeholder="Ingrese su telefono">
-                            </div>
-                        </div>
-                        <!--Direccion del Docente-->
-                        <div class="form-group row">
-                            <label for="adressPerson" class="col-sm-2 col-form-label">Direccion</label>
-                            <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="adressPerson" name="adressPerson"
-                                       value="<?= $DataPersonT->getAdressPerson(); ?>"
-                                       placeholder="Ingrese su direccion">
-                            </div>
-                        </div>
-                        <!--Fecha de nacimiento del Docente-->
-                        <div class="form-group row">
-                            <label for="dateBornPerson" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
-                            <div class="col-sm-10">
-                                <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="dateBornPerson"
-                                       name="dateBornPerson" value="<?= $DataPersonT->getDateBornPerson()->toDateString(); ?>"
-                                       placeholder="Ingrese su Fecha de Nacimiento">
-                            </div>
-                        </div>
-                        <!--Correo Electronico del Docente-->
-                        <div class="form-group row">
-                            <label for="emailPerson" class="col-sm-2 col-form-label">Correo Electronico</label>
-                            <div class="col-sm-10">
-                                <input required type="email" class="form-control" id="emailPerson" name="emailPerson"
-                                       value="<?= $DataPersonT->getEmailPerson(); ?>"
-                                       placeholder="Ingrese su Correo Electronico">
-                            </div>
-                        </div>
-                        <!--Genero del Docente-->
-                        <div class="form-group row">
-                            <label for="generePerson" class=" col-sm-2 col-form-label">Genero</label>
-                            <div class="col-sm-10">
-                                <select id="generePerson" name="generePerson" class="custom-select">
-                                    <option <?= ($DataPersonT->getGenerePerson() == "Masculino") ? "selected" : ""; ?>
-                                            value="Masculino">Masculino
-                                    </option>
-                                    <option <?= ($DataPersonT->getGenerePerson() == "Femenino") ? "selected" : ""; ?>
-                                            value="Femenino">Femenino
-                                    </option>
-                                    <option <?= ($DataPersonT->getGenerePerson() == "Otro") ? "selected" : ""; ?>
-                                            value="Otro">Otro
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <!--Correo Electronico del Docente-->
-                        <div class="form-group row">
-                            <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
-                            <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="photoPerson" name="photoPerson"
-                                       value="<?= $DataPersonT->getPhotoPerson(); ?>" placeholder="Ingrese su Foto">
-                            </div>
-                        </div>
-                        <!--Tipo Persona-->
-                        <div class="form-group row">
-                            <label for="typePerson" class="col-sm-2 col-form-label">Tipo</label>
-                            <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="typePerson" name="typePerson"
-                                       value="<?= $DataPersonT->getTypePerson(); ?>" placeholder="Tipo Persona">
-                            </div>
-                        </div>
-                        <!--Estado de la persona-->
-                        <div class="form-group row">
-                            <label for="statePerson" class="col-sm-2 col-form-label">Estado</label>
-                            <div class="col-sm-10">
-                                <select id="statePerson" name="statePerson" class="custom-select">
-                                    <option <?= ($DataPersonT->getStatePerson() == "Activo") ? "selected" : ""; ?>
-                                            value="Activo">Activo
-                                    </option>
-                                    <option <?= ($DataPersonT->getStatePerson() == "Inactivo") ? "selected" : ""; ?>
-                                            value="Inactivo">Inactivo
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- _______________________________Experiencia________________________-->
-                        <?php
-                        $dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" . $_GET["idPerson"]);
-                        foreach ($dataTeacher as $teacherD) {
-                            $DataExperience = \App\Controllers\ExperienceControllers::searchForID($teacherD->getExperienceIdExperience()->getIdExperience());
-                            $idT = $teacherD->getIdTeacher();
-                        }
-                        if (!empty($DataExperience)) {
-                            ?>
-                            <li class="list-Dates"><i class="fas fa-address-book" id="icon-iconos"></i>Experiencia</li>
-                            <hr>
-                            <input id="idTeacher" name="idTeacher"
-                                   value="<?php echo $idT; ?>" hidden required="required"
-                                   type="text">
-                            <!--DataTeacher-->
-                            <input id="idExperience" name="idExperience"
-                                   value="<?php echo $DataExperience->getIdExperience(); ?>" hidden required="required"
-                                   type="text">
-                            <!--Ultimo Lugar de Trabajo-->
-                            <div class="form-group row">
-                                <label for="institutionExperience" class="col-sm-2 col-form-label">Ultimo Lugar de
-                                    Trabajo</label>
-                                <div class="col-sm-10">
-                                    <input required type="text" class="form-control" id="institutionExperience"
-                                           name="institutionExperience"
-                                           value="<?php echo $DataExperience->getInstitutionExperience(); ?>"
-                                           placeholder="Ultimo Lugar de Trabajo">
-                                </div>
-                            </div>
-                            <!--Ocupacion Laboral-->
-                            <div class="form-group row">
-                                <label for="dedicationExperience" class="col-sm-2 col-form-label">Ocupacion
-                                    Laboral</label>
-                                <div class="col-sm-10">
-                                    <input required type="text" class="form-control" id="dedicationExperience"
-                                           name="dedicationExperience"
-                                           value="<?php echo $DataExperience->getDedicationExperience(); ?>"
-                                           placeholder="Ocupacion Laboral">
-                                </div>
-                            </div>
-
-                            <!--Fecha de Inicio de Contrato-->
-                            <div class="form-group row">
-                                <label for="startExperience" class="col-sm-2 col-form-label">Fecha de Inicio de
-                                    Contrato</label>
-                                <div class="col-sm-10">
-                                    <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="startExperience"
-                                           name="startExperience"
-                                           value="<?php echo $DataExperience->getStartExperience()->toDateString(); ?>"
-                                           placeholder="Fecha de Inicio de Contrato">
-                                </div>
-                            </div>
-                            <!--Fecha de Determinacion  de Contrato-->
-                            <div class="form-group row">
-                                <label for="endExperince" class="col-sm-2 col-form-label">Fecha de Determinacion</label>
-                                <div class="col-sm-10">
-                                    <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="endExperince"
-                                           name="endExperince" value="<?php echo $DataExperience->getEndExperince()->toDateString(); ?>"
-                                           placeholder="Fecha de Determinacion">
-                                </div>
-                            </div>
-                        <?php } ?>
-                        <!-- _____________________Datos de Estudio___________________________________________-->
-
-                        <?php
-                        $dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" . $_GET["idPerson"]);
-                        foreach ($dataTeacher as $teacherD) {
-                            $DataTeacherS = \App\Controllers\TeacherStudiesControllers::searchForID($teacherD->getTeacherStudiesIdTeacherStudies()->getIdTeacherStudies());
-                        }
-                        if (!empty($DataTeacherS)) {
-                            ?>
-                            <li class="list-Dates"><i class="fas fa-book mr-1" id="icon-iconos"></i>Datos de Estudio
-                            </li>
-                            <hr>
-                            <input id="idTeacherStudies" name="idTeacherStudies"
-                                   value="<?php echo $DataTeacherS->getIdTeacherStudies(); ?>" hidden
+                        <form class="form-horizontal" method="post" id="frmEditPersonT" name="frmEditPersonT"
+                              action="../../../../app/Controllers/PersonController.php?action=edit">
+                            <input id="idPerson" name="idPerson" value="<?php echo $DataPersonT->getIdPerson(); ?>" hidden
                                    required="required" type="text">
-                            <!--Titulo Universitario-->
-                            <div class="form-group row">
-                                <label for="titleTeacherStudies" class="col-sm-2 col-form-label">Titulo
-                                    Universitario</label>
-                                <div class="col-sm-10">
-                                    <input required type="text" minlength="6" class="form-control"
-                                           id="titleTeacherStudies" name="titleTeacherStudies"
-                                           value="<?php echo $DataTeacherS->getTitleTeacherStudies(); ?>"
-                                           placeholder="Titulo Universitario">
+                            <div class="card-body">
+                                <!--Datos Basicos-->
+                                <li class="list-Dates"><i class="fas fa-address-book" id="icon-iconos"></i>Datos Basicos</li>
+                                <hr>
+                                <!--Documento del Docente-->
+                                <div class="form-group row">
+                                    <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>
+                                    <div class="col-sm-10">
+                                        <input required type="number" minlength="6" maxlength="11" class="form-control"
+                                               id="documentPerson" name="documentPerson"
+                                               value="<?= $DataPersonT->getDocumentPerson(); ?>"
+                                               placeholder="Ingrese su documento">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <!--Año de Graduacion-->
-                            <div class="form-group row">
-                                <label for="yearStudyTeacher" class="col-sm-2 col-form-label">Año de Graduacion</label>
-                                <div class="col-sm-10">
-                                    <input required type="number" class="form-control" id="yearStudyTeacher"
-                                           name="yearStudyTeacher"
-                                           value="<?php echo $DataTeacherS->getYearStudyTeacher(); ?>"
-                                           placeholder="Año de Graduacion">
+                                <!--Nombre del docente-->
+                                <div class="form-group row">
+                                    <label for="namePerson" class="col-sm-2 col-form-label">Nombres</label>
+                                    <div class="col-sm-10">
+                                        <input required type="text" class="form-control" id="namePerson" name="namePerson"
+                                               value="<?= $DataPersonT->getNamePerson(); ?>" placeholder="Ingresa los nombres">
+                                    </div>
                                 </div>
-                            </div>
+                                <!--Apellidos del docente-->
+                                <div class="form-group row">
+                                    <label for="lastNamePerson" class="col-sm-2 col-form-label">Apellidos</label>
+                                    <div class="col-sm-10">
+                                        <input required type="text" class="form-control" id="lastNamePerson"
+                                               name="lastNamePerson" value="<?= $DataPersonT->getLastNamePerson(); ?>"
+                                               placeholder="Ingresa los Apellidos">
+                                    </div>
+                                </div>
+                                <!--RH del docente-->
+                                <div class="form-group row">
+                                    <label for="rhPerson" class=" col-sm-2 col-form-label">RH</label>
+                                    <div class="col-sm-10">
+                                        <select id="rhPerson" name="rhPerson" class="custom-select">
+                                            <option <?= ($DataPersonT->getRhPerson() == "A+") ? "selected" : ""; ?>
+                                                    value="A+">A+
+                                            </option>
+                                            <option <?= ($DataPersonT->getRhPerson() == "A-") ? "selected" : ""; ?>
+                                                    value="A-">A-
+                                            </option>
+                                            <option <?= ($DataPersonT->getRhPerson() == "B+") ? "selected" : ""; ?>
+                                                    value="B+">B+
+                                            </option>
+                                            <option <?= ($DataPersonT->getRhPerson() == "B-") ? "selected" : ""; ?>
+                                                    value="B-">B-
+                                            </option>
+                                            <option <?= ($DataPersonT->getRhPerson() == "O+") ? "selected" : ""; ?>
+                                                    value="O+">O+
+                                            </option>
+                                            <option <?= ($DataPersonT->getRhPerson() == "O-") ? "selected" : ""; ?>
+                                                    value="O-">O-
+                                            </option>
+                                            <option <?= ($DataPersonT->getRhPerson() == "AB+") ? "selected" : ""; ?>
+                                                    value="AB+">AB+
+                                            </option>
+                                            <option <?= ($DataPersonT->getRhPerson() == "AB-") ? "selected" : ""; ?>
+                                                    value="AB-">AB-
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--Telefono del Docente-->
+                                <div class="form-group row">
+                                    <label for="phonePerson" class="col-sm-2 col-form-label">Telefono</label>
+                                    <div class="col-sm-10">
+                                        <input required type="number" minlength="6" maxlength="11" class="form-control"
+                                               id="phonePerson" name="phonePerson"
+                                               value="<?= $DataPersonT->getPhonePerson(); ?>" placeholder="Ingrese su telefono">
+                                    </div>
+                                </div>
+                                <!--Direccion del Docente-->
+                                <div class="form-group row">
+                                    <label for="adressPerson" class="col-sm-2 col-form-label">Direccion</label>
+                                    <div class="col-sm-10">
+                                        <input required type="text" class="form-control" id="adressPerson" name="adressPerson"
+                                               value="<?= $DataPersonT->getAdressPerson(); ?>"
+                                               placeholder="Ingrese su direccion">
+                                    </div>
+                                </div>
+                                <!--Fecha de nacimiento del Docente-->
+                                <div class="form-group row">
+                                    <label for="dateBornPerson" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                                    <div class="col-sm-10">
+                                        <input required type="date" max="<?= Carbon::now()->subYear(12)->format('Y-m-d') ?>" class="form-control" id="dateBornPerson"
+                                               name="dateBornPerson" value="<?= $DataPersonT->getDateBornPerson()->toDateString(); ?>"
+                                               placeholder="Ingrese su Fecha de Nacimiento">
+                                    </div>
+                                </div>
+                                <!--Correo Electronico del Docente-->
+                                <div class="form-group row">
+                                    <label for="emailPerson" class="col-sm-2 col-form-label">Correo Electronico</label>
+                                    <div class="col-sm-10">
+                                        <input required type="email" class="form-control" id="emailPerson" name="emailPerson"
+                                               value="<?= $DataPersonT->getEmailPerson(); ?>"
+                                               placeholder="Ingrese su Correo Electronico">
+                                    </div>
+                                </div>
+                                <!--Genero del Docente-->
+                                <div class="form-group row">
+                                    <label for="generePerson" class=" col-sm-2 col-form-label">Genero</label>
+                                    <div class="col-sm-10">
+                                        <select id="generePerson" name="generePerson" class="custom-select">
+                                            <option <?= ($DataPersonT->getGenerePerson() == "Masculino") ? "selected" : ""; ?>
+                                                    value="Masculino">Masculino
+                                            </option>
+                                            <option <?= ($DataPersonT->getGenerePerson() == "Femenino") ? "selected" : ""; ?>
+                                                    value="Femenino">Femenino
+                                            </option>
+                                            <option <?= ($DataPersonT->getGenerePerson() == "Otro") ? "selected" : ""; ?>
+                                                    value="Otro">Otro
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--Correo Electronico del Docente-->
+                                <div class="form-group row">
+                                    <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
+                                    <div class="col-sm-10">
+                                        <input required type="text" class="form-control" id="photoPerson" name="photoPerson"
+                                               value="<?= $DataPersonT->getPhotoPerson(); ?>" placeholder="Ingrese su Foto">
+                                    </div>
+                                </div>
+                                <!--Tipo Persona-->
+                                <div class="form-group row">
+                                    <label for="typePerson" class="col-sm-2 col-form-label">Tipo</label>
+                                    <div class="col-sm-10">
+                                        <input required type="text" class="form-control" id="typePerson" name="typePerson"
+                                               value="<?= $DataPersonT->getTypePerson(); ?>" placeholder="Tipo Persona">
+                                    </div>
+                                </div>
+                                <!--Estado de la persona-->
+                                <div class="form-group row">
+                                    <label for="statePerson" class="col-sm-2 col-form-label">Estado</label>
+                                    <div class="col-sm-10">
+                                        <select id="statePerson" name="statePerson" class="custom-select">
+                                            <option <?= ($DataPersonT->getStatePerson() == "Activo") ? "selected" : ""; ?>
+                                                    value="Activo">Activo
+                                            </option>
+                                            <option <?= ($DataPersonT->getStatePerson() == "Inactivo") ? "selected" : ""; ?>
+                                                    value="Inactivo">Inactivo
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- _______________________________Experiencia________________________-->
+                                <?php
+                                $dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" . $_GET["idPerson"]);
+                                foreach ($dataTeacher as $teacherD) {
+                                    $DataExperience = \App\Controllers\ExperienceControllers::searchForID($teacherD->getExperienceIdExperience()->getIdExperience());
+                                    $idT = $teacherD->getIdTeacher();
+                                }
+                                if (!empty($DataExperience)) {
+                                    ?>
+                                    <li class="list-Dates"><i class="fas fa-address-book" id="icon-iconos"></i>Experiencia</li>
+                                    <hr>
+                                    <input id="idTeacher" name="idTeacher"
+                                           value="<?php echo $idT; ?>" hidden required="required"
+                                           type="text">
+                                    <!--DataTeacher-->
+                                    <input id="idExperience" name="idExperience"
+                                           value="<?php echo $DataExperience->getIdExperience(); ?>" hidden required="required"
+                                           type="text">
+                                    <!--Ultimo Lugar de Trabajo-->
+                                    <div class="form-group row">
+                                        <label for="institutionExperience" class="col-sm-2 col-form-label">Ultimo Lugar de
+                                            Trabajo</label>
+                                        <div class="col-sm-10">
+                                            <input required type="text" class="form-control" id="institutionExperience"
+                                                   name="institutionExperience"
+                                                   value="<?php echo $DataExperience->getInstitutionExperience(); ?>"
+                                                   placeholder="Ultimo Lugar de Trabajo">
+                                        </div>
+                                    </div>
+                                    <!--Ocupacion Laboral-->
+                                    <div class="form-group row">
+                                        <label for="dedicationExperience" class="col-sm-2 col-form-label">Ocupacion
+                                            Laboral</label>
+                                        <div class="col-sm-10">
+                                            <input required type="text" class="form-control" id="dedicationExperience"
+                                                   name="dedicationExperience"
+                                                   value="<?php echo $DataExperience->getDedicationExperience(); ?>"
+                                                   placeholder="Ocupacion Laboral">
+                                        </div>
+                                    </div>
 
-                        <?php } ?>
-                        <!-- _________________________________Idiomas_________________________-->
-                        <?php
-                        $DataT = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$_GET["idPerson"]);
-                        $teacher=$DataT[0];
-                        $DataTeacherleng = TeacherLenguages::search("SELECT * FROM TeacherLenguages WHERE Teacher_idTeacher =" .$teacher->getIdTeacher());
-                        foreach ($DataTeacherleng as $teacherLen){
-                            $lenguajes = $teacherLen->getLenguagesIdLenguages();
-                            $idTeachLen = $teacherLen->getIdTeacherLenguages();
-                            $DataLenguagues = \App\Controllers\LenguagesControllers::searchForID($lenguajes->getIdLenguages());
-                        }
-                        if(!empty($DataLenguagues)){?>
+                                    <!--Fecha de Inicio de Contrato-->
+                                    <div class="form-group row">
+                                        <label for="startExperience" class="col-sm-2 col-form-label">Fecha de Inicio de
+                                            Contrato</label>
+                                        <div class="col-sm-10">
+                                            <input required type="date" max="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="startExperience"
+                                                   name="startExperience"
+                                                   value="<?php echo $DataExperience->getStartExperience()->toDateString(); ?>"
+                                                   placeholder="Fecha de Inicio de Contrato">
+                                        </div>
+                                    </div>
+                                    <!--Fecha de Determinacion  de Contrato-->
+                                    <div class="form-group row">
+                                        <label for="endExperince" class="col-sm-2 col-form-label">Fecha de Determinacion</label>
+                                        <div class="col-sm-10">
+                                            <input required type="date" max="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="endExperince"
+                                                   name="endExperince" value="<?php echo $DataExperience->getEndExperince()->toDateString(); ?>"
+                                                   placeholder="Fecha de Determinacion">
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <!-- _____________________Datos de Estudio___________________________________________-->
 
-                        <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Idiomas</li>
-                        <hr>
-                        <input id="idLenguages" name="idLenguages" value="<?php echo $DataLenguagues->getIdLenguages(); ?>" hidden required="required" type="text">
-                        <!--Idiomas-->
-                            <!--Nombre del idioma-->
-                            <div class="form-group row">
-                                <label for="nameLenguages" class="col-sm-2 col-form-label">Idioma</label>
-                                <div class="col-sm-10">
-                                    <input id="idTeacherLenguages" name="idTeacherLenguages"
-                                           value="<?php echo $idTeachLen; ?>" hidden
+                                <?php
+                                $dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" . $_GET["idPerson"]);
+                                foreach ($dataTeacher as $teacherD) {
+                                    $DataTeacherS = \App\Controllers\TeacherStudiesControllers::searchForID($teacherD->getTeacherStudiesIdTeacherStudies()->getIdTeacherStudies());
+                                }
+                                if (!empty($DataTeacherS)) {
+                                    ?>
+                                    <li class="list-Dates"><i class="fas fa-book mr-1" id="icon-iconos"></i>Datos de Estudio
+                                    </li>
+                                    <hr>
+                                    <input id="idTeacherStudies" name="idTeacherStudies"
+                                           value="<?php echo $DataTeacherS->getIdTeacherStudies(); ?>" hidden
                                            required="required" type="text">
-                                    <input required type="text" minlength="6" class="form-control"
-                                           id="nameLenguages" name="nameLenguages"
-                                           value="<?php echo $DataLenguagues->getNameLenguages(); ?>"
-                                           placeholder="Idioma">
-                                </div>
-                            </div>
+                                    <!--Titulo Universitario-->
+                                    <div class="form-group row">
+                                        <label for="titleTeacherStudies" class="col-sm-2 col-form-label">Titulo
+                                            Universitario</label>
+                                        <div class="col-sm-10">
+                                            <input required type="text" minlength="6" class="form-control"
+                                                   id="titleTeacherStudies" name="titleTeacherStudies"
+                                                   value="<?php echo $DataTeacherS->getTitleTeacherStudies(); ?>"
+                                                   placeholder="Titulo Universitario">
+                                        </div>
+                                    </div>
 
-                            <?php } ?>
-                        </div>
-                        <!-- /.card-body -->
+                                    <!--Año de Graduacion-->
+                                    <div class="form-group row">
+                                        <label for="yearStudyTeacher" class="col-sm-2 col-form-label">Año de Graduacion</label>
+                                        <div class="col-sm-10">
+                                            <input required type="number" class="form-control" id="yearStudyTeacher"
+                                                   name="yearStudyTeacher"
+                                                   value="<?php echo $DataTeacherS->getYearStudyTeacher(); ?>"
+                                                   placeholder="Año de Graduacion">
+                                        </div>
+                                    </div>
+
+                                <?php } ?>
+                                <!-- _________________________________Idiomas_________________________-->
+                                <?php
+                                $DataT = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$_GET["idPerson"]);
+                                $teacher=$DataT[0];
+                                $DataTeacherleng = TeacherLenguages::search("SELECT * FROM TeacherLenguages WHERE Teacher_idTeacher =" .$teacher->getIdTeacher());
+                                foreach ($DataTeacherleng as $teacherLen){
+                                    $lenguajes = $teacherLen->getLenguagesIdLenguages();
+                                    $idTeachLen = $teacherLen->getIdTeacherLenguages();
+                                    $DataLenguagues = \App\Controllers\LenguagesControllers::searchForID($lenguajes->getIdLenguages());
+                                }
+                                if(!empty($DataLenguagues)){?>
+
+                                    <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Idiomas</li>
+                                    <hr>
+                                    <input id="idLenguages" name="idLenguages" value="<?php echo $DataLenguagues->getIdLenguages(); ?>" hidden required="required" type="text">
+                                    <!--Idiomas-->
+                                    <!--Nombre del idioma-->
+                                    <div class="form-group row">
+                                        <label for="nameLenguages" class="col-sm-2 col-form-label">Idioma</label>
+                                        <div class="col-sm-10">
+                                            <input id="idTeacherLenguages" name="idTeacherLenguages"
+                                                   value="<?php echo $idTeachLen; ?>" hidden
+                                                   required="required" type="text">
+                                            <input required type="text" minlength="6" class="form-control"
+                                                   id="nameLenguages" name="nameLenguages"
+                                                   value="<?php echo $DataLenguagues->getNameLenguages(); ?>"
+                                                   placeholder="Idioma">
+                                        </div>
+                                    </div>
+
+                                <?php } ?>
+                            </div>
+                            <!-- /.card-body -->
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-info">Enviar</button>
                                 <a href="show.php" role="button" class="btn btn-default float-right">Cancelar</a>

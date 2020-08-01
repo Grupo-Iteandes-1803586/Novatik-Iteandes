@@ -6,6 +6,7 @@ require_once("BasicModel.php");
 class TrainingCompetition extends BasicModel{
     private $idTrainingCompetition;
     private $codeTrainingCompetition;
+    private $codeAlfaTrainingCompetition;
     private $denomination;
     private $duration;
     private $minimumSpace;
@@ -17,6 +18,7 @@ class TrainingCompetition extends BasicModel{
      * TrainingCompetition constructor.
      * @param $idTrainingCompetition
      * @param $codeTrainingCompetition
+     * @param $codeAlfaTrainingCompetition
      * @param $denomination
      * @param $duration
      * @param $minimumSpace
@@ -29,6 +31,7 @@ class TrainingCompetition extends BasicModel{
         parent::__construct();
         $this->idTrainingCompetition =$trainingCompetition['idTrainingCompetition']  ?? null;
         $this->codeTrainingCompetition = $trainingCompetition['codeTrainingCompetition'] ?? null;
+        $this->codeAlfaTrainingCompetition = $trainingCompetition['codeAlfaTrainingCompetition'] ?? null;
         $this->denomination = $trainingCompetition['denomination'] ?? null;
         $this->duration = $trainingCompetition['duration'] ?? null;
         $this->minimumSpace = $trainingCompetition['minimumSpace'] ?? null;
@@ -54,6 +57,22 @@ class TrainingCompetition extends BasicModel{
     public function setIdTrainingCompetition(int $idTrainingCompetition): void
     {
         $this->idTrainingCompetition = $idTrainingCompetition;
+    }
+
+    /**
+     * @return String
+     */
+    public function getCodeAlfaTrainingCompetition(): String
+    {
+        return $this->codeAlfaTrainingCompetition;
+    }
+
+    /**
+     * @param String $codeAlfaTrainingCompetition
+     */
+    public function setCodeAlfaTrainingCompetition(String $codeAlfaTrainingCompetition): void
+    {
+        $this->codeAlfaTrainingCompetition = $codeAlfaTrainingCompetition;
     }
 
     /**
@@ -139,7 +158,7 @@ class TrainingCompetition extends BasicModel{
     /**
      * @return String
      */
-    public function getStatusTrainingCompetition():int
+    public function getStatusTrainingCompetition():String
     {
         return $this->statusTrainingCompetition;
     }
@@ -147,7 +166,7 @@ class TrainingCompetition extends BasicModel{
     /**
      * @paramint $statusTrainingCompetition
      */
-    public function setStatusTrainingCompetition(int $statusTrainingCompetition): void
+    public function setStatusTrainingCompetition(String $statusTrainingCompetition): void
     {
         $this->statusTrainingCompetition = $statusTrainingCompetition;
     }
@@ -155,7 +174,7 @@ class TrainingCompetition extends BasicModel{
     /**
      * @return int
      */
-    public function getTrainingProgramIdTrainingProgram(): int
+    public function getTrainingProgramIdTrainingProgram(): TrainingProgram
     {
         return $this->TrainingProgram_idTrainingProgram;
     }
@@ -171,8 +190,9 @@ class TrainingCompetition extends BasicModel{
     //metodo crear una competencia
     public function create()
     {
-        $result = $this->insertRow("INSERT INTO iteandes_novatik.TrainingCompetition VALUES (NULL, ?, ?, ?, ?,?,?,?)", array(
+        $result = $this->insertRow("INSERT INTO iteandes_novatik.TrainingCompetition VALUES (NULL, ?,?, ?, ?, ?,?,?,?)", array(
                 $this->codeTrainingCompetition,
+                $this->codeAlfaTrainingCompetition,
                 $this->denomination,
                 $this->duration,
                 $this->minimumSpace,
@@ -189,8 +209,9 @@ class TrainingCompetition extends BasicModel{
     //Actulizar una competencia
     public function update()
     {
-        $result = $this->updateRow("UPDATE iteandes_novatik.TrainingCompetition  SET codeTrainingCompetition = ?, denomination = ?, duration= ?, minimumSpace = ?,order=?, statusTrainingCompetition =?,TrainingProgram_idTrainingProgram=? WHERE idTrainingCompetition = ?", array(
+        $result = $this->updateRow("UPDATE iteandes_novatik.TrainingCompetition  SET codeTrainingCompetition = ?,codeAlfaTrainingCompetition = ?, denomination = ?, order =?, duration= ?, minimumSpace = ?,  statusTrainingCompetition =?,TrainingProgram_idTrainingProgram=? WHERE idTrainingCompetition = ?", array(
                 $this->codeTrainingCompetition,
+                $this->codeAlfaTrainingCompetition,
                 $this->denomination,
                 $this->duration,
                 $this->minimumSpace,
@@ -220,6 +241,7 @@ class TrainingCompetition extends BasicModel{
         foreach ($getrows as $value) {
             $competition = new TrainingCompetition();
             $competition->codeTrainingCompetition = $value['codeTrainingCompetition'];
+            $competition->codeAlfaTrainingCompetition = $value['codeAlfaTrainingCompetition'];
             $competition->denomination = $value['denomination'];
             $competition->duration = $value['duration'];
             $competition->minimumSpace = $value['minimumSpace'];
@@ -228,7 +250,7 @@ class TrainingCompetition extends BasicModel{
             $competition->TrainingProgram_idTrainingProgram = TrainingProgram::searchForId($value['TrainingProgram_idTrainingProgram']);
             $competition->idTrainingCompetition = $value['idTrainingCompetition'];
             $competition->Disconnect();
-            array_push($competition, $arrTrainigCompetition);
+            array_push($arrTrainigCompetition,$competition);
         }
         $tmp->Disconnect();
         return $arrTrainigCompetition;
@@ -245,8 +267,9 @@ class TrainingCompetition extends BasicModel{
         $competition = null;
         if($idTrainingCompetition > 0){
             $competition = new TrainingCompetition();
-            $getrow = $competition->getRow("SELECT * FROM iteandes_novatik.TrainingCompetition WHERE idTrainingCompetitio =?", array($idTrainingCompetition));
+            $getrow = $competition->getRow("SELECT * FROM iteandes_novatik.TrainingCompetition WHERE idTrainingCompetition =?", array($idTrainingCompetition));
             $competition->codeTrainingCompetition = $getrow['codeTrainingCompetition'];
+            $competition->codeAlfaTrainingCompetition = $getrow['codeAlfaTrainingCompetition'];
             $competition->denomination = $getrow['denomination'];
             $competition->duration = $getrow['duration'];
             $competition->minimumSpace = $getrow['minimumSpace'];
@@ -258,9 +281,18 @@ class TrainingCompetition extends BasicModel{
         $competition->Disconnect();
         return $competition;
     }
+    public static function competitionRegistration ($codeTrainingCompetition) : bool
+    {
+        $result = TrainingCompetition::search("SELECT idTrainingCompetition FROM iteandes_novatik.TrainingCompetition where codeTrainingCompetition = ".$codeTrainingCompetition);
+        if (count($result) > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     //Metodo to String
     public function __toString()
     {
-        return "Codigo: $this->codeTrainingCompetition, Denominacion: $this->denomination, duracion: $this->duration , cupo Minimo: $this->minimumSpace,  orden: $this->order, Estado: $this->statusTrainingCompetition, Programa de Formacion $this->TrainingProgram_idTrainingProgram";
+        return "Codigo: $this->codeTrainingCompetition, Codigo Corto: $this->codeAlfaTrainingCompetition, Denominacion: $this->denomination, duracion: $this->duration , cupo Minimo: $this->minimumSpace,  orden: $this->order, Estado: $this->statusTrainingCompetition, Programa de Formacion $this->TrainingProgram_idTrainingProgram";
     }
 }

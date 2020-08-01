@@ -25,10 +25,6 @@ class TeacherLenguagesControllers
             TeacherLenguagesControllers::searchForID($_REQUEST['idTeacherLenguages']);
         } else if ($action == "searchAll") {
             TeacherLenguagesControllers::getAll();
-        } else if ($action == "activate") {
-            TeacherLenguagesControllers::activate();
-        } else if ($action == "inactivate") {
-            TeacherLenguagesControllers::inactivate();
         }
     }
 
@@ -66,37 +62,7 @@ class TeacherLenguagesControllers
             header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
-    //Estado activo
-    static public function activate (){
-        try {
-            $ObjTeacherLenguages = TeacherLenguages::searchForId($_GET['idTeacherLenguages']);
-            $ObjTeacherLenguages->setStateTeacherLenguages('Activo');
-            if($ObjTeacherLenguages->update()){
-                header("Location: ../../views/Person/Teacher/index.php");
-            }else{
-                header("Location: ../../views/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
-        } catch (\Exception $e) {
-            GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
-        }
-    }
 
-    ///Estado Inactivo
-    static public function inactivate (){
-        try {
-            $TeacherLenguages  = TeacherLenguages ::searchForId($_GET['idTeacherLenguages']);
-            $TeacherLenguages ->setStateTeacherLenguages("Inactivo");
-            if($TeacherLenguages ->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php");
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
-        } catch (\Exception $e) {
-            GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
-        }
-    }
     static public function searchForID ($idTeacherLenguages){
         try {
             return TeacherLenguages::searchForId($idTeacherLenguages);

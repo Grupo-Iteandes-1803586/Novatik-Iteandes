@@ -26,10 +26,6 @@ class TeacherControllers
             TeacherControllers::searchForID($_REQUEST['idTeacher']);
         } else if ($action == "searchAll") {
             TeacherControllers::getAll();
-        } else if ($action == "activate") {
-            TeacherControllers::activate();
-        } else if ($action == "inactivate") {
-            TeacherControllers::inactivate();
         }
     }
 
@@ -67,36 +63,6 @@ class TeacherControllers
         } catch (\Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje=".$e->getMessage());
-        }
-    }
-/////Estado activo
-    static public function activate (){
-        try {
-            $ObjTeacher = Teacher::searchForId($_GET['idTeacher']);
-            $ObjTeacher->setStateTeacher('Activo');
-            if($ObjTeacher->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php");
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
-        } catch (\Exception $e) {
-           GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=".$e->getMessage());
-        }
-    }
-    ///Estado Inactivo
-    static public function inactivate (){
-        try {
-            $Teacher  = Teacher::searchForId($_GET['idTeacher']);
-            $Teacher ->setStateTeacher("Inactivo");
-            if($Teacher ->update()){
-                header("Location: ../../views/modules/Person/Teacher/index.php");
-            }else{
-                header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error&mensaje=Error al guardar");
-            }
-        } catch (\Exception $e) {
-           // GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/modules/Person/Teacher/index.php?respuesta=error");
         }
     }
     static public function searchForID ($idTeacher){
