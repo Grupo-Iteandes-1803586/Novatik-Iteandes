@@ -117,14 +117,6 @@ use Carbon\Carbon;?>
                             <input required type="text" class="form-control" id="descriptionArchive" name="descriptionArchive" placeholder="Descripcion del Archivo">
                         </div>
                     </div>
-
-                    <!--Ruta de Archivo-->
-                    <div class="form-group row">
-                        <label for="rutaArchive" class="col-sm-2 col-form-label">Ruta de Archivo</label>
-                        <div class="col-sm-10">
-                            <input required type="text" class="form-control" id="rutaArchive" name="rutaArchive" placeholder="Ruta de Archivo">
-                        </div>
-                    </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">

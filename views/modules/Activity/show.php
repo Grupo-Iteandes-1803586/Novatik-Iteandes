@@ -73,37 +73,22 @@ use App\Modules\Archive;?>
                     </p>
                     <hr>
                     <strong><i class="fas fa-user mr-1"></i> codigo de la Actividad </strong>
-                    <p class="text-muted"><?=$DataActivity->getDocumentPerson() ?></p>
+                    <p class="text-muted"><?=$DataActivity->getCodeActivity() ?></p>
                     <hr>
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Rh</strong>
-                    <p class="text-muted"><?= $DataActivity->getRhPerson() ?></p>
+                    <strong><i class="fas fa-map-marker-alt mr-1"></i> descripcion de la Activity</strong>
+                    <p class="text-muted"><?= $DataActivity->getDescriptionActivity() ?></p>
                     <hr>
-                    <strong><i class="fas fa-phone mr-1"></i> Direccion</strong>
-                    <p class="text-muted"><?= $DataPerson->getAdressPerson() ?></p>
-                    <hr>
-                    <strong><i class="far fa-file-alt mr-1"></i> Estado y Rol</strong>
-                    <p class="text-muted"><?= $DataPerson->getStatePerson()." - ".$DataPerson->getTypePerson() ?></p>
-                    <hr>
-                    <strong><i class="fas fa-phone mr-1"></i> Email</strong>
-                    <p class="text-muted"><?= $DataPerson->getEmailPerson() ?></p>
-                    <hr>
-                    <strong><i class="fas fa-phone mr-1"></i> Fecha de Nacimiento</strong>
-                    <p class="text-muted"><?= $DataPerson->getDateBornPerson()->translatedFormat('l, j \\de F Y')  ?></p>
-                    <p class="text-muted">Tienes <?= $DataPerson->getDateBornPerson()->diffInYears(); ?> Años</p>
-                    <hr>
-                    <strong><i class="fas fa-phone mr-1"></i> Celular</strong>
-                    <p class="text-muted"><?= $DataPerson->getPhonePerson() ?></p>
-                    <hr>
-                    <strong><i class="fas fa-phone mr-1"></i> Genero</strong>
-                    <p class="text-muted"><?= $DataPerson->getGenerePerson() ?></p>
+                    <strong><i class="fas fa-phone mr-1"></i> tipo de Activity</strong>
+                    <p class="text-muted"><?= $DataActivity->getTypeActivity() ?></p>
                     <hr>
                     <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
-                    <p class="text-muted"><?= $DataPerson->getStatePerson() ?></p>
+                    <p class="text-muted"><?= $DataActivity->setStateActivity() ?></p>
                     <hr>
                     </p>
 
                 </div>
-                <!--Datos de formacion-->
+
+                <!--Datos del Archivo-->
                 <?php if(!empty($_GET["idActivity"])){
                 $dataArchive = \App\Models\Archive::search("SELECT * FROM Archive WHERE Activity_idActivity =" . $_GET["idActivity"]);
                 foreach ($dataArchive as $archive) {
@@ -118,20 +103,20 @@ use App\Modules\Archive;?>
                     <p>
                         <strong><i class="fas fa-book mr-1"></i> #</strong>
                     <p class="text-muted">
-                        <?= $DataArchi->getId; ?>
+                        <?= $DataArchi->getIdArchive(); ?>
                     </p>
                     <hr>
-                    <strong><i class="fas fa-user mr-1"></i> Modalidad</strong>
-                    <p class="text-muted"><?=$DataStudent->getModality(); ?></p>
+                    <strong><i class="fas fa-user mr-1"></i> Nombre del Archivo</strong>
+                    <p class="text-muted"><?=$DataArchi->getNameArchive(); ?></p>
                     <hr>
-                    <strong><i class="fas fa-user mr-1"></i>Año de Grado</strong>
-                    <p class="text-muted"><?=$DataStudent->getGradeYear(); ?></p>
+                    <strong><i class="fas fa-user mr-1"></i>Descripcion del Archivo</strong>
+                    <p class="text-muted"><?=$DataArchi->getDescriptionArchive(); ?></p>
                     <hr>
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i>Institucion Educativa</strong>
-                    <p class="text-muted"><?= $DataStudent->getInstitution()?></p>
+                    <strong><i class="fas fa-map-marker-alt mr-1"></i>Ruta del Archivo</strong>
+                    <p class="text-muted"><?= $DataArchi->getRutaArchive()?></p>
                     <hr>
                     <strong><i class="fas fa-map-marker-alt mr-1"></i>Estado</strong>
-                    <p class="text-muted"><?= $DataStudent->getStateStudent(); ?></p>
+                    <p class="text-muted"><?= $DataArchi->getStateArchive(); ?></p>
                     <hr>
                     </p>
                     <!--Sub menu-->
@@ -139,12 +124,7 @@ use App\Modules\Archive;?>
                         <div class="row">
                             <div class="col-auto mr-auto">
                                 <a role="button" href="index.php" class="btn btn-success float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-tasks"></i> Consultar Estudiante
-                                </a>
-                            </div>
-                            <div class="col-auto">
-                                <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-plus"></i> Crear Estudiante
+                                    <i class="fas fa-tasks"></i> Consultar Archivo
                                 </a>
                             </div>
                         </div>
