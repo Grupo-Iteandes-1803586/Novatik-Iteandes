@@ -1,0 +1,151 @@
+<?php require ("../../partials/routes.php");
+require_once("../../../app/Controllers/EnrollmentControllers.php");
+require_once("../../../app/Controllers/EnrollmentCompetitionControllers.php");
+
+use App\Controllers\EnrollmentControllers;
+use App\Controllers\EnrollmentCompetitionControllers;
+use App\Models\Enrollment;
+use App\Models\EnrollmentCompetition;
+use Carbon\Carbon;?>
+?>
+<!doctype html>
+<html lang="es">
+<head>
+    <title><?=getenv('TITLE_SITE');?> | Agregar Matricula</title>
+    <?php
+    require ("../../partials/head_imports.php");
+    require ("../../partials/header.php");
+    ?>
+</head>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <?php require ("../../partials/navbar_customation.php");?>
+    <?php require ("../../partials/sliderbar_main_menu.php");?>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Crear Matricula</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="<?= $baseURL; ?>/Views/">Iteandes</a></li>
+                            <li class="breadcrumb-item active">Inicio</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <?php if(!empty($_GET['respuesta'])){ ?>
+                <?php if ($_GET['respuesta'] != "correcto"){ ?>
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-ban"></i> Error!</h5>
+                        Error al crear la Matricula: <?= $_GET['mensaje'] ?>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+
+            <!--Formulario de la Matricula-->
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Agregar Matricula</h3>
+                    <?php require("../../partials/optionMenu.php") ;?>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form class="form-horizontal" method="post" id="frmCreateEnrollment" name="frmCreateEnrollment" action="../../../app/Controllers/EnrollmentControllers.php?action=create">
+                    <div class="card-body">
+                        <?php
+                        require ("../Person/formPerson.php"); ?>
+                        <!--Formulario de los datos del estudio del estudiante-->
+                        <div class="card-body">
+                            <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Estudios</li>
+                            <hr>
+                            <!--Año de Grado-->
+                            <div class="form-group row">
+                                <label for="gradeYear" class="col-sm-2 col-form-label">Año de Grado</label>
+                                <div class="col-sm-10">
+                                    <input required type="number" maxlength="4" class="form-control" id="gradeYear" name="gradeYear" placeholder="Ingrese el año de grado">
+                                </div>
+                            </div>
+                            <!--Modalidad de grado-->
+                            <div class="form-group row">
+                                <label for="modality" class="col-sm-2 col-form-label">Modalidad</label>
+                                <div class="col-sm-10">
+                                    <select id="modality" name="modality" class="custom-select">
+                                        <option value="Bachiller Academico">Bachiller Academico</option>
+                                        <option value="Bachiller Tecnico">Bachiller Tecnico</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Institucion de Grado-->
+                            <div class="form-group row">
+                                <label for="Institution" class="col-sm-2 col-form-label">Institucion Educativa</label>
+                                <div class="col-sm-10">
+                                    <input required type="text" class="form-control" id="Institution" name="Institution" placeholder="Ingresa la Institucion Educativa">
+                                </div>
+                            </div>
+                            <!--Datos de la Matricula-->
+                            <!--Semestre-->
+                            <div class="form-group row">
+                                <label for="Semester_idSemester" class="col-sm-2 col-form-label">Semestre Academico</label>
+                                <div class="col-sm-10">
+                                    <input required type="text" class="form-control" id="Semester_idSemester" name="Semester_idSemester" placeholder="Ingresa Semestre Academico">
+                                </div>
+                            </div>
+                            <!--Programa de Formacion-->
+                            <div class="form-group row">
+                                <label for="TrainingProgram_idTrainingProgram" class="col-sm-2 col-form-label">Programa de Formacion</label>
+                                <div class="col-sm-10">
+                                    <input required type="text" class="form-control" id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram" placeholder="Ingresa Programa de Formacion">
+                                    <?php $idTprogram = $_POST['TrainingProgram_idTrainingProgram'] ?>
+                                </div>
+                            </div>
+                            <!--Competencias-->
+                            <?php
+                            $dataDates = \App\Models\EnrollmentCompetition::search("SELECT * FROM trainingcompetition tc INNER JOIN trainingprogram tp on tp.idTrainingProgram = tc.TrainingProgram_idTrainingProgram WHERE tp.idTrainingProgram=".$idTprogram);
+                            foreach ($dataDates as $daDe) {
+                                $DataCpm = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daDe->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition());
+                                $idC = $daDe->getTrainingCompetitionIdTrainingCompetition();
+                            }
+                            $dataSche = \App\Models\EnrollmentCompetition::search("SELECT sh.idSchedule FROM schedule sh INNER JOIN `group` gr on sh.Group_idGroup = gr.idGroup where gr.TrainingCompetition_idTrainingCompetition =".$idC);
+                            foreach ($dataSche as $daSc) {
+                                $daSch = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daSc->getScheduleIdSchedule->getIdSchedule());
+                                $idS = $daDe->getScheduleIdSchedule();
+                            }
+                            ?>
+                            <input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition"
+                                   value="<?php echo $idC; ?>" hidden required="required"
+                                   type="text">
+                            <input id="Schedule_idSchedule" name="Schedule_idSchedule"
+                                   value="<?php echo $idS; ?>" hidden required="required"
+                                   type="text">
+                        </div>
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info">Enviar</button>
+                            <a href="show.php" role="button" class="btn btn-default float-right">Cancelar</a>
+                        </div>
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+            <!-- /.card -->
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+    <?php require ("../../partials/footer.php");?>
+</div>
+<!--</div>-->
+<?php require ("../../partials/scripts.php");?>
+</body>
+</html>

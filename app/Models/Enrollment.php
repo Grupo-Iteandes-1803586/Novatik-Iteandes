@@ -86,7 +86,7 @@ class Enrollment extends BasicModel{
     /**
      * @return int
      */
-    public function getStudentIdStudent(): int
+    public function getStudentIdStudent(): Student
     {
         return $this->Student_idStudent;
     }
