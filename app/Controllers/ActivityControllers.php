@@ -46,13 +46,13 @@ class ActivityControllers
                 //archive
                 $arrayArchive['nameArchive'] = $_POST['nameArchive'];
                 $arrayArchive['descriptionArchive'] = $_POST['descriptionArchive'];
-                $arrayArchive['rutaArchive'] = $_POST['rutaArchive'];
+                $arrayArchive['rutaArchive'] = 'Ruta del Archivo';
                 $arrayArchive['Activity_idActivity'] =$Activity;
                 $arrayArchive['stateArchive'] = 'Activo';
                 $Archive = new Archive($arrayArchive);
 
                 if ($Archive->create()) {
-                    header("Location: ../../views/modules/Activity/show.php?idActivity=" . $Activity->getIdActivity());
+                    header("Location: ../../views/modules/Activity/show.php?idActivity=".$Activity->getIdActivity());
                 }
             }
         } catch (Exception $e) {
