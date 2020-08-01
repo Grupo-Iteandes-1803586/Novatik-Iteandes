@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 01-08-2020 a las 15:28:38
+-- Tiempo de generación: 01-08-2020 a las 15:56:41
 -- Versión del servidor: 5.7.24
--- Versión de PHP: 7.2.19
+-- Versión de PHP: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -22,13 +22,66 @@ SET time_zone = "+00:00";
 -- Base de datos: `iteandes_novatik`
 --
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+DROP PROCEDURE IF EXISTS `UpdatePerson`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdatePerson` (IN `uIdPerson` INT, IN `stateTotal` VARCHAR(10))  NO SQL
+BEGIN
+UPDATE experience e
+INNER JOIN teacher t ON e.idExperience=t.Experience_idExperience
+SET stateExperience=stateTotal
+ WHERE t.Person_idPerson=uIdPerson;
+ 
+UPDATE teacherstudies ts
+INNER JOIN teacher t ON ts.idTeacherStudies=t.TeacherStudies_idTeacherStudies
+SET stateTeacherStudies=stateTotal
+ WHERE t.Person_idPerson=uIdPerson;
+ 
+UPDATE lenguages l
+INNER JOIN teacherlenguages tl ON tl.Lenguages_idLenguages=l.idLenguages
+INNER JOIN teacher t ON tl.Teacher_idTeacher=t.idTeacher
+SET stateLenguague=stateTotal
+ WHERE t.Person_idPerson=uIdPerson;
+
+UPDATE teacherlenguages tl
+INNER JOIN   lenguages l  ON tl.Lenguages_idLenguages=l.idLenguages
+INNER JOIN teacher t ON tl.Teacher_idTeacher=t.idTeacher
+SET stateTeacherLenguages=stateTotal
+ WHERE t.Person_idPerson=uIdPerson;
+
+UPDATE teacher t
+SET stateTeacher=stateTotal
+ WHERE t.Person_idPerson=uIdPerson;
+ 
+ UPDATE person p
+SET statePerson=stateTotal
+ WHERE p.idPerson=uIdPerson;
+ 
+END$$
+
+DROP PROCEDURE IF EXISTS `UpdateStudent`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateStudent` (IN `uIdPerson` INT, IN `stateTotal` VARCHAR(10))  NO SQL
+BEGIN
+UPDATE student st
+INNER JOIN person p ON st.Person_idPerson=p.idPerson
+SET stateStudent=stateTotal
+WHERE st.Person_idPerson=uIdPerson;
+ 
+ UPDATE person p
+SET statePerson=stateTotal
+ WHERE p.idPerson=uIdPerson;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `activity`
 --
 
-DROP TABLE IF EXISTS `activity`;
 CREATE TABLE `activity` (
   `idActivity` bigint(19) UNSIGNED NOT NULL,
   `codeActivity` bigint(20) NOT NULL,
@@ -59,6 +112,7 @@ CREATE TABLE `archive` (
 --
 -- Estructura de tabla para la tabla `enrollment`
 --
+
 CREATE TABLE `enrollment` (
   `idEnrollment` bigint(19) UNSIGNED NOT NULL,
   `dateEnrollment` date NOT NULL,
@@ -73,6 +127,7 @@ CREATE TABLE `enrollment` (
 --
 -- Estructura de tabla para la tabla `enrollmentcompetition`
 --
+
 CREATE TABLE `enrollmentcompetition` (
   `idEnrollmentCompetition` bigint(19) UNSIGNED NOT NULL,
   `Enrollment_idEnrollment` bigint(19) UNSIGNED NOT NULL,
@@ -86,6 +141,7 @@ CREATE TABLE `enrollmentcompetition` (
 --
 -- Estructura de tabla para la tabla `experience`
 --
+
 CREATE TABLE `experience` (
   `idExperience` bigint(19) UNSIGNED NOT NULL,
   `institutionExperience` varchar(300) NOT NULL,
@@ -95,15 +151,12 @@ CREATE TABLE `experience` (
   `stateExperience` enum('Activo','Inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `experience`
---
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `group`
 --
+
 CREATE TABLE `group` (
   `idGroup` bigint(19) UNSIGNED NOT NULL,
   `codeGroup` bigint(20) NOT NULL,
@@ -119,6 +172,7 @@ CREATE TABLE `group` (
 --
 -- Estructura de tabla para la tabla `learningresult`
 --
+
 CREATE TABLE `learningresult` (
   `idLearningResult` bigint(19) UNSIGNED NOT NULL,
   `codeLearningResult` bigint(20) NOT NULL,
@@ -128,30 +182,25 @@ CREATE TABLE `learningresult` (
   `TrainingCompetition_idTrainingCompetition` bigint(19) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `learningresult`
---
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `lenguages`
 --
+
 CREATE TABLE `lenguages` (
   `idLenguages` bigint(19) UNSIGNED NOT NULL,
   `nameLenguages` varchar(40) NOT NULL,
   `stateLenguague` enum('Activo','Inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `lenguages`
---
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `note`
 --
+
 CREATE TABLE `note` (
   `idNote` bigint(19) UNSIGNED NOT NULL,
   `dateNote` date NOT NULL,
@@ -166,6 +215,7 @@ CREATE TABLE `note` (
 --
 -- Estructura de tabla para la tabla `person`
 --
+
 CREATE TABLE `person` (
   `idPerson` bigint(19) UNSIGNED NOT NULL,
   `documentPerson` int(11) NOT NULL,
@@ -183,15 +233,12 @@ CREATE TABLE `person` (
   `statePerson` enum('Activo','Inactivo') NOT NULL,
   `photoPerson` varchar(350) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `person`
---
--- --------------------------------------------------------
+-------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `schedule`
 --
+
 CREATE TABLE `schedule` (
   `idSchedule` bigint(19) UNSIGNED NOT NULL,
   `startDateSchedule` date NOT NULL,
@@ -209,6 +256,7 @@ CREATE TABLE `schedule` (
 --
 -- Estructura de tabla para la tabla `semester`
 --
+
 CREATE TABLE `semester` (
   `idSemester` bigint(19) UNSIGNED NOT NULL,
   `nameSemester` varchar(250) NOT NULL,
@@ -222,15 +270,12 @@ CREATE TABLE `semester` (
   `statuSemester` enum('Activo','Inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `semester`
---
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `student`
 --
+
 CREATE TABLE `student` (
   `idStudent` bigint(19) UNSIGNED NOT NULL,
   `gradeYear` smallint(4) NOT NULL,
@@ -240,11 +285,13 @@ CREATE TABLE `student` (
   `stateStudent` enum('Activo','Inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `teacher`
 --
+
 CREATE TABLE `teacher` (
   `idTeacher` bigint(19) UNSIGNED NOT NULL,
   `Experience_idExperience` bigint(19) UNSIGNED NOT NULL,
@@ -253,15 +300,12 @@ CREATE TABLE `teacher` (
   `stateTeacher` enum('Activo','Inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `teacher`
---
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `teacherlenguages`
 --
+
 CREATE TABLE `teacherlenguages` (
   `idTeacherLenguages` bigint(19) UNSIGNED NOT NULL,
   `Teacher_idTeacher` bigint(19) UNSIGNED NOT NULL,
@@ -269,11 +313,13 @@ CREATE TABLE `teacherlenguages` (
   `stateTeacherLenguages` enum('Activo','Inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `teacherstudies`
 --
+
 CREATE TABLE `teacherstudies` (
   `idTeacherStudies` bigint(19) UNSIGNED NOT NULL,
   `titleTeacherStudies` varchar(300) NOT NULL,
@@ -281,15 +327,13 @@ CREATE TABLE `teacherstudies` (
   `stateTeacherStudies` enum('Activo','Inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `teacherstudies`
---
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `trainingcompetition`
 --
+
 CREATE TABLE `trainingcompetition` (
   `idTrainingCompetition` bigint(19) UNSIGNED NOT NULL,
   `codeTrainingCompetition` bigint(20) NOT NULL,
@@ -302,18 +346,12 @@ CREATE TABLE `trainingcompetition` (
   `TrainingProgram_idTrainingProgram` bigint(19) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `trainingcompetition`
---
-
-INSERT INTO `trainingcompetition` (`idTrainingCompetition`, `codeTrainingCompetition`, `codeAlfaTrainingCompetition`, `denomination`, `duration`, `minimumSpace`, `orderTrainingCompetition`, `statusTrainingCompetition`, `TrainingProgram_idTrainingProgram`) VALUES
-(1, 1213, '', 'gtrh', 3, 12, 1, 'Activo', 1);
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `trainingprogram`
 --
+
 CREATE TABLE `trainingprogram` (
   `idTrainingProgram` bigint(19) UNSIGNED NOT NULL,
   `codeTrainingProgram` bigint(19) UNSIGNED NOT NULL,
@@ -322,14 +360,6 @@ CREATE TABLE `trainingprogram` (
   `version` float NOT NULL,
   `statusTrainingProgram` enum('Activo','Inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `trainingprogram`
---
-
---
--- Índices para tablas volcadas
---
 
 --
 -- Indices de la tabla `activity`
@@ -509,13 +539,13 @@ ALTER TABLE `group`
 -- AUTO_INCREMENT de la tabla `learningresult`
 --
 ALTER TABLE `learningresult`
-  MODIFY `idLearningResult` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idLearningResult` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `lenguages`
 --
 ALTER TABLE `lenguages`
-  MODIFY `idLenguages` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idLenguages` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `note`
@@ -527,7 +557,7 @@ ALTER TABLE `note`
 -- AUTO_INCREMENT de la tabla `person`
 --
 ALTER TABLE `person`
-  MODIFY `idPerson` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `idPerson` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `schedule`
@@ -539,43 +569,43 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT de la tabla `semester`
 --
 ALTER TABLE `semester`
-  MODIFY `idSemester` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idSemester` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `student`
 --
 ALTER TABLE `student`
-  MODIFY `idStudent` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idStudent` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `idTeacher` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idTeacher` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `teacherlenguages`
 --
 ALTER TABLE `teacherlenguages`
-  MODIFY `idTeacherLenguages` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idTeacherLenguages` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `teacherstudies`
 --
 ALTER TABLE `teacherstudies`
-  MODIFY `idTeacherStudies` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idTeacherStudies` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `trainingcompetition`
 --
 ALTER TABLE `trainingcompetition`
-  MODIFY `idTrainingCompetition` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idTrainingCompetition` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `trainingprogram`
 --
 ALTER TABLE `trainingprogram`
-  MODIFY `idTrainingProgram` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idTrainingProgram` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
