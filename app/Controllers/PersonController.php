@@ -252,7 +252,7 @@ class PersonController{
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
             $arrayPerson['namePerson'] = $_POST['namePerson'];
             $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
-            $arrayPerson['dateBornPerson']= $_POST['dateBornPerson'];
+            $arrayPerson['dateBornPerson']= Carbon::parse($_POST['dateBornPerson']);
             $arrayPerson['rhPerson'] = $_POST['rhPerson'];
             $arrayPerson['emailPerson'] = $_POST['emailPerson'];
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
@@ -292,7 +292,7 @@ class PersonController{
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
             $arrayPerson['namePerson'] = $_POST['namePerson'];
             $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
-            $arrayPerson['dateBornPerson'] = $_POST['dateBornPerson'];
+            $arrayPerson['dateBornPerson'] = Carbon::parse($_POST['dateBornPerson']);
             $arrayPerson['rhPerson'] = $_POST['rhPerson'];
             $arrayPerson['emailPerson'] = $_POST['emailPerson'];
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];

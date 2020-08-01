@@ -47,7 +47,7 @@ class Person extends BasicModel{
         $this->documentPerson = $person['documentPerson'] ?? null;
         $this->namePerson = $person['namePerson'] ?? null;
         $this->lastNamePerson = $person['lastNamePerson'] ?? null;
-        $this->dateBornPerson = $person['dateBornPerson'] ??  new Carbon();
+        $this->dateBornPerson = $person['dateBornPerson'] ?? new Carbon();
         $this->rhPerson = $person['rhPerson'] ?? null;
         $this->emailPerson = $person['emailPerson'] ?? null;
         $this->phonePerson = $person['phonePerson'] ?? null;
@@ -351,7 +351,7 @@ class Person extends BasicModel{
         foreach ($userName as $user){
             $finalUserName .= $user[0];
         }
-        return $finalUserName .= substr($documentPerson,-4) ;
+        return ucfirst(strtolower($finalUserName .= substr($documentPerson,-4))) ;
     }
     //Creacion del metodo actualizar
     public function update(): bool{

@@ -63,6 +63,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="codeAlfaTrainingProgram" class="col-sm-2 col-form-label">Codigo Programa Corto:</label>
+                            <div class="col-sm-10">
+                                <input required type="text" class="form-control" id="codeAlfaTrainingProgram" name="codeAlfaTrainingProgram" placeholder="Ingrese el Codigo de Programa de Formacion corto">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="nameTrainingProgram" class="col-sm-2 col-form-label">Nombre del Programa de Formacion</label>
                             <div class="col-sm-10">
                                 <input required type="text" class="form-control" id="nameTrainingProgram" name="nameTrainingProgram" placeholder="Ingrese el nombre de Programa de Formacion">
