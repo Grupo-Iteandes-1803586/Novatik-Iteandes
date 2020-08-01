@@ -5,8 +5,6 @@ require_once (__DIR__.'/../Models/LearningResult.php');
 
 
 use App\Models\LearningResult;
-use App\Models\Note;
-use App\Models\Teacher;
 use App\Models\Activity;
 
 if(!empty($_GET['action'])){
