@@ -1,12 +1,15 @@
 <?php
 require("../../partials/routes.php");
 require("../../../app/Controllers/TrainingProgramController.php");
+require("../../../app/Controllers/TrainingCompetitionControllers.php");
 
-use App\Controllers\TrainingProgramController; ?>
+use App\Controllers\TrainingProgramController;
+use App\Controllers\TrainingCompetitionControllers;
+?>
 <!doctype html>
 <html lang="es">
 <head>
-    <title><?=getenv('TITLE_SITE');?> | Ver Programa</title>
+    <title><?=getenv('TITLE_SITE');?> | Ver Competencia</title>
     <?php
     require ("../../partials/head_imports.php");
     require ("../../partials/header.php");
@@ -26,7 +29,7 @@ use App\Controllers\TrainingProgramController; ?>
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Informacion del Programa de Formacion</h1>
+                        <h1>Informacion de la competencia</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -46,10 +49,10 @@ use App\Controllers\TrainingProgramController; ?>
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-ban"></i> Error!</h5>
-                        Error al consultar el Programa de Formacion: <?= ($_GET['mensaje']) ?? "" ?>
+                        Error al consultar la competencia: <?= ($_GET['mensaje']) ?? "" ?>
                     </div>
                 <?php } ?>
-            <?php } else if (empty($_GET['idTrainingProgram'])) { ?>
+            <?php } else if (empty($_GET['idTrainingCompetition'])) { ?>
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h5><i class="icon fas fa-ban"></i> Error!</h5>
@@ -59,48 +62,49 @@ use App\Controllers\TrainingProgramController; ?>
 
             <!-- Horizontal Form -->
             <div class="card card-info">
-                <?php if(!empty($_GET["idTrainingProgram"]) && isset($_GET["idTrainingProgram"])){
-                    $DataPrograming = TrainingProgramController::searchForID($_GET["idTrainingProgram"]);
-                    if(!empty($DataPrograming)){
+                <?php if(!empty($_GET["idTrainingCompetition"]) && isset($_GET["idTrainingCompetition"])){
+                    $DataCompetitio = \App\Controllers\TrainingCompetitionControllers::searchForID($_GET["idTrainingCompetition"]);
+                    if(!empty($DataCompetitio)){
                         ?>
                         <div class="card-header">
-                            <h3 class="card-title"><?= $DataPrograming->getNameTrainingProgram();?></h3>
+                            <h3 class="card-title"><?= $DataCompetitio->getDenomination();?></h3>
                             <?php require("../../partials/optionMenu.php") ;?>
                         </div>
                         <div class="card-body">
                             <strong><i class="fas fa-keyboard mr-1"></i> #</strong>
-                                <p class="text-muted">
-                                    <?= $DataPrograming->getIdTrainingProgram();?>
-                                </p>
-                            <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Codigo del Programa</strong>
-                                <p class="text-muted"><?= $DataPrograming->getCodeTrainingProgram();?></p>
-                            <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Codigo del Programa corto</strong>
-                            <p class="text-muted"><?= $DataPrograming->getCodeAlfaTrainingProgram();?></p>
-                            <hr>
-                            <strong><i class="fas fa-book mr-1"></i> Nombre Programa de Formacion</strong>
                             <p class="text-muted">
-                                <?= $DataPrograming->getNameTrainingProgram();?>
+                                <?= $DataCompetitio->getIdTrainingCompetition();?>
                             </p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Version</strong>
-                            <p class="text-muted"><?= $DataPrograming->getVersion() ?></p>
+                            <strong><i class="fas fa-user mr-1"></i> Codigo de la Competencia</strong>
+                            <p class="text-muted"><?= $DataCompetitio->getCodeTrainingCompetition();?></p>
+                            <hr>
+                            <strong><i class="fas fa-user mr-1"></i> Codigo de la Competencia corto</strong>
+                            <p class="text-muted"><?= $DataCompetitio->getCodeAlfaTrainingCompetition();?></p>
+                            <hr>
+                            <strong><i class="fas fa-book mr-1"></i> Nombre de la Competencia</strong>
+                            <p class="text-muted">
+                                <?= $DataCompetitio->getDenomination();?>
+                            </p>
+                            <hr>
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Cupo Minimo</strong>
+                            <p class="text-muted"><?= $DataCompetitio->getMinimumSpace() ?></p>
+                            <hr>
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Duracion</strong>
+                            <p class="text-muted"><?= $DataCompetitio->getDuration() ?></p>
+                            <hr>
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Programa de Formacion</strong>
+                            <p class="text-muted"><?= $DataCompetitio->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram() ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?= $DataPrograming->getStatusTrainingProgram() ?></p>
+                            <p class="text-muted"><?= $DataCompetitio->getStatusTrainingCompetition()?></p>
                             <hr>
                         </div>
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-auto mr-auto">
+                                <div class="col-auto ">
                                     <a role="button" href="index.php" class="btn btn-success float-right" style="margin-right: 5px;">
-                                        <i class="fas fa-tasks"></i> Gestionar Programa
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                        <i class="fas fa-plus"></i> Crear Programa
+                                        <i class="fas fa-tasks"></i> Gestionar Competencia
                                     </a>
                                 </div>
                             </div>

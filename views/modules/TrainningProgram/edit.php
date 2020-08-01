@@ -81,6 +81,12 @@ use App\Controllers\TrainingProgramController; ?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="codeAlfaTrainingProgram" class="col-sm-2 col-form-label">Codigo del Programa de Formacion corto</label>
+                                    <div class="col-sm-10">
+                                        <input required type="text" class="form-control" id="codeAlfaTrainingProgram" name="codeAlfaTrainingProgram" value="<?= $DataTrainigP->getCodeAlfaTrainingProgram(); ?>" placeholder="Ingrese el Codigo del Programa de Formacion">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="nameTrainingProgram" class="col-sm-2 col-form-label">Nombre del Programa de Formacion</label>
                                     <div class="col-sm-10">
                                         <input required type="text" class="form-control" id="nameTrainingProgram" name="nameTrainingProgram" value="<?= $DataTrainigP->getNameTrainingProgram(); ?>" placeholder="Ingrese el nombre del Programa de Formacion">

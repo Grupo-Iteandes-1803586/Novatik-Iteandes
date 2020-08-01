@@ -93,13 +93,28 @@
     border-color: #191970 !important;
 }
 .btn-danger {
+    color : white !important;
     background-color: #7CFC00!important;
     border-color: #7CFC00!important;
+}
+.btn-award{
+  color : white !important;
+  background-color: #28B463  !important;
+  border-color: #28B463  !important;
+}
+.btn-vision{
+  color : white !important;
+  background-color: #039BE5 !important;
+  border-color: #039BE5 !important;
 }
 .btn-warning {
     color : white !important;
     background-color: #008B8B!important;
     border-color: #008B8B!important;
+}
+.form-control:disabled, .form-control[readonly] {
+  background-color: rgba(#154360  ,.05)!important;
+  opacity: 1;
 }
 .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(#007bff,.05)!important;

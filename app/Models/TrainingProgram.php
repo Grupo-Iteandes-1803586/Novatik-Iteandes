@@ -7,6 +7,7 @@ require ('BasicModel.php');
 class TrainingProgram extends BasicModel{
     private $idTrainingProgram;
     private $codeTrainingProgram;
+    private $codeAlfaTrainingProgram;
     private $nameTrainingProgram;
     private $version;
     private $statusTrainingProgram;
@@ -15,6 +16,7 @@ class TrainingProgram extends BasicModel{
      * TrainingProgram constructor.
      * @param $idTrainingProgram
      * @param $codeTrainingProgram
+     * @param $codeAlfaTrainingProgram
      * @param $nameTrainingProgram
      * @param $version
      * @param $statusTrainingProgram
@@ -24,6 +26,7 @@ class TrainingProgram extends BasicModel{
         parent::__construct();//se llama al constructor de la clase BasicModel
         $this->idTrainingProgram =  $trainingProgram['idTrainingProgram']?? null;
         $this->codeTrainingProgram =$trainingProgram['codeTrainingProgram'] ?? null;
+        $this->codeAlfaTrainingProgram =$trainingProgram['codeAlfaTrainingProgram'] ?? null;
         $this->nameTrainingProgram = $trainingProgram['nameTrainingProgram'] ?? null;
         $this->version = $trainingProgram['version'] ?? null;
         $this->statusTrainingProgram = $trainingProgram['statusTrainingProgram'] ?? null;
@@ -48,6 +51,23 @@ class TrainingProgram extends BasicModel{
     {
         $this->idTrainingProgram = $idTrainingProgram;
     }
+
+    /**
+     * @return String
+     */
+    public function getCodeAlfaTrainingProgram(): String
+    {
+        return $this->codeAlfaTrainingProgram;
+    }
+
+    /**
+     * @param String$codeAlfaTrainingProgram
+     */
+    public function setCodeAlfaTrainingProgram(String $codeAlfaTrainingProgram): void
+    {
+        $this->codeAlfaTrainingProgram = $codeAlfaTrainingProgram;
+    }
+
 
     /**
      * @return int
@@ -118,8 +138,9 @@ class TrainingProgram extends BasicModel{
     }
     //Creacion del metodo create
     public function create() : bool{
-        $result = $this->insertRow( "INSERT INTO iteandes_novatik.trainingprogram VALUES (NULL, ?, ?, ?, ?)", array(
+        $result = $this->insertRow( "INSERT INTO iteandes_novatik.trainingprogram VALUES (NULL, ?, ?,?, ?, ?)", array(
             $this->codeTrainingProgram,
+            $this->codeAlfaTrainingProgram,
             $this->nameTrainingProgram ,
             $this->version,
             $this->statusTrainingProgram
@@ -130,8 +151,9 @@ class TrainingProgram extends BasicModel{
     }
     //Creacion del metodo actualizar
     public function update(): bool{
-        $result = $this->updateRow( "UPDATE iteandes_novatik.trainingprogram SET codeTrainingProgram =?,nameTrainingProgram = ?,version = ?,statusTrainingProgram = ? WHERE idTrainingProgram = ?", array(
+        $result = $this->updateRow( "UPDATE iteandes_novatik.trainingprogram SET codeTrainingProgram =?,codeAlfaTrainingProgram = ?,nameTrainingProgram = ?,version = ?,statusTrainingProgram = ? WHERE idTrainingProgram = ?", array(
                 $this->codeTrainingProgram,
+                $this->codeAlfaTrainingProgram,
                 $this->nameTrainingProgram ,
                 $this->version,
                 $this->statusTrainingProgram,
@@ -158,6 +180,7 @@ class TrainingProgram extends BasicModel{
             $Program = new TrainingProgram();
             $Program->idTrainingProgram =  $value['idTrainingProgram'];
             $Program->codeTrainingProgram =$value['codeTrainingProgram'] ;
+            $Program->codeAlfaTrainingProgram =$value['codeAlfaTrainingProgram'] ;
             $Program->nameTrainingProgram = $value['nameTrainingProgram'] ;
             $Program->version = $value['version'];
             $Program->statusTrainingProgram = $value['statusTrainingProgram'];
@@ -171,10 +194,11 @@ class TrainingProgram extends BasicModel{
     public static function searchForId($idTrainingProgram) : TrainingProgram{
         $Program = null;
         if($idTrainingProgram > 0) {
-            $Program = new TrainingProgram;
+            $Program = new TrainingProgram();
             $getrow = $Program->getRow("SELECT * FROM iteandes_novatik.trainingprogram WHERE idTrainingProgram =?", array($idTrainingProgram));
             $Program->idTrainingProgram =  $getrow['idTrainingProgram'];
             $Program->codeTrainingProgram =$getrow['codeTrainingProgram'] ;
+            $Program->codeAlfaTrainingProgram =$getrow['codeAlfaTrainingProgram'] ;
             $Program->nameTrainingProgram = $getrow['nameTrainingProgram'] ;
             $Program->version = $getrow['version'];
             $Program->statusTrainingProgram = $getrow['statusTrainingProgram'];
@@ -187,8 +211,7 @@ class TrainingProgram extends BasicModel{
     {
         return TrainingProgram::search("SELECT * FROM iteandes_novatik.trainingprogram");
     }
-
-    public static function programRegistration ($codeTrainingProgram) : bool
+    public static function codeRegistration($codeTrainingProgram) : bool
     {
         $result = TrainingProgram::search("SELECT idTrainingProgram FROM iteandes_novatik.trainingprogram where codeTrainingProgram = ".$codeTrainingProgram);
         if (count($result) > 0){
@@ -197,9 +220,10 @@ class TrainingProgram extends BasicModel{
             return false;
         }
     }
+
     //Metodo to string o cadena de texto
     public function __toString()
     {
-        return $this->codeTrainingProgram." ".$this->nameTrainingProgram." ".$this->version." ".$this->statusTrainingProgram;
+        return $this->codeTrainingProgram." ".$this->codeAlfaTrainingProgram." ".$this->nameTrainingProgram." ".$this->version." ".$this->statusTrainingProgram;
     }
 }

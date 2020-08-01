@@ -3,29 +3,30 @@
 namespace App\Controllers;
 
 require_once(__DIR__.'/../Models/TrainingProgram.php');
+require_once(__DIR__.'/../Models/GeneralFunctions.php');
 require_once(__DIR__.'/../Models/TrainingCompetition.php');
-
+use App\Models\GeneralFunctions;
 use App\Models\TrainingCompetition;
 use App\Models\TrainingProgram;
 
 if(!empty($_GET['action'])){
-    TrainingProgramController::main($_GET['action']);
+    TrainingCompetitionControllers::main($_GET['action']);
 }
 class TrainingCompetitionControllers{
 
     static function main($action){
         if ($action == "create") {
-            TrainingProgramController::create();
+            TrainingCompetitionControllers::create();
         } else if ($action == "edit") {
-            TrainingProgramController::edit();
+            TrainingCompetitionControllers::edit();
         } else if ($action == "searchForID") {
-            TrainingProgramController::searchForID($_REQUEST['idTrainingCompetition']);
+            TrainingCompetitionControllers::searchForID($_REQUEST['idTrainingCompetition']);
         } else if ($action == "searchAll") {
-            TrainingProgramController::getAll();
+            TrainingCompetitionControllers::getAll();
         } else if ($action == "activate") {
-            TrainingProgramController::activate();
+            TrainingCompetitionControllers::activate();
         } else if ($action == "inactivate") {
-            TrainingProgramController::inactivate();
+            TrainingCompetitionControllers::inactivate();
         }
     }
 
@@ -36,6 +37,7 @@ class TrainingCompetitionControllers{
         try {
             $arrayTrainingCompetition = array();
             $arrayTrainingCompetition['codeTrainingCompetition']= $_POST['codeTrainingCompetition'];
+            $arrayTrainingCompetition['codeAlfaTrainingCompetition']= $_POST['codeAlfaTrainingCompetition'];
             $arrayTrainingCompetition['denomination']= $_POST['denomination'];
             $arrayTrainingCompetition['duration']= $_POST['duration'];
             $arrayTrainingCompetition['minimumSpace']= $_POST['minimumSpace'];
@@ -44,10 +46,10 @@ class TrainingCompetitionControllers{
             $arrayTrainingCompetition['TrainingProgram_idTrainingProgram']= TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
             $competition = new TrainingCompetition($arrayTrainingCompetition);
             if($competition->create()){
-                header("Location: ../../views/modules/TrainingCompetition/create.php?idTeacher=".$competition->getIdTrainingCompetition());
+                header("Location: ../../views/modules/TrainingCompetition/index.php");
             }
         } catch (Exception $e) {
-            //GeneralFunctions::console( $e, 'error', 'errorStack');
+            GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/TrainingCompetition/create.php?respuesta=error&mensaje=" . $e->getMessage());
         }
     }
@@ -57,6 +59,7 @@ class TrainingCompetitionControllers{
         try {
             $arrayTrainingCompetition = array();
             $arrayTrainingCompetition['codeTrainingCompetition']= $_POST['codeTrainingCompetition'];
+            $arrayTrainingCompetition['codeAlfaTrainingCompetition']= $_POST['codeAlfaTrainingCompetition'];
             $arrayTrainingCompetition['denomination']= $_POST['denomination'];
             $arrayTrainingCompetition['duration']= $_POST['duration'];
             $arrayTrainingCompetition['minimumSpace']= $_POST['minimumSpace'];
@@ -69,7 +72,7 @@ class TrainingCompetitionControllers{
 
             header("Location: ../../views/modules/TrainingCompetition/show.php?respuesta=correcto");
         } catch (\Exception $e) {
-            //GeneralFunctions::console( $e, 'error', 'errorStack');
+            GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/TrainingCompetition/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
@@ -85,7 +88,7 @@ class TrainingCompetitionControllers{
                 header("Location: ../../views/modules/TrainingCompetition/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
-            // GeneralFunctions::console( $e, 'error', 'errorStack');
+            GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/TrainingCompetition/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
@@ -95,12 +98,12 @@ class TrainingCompetitionControllers{
             $TrainigCompetition  = TrainingCompetition::searchForId($_GET['idTrainingCompetition']);
             $TrainigCompetition ->setStatusTrainingCompetition("Inactivo");
             if($TrainigCompetition ->update()){
-                header("Location: ../../views/modules/TrainingCompetition/Teacher/index.php");
+                header("Location: ../../views/modules/TrainingCompetition/index.php");
             }else{
                 header("Location: ../../views/modules/TrainingCompetition/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
-            // GeneralFunctions::console( $e, 'error', 'errorStack');
+            GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/TrainingCompetition/index.php?respuesta=error");
         }
     }
@@ -109,7 +112,7 @@ class TrainingCompetitionControllers{
         try {
             return TrainingCompetition::searchForId($idTrainingCompetition);
         } catch (\Exception $e) {
-            //GeneralFunctions::console( $e, 'error', 'errorStack');
+            GeneralFunctions::console( $e, 'error', 'errorStack');
             //header("Location: ../../views/modules/TrainingCompetition/manager.php?respuesta=error");
         }
     }

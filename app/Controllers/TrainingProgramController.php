@@ -31,16 +31,22 @@ class TrainingProgramController{
         try{
             $arrayProgram= array();
             $arrayProgram['codeTrainingProgram'] =$_POST['codeTrainingProgram'];
+            $arrayProgram['codeAlfaTrainingProgram'] =$_POST['codeAlfaTrainingProgram'];
             $arrayProgram['nameTrainingProgram'] = $_POST['nameTrainingProgram'];
             $arrayProgram['version'] = $_POST['version'];
             $arrayProgram['statusTrainingProgram'] = 'Activo';
             //Validacion del registro del programma de formacion
-            $program = new TrainingProgram($arrayProgram);
-            if($program->create()){
-                header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=correcto");
-            }else{
-                header("Location: ../../views/modules/TrainningProgram/create.php?respuesta=error&mensaje=Programa de Formacion no Registrado");
+            if(!TrainingProgram::codeRegistration($arrayProgram['codeTrainingProgram'])){
+                $program = new TrainingProgram($arrayProgram);
+                if($program->create()){
+                    header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=correcto");
+                }else{
+                    header("Location: ../../views/modules/TrainningProgram/create.php?respuesta=error&mensaje=Programa de formacion ya registrado");
+                }
+
+
             }
+
         }catch (\Exception $e){
             header("Location: ../../views/modules/TrainningProgram/create.php?respuesta=error&mensaje" . $e-> getMessage());
         }
@@ -50,6 +56,7 @@ class TrainingProgramController{
         try{
             $arrayProgram= array();
             $arrayProgram['codeTrainingProgram'] =$_POST['codeTrainingProgram'];
+            $arrayProgram['codeAlfaTrainingProgram'] =$_POST['codeAlfaTrainingProgram'];
             $arrayProgram['nameTrainingProgram'] = $_POST['nameTrainingProgram'];
             $arrayProgram['version'] = $_POST['version'];
             $arrayProgram['statusTrainingProgram'] = $_POST['statusTrainingProgram'];
@@ -65,17 +72,17 @@ class TrainingProgramController{
 
     //Funcion Activar estado del  programa de formacion
     static public function active(){
-            try{
-                $ObjTrainingP = TrainingProgram::searchForId($_GET['idTrainingProgram']);
-                $ObjTrainingP->setStatusTrainingProgram('Activo');
-                if($ObjTrainingP->update()){
-                    header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=correcto");
-                }else{
-                    header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=error&mensaje=Error al Guardar");
-                }
-            }catch (\Exception $e){
-                header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=error&mensaje" . $e-> getMessage());
+        try{
+            $ObjTrainingP = TrainingProgram::searchForId($_GET['idTrainingProgram']);
+            $ObjTrainingP->setStatusTrainingProgram('Activo');
+            if($ObjTrainingP->update()){
+                header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=correcto");
+            }else{
+                header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=error&mensaje=Error al Guardar");
             }
+        }catch (\Exception $e){
+            header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=error&mensaje" . $e-> getMessage());
+        }
     }
     //Funcion Inactivo del Programa de Formacion
     static public function inactive(){
