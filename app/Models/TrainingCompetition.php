@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+require_once ('TrainingProgram.php');
+use App\Models\TrainingProgram;
 require_once("BasicModel.php");
 
 class TrainingCompetition extends BasicModel{
@@ -10,7 +12,7 @@ class TrainingCompetition extends BasicModel{
     private $denomination;
     private $duration;
     private $minimumSpace;
-    private $order;
+    private $orderTrainingCompetition;
     private $statusTrainingCompetition;
     private $TrainingProgram_idTrainingProgram;
 
@@ -22,7 +24,7 @@ class TrainingCompetition extends BasicModel{
      * @param $denomination
      * @param $duration
      * @param $minimumSpace
-     * @param $order
+     * @param $orderTrainingCompetition
      * @param $statusTrainingCompetition
      * @param $TrainingProgram_idTrainingProgram
      */
@@ -35,7 +37,7 @@ class TrainingCompetition extends BasicModel{
         $this->denomination = $trainingCompetition['denomination'] ?? null;
         $this->duration = $trainingCompetition['duration'] ?? null;
         $this->minimumSpace = $trainingCompetition['minimumSpace'] ?? null;
-        $this->order = $trainingCompetition['order'] ?? null;
+        $this->orderTrainingCompetition = $trainingCompetition['orderTrainingCompetition'] ?? null;
         $this->statusTrainingCompetition = $trainingCompetition['statusTrainingCompetition'] ?? null;
         $this->TrainingProgram_idTrainingProgram = $trainingCompetition['TrainingProgram_idTrainingProgram'] ?? null;
     }
@@ -142,17 +144,17 @@ class TrainingCompetition extends BasicModel{
     /**
      * @return int
      */
-    public function getOrder(): int
+    public function getOrderTrainingCompetition(): int
     {
-        return $this->order;
+        return $this->orderTrainingCompetition;
     }
 
     /**
-     * @param int $order
+     * @param int $orderTrainingCompetition
      */
-    public function setOrder(int $order): void
+    public function setOrderTrainingCompetition(int $orderTrainingCompetition): void
     {
-        $this->order = $order;
+        $this->orderTrainingCompetition = $orderTrainingCompetition;
     }
 
     /**
@@ -196,7 +198,7 @@ class TrainingCompetition extends BasicModel{
                 $this->denomination,
                 $this->duration,
                 $this->minimumSpace,
-                $this->order,
+                $this->orderTrainingCompetition,
                 $this->statusTrainingCompetition,
                 $this->TrainingProgram_idTrainingProgram->getIdTrainingProgram()
             )
@@ -209,13 +211,13 @@ class TrainingCompetition extends BasicModel{
     //Actulizar una competencia
     public function update()
     {
-        $result = $this->updateRow("UPDATE iteandes_novatik.TrainingCompetition  SET codeTrainingCompetition = ?,codeAlfaTrainingCompetition = ?, denomination = ?, order =?, duration= ?, minimumSpace = ?,  statusTrainingCompetition =?,TrainingProgram_idTrainingProgram=? WHERE idTrainingCompetition = ?", array(
+        $result = $this->updateRow("UPDATE iteandes_novatik.TrainingCompetition  SET codeTrainingCompetition = ?,codeAlfaTrainingCompetition = ?, denomination = ?, orderTrainingCompetition =?, duration= ?, minimumSpace = ?,  statusTrainingCompetition =?,TrainingProgram_idTrainingProgram=? WHERE idTrainingCompetition = ?", array(
                 $this->codeTrainingCompetition,
                 $this->codeAlfaTrainingCompetition,
                 $this->denomination,
                 $this->duration,
                 $this->minimumSpace,
-                $this->order,
+                $this->orderTrainingCompetition,
                 $this->statusTrainingCompetition,
                 $this->TrainingProgram_idTrainingProgram->getIdTrainingProgram(),
                 $this->idTrainingCompetition
@@ -245,7 +247,7 @@ class TrainingCompetition extends BasicModel{
             $competition->denomination = $value['denomination'];
             $competition->duration = $value['duration'];
             $competition->minimumSpace = $value['minimumSpace'];
-            $competition->order = $value['order'];
+            $competition->orderTrainingCompetition = $value['orderTrainingCompetition'];
             $competition->statusTrainingCompetition = $value['statusTrainingCompetition'];
             $competition->TrainingProgram_idTrainingProgram = TrainingProgram::searchForId($value['TrainingProgram_idTrainingProgram']);
             $competition->idTrainingCompetition = $value['idTrainingCompetition'];
@@ -273,7 +275,7 @@ class TrainingCompetition extends BasicModel{
             $competition->denomination = $getrow['denomination'];
             $competition->duration = $getrow['duration'];
             $competition->minimumSpace = $getrow['minimumSpace'];
-            $competition->order = $getrow['order'];
+            $competition->orderTrainingCompetition = $getrow['orderTrainingCompetition'];
             $competition->statusTrainingCompetition = $getrow['statusTrainingCompetition'];
             $competition->TrainingProgram_idTrainingProgram = TrainingProgram::searchForId($getrow['TrainingProgram_idTrainingProgram']);
             $competition->idTrainingCompetition = $getrow['idTrainingCompetition'];
@@ -293,6 +295,6 @@ class TrainingCompetition extends BasicModel{
     //Metodo to String
     public function __toString()
     {
-        return "Codigo: $this->codeTrainingCompetition, Codigo Corto: $this->codeAlfaTrainingCompetition, Denominacion: $this->denomination, duracion: $this->duration , cupo Minimo: $this->minimumSpace,  orden: $this->order, Estado: $this->statusTrainingCompetition, Programa de Formacion $this->TrainingProgram_idTrainingProgram";
+        return "Codigo: $this->codeTrainingCompetition, Codigo Corto: $this->codeAlfaTrainingCompetition, Denominacion: $this->denomination, duracion: $this->duration , cupo Minimo: $this->minimumSpace,  orden: $this->orderTrainingCompetition, Estado: $this->statusTrainingCompetition, Programa de Formacion $this->TrainingProgram_idTrainingProgram";
     }
 }

@@ -69,7 +69,7 @@ class EnrollmentCompetition extends BasicModel
     /**
      * @return int
      */
-    public function getScheduleIdSchedule(): int
+    public function getScheduleIdSchedule(): Schedule
     {
         return $this->Schedule_idSchedule;
     }
@@ -85,7 +85,7 @@ class EnrollmentCompetition extends BasicModel
     /**
      * @return int
      */
-    public function getTrainingCompetitionIdTrainingCompetition(): int
+    public function getTrainingCompetitionIdTrainingCompetition(): TrainingCompetition
     {
         return $this->TrainingCompetition_idTrainingCompetition;
     }

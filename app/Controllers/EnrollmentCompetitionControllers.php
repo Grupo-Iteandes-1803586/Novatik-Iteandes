@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 require_once (__DIR__.'/../Models/EnrollmentCompetition.php');
-require_once (__DIR__.'/../Models/Enrollment');
+require_once (__DIR__.'/../Models/Enrollment.php');
 require_once (__DIR__.'/../Models/Schedule.php');
 require_once (__DIR__.'/../Models/TrainingCompetition.php');
 

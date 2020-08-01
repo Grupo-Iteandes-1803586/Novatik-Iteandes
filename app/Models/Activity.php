@@ -120,7 +120,7 @@ class Activity extends BasicModel
     /**
      * @return int
      */
-    public function getLearningResultIdLearningResult(): int
+    public function getLearningResultIdLearningResult(): LearningResult
     {
         return $this->LearningResult_idLearningResult;
     }
