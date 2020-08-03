@@ -41,7 +41,7 @@ class TrainingCompetitionControllers{
             $arrayTrainingCompetition['denomination']= $_POST['denomination'];
             $arrayTrainingCompetition['duration']= $_POST['duration'];
             $arrayTrainingCompetition['minimumSpace']= $_POST['minimumSpace'];
-            $arrayTrainingCompetition['order']= $_POST['order'];
+            $arrayTrainingCompetition['orderTrainingCompetition']= $_POST['orderTrainingCompetition'];
             $arrayTrainingCompetition['statusTrainingCompetition'] = 'Activo';
             $arrayTrainingCompetition['TrainingProgram_idTrainingProgram']= TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
             $competition = new TrainingCompetition($arrayTrainingCompetition);
@@ -63,7 +63,7 @@ class TrainingCompetitionControllers{
             $arrayTrainingCompetition['denomination']= $_POST['denomination'];
             $arrayTrainingCompetition['duration']= $_POST['duration'];
             $arrayTrainingCompetition['minimumSpace']= $_POST['minimumSpace'];
-            $arrayTrainingCompetition['order']= $_POST['order'];
+            $arrayTrainingCompetition['orderTrainingCompetition']= $_POST['orderTrainingCompetition'];
             $arrayTrainingCompetition['statusTrainingCompetition'] = $_POST['statusTrainingCompetition'];
             $arrayTrainingCompetition['TrainingProgram_idTrainingProgram']= TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
             $arrayTrainingCompetition['idTrainingCompetition']= $_POST['idTrainingCompetition'];

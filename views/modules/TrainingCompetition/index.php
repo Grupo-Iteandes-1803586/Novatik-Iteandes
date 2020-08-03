@@ -98,7 +98,7 @@ use App\Controllers\TrainingCompetitionControllers;?>
                                             <td><?php echo $trainingCom->getDenomination(); ?></td>
                                             <td><?php echo $trainingCom->getDuration(); ?></td>
                                             <td><?php echo $trainingCom->getMinimumSpace(); ?></td>
-                                            <td><?php echo $trainingCom->getOrder(); ?></td>
+                                            <td><?php echo $trainingCom->getOrderTrainingCompetition(); ?></td>
                                             <td><?php echo $trainingCom->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram(); ?></td>
                                             <td><?php echo $trainingCom->getStatusTrainingCompetition(); ?></td>
                                             <td>

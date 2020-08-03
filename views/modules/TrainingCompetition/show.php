@@ -93,6 +93,9 @@ use App\Controllers\TrainingCompetitionControllers;
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Duracion</strong>
                             <p class="text-muted"><?= $DataCompetitio->getDuration() ?></p>
                             <hr>
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Orden</strong>
+                            <p class="text-muted"><?= $DataCompetitio->getOrderTrainingCompetition() ?></p>
+                            <hr>
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Programa de Formacion</strong>
                             <p class="text-muted"><?= $DataCompetitio->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram() ?></p>
                             <hr>
