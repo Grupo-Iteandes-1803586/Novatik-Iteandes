@@ -1,5 +1,7 @@
 <?php
 namespace App\Models;
+require_once ('TrainingCompetition.php');
+use App\Models\TrainingCompetition;
 
 require_once('BasicModel.php');
 class  LearningResult  Extends BasicModel{
@@ -120,7 +122,7 @@ class  LearningResult  Extends BasicModel{
     /**
      * @return int
      */
-    public function getTrainingCompetitionIdTrainingCompetition(): int
+    public function getTrainingCompetitionIdTrainingCompetition(): TrainingCompetition
     {
         return $this->TrainingCompetition_idTrainingCompetition;
     }
@@ -159,39 +161,38 @@ class  LearningResult  Extends BasicModel{
     //Buscar toda la informacion de la tabla
     public static function getAll()
     {
-        return LearningResult::search("SELECT * FROM iteande_novatik.LearningResult");
+        return LearningResult::search("SELECT * FROM iteandes_novatik.LearningResult");
     }
 ///Buscar por id LearningResult
     /**
      * @param $idLearningResult¿
      * @return mixed
      */
-    public static function searchForId($idLearningResult)
+    public static function searchForId($idLearningResult) : LearningResult
     {
-        $teacher = null;
+        $learning = null;
         if ($idLearningResult  > 0) {
-            $teacher= new Teacher();
-            $getrow = $teacher->getRow("SELECT * FROM iteande_novatik.LearningResult WHERE idLearningResult =?", array($idLearningResult));
-            $teacher->idLearningResult = $getrow['idLearningResult'];
-            $teacher->codeLearningResult = $getrow['codeLearningResult'];
-            $teacher->nameLearningResult = $getrow['nameLearningResult'];
-            $teacher->durationLearningResult = $getrow['durationLearningResult'];
-            $teacher->TrainingCompetition_idTrainingCompetition = TrainingCompetition::searchForId($getrow['TrainingCompetition_idTrainingCompetition']);
-            $teacher->statuLearningResult = $getrow['statuLearningResult'];
+            $learning= new LearningResult();
+            $getrow = $learning->getRow("SELECT * FROM iteandes_novatik.LearningResult WHERE idLearningResult =?", array($idLearningResult));
+            $learning->codeLearningResult = $getrow['codeLearningResult'];
+            $learning->nameLearningResult = $getrow['nameLearningResult'];
+            $learning->durationLearningResult = $getrow['durationLearningResult'];
+            $learning->TrainingCompetition_idTrainingCompetition = TrainingCompetition::searchForId($getrow['TrainingCompetition_idTrainingCompetition']);
+            $learning->statuLearningResult = $getrow['statuLearningResult'];
+            $learning->idLearningResult = $getrow['idLearningResult'];
         }
-        $teacher->Disconnect();
-        return $teacher;
+        $learning->Disconnect();
+        return $learning;
     }
     ////////////////////crear a un LearningResult
     public function create()
     {
-        $result = $this->insertRow("INSERT INTO iteande_novatik VALUES (NULL, ?, ?, ?, ?,?)", array(
+        $result = $this->insertRow("INSERT INTO iteandes_novatik.LearningResult VALUES (NULL, ?, ?, ?, ?,?)", array(
                 $this->codeLearningResult,
                 $this->nameLearningResult,
                 $this->durationLearningResult,
-                $this->TrainingCompetition_idTrainingCompetition->getIdLearningResult(),
+                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition(),
                 $this->statuLearningResult,
-
             )
         );
         $this->setIdLearningResult(($result) ? $this->getLastId() : null);
@@ -201,11 +202,11 @@ class  LearningResult  Extends BasicModel{
     ///////////////////Actualizar  un LearningResult
     public function update()
     {
-        $result = $this->updateRow("UPDATE iteande_novatik  SET codeLearningResult = ?, nameLearningResult = ?, durationLearningResult= ?, TrainingCompetition_idTrainingCompetition = ?, statuLearningResult = ? WHERE idLearningResult = ?", array(
+        $result = $this->updateRow("UPDATE iteandes_novatik.LearningResult  SET codeLearningResult = ?, nameLearningResult = ?, durationLearningResult= ?, TrainingCompetition_idTrainingCompetition = ?, statuLearningResult = ? WHERE idLearningResult = ?", array(
                 $this->codeLearningResult,
                 $this->nameLearningResult,
                 $this->durationLearningResult,
-                $this->TrainingCompetition_idTrainingCompetition->getIdLearningResult(),
+                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition(),
                 $this->statuLearningResult,
                 $this->idLearningResult
             )

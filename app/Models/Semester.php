@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-require ('BasicModel.php');
+require_once ('BasicModel.php');
 use Carbon\Carbon;
 class Semester extends BasicModel{
     private $idSemester;

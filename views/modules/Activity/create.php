@@ -1,19 +1,17 @@
-//vas a poner las vistas de archive y activity
-<?php require ("../../../partials/routes.php");
-use Carbon\Carbon;?>
+<?php require ("../../partials/routes.php");?>
 <!doctype html>
 <html lang="es">
 <head>
-    <title><?= getenv('TITLE_SITE');?> | Crear Estudiante</title>
-    <?php require ("../../../partials/head_imports.php");?>
-    <?php require("../../../partials/header.php");?>
+    <title><?= getenv('TITLE_SITE');?> | Crear Actividad</title>
+    <?php require ("../../partials/head_imports.php");?>
+    <?php require("../../partials/header.php");?>
 </head>
 <body class="hold-transition sidebar-mini">
 
 <!-- Site wrapper -->
 <div class="wrapper">
-    <?php require ("../../../partials/navbar_customation.php");?>
-    <?php require ("../../../partials/sliderbar_main_menu.php")?>
+    <?php require ("../../partials/navbar_customation.php");?>
+    <?php require ("../../partials/sliderbar_main_menu.php")?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -22,7 +20,7 @@ use Carbon\Carbon;?>
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Crear un Nuevo Estudiante</h1>
+                        <h1>Crear una Actividad</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -48,7 +46,7 @@ use Carbon\Carbon;?>
             <!-- Horizontal Form -->
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Formulario de Registro del Estudiante</h3>
+                    <h3 class="card-title">Formulario de Actividad</h3>
                     <?php require("../../partials/optionMenu.php") ;?>
                 </div>
                 <!-- /.card-header -->
@@ -93,9 +91,10 @@ use Carbon\Carbon;?>
                         </div>
                         <!--Resultados de Actividad-->
                         <div class="form-group row">
-                            <label for="LearningResult_idLearningResult" class="col-sm-2 col-form-label">Resultados de Actividad</label>
+                            <label for="LearningResult_idLearningResult" class="col-sm-2 col-form-label">Resultado de Aprendizaje</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="LearningResult_idLearningResult" name="LearningResult_idLearningResult" placeholder="Resultados de Actividad">
+                                <input required type="text" class="form-control" id="LearningResult_idLearningResult" name="LearningResult_idLearningResult" placeholder="Resultado de Aprendizaje">
+
                             </div>
                         </div>
                     </div>

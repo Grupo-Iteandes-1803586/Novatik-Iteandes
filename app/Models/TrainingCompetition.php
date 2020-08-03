@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+require_once ('TrainingProgram.php');
+use App\Models\TrainingProgram;
 require_once("BasicModel.php");
 
 class TrainingCompetition extends BasicModel{
