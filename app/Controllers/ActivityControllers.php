@@ -1,9 +1,11 @@
 <?php
 namespace App\Controllers;
 require_once (__DIR__.'/../Models/Activity.php');
+require_once (__DIR__.'/../Models/Archive.php');
 require_once (__DIR__.'/../Models/LearningResult.php');
 
 use App\Models\LearningResult;
+use App\Models\Archive;
 use App\Models\Activity;
 
 if(!empty($_GET['action'])){
@@ -44,6 +46,7 @@ class ActivityControllers
                 $arrayArchive['descriptionArchive'] = $_POST['descriptionArchive'];
                 $arrayArchive['rutaArchive'] = 'Ruta del Archivo';
                 $arrayArchive['Activity_idActivity'] =$activity;
+                $arrayArchive['Group_idGroup'] =$activity;
                 $arrayArchive['stateArchive'] = 'Activo';
                 $archive = new Archive($arrayArchive);
                 if ($archive->create()) {
@@ -78,8 +81,9 @@ class ActivityControllers
                 header("Location: ../../views/modules/Activity/show.php?idActivity=".$Activity->getIdActivity()."&respuesta=correcto");
             }
         } catch (\Exception $e) {
+            var_dump($e);
             //GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/modules/Activity/edit.php?respuesta=error&mensaje=".$e->getMessage());
+            //header("Location: ../../views/modules/Activity/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
     //Estado activo

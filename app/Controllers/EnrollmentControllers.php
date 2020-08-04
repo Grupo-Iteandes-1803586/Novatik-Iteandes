@@ -7,6 +7,7 @@ require_once (__DIR__.'/../Models/TrainingProgram.php');
 require_once (__DIR__.'/../Models/Semester.php');
 
 use App\Models\Enrollment;
+use App\Models\EnrollmentCompetition;
 use App\Models\Person;
 use App\Models\Schedule;
 use App\Models\Student;
@@ -98,24 +99,53 @@ class EnrollmentControllers{
 
     static public function edit (){
         try {
-            $arrEnrollment= array();
-            $arrEnrollment->idEnrollment = $_POST['idEnrollment'];
-            $arrEnrollment->dateEnrollment = Carbon::now(); //Fecha Actual;
-            $arrEnrollment->stateEnrollment = $_POST['stateEnrollment'];
-            $arrEnrollment->Student_idStudent = Student::searchForId($_POST['Student_idStudent']);
-            $arrEnrollment->Semester_idSemester= Semester::searchForId($_POST['Semester_idSemester']);
-            $arrEnrollment->TrainingProgram_idTrainingProgram= TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
-            $enrollmment = new Enrollment($arrEnrollment);
-            $enrollmment->update();
-            $arrayEnrollmentCompetition['idEnrollmentCompetition'] = $_POST['idEnrollmentCompetition'];
-            $arrayEnrollmentCompetition['Enrollment_idEnrollment'] = Enrollment::searchForId($_POST['Enrollment_idEnrollment']);
-            $arrayEnrollmentCompetition['Schedule_idSchedule'] = Schedule::searchForId($_POST['Schedule_idSchedule']);
-            $arrayEnrollmentCompetition['TrainingCompetition_idTrainingCompetition'] = TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
-            $arrayEnrollmentCompetition['stateEnrollmentCompetition'] = $_POST['stateEnrollmentCompetition'];
-            $EnrollmentCompetition = new Note($arrayEnrollmentCompetition);
-            $EnrollmentCompetition->update();
-            header("Location: ../../views/modules/Enrollment/show.php?idEnrollment=".$enrollmment->getIdEnrollment()."&respuesta=correcto");
-        } catch (\Exception $e) {
+            $arrayPerson = array();
+            $arrayPerson['documentPerson'] = $_POST['documentPerson'];
+            $arrayPerson['namePerson'] = $_POST['namePerson'];
+            $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
+            $arrayPerson['dateBornPerson']= Carbon::parse($_POST['dateBornPerson']);
+            $arrayPerson['rhPerson'] = $_POST['rhPerson'];
+            $arrayPerson['emailPerson'] = $_POST['emailPerson'];
+            $arrayPerson['phonePerson'] = $_POST['phonePerson'];
+            $arrayPerson['adressPerson'] = $_POST['adressPerson'];
+            $arrayPerson['generePerson'] = $_POST['generePerson'];
+            $arrayPerson['typePerson'] = $_POST['typePerson'];
+            $arrayPerson['statePerson'] = $_POST['statePerson'];
+            $arrayPerson['photoPerson']= $_POST['photoPerson'];
+            $arrayPerson['idPerson']= $_POST['idPerson'];
+            $person= new Person($arrayPerson);
+            if($person->update()){
+                $arrayStudent = array();
+                $arrayStudent['idStudent'] = $_POST['idStudent'];
+                $arrayStudent['gradeYear'] = $_POST['gradeYear'];
+                $arrayStudent['modality'] = $_POST['modality'];
+                $arrayStudent['Institution'] = $_POST['Institution'];
+                $arrayStudent['Person_idPerson'] = Person::searchForId($_POST['Person_idPerson']);
+                $arrayStudent['stateStudent'] = $person->getStatePerson();
+                $student = new Student($arrayStudent);
+                if($student->update()){
+                    $arrEnrollment= array();
+                    $arrEnrollment->idEnrollment = $_POST['idEnrollment'];
+                    $arrEnrollment->dateEnrollment = Carbon::now(); //Fecha Actual;
+                    $arrEnrollment->stateEnrollment = $person->getStatePerson();
+                    $arrEnrollment->Student_idStudent = $student;
+                    $arrEnrollment->Semester_idSemester= Semester::searchForId($_POST['Semester_idSemester']);
+                    $arrEnrollment->TrainingProgram_idTrainingProgram= TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
+                    $enrollmment = new Enrollment($arrEnrollment);
+                    if($enrollmment->update()){
+                        $arrayEnrollmentCompetition['idEnrollmentCompetition'] = $_POST['idEnrollmentCompetition'];
+                        $arrayEnrollmentCompetition['Enrollment_idEnrollment'] = $enrollmment;
+                        $arrayEnrollmentCompetition['Schedule_idSchedule'] = Schedule::searchForId($_POST['Schedule_idSchedule']);
+                        $arrayEnrollmentCompetition['TrainingCompetition_idTrainingCompetition'] = TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
+                        $arrayEnrollmentCompetition['stateEnrollmentCompetition'] = $person->getStatePerson();
+                        $EnrollmentCompetition = new EnrollmentCompetition($arrayEnrollmentCompetition);
+                        if($EnrollmentCompetition->update()){
+                            header("Location: ../../views/modules/Enrollment/show.php?idEnrollment=".$enrollmment->getIdEnrollment()."&respuesta=correcto");
+                        }
+                    }
+                }
+            }
+         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Enrollment/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }

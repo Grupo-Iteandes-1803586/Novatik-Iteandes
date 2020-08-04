@@ -169,13 +169,14 @@ class Activity extends BasicModel
     public function update()
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Activity  SET codeActivity = ?, nameActivity = ?, descriptionActivity= ?, typeActivity = ?, LearningResult_idLearningResult=?, stateActivity=? WHERE idActivity = ?", array(
-                $this->idActivity,
+
                 $this->codeActivity,
                 $this->nameActivity,
                 $this->descriptionActivity,
                 $this->typeActivity,
                 $this->LearningResult_idLearningResult->getIdLearningResult(),
-                $this->stateActivity
+                $this->stateActivity,
+                $this->idActivity
             )
         );
         $this->Disconnect();

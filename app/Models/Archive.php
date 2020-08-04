@@ -152,12 +152,13 @@ class Archive extends BasicModel
     public function update()
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Archive  SET nameArchive = ?, descriptionArchive = ?, rutaArchive= ?, Activity_idActivity = ?, stateArchive=? WHERE idArchive = ?", array(
-                $this->idArchive,
+
                 $this->nameArchive,
                 $this->descriptionArchive,
                 $this->rutaArchive,
                 $this->Activity_idActivity->getIdActivity(),
-                $this->stateArchive
+                $this->stateArchive,
+                $this->idArchive
             )
         );
         $this->Disconnect();
