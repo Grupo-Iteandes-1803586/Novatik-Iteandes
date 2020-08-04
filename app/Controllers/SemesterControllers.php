@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-require(__DIR__.'/../Models/Semester.php');
+require_once(__DIR__.'/../Models/Semester.php');
 use App\Models\Semester;
 use mysql_xdevapi\Exception;
 use Carbon\Carbon;
@@ -123,5 +123,46 @@ class SemesterControllers{
             var_dump($ex);
             //header("Location: ../../views/modules/Semester/index.php?respuesta=error&mensaje" . $ex-> getMessage());
         }
+    }
+
+
+//Seleccion de Semestres
+    private static function semesterIsInArray($idSemester, $ArrSemester){
+        if(count($ArrSemester) > 0){
+            foreach ($ArrSemester as $semester){
+                if($semester->getIdSemester() == $idSemester){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    //Seleccionar una competencia
+
+    static public function selectCompetition ($isMultiple=false,
+                                              $isRequired=true,
+                                              $id="idSemester",
+                                              $nombre="idSemester",
+                                              $defaultValue="",
+                                              $class="form-control",
+                                              $where="",
+                                              $arrExcluir = array()){
+        $arrSemester = array();
+        if($where != ""){
+            $base = "SELECT * FROM Semester WHERE ";
+            $arrSemester = Semester::search($base.' '.$where);
+        }else{
+            $arrSemester = TrainingCompetition::getAll();
+        }
+
+        $htmlSelect = "<select ".(($isMultiple) ? "multiple" : "")." ".(($isRequired) ? "required" : "")." id= '".$id."' name='".$nombre."' class='".$class."' style='width: 100%;'>";
+        $htmlSelect .= "<option value='' >Seleccione</option>";
+        if(count($arrSemester) > 0){
+            foreach ($arrSemester as $semester)
+                if (!SemesterControllers::semesterIsInArray($semester->getIdSemester(),$arrExcluir))
+                    $htmlSelect .= "<option ".(($semester != "") ? (($defaultValue == $semester->getIdSemester()) ? "selected" : "" ) : "")." value='".$semester->getIdSemester()."'>".$semester->getNameSemester()."</option>";
+        }
+        $htmlSelect .= "</select>";
+        return $htmlSelect;
     }
 }

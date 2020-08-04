@@ -191,8 +191,8 @@ class  LearningResult  Extends BasicModel{
                 $this->codeLearningResult,
                 $this->nameLearningResult,
                 $this->durationLearningResult,
-                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition(),
                 $this->statuLearningResult,
+                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition()
             )
         );
         $this->setIdLearningResult(($result) ? $this->getLastId() : null);
@@ -222,13 +222,13 @@ class  LearningResult  Extends BasicModel{
         return $LearningResult->update();
     }
 
-/**
- * @return string
- */
-public function __toString()
-{
-    return "codeLearningResult: $this->codeLearningResult, nameLearningResult: $this->nameLearningResult, durationLearningResult: $this->durationLearningResult , statuLearningResult: $this->statuLearningResult:,TrainingCompetition_idTrainingCompetition: $this->TrainingCompetition_idTrainingCompetition: idLearningResult: $this->idLearningResult";
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return "codeLearningResult: $this->codeLearningResult, nameLearningResult: $this->nameLearningResult, durationLearningResult: $this->durationLearningResult , statuLearningResult: $this->statuLearningResult:,TrainingCompetition_idTrainingCompetition: $this->TrainingCompetition_idTrainingCompetition: idLearningResult: $this->idLearningResult";
 
-}
+    }
 
 }

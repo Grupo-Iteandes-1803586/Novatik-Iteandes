@@ -1,12 +1,15 @@
 <?php
 require("../../partials/routes.php");
-require_once("../../../app/Controllers/EnrollmentControllers.php");
-
-use App\Models\Enrollment;
+require_once("../../../app/Controllers/TrainingCompetitionControllers.php");
+require_once("../../../app/Controllers/LearningResultControllers.php");
+require_once("../../../app/Models/TrainingCompetition.php");
+use App\Controllers\TrainingCompetitionControllers;
+use App\Controllers\LearningResultControllers;
+use App\Models\TrainingCompetition;
 ?>
 <html lang="es">
 <head>
-    <title><?= getenv('TITLE_SITE')?> | Editar Matricula</title>
+    <title><?= getenv('TITLE_SITE')?> | Editar Resultado de Aprendizaje</title>
     <?php
     require ("../../partials/head_imports.php");
     require ("../../partials/header.php");
@@ -26,7 +29,7 @@ use App\Models\Enrollment;
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Editar Matricula</h1>
+                        <h1>Editar Resultado de Aprendizaje</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -46,10 +49,10 @@ use App\Models\Enrollment;
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-ban"></i> Error!</h5>
-                        Error al editar el usuario: <?= ($_GET['mensaje']) ?? "" ?>
+                        Error al editar el Resultado de Aprendizaje: <?= ($_GET['mensaje']) ?? "" ?>
                     </div>
                 <?php } ?>
-            <?php } else if (empty($_GET['idTrainingCompetition'])) { ?>
+            <?php } else if (empty($_GET['idLearningResult'])) { ?>
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h5><i class="icon fas fa-ban"></i> Error!</h5>
@@ -61,57 +64,57 @@ use App\Models\Enrollment;
             <div class="card card-info">
                 <div class="card-header">
 
-                    <h3 class="card-title">Editar Matricula</h3>
+                    <h3 class="card-title">Editar el Resultado de Aprendizaje</h3>
                     <?php require("../../partials/optionMenu.php") ;?>
                 </div>
                 <!-- /.card-header -->
-                <?php if(!empty($_GET["idEnrollment"]) && isset($_GET["idEnrollment"])){ ?>
+                <?php if(!empty($_GET["idLearningResult"]) && isset($_GET["idLearningResult"])){ ?>
                     <p>
                     <?php
-                    $DataEnrollment = \App\Controllers\EnrollmentControllers::searchForID($_GET["idEnrollment"]);
-                    if(!empty($DataEnrollment)){
+                    $DataLearningR = \App\Controllers\LearningResultControllers::searchForID($_GET["idLearningResult"]);
+                    if(!empty($DataLearningR)){
                         ?>
                         <!-- form start -->
-                        <form class="form-horizontal" method="post" id="frmEditEnrollment" name="frmEditEnrollment" action="../../../app/Controllers/EnrollmentControllers.php?action=edit">
-                            <input id="idTrainingCompetition" name="idTrainingCompetition" value="<?php echo $DataEnrollment->getIdEnrollment(); ?>" hidden required="required" type="text">
+                        <form class="form-horizontal" method="post" id="frmEditLearning" name="frmEditLearning" action="../../../app/Controllers/LearningResultControllers.php?action=edit">
+                            <input id="idLearningResult" name="idLearningResult" value="<?php echo $DataLearningR->getIdLearningResult(); ?>" hidden required="required" type="text">
                             <div class="card-body">
-
                                 <div class="form-group row">
-                                    <label for="dateEnrollment" class="col-sm-2 col-form-label">Fecha</label>
+                                    <label for="codeLearningResult" class="col-sm-2 col-form-label">Codigo del Resultado de Aprendizaje</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="dateEnrollment" name="dateEnrollment" value="<?= $DataEnrollment->getDateEnrollment(); ?>" placeholder="Ingrese el Codigo de la Matricula">
+                                        <input required type="text" class="form-control" id="codeLearningResult" name="codeLearningResult" value="<?= $DataLearningR->getCodeLearningResult(); ?>" placeholder="Ingrese el Codigo del Resultado de Aprendizaje">
                                     </div>
                                 </div>
-                                <!-- HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH -->
-                                <input id="Student_idStudent" name="Student_idStudent" value="<?php echo $DataEnrollment->getStudentIdStudent(); ?>" hidden required="required" type="text">
-
-                                <input id="Semester_idSemester" name="Semester_idSemester" value="<?php echo $DataEnrollment->getSemesterIdSemester(); ?>" hidden required="required" type="text">
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Horario</label>
+                                    <label for="nameLearningResult" class="col-sm-2 col-form-label">Nombre del Resultado de Aprendizaje</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control"value="<?php echo $DataEnrollment->getSemesterIdSemester()->getNameTrainingProgram(); ?>"
+                                        <input required type="text" class="form-control" id="nameLearningResult" name="nameLearningResult" value="<?= $DataLearningR->getNameLearningResult(); ?>" placeholder="Ingrese el Nombre del Resultado de Aprendizaje">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="durationLearningResult" class="col-sm-2 col-form-label">Duracion</label>
+                                    <div class="col-sm-10">
+                                        <input required type="text" class="form-control" id="durationLearningResult" name="durationLearningResult" value="<?= $DataLearningR->getDurationLearningResult(); ?>" placeholder="Ingrese la Duracionn en horas">
+                                    </div>
+                                </div>
+                                <input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition" value="<?php echo $DataLearningR->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition(); ?>" hidden required="required" type="text">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Competencia Asociada</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control"value="<?php echo $DataLearningR->getTrainingCompetitionIdTrainingCompetition()->getDenomination(); ?>"
                                                type="text"  readonly="readonly">
                                     </div>
                                 </div>
 
-                                <input id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram" value="<?php echo $DataEnrollment->getTrainingProgramIdTrainingProgram(); ?>" hidden required="required" type="text">
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Programa de Formacion</label>
+                                    <label for="statuLearningResult" class="col-sm-2 col-form-label">Estado</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control"value="<?php echo $DataEnrollment->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram(); ?>"
-                                               type="text"  readonly="readonly">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="statusTrainingCompetition" class="col-sm-2 col-form-label">Estado</label>
-                                    <div class="col-sm-10">
-                                        <select id="stateEnrollment" name="stateEnrollment" class="custom-select">
-                                            <option <?= ($DataEnrollment->getStateEnrollment() == "Activo") ? "selected":""; ?> value="Activo">Activo</option>
-                                            <option <?= ($DataEnrollment->getStateEnrollment() == "Inactivo") ? "selected":""; ?> value="Inactivo">Inactivo</option>
+                                        <select id="statuLearningResult" name="statuLearningResult" class="custom-select">
+                                            <option <?= ($DataLearningR->getStatuLearningResult() == "Activo") ? "selected":""; ?> value="Activo">Activo</option>
+                                            <option <?= ($DataLearningR->getStatuLearningResult() == "Inactivo") ? "selected":""; ?> value="Inactivo">Inactivo</option>
                                         </select>
                                     </div>
                                 </div>
+
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

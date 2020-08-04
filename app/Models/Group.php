@@ -135,7 +135,7 @@ class Group extends BasicModel{
     /**
      * @return int
      */
-    public function getTrainingCompetitionIdTrainingCompetition(): int
+    public function getTrainingCompetitionIdTrainingCompetition(): TrainingCompetition
     {
         return $this->TrainingCompetition_idTrainingCompetition;
     }
@@ -162,7 +162,7 @@ class Group extends BasicModel{
                 $this->minimumSpaceGroup,
                 $this->maximumSpaceGroup,
                 $this->stateGroup,
-                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingProgram()
+                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition()
             )
         );
         $this->setIdGroup(($result) ? $this->getLastId() : null);
@@ -179,7 +179,7 @@ class Group extends BasicModel{
                 $this->minimumSpaceGroup,
                 $this->maximumSpaceGroup,
                 $this->stateGroup,
-                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingProgram()
+                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition()
             )
         );
         $this->Disconnect();
@@ -206,7 +206,7 @@ class Group extends BasicModel{
                 $group->minimumSpaceGroup = $value['minimumSpaceGroup'];
                 $group->maximumSpaceGroup = $value['maximumSpaceGroup'];
                 $group->stateGroup = $value['stateGroup'];
-                $group->TrainingCompetition_idTrainingCompetition = TrainingProgram::searchForId($value['TrainingCompetition_idTrainingCompetition']);
+                $group->TrainingCompetition_idTrainingCompetition = TrainingCompetition::searchForId($value['TrainingCompetition_idTrainingCompetition']);
                 $group->Disconnect();
                 array_push($arrGroup,$group);
             }
@@ -231,7 +231,7 @@ class Group extends BasicModel{
             $group->minimumSpaceGroup = $getrow['minimumSpaceGroup'];
             $group->maximumSpaceGroup = $getrow['maximumSpaceGroup'];
             $group->stateGroup = $getrow['stateGroup'];
-            $group->TrainingCompetition_idTrainingCompetition = TrainingProgram::searchForId($getrow['TrainingCompetition_idTrainingCompetition']);
+            $group->TrainingCompetition_idTrainingCompetition = TrainingCompetition::searchForId($getrow['TrainingCompetition_idTrainingCompetition']);
         }
         $group->Disconnect();
         return $group;

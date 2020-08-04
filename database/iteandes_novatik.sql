@@ -339,8 +339,8 @@ CREATE TABLE `trainingcompetition` (
   `codeTrainingCompetition` bigint(20) NOT NULL,
   `codeAlfaTrainingCompetition` varchar(10) NOT NULL,
   `denomination` varchar(300) NOT NULL,
-  `duration` tinyint(4) NOT NULL,
-  `minimumSpace` tinyint(4) NOT NULL,
+  `duration` INT(11) NOT NULL ,
+  `minimumSpace` INT(11) NOT NULL ,
   `orderTrainingCompetition` tinyint(4) NOT NULL,
   `statusTrainingCompetition` enum('Activo','Inactivo') NOT NULL,
   `TrainingProgram_idTrainingProgram` bigint(19) UNSIGNED NOT NULL

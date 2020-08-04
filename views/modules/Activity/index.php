@@ -94,19 +94,16 @@ use App\Controllers\ActivityControllers;?>
                                         <td><?php echo $Activity->getDescriptionActivity(); ?></td>
                                         <td><?php echo $Activity->getTypeActivity(); ?></td>
                                         <td><?php echo $Activity->getLearningResultIdLearningResult()->getNameLearningResult(); ?></td>
-                                        <td><?php echo $Activity->stateActivity(); ?></td>
+                                        <td><?php echo $Activity->getStateActivity(); ?></td>
                                         <td>
-                                            <a href="edit.php?idTrainingCompetition=<?php echo $Activity->getIdActivity(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                                            <a href="show.php?idTrainingCompetition=<?php echo $Activity->getIdActivity(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
-                                            <?php if ($Activity->stateActivity() != "Activo"){
+                                            <a href="edit.php?idActivity=<?php echo $Activity->getIdActivity(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                            <a href="show.php?idActivity=<?php echo $Activity->getIdActivity(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                            <?php if ($Activity->getStateActivity() != "Activo"){
                                                 ?>
-                                                <a href="../../../app/Controllers/TrainingCompetitionControllers.php?action=activate&idTrainingCompetition=<?php echo $Activity->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                                <a href="../../../app/Controllers/ActivityControllers.php?action=activate&idActivity=<?php echo $Activity->getIdActivity(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                             <?php }else{?>
-                                                <a type="button" href="../../../app/Controllers/TrainingCompetitionControllers.php?action=inactivate&idTrainingCompetition=<?php echo $Activity->getIdTrainingCompetition(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
-                                            <?php } ?>
-                                            <a href="../LearningResult/create.php?idTrainingCompetition=<?php echo $Activity->getIdActivity(); ?>" type="button" data-toggle="tooltip" title="Agregar Resultado de Aprendizaje" class="btn docs-tooltip btn-award btn-xs"><i class="fa fa-book-reader"></i></a>
-                                            <a href="../LearningResult/index.php?idTrainingCompetition=<?php echo $Activity->getIdActivity(); ?>" type="button" data-toggle="tooltip" title="Ver Resultado de Aprendizaje" class="btn docs-tooltip btn-vision btn-xs"><i class="fa fa-low-vision"></i></a>
-                                        </td>
+                                                <a type="button" href="../../../app/Controllers/ActivityControllers.php?action=inactivate&idActivity=<?php echo $Activity->getIdActivity(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                            <?php } ?> </td>
                                     </tr>
                                 <?php } ?>
 

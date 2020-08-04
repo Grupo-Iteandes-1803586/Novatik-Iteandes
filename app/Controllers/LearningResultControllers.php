@@ -41,7 +41,7 @@ class LearningResultControllers
             $arrayLearningResult['statuLearningResult'] = 'Activo';
             $LearningResult= new LearningResult($arrayLearningResult);
             if($LearningResult->create()){
-                header("Location: ../../views/modules/LearningResult/create.php?idLearningResult=".$LearningResult->getIdLearningResult());
+                header("Location: ../../views/modules/LearningResult/show.php?idLearningResult=".$LearningResult->getIdLearningResult());
             }
         } catch (Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
@@ -53,7 +53,7 @@ class LearningResultControllers
         try {
             $arrayLearningResult  = array();
             $arrayLearningResult ['idLearningResult'] = $_POST['idLearningResult'];
-            $arrayLearningResult ['LearningResult'] = $_POST['LearningResult'];
+            $arrayLearningResult ['codeLearningResult'] = $_POST['codeLearningResult'];
             $arrayLearningResult ['nameLearningResult'] = $_POST['nameLearningResult'];
             $arrayLearningResult ['durationLearningResult'] = $_POST['durationLearningResult'];
             $arrayLearningResult ['statuLearningResult'] = $_POST['statuLearningResult'];
@@ -72,7 +72,7 @@ class LearningResultControllers
     static public function activate (){
         try {
             $LearningResult = LearningResult::searchForId($_GET['idLearningResult']);
-            $LearningResult->setIdLearningResult("Activo");
+            $LearningResult->setStatuLearningResult("Activo");
             if($LearningResult->update()){
                 header("Location: ../../views/modules/LearningResult/index.php");
             }else{
@@ -80,7 +80,6 @@ class LearningResultControllers
             }
         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
-            //var_dump($e);
             header("Location: ../../views/modules/LearningResult/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
@@ -88,7 +87,7 @@ class LearningResultControllers
     static public function inactivate (){
         try {
             $LearningResult  = LearningResult::searchForId($_GET['idLearningResult']);
-            $LearningResult ->setIdLearningResult("Inactivo");
+            $LearningResult ->setStatuLearningResult("Inactivo");
             if($LearningResult ->update()){
                 header("Location: ../../views/modules/LearningResult/index.php");
             }else{

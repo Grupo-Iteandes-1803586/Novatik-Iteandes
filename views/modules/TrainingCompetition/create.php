@@ -95,9 +95,9 @@ use App\Models\TrainingProgram;
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="order" class="col-sm-2 col-form-label">Orden</label>
+                            <label for="orderTrainingCompetition" class="col-sm-2 col-form-label">Orden</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="order" name="order" placeholder="Orden">
+                                <input required type="text" class="form-control" id="orderTrainingCompetition" name="orderTrainingCompetition" placeholder="Orden">
                             </div>
                         </div>
                         <?php
@@ -105,6 +105,13 @@ use App\Models\TrainingProgram;
                         <input id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram"
                                value="<?php echo $idTP; ?>" hidden required="required"
                                type="text">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Programa de Formacion</label>
+                            <div class="col-sm-10">
+                                <input class="form-control"value="<?php echo $DataPrograming->getNameTrainingProgram(); ?>"
+                                       type="text"  readonly="readonly">
+                            </div>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">

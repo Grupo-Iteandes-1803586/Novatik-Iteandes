@@ -5,9 +5,11 @@ namespace  App\Controllers;
 require_once (__DIR__.'/../Models/TrainingCompetition.php');
 require_once (__DIR__.'/../Models/Group.php');
 
+use App\Models\Schedule;
 use App\Models\TrainingCompetition;
 use App\Models\Group;
 use App\Models\TrainingProgram;
+use Carbon\Carbon;
 
 if(!empty($_GET['action'])){
     GroupControllers::main($_GET['action']);
@@ -41,8 +43,19 @@ class GroupControllers{
             $arrGroup['stateGroup']= 'Activo';
             $arrGroup['TrainingCompetition_idTrainingCompetition']= TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
             $group = new Group();
-            if($arrGroup->create()){
-                header("Location: ../../views/modules/Group/show.php?respuesta=correcto");
+            if($group->create()){
+                $arrschedule= array();
+                $arrschedule->startDateSchedule=  Carbon::parse($_POST['startDateSchedule']);
+                $arrschedule->endDateSchedule=  Carbon::parse($_POST['endDateSchedule']);
+                $arrschedule->cantHours=  $_POST['cantHours'];
+                $arrschedule->startHourSchedule=  Carbon::parse($_POST['startHourSchedule']);
+                $arrschedule->endHourSchedule=  Carbon::parse($_POST['endHourSchedule']);
+                $arrschedule->stateSchedule= 'Activo';
+                $arrschedule->Group_idGroup=  $group;
+                $schedule = new Schedule($arrschedule);
+                if($schedule->create()) {
+                    header("Location: ../../views/modules/Group/show.php?respuesta=correcto");
+                }
             }
         } catch (Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
@@ -90,7 +103,7 @@ class GroupControllers{
     static public function inactivate (){
         try {
             $group  = Group::searchForId($_GET['idGroup']);
-            $group ->setStateGroup("Inactivo");
+            $group ->setStateGroup('Inactivo');
             if($group ->update()){
                 header("Location: ../../views/modules/Group/index.php");
             }else{

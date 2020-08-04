@@ -4,7 +4,8 @@ require_once("../../../../app/Controllers/StudentControllers.php");
 require_once("../../../../app/Controllers/PersonController.php");
 
 use App\Controllers\StudentControllers;
-use App\Controllers\PersonController;?>
+use App\Controllers\PersonController;
+?>
 <!DOCTYPE html>
 <html>
 <head>

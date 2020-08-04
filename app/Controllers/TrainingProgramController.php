@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-require(__DIR__.'/../Models/TrainingProgram.php');
+require_once(__DIR__.'/../Models/TrainingProgram.php');
 use App\Models\TrainingProgram;
 use mysql_xdevapi\Exception;
 
@@ -115,5 +115,47 @@ class TrainingProgramController{
             var_dump($e);
             //header("Location: ../../views/modules/TrainningProgram/index.php?respuesta=error&mensaje" . $e-> getMessage());
         }
+    }
+
+
+
+//Seleccion de Semestres
+    private static function programIsInArray($idTrainingProgram, $ArrProgram){
+        if(count($ArrProgram) > 0){
+            foreach ($ArrProgram as $program){
+                if($program->getIdTrainingProgram() == $idTrainingProgram){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    //Seleccionar una competencia
+
+    static public function selectCompetition ($isMultiple=false,
+                                              $isRequired=true,
+                                              $id="idTrainingProgram",
+                                              $nombre="idTrainingProgram",
+                                              $defaultValue="",
+                                              $class="form-control",
+                                              $where="",
+                                              $arrExcluir = array()){
+        $ArrProgram = array();
+        if($where != ""){
+            $base = "SELECT * FROM trainingprogram WHERE ";
+            $ArrProgram = TrainingProgram::search($base.' '.$where);
+        }else{
+            $ArrProgram = TrainingProgram::getAll();
+        }
+
+        $htmlSelect = "<select ".(($isMultiple) ? "multiple" : "")." ".(($isRequired) ? "required" : "")." id= '".$id."' name='".$nombre."' class='".$class."' style='width: 100%;'>";
+        $htmlSelect .= "<option value='' >Seleccione</option>";
+        if(count($ArrProgram) > 0){
+            foreach ($ArrProgram as $program)
+                if (!TrainingProgramController::programIsInArray($program->getIdTrainingProgram(),$arrExcluir))
+                    $htmlSelect .= "<option ".(($program != "") ? (($defaultValue == $program->getIdTrainingProgram()) ? "selected" : "" ) : "")." value='".$program->getIdTrainingProgram()."'>".$program->getNameTrainingProgram()."</option>";
+        }
+        $htmlSelect .= "</select>";
+        return $htmlSelect;
     }
 }

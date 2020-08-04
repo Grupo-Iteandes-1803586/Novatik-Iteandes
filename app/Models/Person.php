@@ -136,7 +136,7 @@ class Person extends BasicModel{
      */
     public function getDateBornPerson() : Carbon
     {
-        return $this->dateBornPerson->locale('es');;
+        return $this->dateBornPerson->locale('es');
     }
 
     /**
