@@ -16,8 +16,8 @@ abstract class BasicModel{
     #Creacion de variables
     public $isConnected;
     protected $datab;
-    private $username ="root";
-    private $password="";
+    private $username ="iteandes_novatik";
+    private $password="Novatik_Iteandes07K";
     private $host = "localhost";
     private $driver = "mysql";//tipo de Base de datos a usar
     private $dbname ="iteandes_novatik";//Nombre de la base de datos
