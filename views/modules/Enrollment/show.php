@@ -2,7 +2,6 @@
 require("../../partials/routes.php");
 require_once("../../../app/Controllers/EnrollmentControllers.php");
 require_once("../../../app/Controllers/TrainingCompetitionControllers.php");
-
 require_once("../../../app/Controllers/StudentControllers.php");
 require_once("../../../app/Controllers/PersonController.php");
 use App\Controllers\StudentControllers;
@@ -166,7 +165,7 @@ use App\Controllers\TrainingCompetitionControllers;
                                 <p class="text-muted"><?=$DataEnrollment->getIdEnrollment() ?></p>
                                 <hr>
                                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de Matricula</strong>
-                                <p class="text-muted"><?= $DataEnrollment->getDateEnrollment()->toDateTimeString() ?></p>
+                                <p class="text-muted"><?= $DataEnrollment->getDateEnrollment()->toDateString() ?></p>
                                 <hr>
                                 <strong><i class="fas fa-phone mr-1"></i> Semestre</strong>
                                 <p class="text-muted"><?= $DataEnrollment->getSemesterIdSemester() ?></p>

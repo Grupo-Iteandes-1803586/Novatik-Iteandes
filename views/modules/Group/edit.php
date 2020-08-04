@@ -156,7 +156,7 @@ use Carbon\Carbon;
                                     <div class="form-group row">
                                         <label for="endDateSchedule" class="col-sm-2 col-form-label">Fecha de Finalizacion</label>
                                         <div class="col-sm-10">
-                                            <input required type="date" max="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="endDateSchedule"
+                                            <input required type="date" min="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="endDateSchedule"
                                                    name="endDateSchedule"
                                                    value="<?php echo $DataS->getEndDateSchedule()->toDateString(); ?>"
                                                    placeholder="Fecha de Finalizacion">
@@ -199,7 +199,7 @@ use Carbon\Carbon;
                                             <input required type="time" max="<?= Carbon::now() ?>" class="form-control" id="endHourSchedule"
                                                    name="endHourSchedule"
                                                    value="<?php echo $DataS->getEndHourSchedule(); ?>"
-                                                   placeholder="Hora     de Finalizacion">
+                                                   placeholder="Hora de Finalizacion">
                                         </div>
                                     </div>
 

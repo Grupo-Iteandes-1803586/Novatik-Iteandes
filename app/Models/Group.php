@@ -173,13 +173,13 @@ class Group extends BasicModel{
     public function update()
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Group  SET codeGroup = ?, nameGroup = ?, minimumSpaceGroup= ?, maximumSpaceGroup = ?,stateGroup=?,TrainingCompetition_idTrainingCompetition=?  WHERE idGroup = ?", array(
-                $this->idGroup,
                 $this->codeGroup,
                 $this->nameGroup,
                 $this->minimumSpaceGroup,
                 $this->maximumSpaceGroup,
                 $this->stateGroup,
-                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition()
+                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition(),
+                $this->idGroup
             )
         );
         $this->Disconnect();

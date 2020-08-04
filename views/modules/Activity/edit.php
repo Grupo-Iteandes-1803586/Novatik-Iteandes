@@ -147,14 +147,13 @@ use App\Controllers\ActivityControllers;?>
                         <div class="form-group row">
                             <label for="descriptionArchive" class="col-sm-2 col-form-label">Descripcion</label>
                             <div class="col-sm-10">
-                                <input required type="number" class="form-control" id="descriptionArchive"
+                                <input required type="text" class="form-control" id="descriptionArchive"
                                        name="descriptionArchive"
                                        value="<?php echo $DataA->getDescriptionArchive(); ?>"
                                        placeholder="Descripcion">
                             </div>
                         </div>
                     </div>
-
                     <?php } ?>
             </div>
         <!-- /.card-body -->
@@ -164,6 +163,7 @@ use App\Controllers\ActivityControllers;?>
             </div>
         <!-- /.card-footer -->
             </form>
+        </section>
         <?php }else{ ?>
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -175,6 +175,7 @@ use App\Controllers\ActivityControllers;?>
         <?php } ?>
     </div>
     <!-- /.card -->
+
     </section>
     <!-- /.content -->
 </div>
