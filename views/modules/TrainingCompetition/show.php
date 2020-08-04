@@ -106,7 +106,7 @@ use App\Controllers\TrainingCompetitionControllers;
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-auto ">
-                                    <a role="button" href="index.php" class="btn btn-success float-right" style="margin-right: 5px;">
+                                    <a role="button" href="index.php?idTrainingProgram=<?= $DataCompetitio->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram()?>" class="btn btn-success float-right" style="margin-right: 5px;">
                                         <i class="fas fa-tasks"></i> Gestionar Competencia
                                     </a>
                                 </div>

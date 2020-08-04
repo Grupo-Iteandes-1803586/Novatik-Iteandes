@@ -4,6 +4,7 @@ namespace  App\Controllers;
 
 require_once (__DIR__.'/../Models/TrainingCompetition.php');
 require_once (__DIR__.'/../Models/Group.php');
+require_once (__DIR__.'/../Models/Schedule.php');
 
 use App\Models\Schedule;
 use App\Models\TrainingCompetition;
@@ -42,19 +43,20 @@ class GroupControllers{
             $arrGroup['maximumSpaceGroup']=$_POST['maximumSpaceGroup'];
             $arrGroup['stateGroup']= 'Activo';
             $arrGroup['TrainingCompetition_idTrainingCompetition']= TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
-            $group = new Group();
+            $group = new Group($arrGroup);
             if($group->create()){
                 $arrschedule= array();
-                $arrschedule->startDateSchedule=  Carbon::parse($_POST['startDateSchedule']);
-                $arrschedule->endDateSchedule=  Carbon::parse($_POST['endDateSchedule']);
-                $arrschedule->cantHours=  $_POST['cantHours'];
-                $arrschedule->startHourSchedule=  Carbon::parse($_POST['startHourSchedule']);
-                $arrschedule->endHourSchedule=  Carbon::parse($_POST['endHourSchedule']);
-                $arrschedule->stateSchedule= 'Activo';
-                $arrschedule->Group_idGroup=  $group;
+                $arrschedule['startDateSchedule']=  Carbon::parse($_POST['startDateSchedule']);
+                $arrschedule['endDateSchedule']=  Carbon::parse($_POST['endDateSchedule']);
+                $arrschedule['cantHours']=  $_POST['cantHours'];
+                $arrschedule['daySchedule']=  $_POST['daySchedule'];
+                $arrschedule['startHourSchedule']=  Carbon::parse($_POST['startHourSchedule']);
+                $arrschedule['endHourSchedule']=  Carbon::parse($_POST['endHourSchedule']);
+                $arrschedule['stateSchedule']= 'Activo';
+                $arrschedule['Group_idGroup']=  $group;
                 $schedule = new Schedule($arrschedule);
                 if($schedule->create()) {
-                    header("Location: ../../views/modules/Group/show.php?respuesta=correcto");
+                    header("Location: ../../views/modules/Group/index.php?respuesta=correcto");
                 }
             }
         } catch (Exception $e) {
@@ -74,11 +76,25 @@ class GroupControllers{
             $arrGroup['maximumSpaceGroup']=$_POST['maximumSpaceGroup'];
             $arrGroup['stateGroup']= 'Activo';
             $arrGroup['TrainingCompetition_idTrainingCompetition']= TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
-            $group = new Group();
-            $group->update();
+            $group = new Group($arrGroup);
+            if($group->update()){
+                $arrschedule= array();
+                $arrschedule['idSchedule']=  $_POST['idSchedule'];
+                $arrschedule['startDateSchedule']=  Carbon::parse($_POST['startDateSchedule']);
+                $arrschedule['endDateSchedule']=  Carbon::parse($_POST['endDateSchedule']);
+                $arrschedule['cantHours']=  $_POST['cantHours'];
+                $arrschedule['startHourSchedule']=  Carbon::parse($_POST['startHourSchedule']);
+                $arrschedule['endHourSchedule']=  Carbon::parse($_POST['endHourSchedule']);
+                $arrschedule['stateSchedule']= $group->getStateGroup();
+                $arrschedule['Group_idGroup']=  $group;
+                $schedule = new Schedule($arrschedule);
+                if($schedule->update()){
+                    header("Location: ../../views/modules/Group/show.php?idGroup=".$group->getIdGroup()."&respuesta=correcto");
+                }
 
-            header("Location: ../../views/modules/Group/show.php?idGroup=".$group->getIdGroup()."&respuesta=correcto");
-        } catch (\Exception $e) {
+            }
+
+         } catch (\Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Group/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }

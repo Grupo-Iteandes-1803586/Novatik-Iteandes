@@ -122,9 +122,9 @@ use Carbon\Carbon;
                         </div>
                         <!--Fecha de Cierre-->
                         <div class="form-group row">
-                            <label for="endDateSchedule" class="col-sm-2 col-form-label">Fecha de Inicio</label>
+                            <label for="endDateSchedule" class="col-sm-2 col-form-label">Fecha de Fin</label>
                             <div class="col-sm-10">
-                                <input required type="date" max="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="endDateSchedule"
+                                <input required type="date" min="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="endDateSchedule"
                                        name="endDateSchedule" placeholder="Ingrese la fecha de Finalizacion de la Competencia">
                             </div>
                         </div>

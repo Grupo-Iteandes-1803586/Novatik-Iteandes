@@ -130,7 +130,7 @@ use Carbon\Carbon;?>
                             }
                             ?>
                             <div class="form-group row">
-                                <label for="Semester_idSemester" class="col-sm-2 col-form-label">Programa de Formacion</label>
+                                <label for="TrainingProgram_idTrainingProgram" class="col-sm-2 col-form-label">Programa de Formacion</label>
                                 <div class="col-sm-10">
                                     <?= \App\Controllers\TrainingProgramController::selectCompetition(false,
                                         true,
@@ -145,16 +145,19 @@ use Carbon\Carbon;?>
 
                             <!--Competencias-->
                             <?php
-                            $dataDates = \App\Models\EnrollmentCompetition::search("SELECT * FROM trainingcompetition tc INNER JOIN trainingprogram tp on tp.idTrainingProgram = tc.TrainingProgram_idTrainingProgram WHERE tp.idTrainingProgram=".$dataProgram);
+                            $query = "SELECT * FROM trainingcompetition tc INNER JOIN trainingprogram tp on tp.idTrainingProgram = tc.TrainingProgram_idTrainingProgram WHERE tp.idTrainingProgram=".$dataProgram;
+                            echo $query;
+                            $dataDates = \App\Models\EnrollmentCompetition::search($query);
+
                             foreach ($dataDates as $daDe) {
                                 $DataCpm = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daDe->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition());
-                                $idC = $daDe->getTrainingCompetitionIdTrainingCompetition();
+                                $idC = $DataCpm;
                             }
                             //Horario
                             $dataSche = \App\Models\EnrollmentCompetition::search("SELECT * FROM schedule sh  INNER JOIN `group` gr on sh.Group_idGroup = gr.idGroup where gr.TrainingCompetition_idTrainingCompetition =".$idC);
                             foreach ($dataSche as $daSc) {
                                 $daSch = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daSc->getScheduleIdSchedule()->getIdSchedule());
-                                $idS = $daDe->getScheduleIdSchedule();
+                                $idS = $daSch;
                             }
                             ?>
                             <input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition"

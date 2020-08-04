@@ -87,8 +87,8 @@ use App\Controllers\TrainingCompetitionControllers;?>
                                 </thead>
                                 <tbody>
                                 <?php
-                                //$idP = $_GET['idTrainingProgram'];
-                                $arrTrainningCompetition = \App\Controllers\TrainingCompetitionControllers::getAll();
+                                $idP = $_GET['idTrainingProgram'];
+                                $arrTrainningCompetition = \App\Models\TrainingCompetition::search("SELECT * FROM TrainingCompetition where TrainingProgram_idTrainingProgram =".$idP);
                                 foreach ($arrTrainningCompetition as $trainingCom){
                                     /*if($trainingCom->getTrainingProgramIdTrainingProgram() == $idP){*/
                                     ?>
