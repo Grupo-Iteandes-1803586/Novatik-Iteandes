@@ -75,12 +75,13 @@ use App\Controllers\TrainingCompetitionControllers;?>
                                     <th>#</th>
                                     <th>Codigo</th>
                                     <th>Codigo corto</th>
-                                    <th>Nombre de la competencia</th>
+                                    <th>Nombre</th>
                                     <th>Duracio</th>
                                     <th>Cupo Minimo</th>
                                     <th>orden</th>
                                     <th>Programa Vinculado</th>
                                     <th>Estado</th>
+                                    <th>Resultado de Aprendizaje</th>
                                     <th>Opciones</th>
                                 </tr>
                                 </thead>
@@ -90,31 +91,32 @@ use App\Controllers\TrainingCompetitionControllers;?>
                                 $arrTrainningCompetition = \App\Controllers\TrainingCompetitionControllers::getAll();
                                 foreach ($arrTrainningCompetition as $trainingCom){
                                     /*if($trainingCom->getTrainingProgramIdTrainingProgram() == $idP){*/
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $trainingCom->getIdTrainingCompetition(); ?></td>
-                                            <td><?php echo $trainingCom->getCodeTrainingCompetition(); ?></td>
-                                            <td><?php echo $trainingCom->getCodeAlfaTrainingCompetition(); ?></td>
-                                            <td><?php echo $trainingCom->getDenomination(); ?></td>
-                                            <td><?php echo $trainingCom->getDuration(); ?></td>
-                                            <td><?php echo $trainingCom->getMinimumSpace(); ?></td>
-                                            <td><?php echo $trainingCom->getOrderTrainingCompetition(); ?></td>
-                                            <td><?php echo $trainingCom->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram(); ?></td>
-                                            <td><?php echo $trainingCom->getStatusTrainingCompetition(); ?></td>
-                                            <td>
-                                                <a href="edit.php?idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                                                <a href="show.php?idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
-                                                <?php if ($trainingCom->getStatusTrainingCompetition() != "Activo"){
-                                                    ?>
-                                                    <a href="../../../app/Controllers/TrainingCompetitionControllers.php?action=activate&idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
-                                                <?php }else{?>
-                                                    <a type="button" href="../../../app/Controllers/TrainingCompetitionControllers.php?action=inactivate&idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
-                                                <?php } ?>
-                                                <a href="../LearningResult/create.php?idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Agregar Resultado de Aprendizaje" class="btn docs-tooltip btn-award btn-xs"><i class="fa fa-book-reader"></i></a>
-                                                <a href="../LearningResult/index.php?idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Ver Resultado de Aprendizaje" class="btn docs-tooltip btn-vision btn-xs"><i class="fa fa-low-vision"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $trainingCom->getIdTrainingCompetition(); ?></td>
+                                        <td><?php echo $trainingCom->getCodeTrainingCompetition(); ?></td>
+                                        <td><?php echo $trainingCom->getCodeAlfaTrainingCompetition(); ?></td>
+                                        <td><?php echo $trainingCom->getDenomination(); ?></td>
+                                        <td><?php echo $trainingCom->getDuration(); ?></td>
+                                        <td><?php echo $trainingCom->getMinimumSpace(); ?></td>
+                                        <td><?php echo $trainingCom->getOrderTrainingCompetition(); ?></td>
+                                        <td><?php echo $trainingCom->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram(); ?></td>
+                                        <td><?php echo $trainingCom->getStatusTrainingCompetition(); ?></td>
+                                        <td> <a href="../LearningResult/create.php?idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Agregar Resultado de Aprendizaje" class="btn docs-tooltip btn-award btn-xs"><i class="fa fa-book-reader"></i></a>
+                                            <a href="../LearningResult/index.php?idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Ver Resultado de Aprendizaje" class="btn docs-tooltip btn-vision btn-xs"><i class="fa fa-low-vision"></i></a>
+
+                                        <td>
+                                            <a href="edit.php?idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                            <a href="show.php?idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                            <?php if ($trainingCom->getStatusTrainingCompetition() != "Activo"){
+                                                ?>
+                                                <a href="../../../app/Controllers/TrainingCompetitionControllers.php?action=activate&idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                            <?php }else{?>
+                                                <a type="button" href="../../../app/Controllers/TrainingCompetitionControllers.php?action=inactivate&idTrainingCompetition=<?php echo $trainingCom->getIdTrainingCompetition(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
 
                                 </tbody>
                             </table>

@@ -3,7 +3,6 @@ namespace App\Controllers;
 require_once (__DIR__.'/../Models/Activity.php');
 require_once (__DIR__.'/../Models/LearningResult.php');
 
-
 use App\Models\LearningResult;
 use App\Models\Activity;
 
@@ -38,19 +37,17 @@ class ActivityControllers
             $arrayActivity['typeActivity'] = $_POST['typeActivity'];
             $arrayActivity['LearningResult_idLearningResult'] = LearningResult::searchForId($_POST['LearningResult_idLearningResult']);
             $arrayActivity['stateActivity'] = 'Activo';
-            $Activity = new Activity($arrayActivity);
-
-            if ($Activity->create()) {
+            $activity = new Activity($arrayActivity);
+            if ($activity->create()) {
                 //archive
                 $arrayArchive['nameArchive'] = $_POST['nameArchive'];
                 $arrayArchive['descriptionArchive'] = $_POST['descriptionArchive'];
                 $arrayArchive['rutaArchive'] = 'Ruta del Archivo';
-                $arrayArchive['Activity_idActivity'] =$Activity;
+                $arrayArchive['Activity_idActivity'] =$activity;
                 $arrayArchive['stateArchive'] = 'Activo';
-                $Archive = new Archive($arrayArchive);
-
-                if ($Archive->create()) {
-                    header("Location: ../../views/modules/Activity/show.php?idActivity=".$Activity->getIdActivity());
+                $archive = new Archive($arrayArchive);
+                if ($archive->create()) {
+                    header("Location: ../../views/modules/Activity/show.php?idActivity=".$activity->getIdActivity());
                 }
             }
         } catch (Exception $e) {
@@ -69,12 +66,20 @@ class ActivityControllers
             $arrayActivity['LearningResult_idLearningResult'] = LearningResult::searchForId($_POST['LearningResult_idLearningResult']);
             $arrayActivity['stateActivity'] = $_POST['stateActivity'];
             $Activity = new Activity($arrayActivity);
-            $Activity->update();
-
-            header("Location: ../../views/modules/Note/show.php?respuesta=correcto");
+            if($Activity->update()){
+                $arrayArchive['idArchive'] = $_POST['idArchive'];
+                $arrayArchive['nameArchive'] = $_POST['nameArchive'];
+                $arrayArchive['descriptionArchive'] = $_POST['descriptionArchive'];
+                $arrayArchive['rutaArchive'] = 'Ruta de Archivo';
+                $arrayArchive['Activity_idActivity'] = $Activity;
+                $arrayArchive['stateArchive'] = $Activity->getStateActivity();
+                $Archive = new Archive ($arrayArchive);
+            }if($Archive->update()){
+                header("Location: ../../views/modules/Activity/show.php?idActivity=".$Activity->getIdActivity()."&respuesta=correcto");
+            }
         } catch (\Exception $e) {
-            GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/modules/Note/edit.php?respuesta=error&mensaje=".$e->getMessage());
+            //GeneralFunctions::console( $e, 'error', 'errorStack');
+            header("Location: ../../views/modules/Activity/edit.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
     //Estado activo
@@ -83,13 +88,13 @@ class ActivityControllers
             $ObjActivity = Activity::searchForId($_GET['idActivity']);
             $ObjActivity->setStateActivity('Activo');
             if($ObjActivity->update()){
-                header("Location: ../../views/modules/Note/index.php");
+                header("Location: ../../views/modules/Activity/index.php");
             }else{
-                header("Location: ../../views/modules/Note/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Activity/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
-            GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/modules/Note/index.php?respuesta=error&mensaje=".$e->getMessage());
+            //GeneralFunctions::console( $e, 'error', 'errorStack');
+            header("Location: ../../views/modules/Activity/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
     ///Estado Inactivo
@@ -98,13 +103,13 @@ class ActivityControllers
             $Activity  = Activity::searchForId($_GET['idActivity']);
             $Activity ->setStateActivity("Inactivo");
             if($Activity ->update()){
-                header("Location: ../../views/modules/Note/index.php");
+                header("Location: ../../views/modules/Activity/index.php");
             }else{
-                header("Location: ../../views/modules/Note/index.php?respuesta=error&mensaje=Error al guardar");
+                header("Location: ../../views/modules/Activity/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
-            GeneralFunctions::console( $e, 'error', 'errorStack');
-            header("Location: ../../views/modules/Note/index.php?respuesta=error");
+            //GeneralFunctions::console( $e, 'error', 'errorStack');
+            header("Location: ../../views/modules/Activity/index.php?respuesta=error");
         }
     }
     //Buscar por id

@@ -188,7 +188,6 @@ use App\Controllers\LenguagesControllers; ?>
                             </div>
                             <?php }?>
                         <?php }?>
-                        <!---->
                         <!--Lenguajes -->
                         <?php if(!empty($_GET["idPerson"])){
                             $DataT = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" .$_GET["idPerson"]);

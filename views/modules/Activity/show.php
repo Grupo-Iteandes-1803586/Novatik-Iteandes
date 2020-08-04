@@ -1,12 +1,12 @@
 <?php
 require ("../../partials/routes.php");
 require_once("../../../app/Controllers/ActivityControllers.php");
-require_once("../../../app/Controllers/ArchiveControllers.php.php");
-require_once("../../../app/Modules/Archive.php");
-
+require_once("../../../app/Controllers/ArchiveControllers.php");
+require_once("../../../app/Models/Archive.php");
 use App\Controllers\ActivityControllers;
 use App\Controllers\ArchiveControllers;
-use App\Modules\Archive;?>
+use App\Models\Archive;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +82,7 @@ use App\Modules\Archive;?>
                     <p class="text-muted"><?= $DataActivity->getTypeActivity() ?></p>
                     <hr>
                     <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
-                    <p class="text-muted"><?= $DataActivity->setStateActivity() ?></p>
+                    <p class="text-muted"><?= $DataActivity->getStateActivity() ?></p>
                     <hr>
                     </p>
 
@@ -90,9 +90,9 @@ use App\Modules\Archive;?>
 
                 <!--Datos del Archivo-->
                 <?php if(!empty($_GET["idActivity"])){
-                $dataArchive = \App\Models\Archive::search("SELECT * FROM Archive WHERE Activity_idActivity =" . $_GET["idActivity"]);
+                $dataArchive = Archive::search("SELECT * FROM Archive WHERE Activity_idActivity =" .$_GET["idActivity"]);
                 foreach ($dataArchive as $archive) {
-                    $DataArchi =  \App\Controllers\ArchiveControllers::searchForID($archive->getActivityIdActivity()->getIdActivity());
+                    $DataArchi =  \App\Controllers\ArchiveControllers::searchForID($archive->getIdArchive());
                 }
                 if(!empty($DataArchi)){
                 ?>
@@ -144,9 +144,9 @@ use App\Modules\Archive;?>
                 <!-- /.card -->
         </section>
     </div>
-    <?php require ("../../../partials/footer.php");?>
+    <?php require ("../../partials/footer.php");?>
     <!--</div>-->
 </div>
-<?php require ("../../../partials/scripts.php");?>
+<?php require ("../../partials/scripts.php");?>
 </body>
 </html>

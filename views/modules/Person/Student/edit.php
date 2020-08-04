@@ -274,7 +274,7 @@ use Carbon\Carbon;?>
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-info">Enviar</button>
-                                <a href="show.php" role="button" class="btn btn-default float-right">Cancelar</a>
+                                <a href="index.php" role="button" class="btn btn-default float-right">Cancelar</a>
                             </div>
                             <!-- /.card-footer -->
                         </form>

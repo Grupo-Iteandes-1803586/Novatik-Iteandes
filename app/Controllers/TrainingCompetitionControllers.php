@@ -70,7 +70,7 @@ class TrainingCompetitionControllers{
             $competition = new TrainingCompetition($arrayTrainingCompetition);
             $competition->update();
 
-            header("Location: ../../views/modules/TrainingCompetition/show.php?respuesta=correcto");
+            header("Location: ../../views/modules/TrainingCompetition/show.php?idTrainingCompetition=".$competition->getIdTrainingCompetition()."&respuesta=correcto");
         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/TrainingCompetition/edit.php?respuesta=error&mensaje=".$e->getMessage());
@@ -124,6 +124,46 @@ class TrainingCompetitionControllers{
             //GeneralFunctions::console( $e, 'log', 'errorStack');
             header("Location: ../Vista/modules/TrainingCompetition/manager.php?respuesta=error");
         }
+    }
+//Seleccion de Competencias
+    private static function competitionIsInArray($idTrainingCompetition, $ArrCompetition){
+        if(count($ArrCompetition) > 0){
+            foreach ($ArrCompetition as $competition){
+                if($competition->getIdTrainingCompetition() == $idTrainingCompetition){
+                    var_dump($competition);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    //Seleccionar una competencia
+
+    static public function selectCompetition ($isMultiple=false,
+                                          $isRequired=true,
+                                          $id="idTrainingCompetition",
+                                          $nombre="idTrainingCompetition",
+                                          $defaultValue="",
+                                          $class="form-control",
+                                          $where="",
+                                          $arrExcluir = array()){
+        $arrCompetition = array();
+        if($where != ""){
+            $base = "SELECT * FROM TrainingCompetition WHERE ";
+            $arrCompetition = TrainingCompetition::search($base.' '.$where);
+        }else{
+            $arrCompetition = TrainingCompetition::getAll();
+        }
+
+        $htmlSelect = "<select ".(($isMultiple) ? "multiple" : "")." ".(($isRequired) ? "required" : "")." id= '".$id."' name='".$nombre."' class='".$class."' style='width: 100%;'>";
+        $htmlSelect .= "<option value='' >Seleccione</option>";
+        if(count($arrCompetition) > 0){
+            foreach ($arrCompetition as $competition)
+                if (!TrainingCompetitionControllers::competitionIsInArray($competition->getIdTrainingCompetition(),$arrExcluir))
+                    $htmlSelect .= "<option ".(($competition != "") ? (($defaultValue == $competition->getIdTrainingCompetition()) ? "selected" : "" ) : "")." value='".$competition->getIdTrainingCompetition()."'>".$competition->getDenomination()."</option>";
+        }
+        $htmlSelect .= "</select>";
+        return $htmlSelect;
     }
 
 }

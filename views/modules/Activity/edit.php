@@ -1,9 +1,11 @@
 <?php
 require ("../../partials/routes.php");
-require ("../../../app/Controllers/ArchiveControllers.php");
-require ("../../../app/Controllers/ActivityControllers.php");
+require_once ("../../../app/Controllers/ArchiveControllers.php");
+require_once ("../../../app/Controllers/ActivityControllers.php");
+require_once ("../../../app/Models/Archive.php");
 
 use App\Controllers\ArchiveControllers;
+use App\Models\Archive;
 use App\Controllers\ActivityControllers;?>
 <html lang="es">
 <head>
@@ -47,10 +49,10 @@ use App\Controllers\ActivityControllers;?>
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-ban"></i> Error!</h5>
-                        Error al editar el usuario: <?= ($_GET['mensaje']) ?? "" ?>
+                        Error al editar la Actividad: <?= ($_GET['mensaje']) ?? "" ?>
                     </div>
                 <?php } ?>
-            <?php } else if (empty($_GET['idTrainingCompetition'])) { ?>
+            <?php } else if (empty($_GET['idActivity'])) { ?>
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h5><i class="icon fas fa-ban"></i> Error!</h5>
@@ -66,14 +68,14 @@ use App\Controllers\ActivityControllers;?>
                     <?php require("../../partials/optionMenu.php") ;?>
                 </div>
                 <!-- /.card-header -->
-                <?php if(!empty($_GET["idTrainingCompetition"]) && isset($_GET["idTrainingCompetition"])){ ?>
+                <?php if(!empty($_GET["idActivity"]) && isset($_GET["idActivity"])){ ?>
                 <p>
                     <?php
                     $DataActivity = \App\Controllers\ActivityControllers::searchForID($_GET["idActivity"]);
                     if(!empty($DataActivity)){
                     ?>
                     <!-- form start -->
-                <form class="form-horizontal" method="post" id="frmEditCompetition" name="frmEditCompetition" action="../../../app/Controllers/ActivityControllers.php?action=edit">
+                <form class="form-horizontal" method="post" id="frmEditActivity" name="frmEditActivity" action="../../../app/Controllers/ActivityControllers.php?action=edit">
                     <input id="idActivity" name="idActivity" value="<?php echo $DataActivity->getIdActivity(); ?>" hidden required="required" type="text">
                     <div class="card-body">
                         <div class="form-group row">
@@ -99,27 +101,61 @@ use App\Controllers\ActivityControllers;?>
                             <div class="col-sm-10">
                                 <input required type="text" class="form-control" id="typeActivity" name="typeActivity" value="<?= $DataActivity->getTypeActivity(); ?>" placeholder="Ingrese Tipo de Actividad">
                             </div>
-                    </div>
-                    <div class="form-group row">
-                        <input id="LearningResult_idLearningResult" name="LearningResult_idLearningResult" value="<?php echo $DataActivity->getLearningResultIdLearningResult(); ?>" hidden required="required" type="text">
+                        </div>
+                        <input id="LearningResult_idLearningResult" name="LearningResult_idLearningResult" value="<?php echo $DataActivity->getLearningResultIdLearningResult()->getIdLearningResult(); ?>" hidden required="required" type="text">
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Resultado de Aprendisaje</label>
+                            <label class="col-sm-2 col-form-label">Resultado de Aprendizaje Asociada</label>
                             <div class="col-sm-10">
-                                <input class="form-control"value="<?php echo $DataActivity->LearningResult_idLearningResult()->getNameLearningResult(); ?>"
+                                <input class="form-control"value="<?php echo $DataActivity->getLearningResultIdLearningResult()->getNameLearningResult(); ?>"
                                        type="text"  readonly="readonly">
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="statusTrainingCompetition" class="col-sm-2 col-form-label">Estado</label>
-                        <div class="col-sm-10">
-                            <select id="stateActivity" name="stateActivity" class="custom-select">
-                                <option <?= ($DataActivity->getStateActivity() == "Activo") ? "selected":""; ?> value="Activo">Activo</option>
-                                <option <?= ($DataActivity->getStateActivity() == "Inactivo") ? "selected":""; ?> value="Inactivo">Inactivo</option>
-                            </select>
+                        <div class="form-group row">
+                            <label for="stateActivity" class="col-sm-2 col-form-label">Estado</label>
+                            <div class="col-sm-10">
+                                <select id="stateActivity" name="stateActivity" class="custom-select">
+                                    <option <?= ($DataActivity->getStateActivity() == "Activo") ? "selected":""; ?> value="Activo">Activo</option>
+                                    <option <?= ($DataActivity->getStateActivity() == "Inactivo") ? "selected":""; ?> value="Inactivo">Inactivo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!------------------------datos de archivo-------------------------->
+                        <?php
+                        $dataArchive = Archive::search("SELECT * FROM Archive WHERE Activity_idActivity =" . $_GET["idActivity"]);
+                        foreach ($dataArchive as $archive) {
+                            $DataA = \App\Controllers\ArchiveControllers::searchForID($archive->getIdArchive());
+                        }
+                        if (!empty($DataA)) { ?>
+                        <li class="list-Dates"><i class="fas fa-book mr-1" id="icon-iconos"></i>Archivo
+                        </li>
+                        <hr>
+                        <input id="idArchive" name="idArchive"
+                               value="<?php echo $DataA->getIdArchive(); ?>" hidden
+                               required="required" type="text">
+                        <!--Nombre del Archivo-->
+                        <div class="form-group row">
+                            <label for="nameArchive" class="col-sm-2 col-form-label">Nombre del Archivo</label>
+                            <div class="col-sm-10">
+                                <input required type="text" minlength="6" class="form-control"
+                                       id="nameArchive" name="nameArchive"
+                                       value="<?php echo $DataA->getNameArchive(); ?>"
+                                       placeholder="Nombre del Archivo">
+                            </div>
+                        </div>
+
+                        <!--Descripcion-->
+                        <div class="form-group row">
+                            <label for="descriptionArchive" class="col-sm-2 col-form-label">Descripcion</label>
+                            <div class="col-sm-10">
+                                <input required type="number" class="form-control" id="descriptionArchive"
+                                       name="descriptionArchive"
+                                       value="<?php echo $DataA->getDescriptionArchive(); ?>"
+                                       placeholder="Descripcion">
+                            </div>
                         </div>
                     </div>
 
+                    <?php } ?>
             </div>
         <!-- /.card-body -->
             <div class="card-footer">

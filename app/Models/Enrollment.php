@@ -56,7 +56,7 @@ class Enrollment extends BasicModel{
      */
     public function getDateEnrollment() : Carbon
     {
-        return $this->dateEnrollment;
+        return $this->dateEnrollment->locale('es');
     }
 
     /**
@@ -102,7 +102,7 @@ class Enrollment extends BasicModel{
     /**
      * @return int
      */
-    public function getSemesterIdSemester(): int
+    public function getSemesterIdSemester(): Semester
     {
         return $this->Semester_idSemester;
     }
@@ -118,7 +118,7 @@ class Enrollment extends BasicModel{
     /**
      * @return int
      */
-    public function getTrainingProgramIdTrainingProgram(): int
+    public function getTrainingProgramIdTrainingProgram(): TrainingProgram
     {
         return $this->TrainingProgram_idTrainingProgram;
     }

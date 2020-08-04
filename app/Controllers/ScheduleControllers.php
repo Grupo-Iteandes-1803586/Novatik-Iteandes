@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 require_once (__DIR__.'/../Models/Schedule.php');
-require_once (__DIR__.'App\Models\Group');
+require_once (__DIR__.'/../Models/Group.php');
 use App\Models\Schedule;
 use App\Models\Group;
 use Carbon\Carbon;
