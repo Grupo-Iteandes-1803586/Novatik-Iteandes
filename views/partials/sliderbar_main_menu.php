@@ -129,6 +129,58 @@
                     </ul>
                 </li>
                 </li>
+                <!--Modulo Gestionar Grupos-->
+                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'group') ? 'menu-open' : '' ?>
+                    <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'group') ? 'active' : '' ?>
+                        <i class="nav-icon far fa-user"></i>
+                        <p>
+                            Gestionar Grupo
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $baseURL ?>/views/modules/Group/index.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Consultar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $baseURL ?>/views/modules/Group/create.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Registrar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                </li>
+                <!--Modulo Gestionar Matricula-->
+                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'enrollment') ? 'menu-open' : '' ?>
+                    <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'enrollment') ? 'active' : '' ?>
+                        <i class="nav-icon far fa-user"></i>
+                        <p>
+                            Gestionar Matricula
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $baseURL ?>/views/modules/Enrollment/index.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Consultar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $baseURL ?>/views/modules/Enrollment/create.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Registrar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                </li>
             </ul>
 
         </nav>

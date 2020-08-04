@@ -1,6 +1,11 @@
 <?php
 require ("../../partials/routes.php");
-require ("../../../app/Controllers/EnrollmentControllers.php");
+require_once ("../../../app/Controllers/EnrollmentControllers.php");
+require_once("../../../app/Controllers/PersonController.php");
+require_once("../../../app/Controllers/StudentControllers.php");
+
+use App\Controllers\PersonController;
+use App\Controllers\StudentControllers;
 
 
 use App\Controllers\EnrollmentControllers;
@@ -66,16 +71,24 @@ use App\Controllers\EnrollmentControllers;
                 <div class="card-body">
                     <div class="row">
                         <div class="col-auto mr-auto"></div>
+                        <div class="col-auto">
+                            <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-plus"></i> Crear Matricula
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto mr-auto"></div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <table id="tblTrainingCompetition" class="datatable table table-bordered table-striped">
+                            <table id="tblEnrollment" class="datatable table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Fecha de Matricula</th>
                                     <th>Nombre del Estudiante</th>
-                                    <th>Horario</th>
+                                    <th>Semestre</th>
                                     <th>Programa de Formacion</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
@@ -91,22 +104,19 @@ use App\Controllers\EnrollmentControllers;
                                     <tr>
                                         <td><?php echo $Enrollment->getIdEnrollment(); ?></td>
                                         <td><?php echo $Enrollment->getDateEnrollment(); ?></td>
-                                        <td><?php echo $Enrollment->getStudentIdStudent()->getNameTrainingProgram(); ?></td>
-                                        <td><?php echo $Enrollment->Semester_idSemester()->getNameTrainingProgram(); ?></td>
-                                        <td><?php echo $Enrollment->TrainingProgram_idTrainingProgram()->getNameTrainingProgram(); ?></td>
+                                        <td><?php echo $Enrollment->getStudentIdStudent()->getPersonIdPerson()->getNamePerson(); ?></td>
+                                        <td><?php echo $Enrollment->getSemesterIdSemester()->getNameSemester(); ?></td>
+                                        <td><?php echo $Enrollment->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram(); ?></td>
                                         <td><?php echo $Enrollment->getStateEnrollment(); ?></td>
                                         <td>
                                             <a href="edit.php?idEnrollment=<?php echo $Enrollment->getIdEnrollment(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                                             <a href="show.php?idEnrollment=<?php echo $Enrollment->getIdEnrollment(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
-                                            <?php if ($Enrollment->getStatusTrainingCompetition() != "Activo"){
+                                            <?php if ($Enrollment->getStateEnrollment() != "Activo"){
                                                 ?>
                                                 <a href="../../../app/Controllers/EnrollmentControllers.php?action=activate&idEnrollment=<?php echo $Enrollment->getIdEnrollment(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                             <?php }else{?>
                                                 <a type="button" href="../../../app/Controllers/EnrollmentControllers.php?action=inactivate&idEnrollment=<?php echo $Enrollment->getIdEnrollment(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
-                                            <?php } ?>
-                                            <a href="../LearningResult/create.php?idEnrollment=<?php echo $Enrollment->getIdEnrollment(); ?>" type="button" data-toggle="tooltip" title="Agregar Resultado de Aprendizaje" class="btn docs-tooltip btn-award btn-xs"><i class="fa fa-book-reader"></i></a>
-                                            <a href="../LearningResult/index.php?idEnrollment=<?php echo $Enrollment->getIdEnrollment(); ?>" type="button" data-toggle="tooltip" title="Ver Resultado de Aprendizaje" class="btn docs-tooltip btn-vision btn-xs"><i class="fa fa-low-vision"></i></a>
-                                        </td>
+                                            <?php } ?></td>
                                     </tr>
                                 <?php } ?>
 

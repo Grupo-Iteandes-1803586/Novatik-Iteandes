@@ -21,7 +21,7 @@ class Activity extends BasicModel
      * @param $LearningResult_idLearningResult
      * @param $stateActivity
      */
-    public function __construct()
+    public function __construct($Activity = array())
     {
         parent::__construct();
         $this->idActivity = $Activity['idActivity'] ?? null;
@@ -228,8 +228,9 @@ class Activity extends BasicModel
             $Activity->nameActivity = $getrow['nameActivity'];
             $Activity->descriptionActivity = $getrow['descriptionActivity'];
             $Activity->typeActivity = $getrow['typeActivity'];
-            $Activity->LearningResult_idLearningResult= LearningResult::searchForId($getrow['LearningResult_idLearningResult']);
             $Activity->stateActivity = $getrow['stateActivity'];
+            $Activity->LearningResult_idLearningResult= LearningResult::searchForId($getrow['LearningResult_idLearningResult']);
+
         }
         $Activity->Disconnect();
         return $Activity;

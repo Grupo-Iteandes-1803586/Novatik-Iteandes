@@ -1,4 +1,14 @@
-<?php require ("../../partials/routes.php");?>
+<?php require ("../../partials/routes.php");
+require_once("../../../app/Controllers/ActivityControllers.php");
+require_once("../../../app/Controllers/LearningResultControllers.php");
+require_once("../../../app/Models/Activity.php");
+require_once("../../../app/Models/LearningResult.php");
+use App\Controllers\ActivityControllers;
+use App\Controllers\LearningResultControllers;
+use App\Models\Activity;
+use App\Models\LearningResult;
+?>
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -46,7 +56,10 @@
             <!-- Horizontal Form -->
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Formulario de Actividad</h3>
+                    <?php
+                    $DataActivity = \App\Controllers\LearningResultControllers::searchForID($_GET["idLearningResult"]);
+                    ?>
+                    <h3 class="card-title">Agregar Actividad</h3>
                     <?php require("../../partials/optionMenu.php") ;?>
                 </div>
                 <!-- /.card-header -->
@@ -90,40 +103,45 @@
                             </div>
                         </div>
                         <!--Resultados de Actividad-->
+                        <?php
+                        $idLR= $_GET["idLearningResult"];?>
+                        <input id="LearningResult_idLearningResult" name="LearningResult_idLearningResult"
+                               value="<?php echo $idLR; ?>" hidden required="required"
+                               type="text">
                         <div class="form-group row">
-                            <label for="LearningResult_idLearningResult" class="col-sm-2 col-form-label">Resultado de Aprendizaje</label>
+                            <label class="col-sm-2 col-form-label">Resultado de Aprendizaje</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="LearningResult_idLearningResult" name="LearningResult_idLearningResult" placeholder="Resultado de Aprendizaje">
+                                <input class="form-control"value="<?php echo $DataActivity->getNameLearningResult(); ?>"
+                                       type="text" readonly="readonly">
+                            </div>
+                        </div>
 
+                        <!------------------------datos de archivo-------------------------->
+
+                        <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Archivo</li>
+                        <hr>
+                        <!--nombre archivo-->
+                        <div class="form-group row">
+                            <label for="nameArchive" class="col-sm-2 col-form-label">Nombre Archivo</label>
+                            <div class="col-sm-10">
+                                <input required type="text" class="form-control" id="nameArchive" name="nameArchive" placeholder="Nombre Archivo">
+                            </div>
+                        </div>
+                        <!--Descripcion del Archivo-->
+                        <div class="form-group row">
+                            <label for="descriptionArchive" class="col-sm-2 col-form-label">Descripcion del Archivo</label>
+                            <div class="col-sm-10">
+                                <input required type="text" class="form-control" id="descriptionArchive" name="descriptionArchive" placeholder="Descripcion del Archivo">
                             </div>
                         </div>
                     </div>
-                    <!------------------------datos de archivo-------------------------->
-
-                    <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Archivo</li>
-                    <hr>
-                    <!--nombre archivo-->
-                    <div class="form-group row">
-                        <label for="nameArchive" class="col-sm-2 col-form-label">Nombre Archivo</label>
-                        <div class="col-sm-10">
-                            <input required type="text" class="form-control" id="nameArchive" name="nameArchive" placeholder="Nombre Archivo">
-                        </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info">Enviar</button>
+                        <a href="show.php" role="button" class="btn btn-default float-right">Cancelar</a>
                     </div>
-                    <!--Descripcion del Archivo-->
-                    <div class="form-group row">
-                        <label for="descriptionArchive" class="col-sm-2 col-form-label">Descripcion del Archivo</label>
-                        <div class="col-sm-10">
-                            <input required type="text" class="form-control" id="descriptionArchive" name="descriptionArchive" placeholder="Descripcion del Archivo">
-                        </div>
-                    </div>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                <button type="submit" class="btn btn-info">Enviar</button>
-                <a href="show.php" role="button" class="btn btn-default float-right">Cancelar</a>
-            </div>
-            <!-- /.card-footer -->
-            </form>
+                    <!-- /.card-footer -->
+                </form>
         </section>
     </div>
     </section>

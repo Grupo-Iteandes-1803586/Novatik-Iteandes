@@ -20,7 +20,7 @@ class Archive extends BasicModel
      * @param $rutaArchive
      * @param $Activity_idActivity
      */
-    public function __construct()
+    public function __construct($Archive = array())
     {
         parent::__construct();
         $this->idArchive = $Archive['idArchive'] ?? null;
@@ -138,9 +138,9 @@ class Archive extends BasicModel
         $result = $this->insertRow("INSERT INTO iteandes_novatik.Archive VALUES (NULL, ?, ?, ?, ?,?)", array(
                 $this->nameArchive,
                 $this->descriptionArchive,
-                $this->descrrutaArchiveiptionArchive,
-                $this->Activity_idActivity->getIdActivity(),
-                $this->stateArchive
+                $this->stateArchive,
+                $this->rutaArchive,
+                $this->Activity_idActivity->getIdActivity()
             )
         );
         $this->setIdArchive(($result) ? $this->getLastId() : null);
@@ -178,7 +178,6 @@ class Archive extends BasicModel
         $arrArchive = array();
         $tmp = new Archive();
         $getrows = $tmp->getRows($query);
-
         foreach ($getrows as $value) {
             $Archive = new Archive();
             $Archive->idArchive = $value['idArchive'];

@@ -1,13 +1,19 @@
 <?php require ("../../partials/routes.php");
 require_once("../../../app/Controllers/EnrollmentControllers.php");
 require_once("../../../app/Controllers/EnrollmentCompetitionControllers.php");
+require_once("../../../app/Controllers/TrainingCompetitionControllers.php");
+require_once("../../../app/Controllers/TrainingProgramController.php");
+require_once("../../../app/Controllers/SemesterControllers.php");
 
 use App\Controllers\EnrollmentControllers;
+use App\Controllers\SemesterControllers;
+use App\Controllers\TrainingCompetitionControllers;
+use App\Controllers\TrainingProgramController;
 use App\Controllers\EnrollmentCompetitionControllers;
 use App\Models\Enrollment;
 use App\Models\EnrollmentCompetition;
 use Carbon\Carbon;?>
-?>
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -94,32 +100,60 @@ use Carbon\Carbon;?>
                                     <input required type="text" class="form-control" id="Institution" name="Institution" placeholder="Ingresa la Institucion Educativa">
                                 </div>
                             </div>
+
                             <!--Datos de la Matricula-->
                             <!--Semestre-->
+                            <?php
+                            $dataSemester= null;
+                            if (!empty($_GET['idSemester'])) {
+                                $dataSemester = \App\Controllers\SemesterControllers::searchForID($_GET['idSemester']);
+                            }
+                            ?>
                             <div class="form-group row">
-                                <label for="Semester_idSemester" class="col-sm-2 col-form-label">Semestre Academico</label>
+                                <label for="Semester_idSemester" class="col-sm-2 col-form-label">Semestre</label>
                                 <div class="col-sm-10">
-                                    <input required type="text" class="form-control" id="Semester_idSemester" name="Semester_idSemester" placeholder="Ingresa Semestre Academico">
+                                    <?= \App\Controllers\SemesterControllers::selectCompetition(false,
+                                        true,
+                                        '$Semester_idSemester',
+                                        '$Semester_idSemester',
+                                        (!empty($dataSemester)) ? $dataSemester->getSemesterIdSemester()->getIdSemester() : '',
+                                        'form-control select2bs4 select2-info',
+                                        "statuSemester = 'Activo'")
+                                    ?>
                                 </div>
                             </div>
                             <!--Programa de Formacion-->
+                            <?php
+                            $dataProgram= null;
+                            if (!empty($_GET['idTrainingProgram'])) {
+                                $dataProgram = \App\Controllers\TrainingProgramController::searchForID($_GET['idTrainingProgram']);
+                            }
+                            ?>
                             <div class="form-group row">
-                                <label for="TrainingProgram_idTrainingProgram" class="col-sm-2 col-form-label">Programa de Formacion</label>
+                                <label for="Semester_idSemester" class="col-sm-2 col-form-label">Programa de Formacion</label>
                                 <div class="col-sm-10">
-                                    <input required type="text" class="form-control" id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram" placeholder="Ingresa Programa de Formacion">
-                                    <?php $idTprogram = $_POST['TrainingProgram_idTrainingProgram'] ?>
+                                    <?= \App\Controllers\TrainingProgramController::selectCompetition(false,
+                                        true,
+                                        'TrainingProgram_idTrainingProgram',
+                                        'TrainingProgram_idTrainingProgram',
+                                        (!empty($dataProgram)) ? $dataProgram->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram() : '',
+                                        'form-control select2bs4 select2-info',
+                                        "statusTrainingProgram = 'Activo'")
+                                    ?>
                                 </div>
                             </div>
+
                             <!--Competencias-->
                             <?php
-                            $dataDates = \App\Models\EnrollmentCompetition::search("SELECT * FROM trainingcompetition tc INNER JOIN trainingprogram tp on tp.idTrainingProgram = tc.TrainingProgram_idTrainingProgram WHERE tp.idTrainingProgram=".$idTprogram);
+                            $dataDates = \App\Models\EnrollmentCompetition::search("SELECT * FROM trainingcompetition tc INNER JOIN trainingprogram tp on tp.idTrainingProgram = tc.TrainingProgram_idTrainingProgram WHERE tp.idTrainingProgram=".$dataProgram);
                             foreach ($dataDates as $daDe) {
                                 $DataCpm = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daDe->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition());
                                 $idC = $daDe->getTrainingCompetitionIdTrainingCompetition();
                             }
-                            $dataSche = \App\Models\EnrollmentCompetition::search("SELECT sh.idSchedule FROM schedule sh INNER JOIN `group` gr on sh.Group_idGroup = gr.idGroup where gr.TrainingCompetition_idTrainingCompetition =".$idC);
+                            //Horario
+                            $dataSche = \App\Models\EnrollmentCompetition::search("SELECT * FROM schedule sh  INNER JOIN `group` gr on sh.Group_idGroup = gr.idGroup where gr.TrainingCompetition_idTrainingCompetition =".$idC);
                             foreach ($dataSche as $daSc) {
-                                $daSch = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daSc->getScheduleIdSchedule->getIdSchedule());
+                                $daSch = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daSc->getScheduleIdSchedule()->getIdSchedule());
                                 $idS = $daDe->getScheduleIdSchedule();
                             }
                             ?>
@@ -130,12 +164,12 @@ use Carbon\Carbon;?>
                                    value="<?php echo $idS; ?>" hidden required="required"
                                    type="text">
                         </div>
-
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-info">Enviar</button>
-                            <a href="show.php" role="button" class="btn btn-default float-right">Cancelar</a>
-                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info">Enviar</button>
+                        <a href="show.php" role="button" class="btn btn-default float-right">Cancelar</a>
+                    </div>
                     <!-- /.card-footer -->
                 </form>
             </div>

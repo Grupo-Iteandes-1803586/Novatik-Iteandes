@@ -51,7 +51,7 @@ use App\Models\TrainingCompetition;
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-ban"></i> Error!</h5>
-                        Error al editar el usuario: <?= ($_GET['mensaje']) ?? "" ?>
+                        Error al editar la Competencia: <?= ($_GET['mensaje']) ?? "" ?>
                     </div>
                 <?php } ?>
             <?php } else if (empty($_GET['idTrainingCompetition'])) { ?>
@@ -111,12 +111,12 @@ use App\Models\TrainingCompetition;
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="order" class="col-sm-2 col-form-label">order</label>
+                                    <label for="orderTrainingCompetition" class="col-sm-2 col-form-label">Orden</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="order" name="order" value="<?= $DataTrainigCompetition->getOrder(); ?>" placeholder="Ingrese el Orden">
+                                        <input required type="text" class="form-control" id="orderTrainingCompetition" name="orderTrainingCompetition" value="<?= $DataTrainigCompetition->getOrderTrainingCompetition(); ?>" placeholder="Orden">
                                     </div>
                                 </div>
-                                <input id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram" value="<?php echo $DataTrainigCompetition->getTrainingProgramIdTrainingProgram(); ?>" hidden required="required" type="text">
+                                <input id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram" value="<?php echo $DataTrainigCompetition->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram(); ?>" hidden required="required" type="text">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Programa de Formacion</label>
                                     <div class="col-sm-10">

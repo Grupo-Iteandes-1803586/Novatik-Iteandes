@@ -83,6 +83,7 @@ use App\Controllers\TrainingProgramController;?>
                                     <th>Nombre del Programa</th>
                                     <th>Version</th>
                                     <th>Estado</th>
+                                    <th>Competencia</th>
                                     <th>Opciones</th>
                                 </tr>
                                 </thead>
@@ -99,6 +100,10 @@ use App\Controllers\TrainingProgramController;?>
                                         <td><?php echo $trainingP->getVersion(); ?></td>
                                         <td><?php echo $trainingP->getStatusTrainingProgram(); ?></td>
                                         <td>
+                                            <a href="../TrainingCompetition/create.php?idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Agregar Competencia" class="btn docs-tooltip btn-award btn-xs"><i class="fa fa-award"></i></a>
+                                            <a href="../TrainingCompetition/index.php?idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Ver Competencias" class="btn docs-tooltip btn-vision btn-xs"><i class="fa fa-low-vision"></i></a>
+                                        </td>
+                                        <td>
                                             <a href="edit.php?idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                                             <a href="show.php?idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
                                             <?php if ($trainingP->getStatusTrainingProgram() != "Activo"){ ?>
@@ -106,9 +111,6 @@ use App\Controllers\TrainingProgramController;?>
                                             <?php }else{ ?>
                                                 <a type="button" href="../../../app/Controllers/TrainingProgramController.php?action=inactive&idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                             <?php } ?>
-                                        <a href="../TrainingCompetition/create.php?idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Agregar Competencia" class="btn docs-tooltip btn-award btn-xs"><i class="fa fa-award"></i></a>
-                                        <a href="../TrainingCompetition/index.php?idTrainingProgram=<?php echo $trainingP->getIdTrainingProgram(); ?>" type="button" data-toggle="tooltip" title="Ver Competencias" class="btn docs-tooltip btn-vision btn-xs"><i class="fa fa-low-vision"></i></a>
-
                                     </td>
                                     </tr>
                                 <?php } ?>
