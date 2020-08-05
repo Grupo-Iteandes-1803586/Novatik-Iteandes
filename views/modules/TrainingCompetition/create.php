@@ -66,7 +66,7 @@ use App\Models\TrainingProgram;
                         <div class="form-group row">
                             <label for="codeTrainingCompetition" class="col-sm-2 col-form-label">Codigo Competencia</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="codeTrainingCompetition" name="codeTrainingCompetition" placeholder="Ingrese el Codigo de la Competencia">
+                                <input required type="number" class="form-control" id="codeTrainingCompetition" name="codeTrainingCompetition" placeholder="Ingrese el Codigo de la Competencia">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -78,26 +78,26 @@ use App\Models\TrainingProgram;
                         <div class="form-group row">
                             <label for="denomination" class="col-sm-2 col-form-label">Nombre de la Competencia</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="denomination" name="denomination" placeholder="Ingrese el nombre de la Competencia">
+                                <input required type="text" maxlength="280"  class="form-control" id="denomination" name="denomination" placeholder="Ingrese el nombre de la Competencia">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="duration" class="col-sm-2 col-form-label">Duracion</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="duration" name="duration" placeholder="Duracion en horas">
+                                <input required type="text"  maxlength="4" class="form-control" id="duration" name="duration" placeholder="Duracion en horas">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="minimumSpace" class="col-sm-2 col-form-label">Cupo Minimo</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="minimumSpace" name="minimumSpace" placeholder="Cupo Minimo">
+                                <input required type="text" maxlength="2" class="form-control" id="minimumSpace" name="minimumSpace" placeholder="Cupo Minimo">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="orderTrainingCompetition" class="col-sm-2 col-form-label">Orden</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="orderTrainingCompetition" name="orderTrainingCompetition" placeholder="Orden">
+                                <input required type="text" maxlength="2" class="form-control" id="orderTrainingCompetition" name="orderTrainingCompetition" placeholder="Orden">
                             </div>
                         </div>
                         <?php
@@ -116,7 +116,7 @@ use App\Models\TrainingProgram;
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-info">Enviar</button>
-                        <?php$idTP;?>
+
                         <a href="index.php" role="button" class="btn btn-default float-right">Cancelar</a>
                     </div>
                     <!-- /.card-footer -->
@@ -130,5 +130,6 @@ use App\Models\TrainingProgram;
 </div>
 <!--</div>-->
 <?php require ("../../partials/scripts.php");?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>

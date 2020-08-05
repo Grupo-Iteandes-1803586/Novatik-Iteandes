@@ -8,6 +8,6 @@
     <div class="form-group row">
         <label for="nameLenguages" class="col-sm-2 col-form-label">Idiomas</label>
         <div class="col-sm-10">
-            <input required type="text" class="form-control" id="nameLenguages" name="nameLenguages" placeholder="Idiomas">
+            <input required type="text" maxlength="40" class="form-control" id="nameLenguages" name="nameLenguages" placeholder="Idiomas">
         </div>
 </div>

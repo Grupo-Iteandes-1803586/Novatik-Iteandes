@@ -3,19 +3,18 @@ use Carbon\Carbon;?>
 <div class="card-body">
         <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Experiencia</li>
         <hr>
-
         <!--Ultimo Lugar de Trabajo-->
         <div class="form-group row">
             <label for="institutionExperience" class="col-sm-2 col-form-label">Ultimo Lugar de Trabajo</label>
             <div class="col-sm-10">
-                <input required type="text" class="form-control" id="institutionExperience" name="institutionExperience" placeholder="Ultimo Lugar de Trabajo">
+                <input required type="text" maxlength="280" class="form-control" id="institutionExperience" name="institutionExperience" placeholder="Ultimo Lugar de Trabajo">
             </div>
         </div>
         <!--Ocupacion Laboral-->
         <div class="form-group row">
             <label for="dedicationExperience" class="col-sm-2 col-form-label">Ocupacion Laboral</label>
             <div class="col-sm-10">
-                <input required type="text" class="form-control" id="dedicationExperience" name="dedicationExperience" placeholder="Ocupacion Laboral">
+                <input required type="text" maxlength="280" class="form-control" id="dedicationExperience" name="dedicationExperience" placeholder="Ocupacion Laboral">
             </div>
         </div>
 

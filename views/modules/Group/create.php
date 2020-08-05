@@ -65,28 +65,28 @@ use Carbon\Carbon;
                         <div class="form-group row">
                             <label for="codeGroup" class="col-sm-2 col-form-label">Codigo Grupo</label>
                             <div class="col-sm-10">
-                                <input required type="Number" class="form-control" id="codeGroup" name="codeGroup" placeholder="Codigo del Grupo">
+                                <input required type="number" class="form-control" id="codeGroup" name="codeGroup" placeholder="Codigo del Grupo">
                             </div>
                         </div>
                         <!--nombre del Grupo-->
                         <div class="form-group row">
                             <label for="nameGroup" class="col-sm-2 col-form-label">Nombre Del Grupo</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="nameGroup" name="nameGroup" placeholder="Nombre del Grupo">
+                                <input required type="text" class="form-control" maxlength="300" id="nameGroup" name="nameGroup" placeholder="Nombre del Grupo">
                             </div>
                         </div>
                         <!--Cupo Minimo-->
                         <div class="form-group row">
                             <label for="minimumSpaceGroup" class="col-sm-2 col-form-label">Cupo Minimo</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="minimumSpaceGroup" name="minimumSpaceGroup" placeholder="Cupo Minimo">
+                                <input required type="text" maxlength="2" class="form-control" id="minimumSpaceGroup" name="minimumSpaceGroup" placeholder="Cupo Minimo">
                             </div>
                         </div>
                         <!--Cupo Maximo-->
                         <div class="form-group row">
                             <label for="maximumSpaceGroup" class="col-sm-2 col-form-label">Cupo Maximo</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="maximumSpaceGroup" name="maximumSpaceGroup" placeholder="Cupo Maximo">
+                                <input required type="text" maxlength="2" class="form-control" id="maximumSpaceGroup" name="maximumSpaceGroup" placeholder="Cupo Maximo">
                             </div>
                         </div>
                         <?php
@@ -132,7 +132,7 @@ use Carbon\Carbon;
                         <div class="form-group row">
                             <label for="cantHours" class="col-sm-2 col-form-label">Cantidad de Horas</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="cantHours" name="cantHours" placeholder="Cantidad de Horas">
+                                <input required type="text" maxlength="4" class="form-control" id="cantHours" name="cantHours" placeholder="Cantidad de Horas">
                             </div>
                         </div>
                         <!--Dias-->
@@ -177,5 +177,6 @@ use Carbon\Carbon;
 <?php require ("../../partials/footer.php");?>
     <!--</div>-->
 <?php require ("../../partials/scripts.php");?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>
