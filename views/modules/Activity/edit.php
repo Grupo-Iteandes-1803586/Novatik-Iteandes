@@ -81,19 +81,19 @@ use App\Controllers\ActivityControllers;?>
                         <div class="form-group row">
                             <label for="codeActivity" class="col-sm-2 col-form-label">Codigo de la Actividad</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="codeActivity" name="codeActivity" value="<?= $DataActivity->getCodeActivity(); ?>" placeholder="Ingrese el Codigo de la Actividad">
+                                <input required type="number" class="form-control" id="codeActivity" name="codeActivity" value="<?= $DataActivity->getCodeActivity(); ?>" placeholder="Ingrese el Codigo de la Actividad">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="nameActivity" class="col-sm-2 col-form-label">Nombre de la Actividad</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="nameActivity" name="nameActivity" value="<?= $DataActivity->getNameActivity(); ?>" placeholder="Ingrese el Nombre de la Actividad">
+                                <input required type="text" maxlength="300" class="form-control" id="nameActivity" name="nameActivity" value="<?= $DataActivity->getNameActivity(); ?>" placeholder="Ingrese el Nombre de la Actividad">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="descriptionActivity" class="col-sm-2 col-form-label">Descipcion Actividad</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="descriptionActivity" name="descriptionActivity" value="<?= $DataActivity->getDescriptionActivity(); ?>" placeholder="Ingrese la Descripcion de la Actividad">
+                                <input required type="text" maxlength="500" class="form-control" id="descriptionActivity" name="descriptionActivity" value="<?= $DataActivity->getDescriptionActivity(); ?>" placeholder="Ingrese la Descripcion de la Actividad">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -136,7 +136,7 @@ use App\Controllers\ActivityControllers;?>
                         <div class="form-group row">
                             <label for="nameArchive" class="col-sm-2 col-form-label">Nombre del Archivo</label>
                             <div class="col-sm-10">
-                                <input required type="text" minlength="6" class="form-control"
+                                <input required type="text" minlength="6" maxlength="300" class="form-control"
                                        id="nameArchive" name="nameArchive"
                                        value="<?php echo $DataA->getNameArchive(); ?>"
                                        placeholder="Nombre del Archivo">
@@ -147,7 +147,7 @@ use App\Controllers\ActivityControllers;?>
                         <div class="form-group row">
                             <label for="descriptionArchive" class="col-sm-2 col-form-label">Descripcion</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="descriptionArchive"
+                                <input required type="text" maxlength="250" class="form-control" id="descriptionArchive"
                                        name="descriptionArchive"
                                        value="<?php echo $DataA->getDescriptionArchive(); ?>"
                                        placeholder="Descripcion">

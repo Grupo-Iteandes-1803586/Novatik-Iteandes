@@ -116,10 +116,10 @@ use App\Controllers\ScheduleControllers;
                                         <p class="text-muted"><?=$DataS->getCantHours();?></p>
                                         <hr>
                                         <strong><i class="fas fa-user mr-1"></i> Hora de Inicio</strong>
-                                        <p class="text-muted"><?=$DataS->getStartHourSchedule();?></p>
+                                        <p class="text-muted"><?=$DataS->getStartHourSchedule()->toTimeString();?></p>
                                         <hr>
                                         <strong><i class="fas fa-user mr-1"></i> Hora de Cierre</strong>
-                                        <p class="text-muted"><?=$DataS->getEndHourSchedule();?></p>
+                                        <p class="text-muted"><?=$DataS->getEndHourSchedule()->toTimeString();?></p>
                                         <hr>
                                         <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                                         <p class="text-muted"><?=$DataS->getStateSchedule();?></p>

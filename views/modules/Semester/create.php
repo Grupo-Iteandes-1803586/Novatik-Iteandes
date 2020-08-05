@@ -59,13 +59,13 @@ use Carbon\Carbon;?>
                         <div class="form-group row">
                             <label for="nameSemester" class="col-sm-2 col-form-label">Nombres Semestre</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="nameSemester" name="nameSemester" placeholder="Ingrese el nombre de Semestre">
+                                <input required type="text" maxlength="240"  class="form-control" id="nameSemester" name="nameSemester" placeholder="Ingrese el nombre de Semestre">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="descriptionSemester" class="col-sm-2 col-form-label">Descripcion</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="descriptionSemester" name="descriptionSemester" placeholder="Ingrese el nombre de Semestre">
+                                <input required type="text" maxlength="480" class="form-control" id="descriptionSemester" name="descriptionSemester" placeholder="Ingrese el nombre de Semestre">
                             </div>
                         </div>
                         <div class="form-group row">

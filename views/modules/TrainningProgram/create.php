@@ -59,7 +59,7 @@
                         <div class="form-group row">
                             <label for="codeTrainingProgram" class="col-sm-2 col-form-label">Codigo Programa</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="codeTrainingProgram" name="codeTrainingProgram" placeholder="Ingrese el Codigo de Programa de Formacion">
+                                <input required type="number" class="form-control" id="codeTrainingProgram" name="codeTrainingProgram" placeholder="Ingrese el Codigo de Programa de Formacion">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -71,7 +71,7 @@
                         <div class="form-group row">
                             <label for="nameTrainingProgram" class="col-sm-2 col-form-label">Nombre del Programa de Formacion</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="nameTrainingProgram" name="nameTrainingProgram" placeholder="Ingrese el nombre de Programa de Formacion">
+                                <input required type="text" maxlength="250" class="form-control" id="nameTrainingProgram" name="nameTrainingProgram" placeholder="Ingrese el nombre de Programa de Formacion">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -98,5 +98,6 @@
 </div>
 <!--</div>-->
 <?php require ("../../partials/scripts.php");?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>

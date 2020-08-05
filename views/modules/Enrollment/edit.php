@@ -91,7 +91,7 @@ use Carbon\Carbon;
                                 <div class="form-group row">
                                     <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>
                                     <div class="col-sm-10">
-                                        <input required type="number" minlength="6" maxlength="11" class="form-control"
+                                        <input required type="number" minlength="6" maxlength="10" class="form-control"
                                                id="documentPerson" name="documentPerson"
                                                value="<?= $DataPersonT->getDocumentPerson(); ?>"
                                                placeholder="Ingrese su documento">
@@ -101,7 +101,7 @@ use Carbon\Carbon;
                                 <div class="form-group row">
                                     <label for="namePerson" class="col-sm-2 col-form-label">Nombres</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="namePerson" name="namePerson"
+                                        <input required type="text" maxlength="130" class="form-control" id="namePerson" name="namePerson"
                                                value="<?= $DataPersonT->getNamePerson(); ?>" placeholder="Ingresa los nombres">
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@ use Carbon\Carbon;
                                 <div class="form-group row">
                                     <label for="lastNamePerson" class="col-sm-2 col-form-label">Apellidos</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="lastNamePerson"
+                                        <input required type="text" maxlength="130" class="form-control" id="lastNamePerson"
                                                name="lastNamePerson" value="<?= $DataPersonT->getLastNamePerson(); ?>"
                                                placeholder="Ingresa los Apellidos">
                                     </div>
@@ -150,7 +150,7 @@ use Carbon\Carbon;
                                 <div class="form-group row">
                                     <label for="phonePerson" class="col-sm-2 col-form-label">Telefono</label>
                                     <div class="col-sm-10">
-                                        <input required type="number" minlength="6" maxlength="11" class="form-control"
+                                        <input required type="number" minlength="6" maxlength="10" class="form-control"
                                                id="phonePerson" name="phonePerson"
                                                value="<?= $DataPersonT->getPhonePerson(); ?>" placeholder="Ingrese su telefono">
                                     </div>
@@ -159,7 +159,7 @@ use Carbon\Carbon;
                                 <div class="form-group row">
                                     <label for="adressPerson" class="col-sm-2 col-form-label">Direccion</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="adressPerson" name="adressPerson"
+                                        <input required type="text" maxlength="250" class="form-control" id="adressPerson" name="adressPerson"
                                                value="<?= $DataPersonT->getAdressPerson(); ?>"
                                                placeholder="Ingrese su direccion">
                                     </div>
@@ -177,7 +177,7 @@ use Carbon\Carbon;
                                 <div class="form-group row">
                                     <label for="emailPerson" class="col-sm-2 col-form-label">Correo Electronico</label>
                                     <div class="col-sm-10">
-                                        <input required type="email" class="form-control" id="emailPerson" name="emailPerson"
+                                        <input required type="email" maxlength="90" class="form-control" id="emailPerson" name="emailPerson"
                                                value="<?= $DataPersonT->getEmailPerson(); ?>"
                                                placeholder="Ingrese su Correo Electronico">
                                     </div>
@@ -199,7 +199,7 @@ use Carbon\Carbon;
                                         </select>
                                     </div>
                                 </div>
-                                <!--Correo Electronico del Estudiante-->
+                                <!--Foto del Estudiante-->
                                 <div class="form-group row">
                                     <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
                                     <div class="col-sm-10">
@@ -244,11 +244,9 @@ use Carbon\Carbon;
                                                required="required" type="text">
                                         <!--Año de Grado-->
                                         <div class="form-group row">
-                                            <input id="idStudent" name="idStudent" value="<?php echo $DataStudent->getIdStudent(); ?>" hidden
-                                                   required="required" type="text">
                                             <label for="gradeYear" class="col-sm-2 col-form-label">Año de Grado</label>
                                             <div class="col-sm-10">
-                                                <input required type="text" class="form-control" id="gradeYear" name="gradeYear"
+                                                <input required type="text" maxlength="4" class="form-control" id="gradeYear" name="gradeYear"
                                                        value="<?= $DataStudent->getGradeYear(); ?>" placeholder="Año de Graduacion">
                                             </div>
                                         </div>
@@ -270,7 +268,7 @@ use Carbon\Carbon;
                                         <div class="form-group row">
                                             <label for="Institution" class="col-sm-2 col-form-label">Institucion Educativa</label>
                                             <div class="col-sm-10">
-                                                <input required type="text" class="form-control" id="Institution" name="Institution"
+                                                <input required type="text" maxlength="300" class="form-control" id="Institution" name="Institution"
                                                        value="<?= $DataStudent->getInstitution(); ?>" placeholder="Institucion Educativa">
                                             </div>
                                         </div>
@@ -291,7 +289,7 @@ use Carbon\Carbon;
                                         <!--Fecha de Matricula-->
                                         <div class="form-group row">
                                             <input id="dateEnrollment" name="dateEnrollment" value="<?php echo $DataEnrollment->getDateEnrollment(); ?>" hidden
-                                                   required="required" type="text">
+                                                   required="required" type="date">
                                             <label class="col-sm-2 col-form-label">Fecha de Matricula</label>
                                             <div class="col-sm-10">
                                                 <input required type="text" class="form-control" id="gradeYear" name="gradeYear"
@@ -304,7 +302,7 @@ use Carbon\Carbon;
                                                    required="required" type="text">
                                             <label class="col-sm-2 col-form-label">Semestre</label>
                                             <div class="col-sm-10">
-                                                <input required type="text" class="form-control" id="gradeYear" name="gradeYear"
+                                                <input required type="text" class="form-control"
                                                        value="<?= $DataEnrollment->getSemesterIdSemester()->getNameSemester(); ?>" readonly="readonly">
                                             </div>
                                         </div>
@@ -314,7 +312,7 @@ use Carbon\Carbon;
                                                    required="required" type="text">
                                             <label class="col-sm-2 col-form-label">Programa de Formacion</label>
                                             <div class="col-sm-10">
-                                                <input required type="text" class="form-control" id="gradeYear" name="gradeYear"
+                                                <input required type="text" class="form-control"
                                                        value="<?= $DataEnrollment->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram(); ?>" readonly="readonly">
                                             </div>
                                         </div>
@@ -377,5 +375,6 @@ use Carbon\Carbon;
 </div>
 <!-- ./wrapper -->
 <?php require ('../../partials/scripts.php');?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>

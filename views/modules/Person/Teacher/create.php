@@ -84,5 +84,6 @@ use Carbon\Carbon;?>
         <?php require ("../../../partials/footer.php");?>
     <!--</div>-->
 <?php require ("../../../partials/scripts.php");?>
+        <script src="../../../components/Js/script.js"></script>
 </body>
 </html>

@@ -66,19 +66,19 @@ use App\Models\TrainingCompetition;
                         <div class="form-group row">
                             <label for="codeLearningResult" class="col-sm-2 col-form-label">Codigo Resutado de Aprendizaje</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="codeLearningResult" name="codeLearningResult" placeholder="Ingrese el Codigo del Resultado de Aprendizaje">
+                                <input required type="number" class="form-control" id="codeLearningResult" name="codeLearningResult" placeholder="Ingrese el Codigo del Resultado de Aprendizaje">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="nameLearningResult" class="col-sm-2 col-form-label">Nombre del Resultado de Aprendizaje</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="nameLearningResult" name="nameLearningResult" placeholder="Ingrese el Nombre del Resultado de Aprendizaje">
+                                <input required type="text" maxlength="500" class="form-control" id="nameLearningResult" name="nameLearningResult" placeholder="Ingrese el Nombre del Resultado de Aprendizaje">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="durationLearningResult" class="col-sm-2 col-form-label">Duracion </label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="durationLearningResult" name="durationLearningResult" placeholder="Duracion">
+                                <input required type="text" maxlength="4"  class="form-control" id="durationLearningResult" name="durationLearningResult" placeholder="Duracion">
                             </div>
                         </div>
                         <?php
@@ -111,5 +111,6 @@ use App\Models\TrainingCompetition;
 </div>
 <!--</div>-->
 <?php require ("../../partials/scripts.php");?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>
