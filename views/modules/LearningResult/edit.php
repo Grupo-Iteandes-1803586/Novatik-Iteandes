@@ -81,19 +81,19 @@ use App\Models\TrainingCompetition;
                                 <div class="form-group row">
                                     <label for="codeLearningResult" class="col-sm-2 col-form-label">Codigo del Resultado de Aprendizaje</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="codeLearningResult" name="codeLearningResult" value="<?= $DataLearningR->getCodeLearningResult(); ?>" placeholder="Ingrese el Codigo del Resultado de Aprendizaje">
+                                        <input required type="number" class="form-control" id="codeLearningResult" name="codeLearningResult" value="<?= $DataLearningR->getCodeLearningResult(); ?>" placeholder="Ingrese el Codigo del Resultado de Aprendizaje">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="nameLearningResult" class="col-sm-2 col-form-label">Nombre del Resultado de Aprendizaje</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="nameLearningResult" name="nameLearningResult" value="<?= $DataLearningR->getNameLearningResult(); ?>" placeholder="Ingrese el Nombre del Resultado de Aprendizaje">
+                                        <input required type="text" maxlength="500"  class="form-control" id="nameLearningResult" name="nameLearningResult" value="<?= $DataLearningR->getNameLearningResult(); ?>" placeholder="Ingrese el Nombre del Resultado de Aprendizaje">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="durationLearningResult" class="col-sm-2 col-form-label">Duracion</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="durationLearningResult" name="durationLearningResult" value="<?= $DataLearningR->getDurationLearningResult(); ?>" placeholder="Ingrese la Duracionn en horas">
+                                        <input required type="text" maxlength="4" class="form-control" id="durationLearningResult" name="durationLearningResult" value="<?= $DataLearningR->getDurationLearningResult(); ?>" placeholder="Ingrese la Duracionn en horas">
                                     </div>
                                 </div>
                                 <input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition" value="<?php echo $DataLearningR->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition(); ?>" hidden required="required" type="text">
@@ -143,5 +143,6 @@ use App\Models\TrainingCompetition;
 </div>
 <!-- ./wrapper -->
 <?php require ('../../partials/scripts.php');?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>

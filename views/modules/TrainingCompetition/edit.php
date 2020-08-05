@@ -83,7 +83,7 @@ use App\Models\TrainingCompetition;
                                 <div class="form-group row">
                                     <label for="codeTrainingCompetition" class="col-sm-2 col-form-label">Codigo de la Competencia</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="codeTrainingCompetition" name="codeTrainingCompetition" value="<?= $DataTrainigCompetition->getCodeTrainingCompetition(); ?>" placeholder="Ingrese el Codigo de la competencia">
+                                        <input required type="number" class="form-control" id="codeTrainingCompetition" name="codeTrainingCompetition" value="<?= $DataTrainigCompetition->getCodeTrainingCompetition(); ?>" placeholder="Ingrese el Codigo de la competencia">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -95,25 +95,25 @@ use App\Models\TrainingCompetition;
                                 <div class="form-group row">
                                     <label for="denomination" class="col-sm-2 col-form-label">Nombre de la Competencia</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="denomination" name="denomination" value="<?= $DataTrainigCompetition->getDenomination(); ?>" placeholder="Ingrese el nombre de la competencia">
+                                        <input required type="text" maxlength="280" class="form-control" id="denomination" name="denomination" value="<?= $DataTrainigCompetition->getDenomination(); ?>" placeholder="Ingrese el nombre de la competencia">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="duration" class="col-sm-2 col-form-label">Duracion</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="duration" name="duration" value="<?= $DataTrainigCompetition->getDuration(); ?>" placeholder="Ingrese la Duracionn en horas">
+                                        <input required type="text" maxlength="4" class="form-control" id="duration" name="duration" value="<?= $DataTrainigCompetition->getDuration(); ?>" placeholder="Ingrese la Duracionn en horas">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="minimumSpace" class="col-sm-2 col-form-label">Cupo Minimo</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="minimumSpace" name="minimumSpace" value="<?= $DataTrainigCompetition->getMinimumSpace(); ?>" placeholder="Ingrese el Cupo Minimo">
+                                        <input required type="text" maxlength="2" class="form-control" id="minimumSpace" name="minimumSpace" value="<?= $DataTrainigCompetition->getMinimumSpace(); ?>" placeholder="Ingrese el Cupo Minimo">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="orderTrainingCompetition" class="col-sm-2 col-form-label">Orden</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="orderTrainingCompetition" name="orderTrainingCompetition" value="<?= $DataTrainigCompetition->getOrderTrainingCompetition(); ?>" placeholder="Orden">
+                                        <input required type="text" maxlength="2" class="form-control" id="orderTrainingCompetition" name="orderTrainingCompetition" value="<?= $DataTrainigCompetition->getOrderTrainingCompetition(); ?>" placeholder="Orden">
                                     </div>
                                 </div>
                                 <input id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram" value="<?php echo $DataTrainigCompetition->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram(); ?>" hidden required="required" type="text">
@@ -163,5 +163,6 @@ use App\Models\TrainingCompetition;
 </div>
 <!-- ./wrapper -->
 <?php require ('../../partials/scripts.php');?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>

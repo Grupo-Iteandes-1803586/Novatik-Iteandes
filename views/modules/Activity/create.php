@@ -81,14 +81,14 @@ use App\Models\LearningResult;
                         <div class="form-group row">
                             <label for="nameActivity" class="col-sm-2 col-form-label">Nombre Actividad</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="nameActivity" name="nameActivity" placeholder="Nombre Actividad">
+                                <input required type="text" maxlength="300" class="form-control" id="nameActivity" name="nameActivity" placeholder="Nombre Actividad">
                             </div>
                         </div>
                         <!--Descripcion-->
                         <div class="form-group row">
                             <label for="descriptionActivity" class="col-sm-2 col-form-label">Descripcion</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="descriptionActivity" name="descriptionActivity" placeholder="Descripcion">
+                                <input required type="text" maxlength="500" class="form-control" id="descriptionActivity" name="descriptionActivity" placeholder="Descripcion">
                             </div>
                         </div>
                         <!--Tipo de Activida-->
@@ -124,12 +124,12 @@ use App\Models\LearningResult;
                         <div class="form-group row">
                             <label for="nameArchive" class="col-sm-2 col-form-label">Nombre Archivo</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="nameArchive" name="nameArchive" placeholder="Nombre Archivo">
+                                <input required type="text" maxlength="300"  class="form-control" id="nameArchive" name="nameArchive" placeholder="Nombre Archivo">
                             </div>
                         </div>
                         <!--Descripcion del Archivo-->
                         <div class="form-group row">
-                            <label for="descriptionArchive" class="col-sm-2 col-form-label">Descripcion del Archivo</label>
+                            <label for="descriptionArchive" maxlength="250" class="col-sm-2 col-form-label">Descripcion del Archivo</label>
                             <div class="col-sm-10">
                                 <input required type="text" class="form-control" id="descriptionArchive" name="descriptionArchive" placeholder="Descripcion del Archivo">
                             </div>

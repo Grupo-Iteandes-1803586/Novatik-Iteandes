@@ -80,7 +80,7 @@ use Carbon\Carbon;?>
                             <div class="form-group row">
                                 <label for="gradeYear" class="col-sm-2 col-form-label">Año de Grado</label>
                                 <div class="col-sm-10">
-                                    <input required type="number" maxlength="4" class="form-control" id="gradeYear" name="gradeYear" placeholder="Ingrese el año de grado">
+                                    <input required type="text" maxlength="4" class="form-control" id="gradeYear" name="gradeYear" placeholder="Ingrese el año de grado">
                                 </div>
                             </div>
                             <!--Modalidad de grado-->
@@ -97,7 +97,7 @@ use Carbon\Carbon;?>
                             <div class="form-group row">
                                 <label for="Institution" class="col-sm-2 col-form-label">Institucion Educativa</label>
                                 <div class="col-sm-10">
-                                    <input required type="text" class="form-control" id="Institution" name="Institution" placeholder="Ingresa la Institucion Educativa">
+                                    <input required type="text" maxlength="300" class="form-control" id="Institution" name="Institution" placeholder="Ingresa la Institucion Educativa">
                                 </div>
                             </div>
 
@@ -184,5 +184,6 @@ use Carbon\Carbon;?>
 </div>
 <!--</div>-->
 <?php require ("../../partials/scripts.php");?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>

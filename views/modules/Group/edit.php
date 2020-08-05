@@ -84,28 +84,28 @@ use Carbon\Carbon;
                                 <div class="form-group row">
                                     <label for="codeGroup" class="col-sm-2 col-form-label">Codigo</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="codeGroup" name="codeGroup" value="<?= $DataGroup->getCodeGroup(); ?>" placeholder="Ingrese el Codigo">
+                                        <input required type="number" class="form-control" id="codeGroup" name="codeGroup" value="<?= $DataGroup->getCodeGroup(); ?>" placeholder="Ingrese el Codigo">
                                     </div>
                                 </div>
                                 <!--Nombre-->
                                 <div class="form-group row">
                                     <label for="nameGroup" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="nameGroup" name="nameGroup" value="<?= $DataGroup->getNameGroup(); ?>" placeholder="Ingrese el Nombre">
+                                        <input required type="text" maxlength="300" class="form-control" id="nameGroup" name="nameGroup" value="<?= $DataGroup->getNameGroup(); ?>" placeholder="Ingrese el Nombre">
                                     </div>
                                 </div>
                                 <!--Cupo Minimo-->
                                 <div class="form-group row">
                                     <label for="minimumSpaceGroup" class="col-sm-2 col-form-label">Cupo Minimo</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="minimumSpaceGroup" name="minimumSpaceGroup" value="<?= $DataGroup->getMinimumSpaceGroup(); ?>" placeholder="Ingrese el Cupo Minimo">
+                                        <input required type="text" maxlength="2" class="form-control" id="minimumSpaceGroup" name="minimumSpaceGroup" value="<?= $DataGroup->getMinimumSpaceGroup(); ?>" placeholder="Ingrese el Cupo Minimo">
                                     </div>
                                 </div>
                                 <!--Cupo Maximo-->
                                 <div class="form-group row">
-                                    <label for="maximumSpaceGroup" class="col-sm-2 col-form-label">Cupo Maxio</label>
+                                    <label for="maximumSpaceGroup" class="col-sm-2 col-form-label">Cupo Maximo</label>
                                     <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="maximumSpaceGroup" name="maximumSpaceGroup" value="<?= $DataGroup->getMaximumSpaceGroup(); ?>" placeholder="Ingrese el Cupo Maximo">
+                                        <input required type="text" maxlength="2" class="form-control" id="maximumSpaceGroup" name="maximumSpaceGroup" value="<?= $DataGroup->getMaximumSpaceGroup(); ?>" placeholder="Ingrese el Cupo Maximo">
                                     </div>
                                 </div>
                                 <!--Competencia Asociada-->
@@ -166,7 +166,7 @@ use Carbon\Carbon;
                                     <div class="form-group row">
                                         <label for="cantHours" class="col-sm-2 col-form-label">Cant de Horas</label>
                                         <div class="col-sm-10">
-                                            <input required type="text" class="form-control" id="cantHours"
+                                            <input required type="text" maxlength="4"class="form-control" id="cantHours"
                                                    name="cantHours"
                                                    value="<?php echo $DataS->getCantHours(); ?>"
                                                    placeholder="Cant de Horas">
@@ -233,5 +233,6 @@ use Carbon\Carbon;
 </div>
 <!-- ./wrapper -->
 <?php require ('../../partials/scripts.php');?>
+<script src="../../components/Js/script.js"></script>
 </body>
 </html>
