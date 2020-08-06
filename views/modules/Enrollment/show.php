@@ -126,11 +126,6 @@ use App\Controllers\TrainingCompetitionControllers;
                 </div>
                 <div class="card-body">
                     <p>
-                        <strong><i class="fas fa-book mr-1"></i> #</strong>
-                    <p class="text-muted">
-                        <?= $DataStudent->getIdStudent(); ?>
-                    </p>
-                    <hr>
                     <strong><i class="fas fa-user mr-1"></i> Modalidad</strong>
                     <p class="text-muted"><?=$DataStudent->getModality(); ?></p>
                     <hr>
@@ -160,10 +155,6 @@ use App\Controllers\TrainingCompetitionControllers;
                             </div>
                             <div class="card-body">
                                 <p>
-
-                                <strong><i class="fas fa-user mr-1"></i> #</strong>
-                                <p class="text-muted"><?=$DataEnrollment->getIdEnrollment() ?></p>
-                                <hr>
                                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de Matricula</strong>
                                 <p class="text-muted"><?= $DataEnrollment->getDateEnrollment()->toDateString() ?></p>
                                 <hr>

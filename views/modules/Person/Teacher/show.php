@@ -20,14 +20,14 @@ use App\Controllers\LenguagesControllers; ?>
 
 <!doctype html>
 <html lang="es">
-    <head>
-        <title><?= getenv('TITLE_SITE');?> | Consultar Docente</title>
-        <?php require ("../../../partials/head_imports.php");?>
-        <?php require("../../../partials/header.php");?>
-    </head>
+<head>
+    <title><?= getenv('TITLE_SITE');?> | Consultar Docente</title>
+    <?php require ("../../../partials/head_imports.php");?>
+    <?php require("../../../partials/header.php");?>
+</head>
 <body class="hold-transition sidebar-mini">
 
-    <!-- Site wrapper -->
+<!-- Site wrapper -->
 <div class="wrapper">
 
     <?php require ("../../../partials/navbar_customation.php");?>
@@ -86,29 +86,29 @@ use App\Controllers\LenguagesControllers; ?>
                             </p>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Documento</strong>
-                                <p class="text-muted"><?=$DataPerson->getDocumentPerson() ?></p>
+                            <p class="text-muted"><?=$DataPerson->getDocumentPerson() ?></p>
                             <hr>
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Rh</strong>
-                                <p class="text-muted"><?= $DataPerson->getRhPerson(); ?></p>
+                            <p class="text-muted"><?= $DataPerson->getRhPerson(); ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Direccion</strong>
-                                <p class="text-muted"><?= $DataPerson->getAdressPerson() ;?></p>
+                            <p class="text-muted"><?= $DataPerson->getAdressPerson() ;?></p>
                             <hr>
                             <strong><i class="far fa-file-alt mr-1"></i> Estado y Rol</strong>
-                                <p class="text-muted"><?= $DataPerson->getStatePerson()." - ".$DataPerson->getTypePerson() ?></p>
+                            <p class="text-muted"><?= $DataPerson->getStatePerson()." - ".$DataPerson->getTypePerson() ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Email</strong>
-                                <p class="text-muted"><?= $DataPerson->getEmailPerson(); ?></p>
+                            <p class="text-muted"><?= $DataPerson->getEmailPerson(); ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Fecha de Nacimiento</strong>
-                                <p class="text-muted"><?= $DataPerson->getDateBornPerson()->translatedFormat('l, j \\de F Y') ?></p>
-                                <p class="text-muted">Tienes <?= $DataPerson->getDateBornPerson()->diffInYears(); ?> Años</p>
+                            <p class="text-muted"><?= $DataPerson->getDateBornPerson()->translatedFormat('l, j \\de F Y') ?></p>
+                            <p class="text-muted">Tienes <?= $DataPerson->getDateBornPerson()->diffInYears(); ?> Años</p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Celular</strong>
-                                <p class="text-muted"><?= $DataPerson->getPhonePerson() ;?></p>
+                            <p class="text-muted"><?= $DataPerson->getPhonePerson() ;?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Genero</strong>
-                                <p class="text-muted"><?= $DataPerson->getGenerePerson(); ?></p>
+                            <p class="text-muted"><?= $DataPerson->getGenerePerson(); ?></p>
                             <hr>
                             <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataPerson->getStatePerson(); ?></p>
@@ -117,35 +117,30 @@ use App\Controllers\LenguagesControllers; ?>
 
                         </div>
                         <!--datos TeacherStudies -->
-                <?php if(!empty($_GET["idPerson"])){
+                        <?php if(!empty($_GET["idPerson"])){
                             $dataTeacher = Teacher::search("SELECT * FROM teacher WHERE Person_idPerson =" . $_GET["idPerson"]);
                             foreach ($dataTeacher as $teacherD) {
                                 $DataTeacherS = \App\Controllers\TeacherStudiesControllers::searchForID($teacherD->getTeacherStudiesIdTeacherStudies()->getIdTeacherStudies());
                             }
-                    if(!empty($DataTeacherS)){
-                        ?>
-                        <div class="card-header">
-                            <h3 class="card-title">Estudios</h3>
-                        </div>
-                        <div class="card-body">
-                            <strong><i class="fas fa-user mr-1"></i> #</strong>
-                            <p class="text-muted"><?=$DataTeacherS->getIdTeacherStudies()?></p>
-                            <hr>
-                            <p>
-                                <strong><i class="fas fa-book mr-1"></i> titulo</strong>
-                            <p class="text-muted">
-                                <?= $DataTeacherS->getTitleTeacherStudies()?>
-                            </p>
-                            <hr>
-                            <strong><i class="fas fa-user mr-1"></i> año</strong>
-                            <p class="text-muted"><?=$DataTeacherS->getYearStudyTeacher()?></p>
-                            <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?=$DataTeacherS->getStateTeacherStudies()?></p>
-                            <hr>
-
-                        </div>
-                        <?php }
+                            if(!empty($DataTeacherS)){
+                                ?>
+                                <div class="card-header">
+                                    <h3 class="card-title">Estudios</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>
+                                    <strong><i class="fas fa-book mr-1"></i> titulo</strong>
+                                    <p class="text-muted"><?= $DataTeacherS->getTitleTeacherStudies()?></p>
+                                    <hr>
+                                    <strong><i class="fas fa-user mr-1"></i> año</strong>
+                                    <p class="text-muted"><?=$DataTeacherS->getYearStudyTeacher()?></p>
+                                    <hr>
+                                    <strong><i class="fas fa-user mr-1"></i> Estado</strong>
+                                    <p class="text-muted"><?=$DataTeacherS->getStateTeacherStudies()?></p>
+                                    <hr>
+                                    </p>
+                                </div>
+                            <?php }
                         } ?>
 
                         <!--Experince -->
@@ -156,36 +151,29 @@ use App\Controllers\LenguagesControllers; ?>
                                 $DataExperience = \App\Controllers\ExperienceControllers::searchForID($teacherD->getExperienceIdExperience()->getIdExperience());
                                 $idT = $teacherD->getIdTeacher();
                             }
-                        if(!empty($DataExperience)){?>
-                            <div class="card-header">
-                                <h3 class="card-title">Experiencia</h3>
-                            </div>
-                            <div class="card-body">
-                                <strong><i class="fas fa-user mr-1"></i> #</strong>
-                                <p class="text-muted"><?=$DataExperience->getIdExperience();?></p>
-                                <hr>
-                                <p>
-                                        <strong><i class="fas fa-book mr-1"></i> Instituto</strong>
-                                <p class="text-muted">
-                                    <?= $DataExperience->getInstitutionExperience();?>
-                                <hr>
-                                <strong><i class="fas fa-user mr-1"></i>Dedicacion</strong>
-                                <p class="text-muted"><?=$DataExperience->getDedicationExperience();?></p>
-                                <hr>
-                                </p>
-                                <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
-                                <p class="text-muted"><?=$DataExperience->getStartExperience()->translatedFormat('l, j \\de F Y');?></p>
-                                <hr>
-                                </p>
-                                <strong><i class="fas fa-user mr-1"></i> Fecha fin</strong>
-                                <p class="text-muted"><?=$DataExperience->getEndExperince()->translatedFormat('l, j \\de F Y');?></p>
-                                <hr>
-                                </p>
-                                <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                                <p class="text-muted"><?=$DataExperience->getStateExperience();?></p>
-                                <hr>
-                                </p>
-                            </div>
+                            if(!empty($DataExperience)){?>
+                                <div class="card-header">
+                                    <h3 class="card-title">Experiencia</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>
+                                    <strong><i class="fas fa-book mr-1"></i> Instituto</strong>
+                                    <p class="text-muted"><?= $DataExperience->getInstitutionExperience();?></p>
+                                    <hr>
+                                    <strong><i class="fas fa-user mr-1"></i>Dedicacion</strong>
+                                    <p class="text-muted"><?=$DataExperience->getDedicationExperience();?></p>
+                                    <hr>
+                                    <strong><i class="fas fa-user mr-1"></i> Fecha Incio</strong>
+                                    <p class="text-muted"><?=$DataExperience->getStartExperience()->translatedFormat('l, j \\de F Y');?></p>
+                                    <hr>
+                                    <strong><i class="fas fa-user mr-1"></i> Fecha fin</strong>
+                                    <p class="text-muted"><?=$DataExperience->getEndExperince()->translatedFormat('l, j \\de F Y');?></p>
+                                    <hr>
+                                    <strong><i class="fas fa-user mr-1"></i> Estado</strong>
+                                    <p class="text-muted"><?=$DataExperience->getStateExperience();?></p>
+                                    <hr>
+                                    </p>
+                                </div>
                             <?php }?>
                         <?php }?>
                         <!--Lenguajes -->
@@ -204,11 +192,7 @@ use App\Controllers\LenguagesControllers; ?>
                                     <h3 class="card-title">Idioma</h3>
                                 </div>
                                 <div class="card-body">
-                                    <strong><i class="fas fa-user mr-1"></i> #</strong>
-                                    <p class="text-muted"><?=$DataLenguagues->getIdLenguages()?></p>
-                                    <hr>
-                                    <p>
-                                        <strong><i class="fas fa-book mr-1"></i> Idioma</strong>
+                                    <p> <strong><i class="fas fa-book mr-1"></i> Idioma</strong>
                                     <p class="text-muted">
                                         <?= $DataLenguagues->getNameLenguages()?>
                                     <hr>

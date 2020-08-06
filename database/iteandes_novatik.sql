@@ -218,7 +218,7 @@ CREATE TABLE `note` (
 
 CREATE TABLE `person` (
   `idPerson` bigint(19) UNSIGNED NOT NULL,
-  `documentPerson` int(11) NOT NULL,
+  `documentPerson` bigint(20)  NOT NULL ,
   `namePerson` varchar(150) NOT NULL,
   `lastNamePerson` varchar(150) NOT NULL,
   `dateBornPerson` date NOT NULL,

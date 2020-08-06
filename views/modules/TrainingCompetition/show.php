@@ -71,11 +71,7 @@ use App\Controllers\TrainingCompetitionControllers;
                             <?php require("../../partials/optionMenu.php") ;?>
                         </div>
                         <div class="card-body">
-                            <strong><i class="fas fa-keyboard mr-1"></i> #</strong>
-                            <p class="text-muted">
-                                <?= $DataCompetitio->getIdTrainingCompetition();?>
-                            </p>
-                            <hr>
+                            <p>
                             <strong><i class="fas fa-user mr-1"></i> Codigo de la Competencia</strong>
                             <p class="text-muted"><?= $DataCompetitio->getCodeTrainingCompetition();?></p>
                             <hr>
@@ -83,9 +79,7 @@ use App\Controllers\TrainingCompetitionControllers;
                             <p class="text-muted"><?= $DataCompetitio->getCodeAlfaTrainingCompetition();?></p>
                             <hr>
                             <strong><i class="fas fa-book mr-1"></i> Nombre de la Competencia</strong>
-                            <p class="text-muted">
-                                <?= $DataCompetitio->getDenomination();?>
-                            </p>
+                            <p class="text-muted"> <?= $DataCompetitio->getDenomination();?></p>
                             <hr>
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Cupo Minimo</strong>
                             <p class="text-muted"><?= $DataCompetitio->getMinimumSpace() ?></p>
@@ -102,6 +96,7 @@ use App\Controllers\TrainingCompetitionControllers;
                             <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataCompetitio->getStatusTrainingCompetition()?></p>
                             <hr>
+                            </p>
                         </div>
                         <div class="card-footer">
                             <div class="row">

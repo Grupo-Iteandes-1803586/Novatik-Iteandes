@@ -63,14 +63,8 @@ use App\Controllers\SemesterControllers;?>
                         </div>
                         <div class="card-body">
                             <p>
-                                <strong><i class="fas fa-book mr-1"></i> #</strong>
-                            <p class="text-muted">
-                                <?= $DataSemester->getIdSemester(); ?>
-                            </p>
-                            <hr>
                             <strong><i class="fas fa-user mr-1"></i> Nombre</strong>
                             <p class="text-muted"><?=$DataSemester->getNameSemester(); ?></p>
-                            <hr>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Fecha de inicio</strong>
                             <p class="text-muted"><?=$DataSemester->getStarDateSemester()->translatedFormat('l, j \\de F Y'); ?></p>

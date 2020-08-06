@@ -72,11 +72,7 @@ use App\Models\TrainingCompetition;
                             <?php require("../../partials/optionMenu.php") ;?>
                         </div>
                         <div class="card-body">
-                            <strong><i class="fas fa-keyboard mr-1"></i> #</strong>
-                            <p class="text-muted">
-                                <?= $DataLearning->getIdLearningResult();?>
-                            </p>
-                            <hr>
+                            <p>
                             <strong><i class="fas fa-user mr-1"></i> Codigo del Resultado de Aprendizaje</strong>
                             <p class="text-muted"><?= $DataLearning->getCodeLearningResult();?></p>
                             <hr>
@@ -94,6 +90,7 @@ use App\Models\TrainingCompetition;
                             <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataLearning->getStatuLearningResult()?></p>
                             <hr>
+                            </p>
                         </div>
                         <div class="card-footer">
                             <div class="row">
