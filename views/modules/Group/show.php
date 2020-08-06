@@ -66,11 +66,6 @@ use App\Controllers\ScheduleControllers;
                         </div>
                         <div class="card card-info">
                             <p>
-                                <strong><i class="fas fa-book mr-1"></i> #</strong>
-                            <p class="text-muted">
-                                <?= $DataGroup->getIdGroup(); ?>
-                            </p>
-                            <hr>
                             <strong><i class="fas fa-user mr-1"></i> Codigo</strong>
                             <p class="text-muted"><?=$DataGroup->getCodeGroup() ?></p>
                             <hr>
@@ -103,9 +98,7 @@ use App\Controllers\ScheduleControllers;
                                         <h3 class="card-title">Horario</h3>
                                     </div>
                                     <div class="card-body">
-                                        <strong><i class="fas fa-user mr-1"></i> #</strong>
-                                        <p class="text-muted"><?=$DataS->getIdSchedule();?></p>
-                                        <hr>
+                                        <p>
                                         <strong><i class="fas fa-calendar mr-1"></i> Fecha de Inicio</strong>
                                         <p class="text-muted"><?= $DataS->getStartDateSchedule()->translatedFormat('l, j \\de F Y'); ?></p>
                                         <hr>
@@ -124,6 +117,7 @@ use App\Controllers\ScheduleControllers;
                                         <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                                         <p class="text-muted"><?=$DataS->getStateSchedule();?></p>
                                         <hr>
+                                        </p>
                                     </div>
                                 <?php }?>
                             <?php }?>
