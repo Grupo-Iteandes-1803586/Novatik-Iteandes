@@ -68,7 +68,7 @@ use App\Models\LearningResult;
 
                     <!--Formulario de los datos de la actividad-->
                     <div class="card-body">
-                        <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Actividad</li>
+                        <li class="list-Dates"><i class ="fas fa-drafting-compass" id="icon-iconos"></i>Actividad</li>
                         <hr>
                         <!--codigoActivity-->
                         <div class="form-group row">
