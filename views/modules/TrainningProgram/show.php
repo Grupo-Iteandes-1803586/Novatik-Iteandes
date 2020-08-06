@@ -68,11 +68,7 @@ use App\Controllers\TrainingProgramController; ?>
                             <?php require("../../partials/optionMenu.php") ;?>
                         </div>
                         <div class="card-body">
-                            <strong><i class="fas fa-keyboard mr-1"></i> #</strong>
-                                <p class="text-muted">
-                                    <?= $DataPrograming->getIdTrainingProgram();?>
-                                </p>
-                            <hr>
+                            <p>
                             <strong><i class="fas fa-user mr-1"></i> Codigo del Programa</strong>
                                 <p class="text-muted"><?= $DataPrograming->getCodeTrainingProgram();?></p>
                             <hr>
@@ -90,6 +86,7 @@ use App\Controllers\TrainingProgramController; ?>
                             <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataPrograming->getStatusTrainingProgram() ?></p>
                             <hr>
+                            </p>
                         </div>
                         <div class="card-footer">
                             <div class="row">

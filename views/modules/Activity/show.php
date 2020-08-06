@@ -101,11 +101,6 @@ use App\Models\Archive;
                 </div>
                 <div class="card-body">
                     <p>
-                        <strong><i class="fas fa-book mr-1"></i> #</strong>
-                    <p class="text-muted">
-                        <?= $DataArchi->getIdArchive(); ?>
-                    </p>
-                    <hr>
                     <strong><i class="fas fa-user mr-1"></i> Nombre del Archivo</strong>
                     <p class="text-muted"><?=$DataArchi->getNameArchive(); ?></p>
                     <hr>

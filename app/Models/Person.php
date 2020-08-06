@@ -12,7 +12,6 @@ class Person extends BasicModel{
     private $namePerson;
     private $lastNamePerson;
     private Carbon $dateBornPerson;
-    private $agePerson;
     private $rhPerson;
     private $emailPerson;
     private $phonePerson;
@@ -329,7 +328,7 @@ class Person extends BasicModel{
             $this->adressPerson,
             $this->generePerson,
             $this->generateNameUser($this -> documentPerson , $this -> namePerson,$this->lastNamePerson),
-            $this->documentPerson,
+            $this->generatePassword(),
             $this->typePerson,
             $this->statePerson,
             $this->photoPerson
@@ -339,6 +338,26 @@ class Person extends BasicModel{
         $this->setIdPerson(($result) ? $this->getLastId() : null);
         $this->Disconnect();
         return $result;
+    }
+    //Generar Password
+    public function generatePassword($longitud = 10, $opcLetra = TRUE, $opcNumero = TRUE, $opcMayus = TRUE, $opcEspecial = FALSE): String{
+        $letras ="abcdefghijklmnopqrstuvwxyz";
+        $numb = "1234567890";
+        $letrasMayus = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $especiales ="#%()=*+-_";
+        $list = "";
+        $password = "";
+        if ($opcLetra == TRUE) $list .= $letras;
+        if ($opcNumero == TRUE) $list .= $numb;
+        if($opcMayus == TRUE) $list .= $letrasMayus;
+        if($opcEspecial == TRUE) $list .= $especiales;
+
+        for( $i=1; $i<=$longitud; $i++) {
+            $caracter = $list[rand(0,strlen($list)-1)];
+            $password.=$caracter;
+            $list = str_shuffle($list);
+        }
+        return $password;
     }
     //Generar nomre de usuario
     public function generateNameUser($documentPerson , $namePerson,$lastNamePerson):String{
@@ -351,7 +370,7 @@ class Person extends BasicModel{
         foreach ($userName as $user){
             $finalUserName .= $user[0];
         }
-        return ucfirst(strtolower($finalUserName .= substr($documentPerson,-4))) ;
+        return ucfirst(strtolower($finalUserName .= substr($documentPerson,-2))) ;
     }
     //Creacion del metodo actualizar
     public function update(): bool{
