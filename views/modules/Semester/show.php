@@ -63,28 +63,28 @@ use App\Controllers\SemesterControllers;?>
                         </div>
                         <div class="card-body">
                             <p>
-                            <strong><i class="fas fa-user mr-1"></i> Nombre</strong>
+                            <strong><i class="fas fa-edit"></i> Nombre</strong>
                             <p class="text-muted"><?=$DataSemester->getNameSemester(); ?></p>
                             <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Fecha de inicio</strong>
+                            <strong><i class="far fa-calendar-alt"></i> Fecha de inicio</strong>
                             <p class="text-muted"><?=$DataSemester->getStarDateSemester()->translatedFormat('l, j \\de F Y'); ?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de cierre</strong>
+                            <strong><i class="	fas fa-calendar-check"></i> Fecha de cierre</strong>
                             <p class="text-muted"><?= $DataSemester->getEndDateSemester()->translatedFormat('l, j \\de F Y'); ?></p>
                             <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Fecha de inicio 1er 50</strong>
+                            <strong><i class="far fa-calendar-alt"></i> Fecha de inicio 1er 50</strong>
                             <p class="text-muted"><?=$DataSemester->getStartDate50()->translatedFormat('l, j \\de F Y'); ?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de cierre 1er 50</strong>
+                            <strong><i class="fas fa-calendar-check"></i> Fecha de cierre 1er 50</strong>
                             <p class="text-muted"><?= $DataSemester->getEndDate50()->translatedFormat('l, j \\de F Y'); ?></p>
                             <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Fecha de inicio 2do 50</strong>
+                            <strong><i class="far fa-calendar-alt"></i> Fecha de inicio 2do 50</strong>
                             <p class="text-muted"><?=$DataSemester->getStarDate2Semester()->translatedFormat('l, j \\de F Y'); ?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Fecha de cierre 2do 50</strong>
+                            <strong><i class="fas fa-calendar-check"></i> Fecha de cierre 2do 50</strong>
                             <p class="text-muted"><?= $DataSemester->getEndDate2Semester()->translatedFormat('l, j \\de F Y'); ?></p>
                             <hr>
-                            <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
+                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataSemester->getStatuSemester(); ?></p>
                             <hr>
                             </p>

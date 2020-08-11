@@ -69,21 +69,21 @@ use App\Controllers\TrainingProgramController; ?>
                         </div>
                         <div class="card-body">
                             <p>
-                            <strong><i class="fas fa-user mr-1"></i> Codigo del Programa</strong>
+                            <strong><i class="fas fa-barcode"></i> Codigo del Programa</strong>
                                 <p class="text-muted"><?= $DataPrograming->getCodeTrainingProgram();?></p>
                             <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Codigo del Programa corto</strong>
+                            <strong><i class="fas fa-barcode"></i> Codigo del Programa corto</strong>
                             <p class="text-muted"><?= $DataPrograming->getCodeAlfaTrainingProgram();?></p>
                             <hr>
-                            <strong><i class="fas fa-book mr-1"></i> Nombre Programa de Formacion</strong>
+                            <strong><i class="fas fa-edit"></i> Nombre Programa de Formacion</strong>
                             <p class="text-muted">
                                 <?= $DataPrograming->getNameTrainingProgram();?>
                             </p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Version</strong>
+                            <strong><i class="far fa-calendar-minus"></i> Version</strong>
                             <p class="text-muted"><?= $DataPrograming->getVersion() ?></p>
                             <hr>
-                            <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
+                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataPrograming->getStatusTrainingProgram() ?></p>
                             <hr>
                             </p>

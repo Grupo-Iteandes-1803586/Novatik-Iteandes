@@ -101,16 +101,16 @@ use App\Models\Archive;
                 </div>
                 <div class="card-body">
                     <p>
-                    <strong><i class="fas fa-user mr-1"></i> Nombre del Archivo</strong>
+                    <strong><i class="far fa-edit"></i> Nombre del Archivo</strong>
                     <p class="text-muted"><?=$DataArchi->getNameArchive(); ?></p>
                     <hr>
-                    <strong><i class="fas fa-user mr-1"></i>Descripcion del Archivo</strong>
+                    <strong><i class="fas fa-marker"></i>Descripcion del Archivo</strong>
                     <p class="text-muted"><?=$DataArchi->getDescriptionArchive(); ?></p>
                     <hr>
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i>Ruta del Archivo</strong>
+                    <strong><i class="fas fa-globe"></i>Ruta del Archivo</strong>
                     <p class="text-muted"><?= $DataArchi->getRutaArchive()?></p>
                     <hr>
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i>Estado</strong>
+                    <strong><i class="fas fa-user mr-1"></i>Estado</strong>
                     <p class="text-muted"><?= $DataArchi->getStateArchive(); ?></p>
                     <hr>
                     </p>

@@ -59,7 +59,7 @@ use Carbon\Carbon;
 
                     <!--Formulario de los datos de la actividad-->
                     <div class="card-body">
-                        <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Grupo</li>
+                        <li class="list-Dates"><i class ="fab fa-glide" id="icon-iconos"></i>Grupo</li>
                         <hr>
                         <!--Codigo del Grupo-->
                         <div class="form-group row">
@@ -110,7 +110,7 @@ use Carbon\Carbon;
                         </div>
                         <!------------------------Horario o Jornada-------------------------->
 
-                        <li class="list-Dates"><i class ="fas fa-address-book" id="icon-iconos"></i>Horario</li>
+                        <li class="list-Dates"><i class ="far fa-clock" id="icon-iconos"></i>Horario</li>
                         <hr>
                         <!--Fecha de Inicio-->
                         <div class="form-group row">
