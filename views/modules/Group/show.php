@@ -66,22 +66,22 @@ use App\Controllers\ScheduleControllers;
                         </div>
                         <div class="card card-info">
                             <p>
-                            <strong><i class="fas fa-user mr-1"></i> Codigo</strong>
+                            <strong><i class="fas fa-barcode"></i> Codigo</strong>
                             <p class="text-muted"><?=$DataGroup->getCodeGroup() ?></p>
                             <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Nombre</strong>
+                            <strong><i class="fas fa-edit"></i> Nombre</strong>
                             <p class="text-muted"><?=$DataGroup->getNameGroup(); ?></p>
                             <hr>
-                            <strong><i class="fas fa-user mr-1"></i>Cupo Minimo</strong>
+                            <strong><i class="fas fa-chalkboard-teacher"></i>Cupo Minimo</strong>
                             <p class="text-muted"><?=$DataGroup->getMinimumSpaceGroup()?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Cupo Maximo</strong>
+                            <strong><i class="fas fa-book-reader"></i> Cupo Maximo</strong>
                             <p class="text-muted"><?= $DataGroup->getMaximumSpaceGroup()?></p>
                             <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Competencia Asociada</strong>
+                            <strong><i class="fas fa-file-export"></i> Competencia Asociada</strong>
                             <p class="text-muted"><?=$DataGroup->getTrainingCompetitionIdTrainingCompetition()->getDenomination() ?></p>
                             <hr>
-                            <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
+                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataGroup->getStateGroup(); ?></p>
                             <hr>
                             </p>
@@ -99,19 +99,19 @@ use App\Controllers\ScheduleControllers;
                                     </div>
                                     <div class="card-body">
                                         <p>
-                                        <strong><i class="fas fa-calendar mr-1"></i> Fecha de Inicio</strong>
+                                        <strong><i class="fas fa-calendar-alt"></i> Fecha de Inicio</strong>
                                         <p class="text-muted"><?= $DataS->getStartDateSchedule()->translatedFormat('l, j \\de F Y'); ?></p>
                                         <hr>
-                                        <strong><i class="fas fa-calendar mr-1"></i> Fecha de Cierre</strong>
+                                        <strong><i class="fas fa-calendar-alt"></i> Fecha de Cierre</strong>
                                         <p class="text-muted"><?= $DataS->getEndDateSchedule()->translatedFormat('l, j \\de F Y'); ?></p>
                                         <hr>
-                                        <strong><i class="fas fa-user mr-1"></i>Cant de Horas</strong>
+                                        <strong><i class= "fas fa-compass"></i>Cant de Horas</strong>
                                         <p class="text-muted"><?=$DataS->getCantHours();?></p>
                                         <hr>
-                                        <strong><i class="fas fa-user mr-1"></i> Hora de Inicio</strong>
+                                        <strong><i class="far fa-compass"></i> Hora de Inicio</strong>
                                         <p class="text-muted"><?=$DataS->getStartHourSchedule()->toTimeString();?></p>
                                         <hr>
-                                        <strong><i class="fas fa-user mr-1"></i> Hora de Cierre</strong>
+                                        <strong><i class="far fa-compass"></i> Hora de Cierre</strong>
                                         <p class="text-muted"><?=$DataS->getEndHourSchedule()->toTimeString();?></p>
                                         <hr>
                                         <strong><i class="fas fa-user mr-1"></i> Estado</strong>

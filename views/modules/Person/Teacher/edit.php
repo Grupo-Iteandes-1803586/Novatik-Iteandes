@@ -92,7 +92,7 @@ use Carbon\Carbon;?>
                                    required="required" type="text">
                             <div class="card-body">
                                 <!--Datos Basicos-->
-                                <li class="list-Dates"><i class="fas fa-address-book" id="icon-iconos"></i>Datos Basicos</li>
+                                <li class="list-Dates"><i class="fas fa-edit" id="icon-iconos"></i>Datos Basicos</li>
                                 <hr>
                                 <!--Documento del Docente-->
                                 <div class="form-group row">
@@ -106,7 +106,7 @@ use Carbon\Carbon;?>
                                 </div>
                                 <!--Nombre del docente-->
                                 <div class="form-group row">
-                                    <label for="namePerson" class="col-sm-2 col-form-label">Nombres</label>
+                                    <label for="namePerson" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-10">
                                         <input required type="text" maxlength="130" class="form-control" id="namePerson" name="namePerson"
                                                value="<?= $DataPersonT->getNamePerson(); ?>" placeholder="Ingresa los nombres">
@@ -245,7 +245,7 @@ use Carbon\Carbon;?>
                                 }
                                 if (!empty($DataExperience)) {
                                     ?>
-                                    <li class="list-Dates"><i class="fas fa-address-book" id="icon-iconos"></i>Experiencia</li>
+                                    <li class="list-Dates"><i class="fas fa-cut " id="icon-iconos"></i>Experiencia</li>
                                     <hr>
                                     <input id="idTeacher" name="idTeacher"
                                            value="<?php echo $idT; ?>" hidden required="required"
@@ -307,7 +307,7 @@ use Carbon\Carbon;?>
                                 }
                                 if (!empty($DataTeacherS)) {
                                     ?>
-                                    <li class="list-Dates"><i class="fas fa-book mr-1" id="icon-iconos"></i>Datos de Estudio
+                                    <li class="list-Dates"><i class="fas fa-user-graduate" id="icon-iconos"></i>Datos de Estudio
                                     </li>
                                     <hr>
                                     <input id="idTeacherStudies" name="idTeacherStudies"

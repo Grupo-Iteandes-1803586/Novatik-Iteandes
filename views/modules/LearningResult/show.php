@@ -73,21 +73,21 @@ use App\Models\TrainingCompetition;
                         </div>
                         <div class="card-body">
                             <p>
-                            <strong><i class="fas fa-user mr-1"></i> Codigo del Resultado de Aprendizaje</strong>
+                            <strong><i class="fas fa-barcode"></i> Codigo del Resultado de Aprendizaje</strong>
                             <p class="text-muted"><?= $DataLearning->getCodeLearningResult();?></p>
                             <hr>
-                            <strong><i class="fas fa-book mr-1"></i> Nombre del Resultado de Aprendizaje</strong>
+                            <strong><i class="fas fa-edit"></i> Nombre del Resultado de Aprendizaje</strong>
                             <p class="text-muted">
                                 <?= $DataLearning->getNameLearningResult();?>
                             </p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Duracion</strong>
+                            <strong><i class="fas fa-compass"></i> Duracion</strong>
                             <p class="text-muted"><?= $DataLearning->getDurationLearningResult() ?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Competencia Asociada</strong>
+                            <strong><i class="fas fa-book mr-1"></i> Competencia Asociada</strong>
                             <p class="text-muted"><?= $DataLearning->getTrainingCompetitionIdTrainingCompetition()->getDenomination() ?></p>
                             <hr>
-                            <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
+                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataLearning->getStatuLearningResult()?></p>
                             <hr>
                             </p>

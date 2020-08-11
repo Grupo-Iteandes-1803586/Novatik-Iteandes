@@ -72,28 +72,28 @@ use App\Controllers\TrainingCompetitionControllers;
                         </div>
                         <div class="card-body">
                             <p>
-                            <strong><i class="fas fa-user mr-1"></i> Codigo de la Competencia</strong>
+                            <strong><i class="fas fa-barcode"></i> Codigo de la Competencia</strong>
                             <p class="text-muted"><?= $DataCompetitio->getCodeTrainingCompetition();?></p>
                             <hr>
-                            <strong><i class="fas fa-user mr-1"></i> Codigo de la Competencia corto</strong>
+                            <strong><i class="fas fa-barcode"></i> Codigo de la Competencia corto</strong>
                             <p class="text-muted"><?= $DataCompetitio->getCodeAlfaTrainingCompetition();?></p>
                             <hr>
-                            <strong><i class="fas fa-book mr-1"></i> Nombre de la Competencia</strong>
+                            <strong><i class="fas fa-marker"></i> Nombre de la Competencia</strong>
                             <p class="text-muted"> <?= $DataCompetitio->getDenomination();?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Cupo Minimo</strong>
+                            <strong><i class="fas fa-robot"></i> Cupo Minimo</strong>
                             <p class="text-muted"><?= $DataCompetitio->getMinimumSpace() ?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Duracion</strong>
+                            <strong><i class="fas fa-business-time"></i> Duracion</strong>
                             <p class="text-muted"><?= $DataCompetitio->getDuration() ?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Orden</strong>
+                            <strong><i class="fas fa-folder-open"></i> Orden</strong>
                             <p class="text-muted"><?= $DataCompetitio->getOrderTrainingCompetition() ?></p>
                             <hr>
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Programa de Formacion</strong>
+                            <strong><i class="fas fa-book"></i> Programa de Formacion</strong>
                             <p class="text-muted"><?= $DataCompetitio->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram() ?></p>
                             <hr>
-                            <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
+                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataCompetitio->getStatusTrainingCompetition()?></p>
                             <hr>
                             </p>
