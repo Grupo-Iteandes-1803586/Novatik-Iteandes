@@ -245,7 +245,7 @@ use Carbon\Carbon;?>
                                 }
                                 if (!empty($DataExperience)) {
                                     ?>
-                                    <li class="list-Dates"><i class="fas fa-cut " id="icon-iconos"></i>Experiencia</li>
+                                    <li class="list-Dates"><i class="fas fa-id-badge " id="icon-iconos"></i>Experiencia</li>
                                     <hr>
                                     <input id="idTeacher" name="idTeacher"
                                            value="<?php echo $idT; ?>" hidden required="required"
