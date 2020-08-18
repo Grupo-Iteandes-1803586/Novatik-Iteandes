@@ -57,7 +57,7 @@ class Note extends BasicModel{
      */
     public function getDateNote() : Carbon
     {
-        return $this->dateNote;
+        return $this->dateNote->locale('es');
     }
 
     /**

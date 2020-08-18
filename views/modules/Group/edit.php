@@ -186,19 +186,19 @@ use Carbon\Carbon;
                                     <div class="form-group row">
                                         <label for="startHourSchedule" class="col-sm-2 col-form-label">Hora</label>
                                         <div class="col-sm-10">
-                                            <input required type="time" max="<?= Carbon::now()?>" class="form-control" id="startHourSchedule"
+                                            <input required type="time" class="form-control" id="startHourSchedule"
                                                    name="startHourSchedule"
-                                                   value="<?php echo $DataS->getStartHourSchedule(); ?>"
-                                                   placeholder="Hora de">
+                                                   value="<?php echo $DataS->getStartHourSchedule()->toTimeString(); ?>"
+                                                   placeholder="Hora de Inicio">
                                         </div>
                                     </div>
                                     <!--Hora de Fin-->
                                     <div class="form-group row">
                                         <label for="endHourSchedule" class="col-sm-2 col-form-label">Hora de Finalizacion</label>
                                         <div class="col-sm-10">
-                                            <input required type="time" max="<?= Carbon::now() ?>" class="form-control" id="endHourSchedule"
+                                            <input required type="time" class="form-control" id="endHourSchedule"
                                                    name="endHourSchedule"
-                                                   value="<?php echo $DataS->getEndHourSchedule(); ?>"
+                                                   value="<?php echo $DataS->getEndHourSchedule()->toTimeString(); ?>"
                                                    placeholder="Hora de Finalizacion">
                                         </div>
                                     </div>

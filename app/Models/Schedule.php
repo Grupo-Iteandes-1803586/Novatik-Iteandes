@@ -79,7 +79,7 @@ class Schedule extends BasicModel{
      */
     public function getStartDateSchedule(): Carbon
     {
-        return $this->startDateSchedule;
+        return $this->startDateSchedule->locale('es');
     }
 
     /**
@@ -95,7 +95,7 @@ class Schedule extends BasicModel{
      */
     public function getEndDateSchedule(): Carbon
     {
-        return $this->endDateSchedule;
+        return $this->endDateSchedule->locale('es');
     }
 
     /**
@@ -208,8 +208,8 @@ class Schedule extends BasicModel{
     //Actualizar  un docente
     public function update()
     {
-        $result = $this->updateRow("UPDATE iteandes_novatik.Schedule  SET startDateSchedule = ?, endDateSchedule = ?, cantHours= ?, startHourSchedule = ? ,endHourSchedule=?, stateSchedule=?, Group_idGroup =? WHERE idSchedule = ?", array(
-                $this->idSchedule,
+        $result = $this->updateRow("UPDATE iteandes_novatik.Schedule  SET startDateSchedule = ?, endDateSchedule = ?, cantHours= ?, daySchedule = ?,startHourSchedule = ? ,endHourSchedule=?, stateSchedule=?, Group_idGroup =? WHERE idSchedule = ?", array(
+
                 $this->startDateSchedule->toDateString(), //YYYY-MM-DD,,
                 $this->endDateSchedule->toDateString(), //YYYY-MM-DD,,
                 $this->cantHours,
@@ -217,7 +217,8 @@ class Schedule extends BasicModel{
                 $this->startHourSchedule->toDateTimeString(), //YYYY-MM-DD HH:MM:SS,
                 $this->endHourSchedule->toDateTimeString(), //YYYY-MM-DD HH:MM:SS,
                 $this->stateSchedule,
-                $this->Group_idGroup->getIdGroup()
+                $this->Group_idGroup->getIdGroup(),
+                $this->idSchedule
             )
         );
         $this->Disconnect();

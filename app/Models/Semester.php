@@ -105,7 +105,7 @@ class Semester extends BasicModel{
      */
     public function getStarDateSemester() : Carbon
     {
-        return $this->starDateSemester;
+        return $this->starDateSemester->locale('es');
     }
 
     /**
@@ -121,7 +121,7 @@ class Semester extends BasicModel{
      */
     public function getEndDateSemester() : Carbon
     {
-        return $this->endDateSemester;
+        return $this->endDateSemester->locale('es');
     }
 
     /**
@@ -153,7 +153,7 @@ class Semester extends BasicModel{
      */
     public function getStartDate50() : Carbon
     {
-        return $this->startDate50;
+        return $this->startDate50->locale('es');
     }
 
     /**
@@ -169,7 +169,7 @@ class Semester extends BasicModel{
      */
     public function getEndDate50() : Carbon
     {
-        return $this->endDate50;
+        return $this->endDate50->locale('es');
     }
 
     /**
@@ -185,7 +185,7 @@ class Semester extends BasicModel{
      */
     public function getStarDate2Semester() : Carbon
     {
-        return $this->starDate2Semester;
+        return $this->starDate2Semester->locale('es');
     }
 
     /**
@@ -201,7 +201,7 @@ class Semester extends BasicModel{
      */
     public function getEndDate2Semester() : Carbon
     {
-        return $this->endDate2Semester;
+        return $this->endDate2Semester->locale('es');
     }
 
     /**
