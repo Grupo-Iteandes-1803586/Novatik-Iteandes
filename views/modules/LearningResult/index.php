@@ -67,6 +67,13 @@ use App\Controllers\LearningResultControllers;
                 <div class="card-body">
                     <div class="row">
                         <div class="col-auto mr-auto"></div>
+                        <div class="col-auto">
+                            <?php $idTC= $_GET["idTrainingCompetition"];?>
+                            <a role="button" href="create.php?idTrainingCompetition=<?=$idTC; ?>" class="btn btn-primary float-right"
+                               style="margin-right: 5px;">
+                                <i class="fas fa-plus"></i> Crear Resultado
+                            </a>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
@@ -85,9 +92,9 @@ use App\Controllers\LearningResultControllers;
                                 </thead>
                                 <tbody>
                                 <?php
-                                $arrLearning = \App\Controllers\LearningResultControllers::getAll();
-                                foreach ($arrLearning as $learningR){
-                                    /*if($trainingCom->getTrainingProgramIdTrainingProgram() == $idP){*/
+                                $idC = $_GET['idTrainingCompetition'];
+                                $arrLe= \App\Models\LearningResult::search("SELECT * FROM LearningResult where TrainingCompetition_idTrainingCompetition =".$idC);
+                                foreach ($arrLe as $learningR){
                                     ?>
                                     <tr>
                                         <td><?php echo $learningR->getIdLearningResult(); ?></td>

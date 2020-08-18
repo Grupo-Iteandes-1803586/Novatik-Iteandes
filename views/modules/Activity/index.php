@@ -66,17 +66,24 @@ use App\Controllers\ActivityControllers;?>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-auto mr-auto"></div>
+                        <div class="col-auto">
+                            <?php $idL= $_GET["idLearningResult"];?>
+                            <a role="button" href="create.php?idLearningResult=<?=$idL; ?>" class="btn btn-primary float-right"
+                               style="margin-right: 5px;">
+                                <i class="fas fa-plus"></i> Crear Actividad
+                            </a>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <table id="tblTrainingCompetition" class="datatable table table-bordered table-striped">
+                            <table id="tblActivity" class="datatable table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Codigo Actvidad</th>
                                     <th>Nombre de la Actvidad</th>
                                     <th>Descripcion de la Actividad</th>
-                                    <th>Tipo de activiad</th>
+                                    <th>Tipo de actividad</th>
                                     <th>Resultado de Aprendizaje</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
@@ -84,7 +91,8 @@ use App\Controllers\ActivityControllers;?>
                                 </thead>
                                 <tbody>
                                 <?php
-                                $arrActivity = \App\Controllers\ActivityControllers::getAll();
+                                $idP = $_GET['idLearningResult'];
+                                $arrActivity = \App\Models\Activity::search("SELECT * FROM Activity where LearningResult_idLearningResult =".$idL);
                                 foreach ($arrActivity as $Activity){
                                     ?>
                                     <tr>

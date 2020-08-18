@@ -66,6 +66,13 @@ use App\Controllers\TrainingCompetitionControllers;?>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-auto mr-auto"></div>
+                        <div class="col-auto">
+                            <?php $idTP= $_GET["idTrainingProgram"];?>
+                            <a role="button" href="create.php?idTrainingProgram=<?=$idTP; ?>" class="btn btn-primary float-right"
+                               style="margin-right: 5px;">
+                                <i class="fas fa-plus"></i> Crear Competencia
+                            </a>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
@@ -90,7 +97,6 @@ use App\Controllers\TrainingCompetitionControllers;?>
                                 $idP = $_GET['idTrainingProgram'];
                                 $arrTrainningCompetition = \App\Models\TrainingCompetition::search("SELECT * FROM TrainingCompetition where TrainingProgram_idTrainingProgram =".$idP);
                                 foreach ($arrTrainningCompetition as $trainingCom){
-                                    /*if($trainingCom->getTrainingProgramIdTrainingProgram() == $idP){*/
                                     ?>
                                     <tr>
                                         <td><?php echo $trainingCom->getIdTrainingCompetition(); ?></td>

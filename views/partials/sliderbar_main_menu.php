@@ -17,7 +17,7 @@
                 <li class="nav-item">
                 <li class="nav-item has-treeview"> <?= strpos($_SERVER['REQUEST_URI'],'datos') ? 'menu-open' : '' ?>
                     <a href="#" class="nav-link"><?= strpos($_SERVER['REQUEST_URI'],'datos') ? 'active' : '' ?>
-                        <i class="nav-icon far fa-user"></i>
+                        <i class="nav-icon fas fa-id-card"></i>
                         <p>
                            Datos Personales
                         </p>
@@ -29,7 +29,7 @@
                 <li class="nav-item has-treeview menu-open">
                 <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'docente') ? 'menu-open' : '' ?>
                     <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'docente') ? 'active' : '' ?>
-                        <i class="nav-icon far fa-user"></i>
+                        <i class="nav-icon fas fa-user-plus"></i>
                         <p>
                             Gestionar Docentes
                             <i class="fas fa-angle-left right"></i>
@@ -55,7 +55,7 @@
                 <li class="nav-item has-treeview menu-open">
                 <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'semester') ? 'menu-open' : '' ?>
                     <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'semester') ? 'active' : '' ?>
-                        <i class="nav-icon far fa-user"></i>
+                        <i class="nav-icon fas fa-calendar-plus"></i>
                         <p>
                             Gestionar Semestre
                             <i class="fas fa-angle-left right"></i>
@@ -81,7 +81,7 @@
                 <li class="nav-item has-treeview menu-open">
                 <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'program') ? 'menu-open' : '' ?>
                     <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'program') ? 'active' : '' ?>
-                        <i class="nav-icon far fa-user"></i>
+                        <i class="nav-icon fas fa-chalkboard-teacher"></i>
                         <p>
                             Gestionar Programa
                             <i class="fas fa-angle-left right"></i>
@@ -107,7 +107,7 @@
                 <li class="nav-item has-treeview menu-open">
                 <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'group') ? 'menu-open' : '' ?>
                     <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'group') ? 'active' : '' ?>
-                        <i class="nav-icon far fa-user"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Gestionar Grupo
                             <i class="fas fa-angle-left right"></i>
@@ -133,7 +133,7 @@
                 <li class="nav-item has-treeview menu-open">
                 <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'enrollment') ? 'menu-open' : '' ?>
                     <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'enrollment') ? 'active' : '' ?>
-                        <i class="nav-icon far fa-user"></i>
+                        <i class="nav-icon fas fa-file-signature"></i>
                         <p>
                             Gestionar Matricula
                             <i class="fas fa-angle-left right"></i>

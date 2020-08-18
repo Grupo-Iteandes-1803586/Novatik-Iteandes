@@ -6,7 +6,7 @@
 .encabezado {
   background: white;
   height: 20%;
-  border: 1px solid; }
+  border-bottom: 1px solid; }
 
 .img-index {
   margin-top: 5px;
@@ -88,9 +88,22 @@
   background-color: #191970 !important;
   border-color: #191970 !important; }
 
+.btn-primary:hover {
+  background-color: rgba(11, 83, 69, 0.5) !important;
+  border-color: rgba(11, 83, 69, 0.5) !important; }
+
 .btn-secondary {
   background-color: #191970 !important;
   border-color: #191970 !important; }
+
+.btn-secondary:hover {
+  background-color: rgba(11, 83, 69, 0.5) !important;
+  border-color: rgba(11, 83, 69, 0.5) !important; }
+
+.modal-header {
+  color: white !important;
+  background-color: #7CFC00 !important;
+  border-color: #7CFC00 !important; }
 
 .btn-danger {
   color: white !important;
@@ -111,6 +124,10 @@
   color: white !important;
   background-color: #008B8B !important;
   border-color: #008B8B !important; }
+
+.form-control {
+  background-color: rgba(21, 67, 96, 0.05) !important;
+  opacity: 1; }
 
 .form-control:disabled, .form-control[readonly] {
   background-color: rgba(21, 67, 96, 0.05) !important;

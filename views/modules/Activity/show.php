@@ -81,6 +81,9 @@ use App\Models\Archive;
                     <strong><i class="fas fa-phone mr-1"></i> tipo de Activity</strong>
                     <p class="text-muted"><?= $DataActivity->getTypeActivity() ?></p>
                     <hr>
+                    <strong><i class="fas fa-book-reader"></i> Resultado de Aprendizaje</strong>
+                    <p class="text-muted"><?= $DataActivity->getLearningResultIdLearningResult()->getNameLearningResult() ?></p>
+                    <hr>
                     <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
                     <p class="text-muted"><?= $DataActivity->getStateActivity() ?></p>
                     <hr>
@@ -118,8 +121,8 @@ use App\Models\Archive;
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-auto mr-auto">
-                                <a role="button" href="index.php" class="btn btn-success float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-tasks"></i> Consultar Archivo
+                                <a role="button" href="index.php?idLearningResult=<?=$DataActivity->getLearningResultIdLearningResult()->getIdLearningResult() ;?>" class="btn btn-success float-right" style="margin-right: 5px;">
+                                    <i class="fas fa-tasks"></i> Gestionar Archivo
                                 </a>
                             </div>
                         </div>
