@@ -95,7 +95,7 @@ use App\Models\TrainingCompetition;
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-auto ">
-                                    <a role="button" href="index.php" class="btn btn-success float-right" style="margin-right: 5px;">
+                                    <a role="button" href="index.php?idTrainingCompetition=<?= $DataLearning->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition()?>" class="btn btn-success float-right" style="margin-right: 5px;">
                                         <i class="fas fa-tasks"></i> Gestionar Resutado de Aprendizaje
                                     </a>
                                 </div>

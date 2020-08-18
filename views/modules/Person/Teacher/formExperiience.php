@@ -1,7 +1,7 @@
 <?php require_once(__DIR__ .'/../../../../vendor/autoload.php');
 use Carbon\Carbon;?>
 <div class="card-body">
-        <li class="list-Dates"><i class ="fas fa-cut" id="icon-iconos"></i>Experiencia</li>
+        <li class="list-Dates"><i class ="fas fa-id-badge" id="icon-iconos"></i>Experiencia</li>
         <hr>
         <!--Ultimo Lugar de Trabajo-->
         <div class="form-group row">

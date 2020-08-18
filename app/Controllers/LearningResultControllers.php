@@ -41,7 +41,7 @@ class LearningResultControllers
             $arrayLearningResult['statuLearningResult'] = 'Activo';
             $LearningResult= new LearningResult($arrayLearningResult);
             if($LearningResult->create()){
-                header("Location: ../../views/modules/LearningResult/show.php?idLearningResult=".$LearningResult->getIdLearningResult());
+                header("Location: ../../views/modules/LearningResult/create.php?idTrainingCompetition=".$LearningResult->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition());
             }
         } catch (Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');

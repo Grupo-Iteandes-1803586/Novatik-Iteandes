@@ -50,7 +50,7 @@ class ActivityControllers
                 $arrayArchive['stateArchive'] = 'Activo';
                 $archive = new Archive($arrayArchive);
                 if ($archive->create()) {
-                    header("Location: ../../views/modules/Activity/show.php?idActivity=".$activity->getIdActivity());
+                    header("Location: ../../views/modules/Activity/create.php?idLearningResult=".$activity->getLearningResultIdLearningResult()->getIdLearningResult());
                 }
             }
         } catch (Exception $e) {

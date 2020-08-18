@@ -46,7 +46,7 @@ class TrainingCompetitionControllers{
             $arrayTrainingCompetition['TrainingProgram_idTrainingProgram']= TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
             $competition = new TrainingCompetition($arrayTrainingCompetition);
             if($competition->create()){
-                header("Location: ../../views/modules/TrainingCompetition/index.php");
+                header("Location: ../../views/modules/TrainingCompetition/create.php?idTrainingProgram=".$competition->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram());
             }
         } catch (Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
