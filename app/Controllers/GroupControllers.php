@@ -83,6 +83,7 @@ class GroupControllers{
                 $arrschedule['startDateSchedule']=  Carbon::parse($_POST['startDateSchedule']);
                 $arrschedule['endDateSchedule']=  Carbon::parse($_POST['endDateSchedule']);
                 $arrschedule['cantHours']=  $_POST['cantHours'];
+                $arrschedule['daySchedule']=  $_POST['daySchedule'];
                 $arrschedule['startHourSchedule']=  Carbon::parse($_POST['startHourSchedule']);
                 $arrschedule['endHourSchedule']=  Carbon::parse($_POST['endHourSchedule']);
                 $arrschedule['stateSchedule']= $group->getStateGroup();
