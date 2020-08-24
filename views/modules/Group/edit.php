@@ -80,6 +80,8 @@ use Carbon\Carbon;
                         <form class="form-horizontal" method="post" id="frmEditGroup" name="frmEditGroup" action="../../../app/Controllers/GroupControllers.php?action=edit">
                             <input id="idGroup" name="idGroup" value="<?php echo $DataGroup->getIdGroup(); ?>" hidden required="required" type="text">
                             <div class="card-body">
+                                <li class="list-Dates"><i class ="fas fa-users" id="icon-iconos"></i>Grupo</li>
+                                <hr>
                                 <!--Codigo-->
                                 <div class="form-group row">
                                     <label for="codeGroup" class="col-sm-2 col-form-label">Codigo</label>
@@ -130,7 +132,7 @@ use Carbon\Carbon;
 
                                 <!--Horarios-->
                                 <?php
-                                $dataSchedule = Schedule::search("SELECT * FROM Schedule WHERE Group_idGroup =" . $_GET["idGroup"]);
+                                $dataSchedule = Schedule::search("SELECT * FROM Schedule WHERE Group_idGroup =".$_GET["idGroup"]);
                                 foreach ($dataSchedule as $schedule) {
                                     $DataS = \App\Controllers\ScheduleControllers::searchForID($schedule->getIdSchedule());
                                 }
@@ -172,15 +174,38 @@ use Carbon\Carbon;
                                                    placeholder="Cant de Horas">
                                         </div>
                                     </div>
-                                    <!--Dias-->
+
+
                                     <div class="form-group row">
                                         <label for="daySchedule" class="col-sm-2 col-form-label">Dias</label>
-                                        <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col">
+                                                <table id="tblDays" class="datatable table table-bordered table-striped">
+                                                    <tr class="inputC">
+                                                        <!--Dias-->
+                                                        <?php
+                                                        $checked_arr = explode("|",$DataS->getDaySchedule());
+                                                        $daysArray = array("Lu"=>"Lunes","Ma"=>"Martes","Mi"=>"Miércoles","Ju"=>"Jueves","Vi"=>"Viernes","Sa"=>"Sábado","Do"=>"Domingo");
+                                                        foreach($daysArray as $key=>$value) {
+                                                            $checked = "";
+                                                            if(in_array($key,$checked_arr)){
+                                                                $checked = "checked";
+                                                            }
+                                                            echo '<td><input type="checkbox" name="dayS[]" value="'.$key.'" '.$checked.' > '.$value.' </td>';
+                                                        }
+
+                                                        ?>
+
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-sm-10">
                                             <input required type="text" class="form-control" id="daySchedule"
                                                    name="daySchedule"
                                                    value="<?php echo $DataS->getDaySchedule(); ?>"
                                                    placeholder="Dias">
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <!--Hora de Inicio-->
                                     <div class="form-group row">

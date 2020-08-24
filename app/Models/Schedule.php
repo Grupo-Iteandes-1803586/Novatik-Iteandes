@@ -264,7 +264,7 @@ class Schedule extends BasicModel{
     }
     public static function searchForId($idSchedule )
     {
-        $teacher = null;
+        $schedule = null;
         if ($idSchedule  > 0) {
             $schedule= new Schedule();
             $getrow = $schedule->getRow("SELECT * FROM iteandes_novatik.Schedule WHERE idSchedule =?", array($idSchedule));

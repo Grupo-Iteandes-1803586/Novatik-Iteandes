@@ -4,6 +4,7 @@ require_once("../../../app/Controllers/EnrollmentCompetitionControllers.php");
 require_once("../../../app/Controllers/TrainingCompetitionControllers.php");
 require_once("../../../app/Controllers/TrainingProgramController.php");
 require_once("../../../app/Controllers/SemesterControllers.php");
+require_once("../../../app/Models/Schedule.php");
 
 use App\Controllers\EnrollmentControllers;
 use App\Controllers\SemesterControllers;
@@ -11,6 +12,7 @@ use App\Controllers\TrainingCompetitionControllers;
 use App\Controllers\TrainingProgramController;
 use App\Controllers\EnrollmentCompetitionControllers;
 use App\Models\Enrollment;
+use App\Models\Schedule;
 use App\Models\EnrollmentCompetition;
 use Carbon\Carbon;?>
 
@@ -112,10 +114,10 @@ use Carbon\Carbon;?>
                             <div class="form-group row">
                                 <label for="Semester_idSemester" class="col-sm-2 col-form-label">Semestre</label>
                                 <div class="col-sm-10">
-                                    <?= \App\Controllers\SemesterControllers::selectCompetition(false,
+                                    <?= \App\Controllers\SemesterControllers::selectSemester(false,
                                         true,
-                                        '$Semester_idSemester',
-                                        '$Semester_idSemester',
+                                        'Semester_idSemester',
+                                        'Semester_idSemester',
                                         (!empty($dataSemester)) ? $dataSemester->getSemesterIdSemester()->getIdSemester() : '',
                                         'form-control select2bs4 select2-info',
                                         "statuSemester = 'Activo'")
@@ -142,11 +144,10 @@ use Carbon\Carbon;?>
                                     ?>
                                 </div>
                             </div>
-
-                            <!--Competencias-->
                             <?php
+                            if(!empty($dataProgram)){
+                                //Competencias
                             $query = "SELECT * FROM trainingcompetition tc INNER JOIN trainingprogram tp on tp.idTrainingProgram = tc.TrainingProgram_idTrainingProgram WHERE tp.idTrainingProgram=".$dataProgram;
-                            echo $query;
                             $dataDates = \App\Models\EnrollmentCompetition::search($query);
 
                             foreach ($dataDates as $daDe) {
@@ -154,18 +155,25 @@ use Carbon\Carbon;?>
                                 $idC = $DataCpm;
                             }
                             //Horario
-                            $dataSche = \App\Models\EnrollmentCompetition::search("SELECT * FROM schedule sh  INNER JOIN `group` gr on sh.Group_idGroup = gr.idGroup where gr.TrainingCompetition_idTrainingCompetition =".$idC);
+                            $dataSche = \App\Models\schedule::search("SELECT * FROM schedule sh  INNER JOIN `group` gr on sh.Group_idGroup = gr.idGroup where gr.TrainingCompetition_idTrainingCompetition =".$idC);
+
                             foreach ($dataSche as $daSc) {
                                 $daSch = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daSc->getScheduleIdSchedule()->getIdSchedule());
                                 $idS = $daSch;
+                                var_dump('rg:',$idS);
                             }
-                            ?>
+
+
+                            }?>
                             <input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition"
                                    value="<?php echo $idC; ?>" hidden required="required"
                                    type="text">
                             <input id="Schedule_idSchedule" name="Schedule_idSchedule"
                                    value="<?php echo $idS; ?>" hidden required="required"
                                    type="text">
+                            <label><input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition"
+                                          value="<?php echo $idS; ?>"
+                                          type="text"></label>
                         </div>
                     </div>
                     <!-- /.card-body -->

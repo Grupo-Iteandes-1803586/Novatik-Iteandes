@@ -9,6 +9,10 @@ use Carbon\Carbon;
     <title><?= getenv('TITLE_SITE');?> | Crear Grupo</title>
     <?php require ("../../partials/head_imports.php");?>
     <?php require("../../partials/header.php");?>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= $adminlteURL ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="<?= $adminlteURL ?>/plugins/datatables-responsive/css/responsive.bootstrap4.css">
+    <link rel="stylesheet" href="<?= $adminlteURL ?>/plugins/datatables-buttons/css/buttons.bootstrap4.css">
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -59,7 +63,7 @@ use Carbon\Carbon;
 
                     <!--Formulario de los datos de la actividad-->
                     <div class="card-body">
-                        <li class="list-Dates"><i class ="fab fa-glide" id="icon-iconos"></i>Grupo</li>
+                        <li class="list-Dates"><i class ="fas fa-users" id="icon-iconos"></i>Grupo</li>
                         <hr>
                         <!--Codigo del Grupo-->
                         <div class="form-group row">
@@ -137,10 +141,26 @@ use Carbon\Carbon;
                         </div>
                         <!--Dias-->
                         <div class="form-group row">
-                            <label for="daySchedule" class="col-sm-2 col-form-label">Dias</label>
-                            <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="daySchedule" name="daySchedule" placeholder="Dias">
+                            <label  class="col-sm-2 col-form-label">Dias</label>
+                            <!--Tabla para checkbox-->
+                            <div class="row">
+                                <div class="col">
+                                    <table id="tblDays" class="datatable table table-bordered table-striped">
+                                        <tr class="inputC">
+                                            <td><input type="checkbox" name="dayS[]" value="Lu"/>Lunes</td>
+                                            <td><input type="checkbox" name="dayS[]" value="Ma"/>Martes</td>
+                                            <td><input type="checkbox" name="dayS[]" value="Mi"/>Miercoles</td>
+                                            <td><input type="checkbox" name="dayS[]" value="Ju"/>Jueves</td>
+                                            <td><input type="checkbox" name="dayS[]" value="Vi"/>Viernes</td>
+                                            <td><input type="checkbox" name="dayS[]" value="Sa"/>Sabado</td>
+                                            <td><input type="checkbox" name="dayS[]" value="Do"/>Domingo</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
+                            <!--<div class="col-sm-10">
+                                <input required type="text" class="form-control" id="daySchedule" name="daySchedule" placeholder="Dias">
+                            </div>-->
                         </div>
                         <!--Hora de inicio-->
                         <div class="form-group row">
@@ -172,10 +192,8 @@ use Carbon\Carbon;
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-
 <?php require ("../../partials/footer.php");?>
-    <!--</div>-->
+<!--</div>-->
 <?php require ("../../partials/scripts.php");?>
 <script src="../../components/Js/script.js"></script>
 </body>

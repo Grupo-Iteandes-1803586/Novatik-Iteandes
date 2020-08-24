@@ -137,9 +137,9 @@ class SemesterControllers{
         }
         return false;
     }
-    //Seleccionar una competencia
+    //Seleccionar un Semestre
 
-    static public function selectCompetition ($isMultiple=false,
+    static public function selectSemester ($isMultiple=false,
                                               $isRequired=true,
                                               $id="idSemester",
                                               $nombre="idSemester",
@@ -152,7 +152,7 @@ class SemesterControllers{
             $base = "SELECT * FROM Semester WHERE ";
             $arrSemester = Semester::search($base.' '.$where);
         }else{
-            $arrSemester = TrainingCompetition::getAll();
+            $arrSemester = Semester::getAll();
         }
 
         $htmlSelect = "<select ".(($isMultiple) ? "multiple" : "")." ".(($isRequired) ? "required" : "")." id= '".$id."' name='".$nombre."' class='".$class."' style='width: 100%;'>";

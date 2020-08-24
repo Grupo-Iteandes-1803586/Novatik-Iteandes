@@ -113,6 +113,21 @@ use App\Controllers\ScheduleControllers;
                                         <hr>
                                         <strong><i class="far fa-compass"></i> Hora de Cierre</strong>
                                         <p class="text-muted"><?=$DataS->getEndHourSchedule()->toTimeString();?></p>
+
+                                        <hr><strong><i class="fas fa-user mr-1"></i> Dias</strong>
+                                        <p class="text-muted"><?php
+                                            $checked_arr = explode("|",$DataS->getDaySchedule());
+                                            $daysArray = array("Lu"=>"Lunes","Ma"=>"Martes","Mi"=>"Miércoles","Ju"=>"Jueves","Vi"=>"Viernes","Sa"=>"Sábado","Do"=>"Domingo");
+                                            $check=array();
+                                            foreach($daysArray as $key=>$value) {
+                                                $checked = "";
+                                                if(in_array($key,$checked_arr)){
+                                                    array_push($check,$value);
+                                                }
+                                            }
+                                            echo implode(',',$check);
+                                            ?>
+                                        </p>
                                         <hr>
                                         <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                                         <p class="text-muted"><?=$DataS->getStateSchedule();?></p>
