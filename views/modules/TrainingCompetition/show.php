@@ -82,19 +82,19 @@ use App\Controllers\TrainingCompetitionControllers;
                             <p class="text-muted"> <?= $DataCompetitio->getDenomination();?></p>
                             <hr>
                             <strong><i class="fas fa-robot"></i> Cupo Minimo</strong>
-                            <p class="text-muted"><?= $DataCompetitio->getMinimumSpace() ?></p>
+                            <p class="text-muted"><?= $DataCompetitio->getMinimumSpace(); ?></p>
                             <hr>
                             <strong><i class="fas fa-business-time"></i> Duracion</strong>
-                            <p class="text-muted"><?= $DataCompetitio->getDuration() ?></p>
+                            <p class="text-muted"><?= $DataCompetitio->getDuration(); ?></p>
                             <hr>
                             <strong><i class="fas fa-folder-open"></i> Orden</strong>
-                            <p class="text-muted"><?= $DataCompetitio->getOrderTrainingCompetition() ?></p>
+                            <p class="text-muted"><?= $DataCompetitio->getOrderTrainingCompetition(); ?></p>
                             <hr>
                             <strong><i class="fas fa-book"></i> Programa de Formacion</strong>
-                            <p class="text-muted"><?= $DataCompetitio->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram() ?></p>
+                            <p class="text-muted"><?= $DataCompetitio->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram(); ?></p>
                             <hr>
                             <strong><i class="fas fa-user mr-1"></i> Estado</strong>
-                            <p class="text-muted"><?= $DataCompetitio->getStatusTrainingCompetition()?></p>
+                            <p class="text-muted"><?= $DataCompetitio->getStatusTrainingCompetition();?></p>
                             <hr>
                             </p>
                         </div>

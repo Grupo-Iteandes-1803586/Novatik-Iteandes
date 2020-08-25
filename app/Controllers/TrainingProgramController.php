@@ -130,7 +130,7 @@ class TrainingProgramController{
         }
         return false;
     }
-    //Seleccionar una competencia
+    //Seleccionar un programa
 
     static public function selectCompetition ($isMultiple=false,
                                               $isRequired=true,

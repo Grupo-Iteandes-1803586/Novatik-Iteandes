@@ -36,6 +36,15 @@ class GroupControllers{
     static public function create()
     {
         try {
+            $dayF = "";
+            foreach ($_POST['dayS'] as $daySchedule) {
+                $s = '|';
+                if ($dayF == '') {
+                    $dayF = $daySchedule;
+                } else {
+                    $dayF .= $s . $daySchedule;
+                }
+            }
             $arrGroup = array();
             $arrGroup['codeGroup']=$_POST['codeGroup'];
             $arrGroup['nameGroup']=$_POST['nameGroup'];
@@ -49,7 +58,7 @@ class GroupControllers{
                 $arrschedule['startDateSchedule']=  Carbon::parse($_POST['startDateSchedule']);
                 $arrschedule['endDateSchedule']=  Carbon::parse($_POST['endDateSchedule']);
                 $arrschedule['cantHours']=  $_POST['cantHours'];
-                $arrschedule['daySchedule']=  $_POST['daySchedule'];
+                $arrschedule['daySchedule']=  $dayF;
                 $arrschedule['startHourSchedule']=  Carbon::parse($_POST['startHourSchedule']);
                 $arrschedule['endHourSchedule']=  Carbon::parse($_POST['endHourSchedule']);
                 $arrschedule['stateSchedule']= 'Activo';
@@ -68,6 +77,15 @@ class GroupControllers{
     //Editar un Grupo
     static public function edit (){
         try {
+                $dayF = "";
+                foreach ($_POST['dayS'] as $daySchedule) {
+                    $s = '|';
+                    if ($dayF == '') {
+                        $dayF = $daySchedule;
+                    } else {
+                        $dayF .= $s . $daySchedule;
+                    }
+                }
             $arrGroup = array();
             $arrGroup['idGroup']=$_POST['idGroup'];
             $arrGroup['codeGroup']=$_POST['codeGroup'];
@@ -83,6 +101,7 @@ class GroupControllers{
                 $arrschedule['startDateSchedule']=  Carbon::parse($_POST['startDateSchedule']);
                 $arrschedule['endDateSchedule']=  Carbon::parse($_POST['endDateSchedule']);
                 $arrschedule['cantHours']=  $_POST['cantHours'];
+                $arrschedule['daySchedule']= $dayF;
                 $arrschedule['startHourSchedule']=  Carbon::parse($_POST['startHourSchedule']);
                 $arrschedule['endHourSchedule']=  Carbon::parse($_POST['endHourSchedule']);
                 $arrschedule['stateSchedule']= $group->getStateGroup();
