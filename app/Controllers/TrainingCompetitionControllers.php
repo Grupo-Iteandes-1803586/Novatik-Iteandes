@@ -130,7 +130,6 @@ class TrainingCompetitionControllers{
         if(count($ArrCompetition) > 0){
             foreach ($ArrCompetition as $competition){
                 if($competition->getIdTrainingCompetition() == $idTrainingCompetition){
-                    var_dump($competition);
                     return true;
                 }
             }

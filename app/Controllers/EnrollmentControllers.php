@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 require_once (__DIR__.'/../Models/Enrollment.php');
+require_once (__DIR__.'/../Models/Schedule.php');
 require_once (__DIR__.'/../Models/Student.php');
+require_once (__DIR__.'/../Models/Person.php');
 require_once (__DIR__.'/../Models/TrainingProgram.php');
 require_once (__DIR__.'/../Models/Semester.php');
 
@@ -51,7 +53,7 @@ class EnrollmentControllers{
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
             $arrayPerson['adressPerson'] = $_POST['adressPerson'];
             $arrayPerson['generePerson'] = $_POST['generePerson'];
-            $arrayPerson['typePerson'] = 'Docente';
+            $arrayPerson['typePerson'] = 'Estudiante';
             $arrayPerson['statePerson'] = 'Activo';
             $arrayPerson['photoPerson']= $_POST['photoPerson'];
             //Validar registro del Usuario
@@ -65,24 +67,24 @@ class EnrollmentControllers{
                     $arrayStudent['Person_idPerson'] = $person;
                     $arrayStudent['stateStudent'] = 'Activo';
                     $student = new Student($arrayStudent);
-
                     if ($student->create()) {
                         $arrEnrollment = array();
-                        $arrEnrollment->dateEnrollment = Carbon::now(); //Fecha Actual;
-                        $arrEnrollment->stateEnrollment = $_POST['stateEnrollment'];
-                        $arrEnrollment->Student_idStudent = $student;
-                        $arrEnrollment->Semester_idSemester = Semester::searchForId($_POST['Semester_idSemester']);
-                        $arrEnrollment->TrainingProgram_idTrainingProgram = TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
+                        $arrEnrollment['dateEnrollment'] = Carbon::now(); //Fecha Actual;
+                        $arrEnrollment['stateEnrollment'] = 'Activo';
+                        $arrEnrollment['Student_idStudent'] = $student;
+                        $arrEnrollment['Semester_idSemester'] = Semester::searchForId($_POST['Semester_idSemester']);
+                        $arrEnrollment['TrainingProgram_idTrainingProgram'] = TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
+                        var_dump($_POST['TrainingProgram_idTrainingProgram']);
                         $enrollmment = new Enrollment($arrEnrollment);
                         if ($enrollmment->create()) {
+
                             $arrayEnrollmentCompetition['Enrollment_idEnrollment'] = $enrollmment;
                             $arrayEnrollmentCompetition['Schedule_idSchedule'] = Schedule::searchForId($_POST['Schedule_idSchedule']);
                             $arrayEnrollmentCompetition['TrainingCompetition_idTrainingCompetition'] = TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
                             $arrayEnrollmentCompetition['stateEnrollmentCompetition'] = 'Activo';
                             $EnrollmentCompetition = new EnrollmentCompetition($arrayEnrollmentCompetition);
-
                             if ($EnrollmentCompetition->create()) {
-                                header("Location: ../../views/modules/Enrollment/show.php?idEnrollment=" . $enrollmment->idEnrollment());
+                                header("Location: ../../views/modules/Enrollment/show.php?idEnrollment=".$enrollmment->idEnrollment());
 
                             }
 
