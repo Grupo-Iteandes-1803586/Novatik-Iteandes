@@ -485,4 +485,36 @@ class Person extends BasicModel{
             ." ".$this->passwordPerson." ".$this->typePerson." ".$this->statePerson." ".$this->photoPerson;
     }
 
+    public function Login($User, $Password){
+        $resulPerson = Person::search("SELECT * FROM Person WHERE userPerson = '$User'");
+        if(count($resulPerson) >= 1){
+            if($resulPerson[0]->passwordPerson == $Password){
+                if($resulPerson[0]->statePerson == 'Activo'){
+                    return $resulPerson[0];
+                }else{
+                    return "Usuario Inactivo";
+                }
+            }else{
+                return "Contraseña Incorrecta";
+            }
+        }else{
+            return "Usuario Incorrecto";
+        }
+    }
+     public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getIdPerson(),
+            'nombres' => $this->getNamePerson(),
+            'apellidos' => $this->getLastNamePerson(),
+            'documento' => $this->getDocumentPerson(),
+            'telefono' => $this->getPhonePerson(),
+            'direccion' => $this->getAdressPerson(),
+            'fecha_nacimiento' => $this->getDateBornPerson()->toDateString(),
+            'user' => $this->getUserPerson(),
+            'password' => $this->getPasswordPerson(),
+            'rol' => $this->getTypePerson(),
+            'estado' => $this->getStatePerson(),
+        ];
+    }
 }
