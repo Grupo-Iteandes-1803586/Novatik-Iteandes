@@ -43,6 +43,9 @@
     justify-content: space-between;
     position: relative;
 }
+input[type=text]{
+  text-transform: capitalize;
+}
 .inputC input[type=checkbox]{
   padding-right: 5px;
   border-color : #7CFC00!important;

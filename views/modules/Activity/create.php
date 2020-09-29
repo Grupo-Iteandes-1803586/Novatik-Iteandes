@@ -244,7 +244,8 @@ use App\Models\Activity;
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" href="create.php?idLearningResult=<?= $Activity->getLearningResultIdLearningResult()->getIdLearningResult()?>" class="btn btn-primary"></i> Agregar</button>
+                            <button type="submit" href="create.php?idLearningResult=<?= $Activity->getLearningResultIdLearningResult()->getIdLearningResult()?>"
+                                    class="btn btn-primary"></i> Agregar</button>
                         </div>
                     </form>
                 </div>
