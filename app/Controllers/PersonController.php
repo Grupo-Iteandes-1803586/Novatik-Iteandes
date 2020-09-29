@@ -41,9 +41,14 @@ class PersonController{
             PersonController::getAll();
         }else if($action == "active"){
             PersonController::active();
-        }else if($action =="inactive"){
+        }else if($action =="inactive") {
             PersonController::inactive();
-        }
+        } else if ($action =="login"){
+            PersonController::login();
+        }else if($action == "cerrarSession"){
+            PersonController::cerrarSession();
+}
+
     }
     //Funcion crear persona
     static public function create(){
@@ -230,5 +235,27 @@ class PersonController{
             //header("Location: ../../views/modules/Person/index.php?respuesta=error");
         }
     }
-
+    public static function login (){
+        try {
+            if(!empty($_POST['userPerson']) && !empty($_POST['passwordPerson'])){
+                $tmpUser = new Person();
+                $respuesta = $tmpUser->Login($_POST['userPerson'], $_POST['passwordPerson']);
+                if (is_a($respuesta,"App\Models\Person")) {
+                    $_SESSION['UserInSession'] = $respuesta->jsonSerialize();
+                    header("Location: ../../views/index.php");
+                }else{
+                    header("Location: ../../views/modules/site/login.php?respuesta=error&mensaje=".$respuesta);
+                }
+            }else{
+                header("Location: ../../views/modules/site/login.php?respuesta=error&mensaje=Datos Vacíos");
+            }
+        } catch (\Exception $e) {
+            header("Location: ../../views/modules/site/login.php?respuesta=error&mensaje=".$e->getMessage());
+        }
+    }
+    public static function cerrarSession (){
+        session_unset();
+        session_destroy();
+        header("Location: ../../views/modules/site/login.php");
+    }
 }

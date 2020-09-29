@@ -107,10 +107,10 @@ use App\Controllers\LenguagesControllers; ?>
                             <strong><i class="fas fa-mobile-alt"></i> Celular</strong>
                             <p class="text-muted"><?= $DataPerson->getPhonePerson() ;?></p>
                             <hr>
-                            <strong><i class="fas fa-phone mr-1"></i> Genero</strong>
+                            <strong><i class="fab fa-keybase"></i> Genero</strong>
                             <p class="text-muted"><?= $DataPerson->getGenerePerson(); ?></p>
                             <hr>
-                            <strong><i class="fas fa-phone mr-1"></i> Estado</strong>
+                            <strong><i class="fas fa-user mr-1"></i> Estado</strong>
                             <p class="text-muted"><?= $DataPerson->getStatePerson(); ?></p>
                             <hr>
                             </p>
