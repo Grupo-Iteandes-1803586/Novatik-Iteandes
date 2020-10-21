@@ -174,6 +174,9 @@ use Carbon\Carbon;?>
                             <label><input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition"
                                           value="<?php echo $idS; ?>"
                                           type="text"></label>
+                            <div id="divSelectCompetition" name="divSelectCompetition">
+
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -193,5 +196,28 @@ use Carbon\Carbon;?>
 <!--</div>-->
 <?php require ("../../partials/scripts.php");?>
 <script src="../../components/Js/script.js"></script>
+<script>
+
+    $(function () {
+        $('#TrainingProgram_idTrainingProgram').change( function (e) {
+            $.post("../../../app/Controllers/TrainingCompetitionControllers.php?action=selectAjaxCompetition", {
+                isMultiple :false,
+                isRequired : true,
+                id : "TrainingProgram_idTrainingProgram",
+                nombre : "TrainingProgram_idTrainingProgram",
+                defaultValue : "",
+                class : "form-control",
+                where : "TrainingProgram_idTrainingProgram = "+ $(this).val(),
+
+            }, "json")
+                .done(function( resultCompetition ) {
+                    $('#divSelectCompetition').html(resultCompetition);
+                })
+                .fail(function(err) {
+                    console.log( "Error al realizar la consulta"+err );
+                })
+        });
+    });
+</script>
 </body>
 </html>

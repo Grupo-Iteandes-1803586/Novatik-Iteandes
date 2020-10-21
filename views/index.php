@@ -31,5 +31,6 @@
         <?php require ("partials/footer.php");?>
     </div>
     <?php require ("partials/scripts.php");?>
+
 </body>
 </html>
