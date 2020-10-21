@@ -21,12 +21,16 @@ class TrainingCompetitionControllers{
             TrainingCompetitionControllers::edit();
         } else if ($action == "searchForID") {
             TrainingCompetitionControllers::searchForID($_REQUEST['idTrainingCompetition']);
-        } else if ($action == "searchAll") {
+        } else if ($action == "searchForIDAjax") {
+            TrainingCompetitionControllers::searchForID($_REQUEST['idTrainingCompetition'], 'Ajax');
+        }else if ($action == "searchAll") {
             TrainingCompetitionControllers::getAll();
         } else if ($action == "activate") {
             TrainingCompetitionControllers::activate();
         } else if ($action == "inactivate") {
             TrainingCompetitionControllers::inactivate();
+        }else if($action == "selectAjaxCompetition"){
+            TrainingCompetitionControllers::selectAjaxCompetition();
         }
     }
 
@@ -108,12 +112,23 @@ class TrainingCompetitionControllers{
         }
     }
     //Buscar popr id
-    static public function searchForID ($idTrainingCompetition){
+    static public function searchForID ($idTrainingCompetition,$method = 'normal'){
         try {
-            return TrainingCompetition::searchForId($idTrainingCompetition);
+            $result = TrainingCompetition::searchForId($idTrainingCompetition);
+            if ($method === 'normal') {
+                return $result;
+            }else{
+                header('Content-type: application/json; charset=utf-8');
+                echo json_encode($result->jsonSerialize());
+            }
         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
-            //header("Location: ../../views/modules/TrainingCompetition/manager.php?respuesta=error");
+            if ($method === 'normal'){
+                header("Location: ../../views/modules/TrainingCompetition/create.php?respuesta=error");
+            }else{
+                header('Content-type: application/json; charset=utf-8');
+                echo json_encode($e);
+            }
         }
     }
     //Obtener toda la informacion de la tabla
@@ -164,5 +179,15 @@ class TrainingCompetitionControllers{
         $htmlSelect .= "</select>";
         return $htmlSelect;
     }
+    static public function  selectAjaxCompetition(){
+        $isMultiple= $_POST['isMultiple'];
+                                          $isRequired=$_POST['isRequired'];
+                                          $id=$_POST['id'];
+                                          $nombre=$_POST['nombre'];
+                                          $defaultValue= $_POST['defaultValue'];
+                                          $class= $_POST['class'];
+                                          $where= $_POST['where'];
+                                        echo (self::selectCompetition($isMultiple,$isRequired,$id,$nombre,$defaultValue,$class,$where));
+}
 
 }

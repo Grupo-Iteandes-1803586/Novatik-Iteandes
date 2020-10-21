@@ -3,9 +3,11 @@
 namespace App\Models;
 require_once ('TrainingProgram.php');
 use App\Models\TrainingProgram;
+use JsonSerializable;
+
 require_once("BasicModel.php");
 
-class TrainingCompetition extends BasicModel{
+class TrainingCompetition extends BasicModel implements JsonSerializable{
     private $idTrainingCompetition;
     private $codeTrainingCompetition;
     private $codeAlfaTrainingCompetition;
@@ -296,5 +298,21 @@ class TrainingCompetition extends BasicModel{
     public function __toString()
     {
         return "Codigo: $this->codeTrainingCompetition, Codigo Corto: $this->codeAlfaTrainingCompetition, Denominacion: $this->denomination, duracion: $this->duration , cupo Minimo: $this->minimumSpace,  orden: $this->orderTrainingCompetition, Estado: $this->statusTrainingCompetition, Programa de Formacion $this->TrainingProgram_idTrainingProgram";
+    }
+
+    public function jsonSerialize()
+    {
+        // TODO: Implement jsonSerialize() method.
+        return [
+            'codeTrainingCompetition' => $this->getCodeTrainingCompetition(),
+            'codeAlfaTrainingCompetition' => $this->getCodeAlfaTrainingCompetition(),
+            'denomination' => $this->getDenomination(),
+            'duration' => $this->getDuration(),
+            'minimumSpace' => $this->getMinimumSpace(),
+            'orderTrainingCompetition' => $this->getOrderTrainingCompetition(),
+            'statusTrainingCompetition' => $this->getStatusTrainingCompetition(),
+            'TrainingProgram_idTrainingProgram' => $this->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram(),
+            'idTrainingCompetition' => $this->getIdTrainingCompetition()
+        ];
     }
 }
