@@ -144,39 +144,6 @@ use Carbon\Carbon;?>
                                     ?>
                                 </div>
                             </div>
-                            <?php
-                            if(!empty($dataProgram)){
-                                //Competencias
-                            $query = "SELECT * FROM trainingcompetition tc INNER JOIN trainingprogram tp on tp.idTrainingProgram = tc.TrainingProgram_idTrainingProgram WHERE tp.idTrainingProgram=".$dataProgram;
-                            $dataDates = \App\Models\EnrollmentCompetition::search($query);
-
-                            foreach ($dataDates as $daDe) {
-                                $DataCpm = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daDe->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition());
-                                $idC = $DataCpm;
-                            }
-                            //Horario
-                            $dataSche = \App\Models\schedule::search("SELECT * FROM schedule sh  INNER JOIN `group` gr on sh.Group_idGroup = gr.idGroup where gr.TrainingCompetition_idTrainingCompetition =".$idC);
-
-                            foreach ($dataSche as $daSc) {
-                                $daSch = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daSc->getScheduleIdSchedule()->getIdSchedule());
-                                $idS = $daSch;
-                                var_dump('rg:',$idS);
-                            }
-
-
-                            }?>
-                            <input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition"
-                                   value="<?php echo $idC; ?>" hidden required="required"
-                                   type="text">
-                            <input id="Schedule_idSchedule" name="Schedule_idSchedule"
-                                   value="<?php echo $idS; ?>" hidden required="required"
-                                   type="text">
-                            <label><input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition"
-                                          value="<?php echo $idS; ?>"
-                                          type="text"></label>
-                            <div id="divSelectCompetition" name="divSelectCompetition">
-
-                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -196,28 +163,6 @@ use Carbon\Carbon;?>
 <!--</div>-->
 <?php require ("../../partials/scripts.php");?>
 <script src="../../components/Js/script.js"></script>
-<script>
 
-    $(function () {
-        $('#TrainingProgram_idTrainingProgram').change( function (e) {
-            $.post("../../../app/Controllers/TrainingCompetitionControllers.php?action=selectAjaxCompetition", {
-                isMultiple :false,
-                isRequired : true,
-                id : "TrainingProgram_idTrainingProgram",
-                nombre : "TrainingProgram_idTrainingProgram",
-                defaultValue : "",
-                class : "form-control",
-                where : "TrainingProgram_idTrainingProgram = "+ $(this).val(),
-
-            }, "json")
-                .done(function( resultCompetition ) {
-                    $('#divSelectCompetition').html(resultCompetition);
-                })
-                .fail(function(err) {
-                    console.log( "Error al realizar la consulta"+err );
-                })
-        });
-    });
-</script>
 </body>
 </html>

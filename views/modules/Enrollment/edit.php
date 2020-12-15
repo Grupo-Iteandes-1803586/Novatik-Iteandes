@@ -51,7 +51,7 @@ use Carbon\Carbon;
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-ban"></i> Error!</h5>
-                        Error al crear la Matricula: <?= ($_GET['mensaje']) ?? "" ?>
+                        Error al Editar la Matricula: <?= ($_GET['mensaje']) ?? "" ?>
                     </div>
                 <?php } ?>
             <?php } else if (empty($_GET['idEnrollment'])) { ?>
@@ -79,8 +79,7 @@ use Carbon\Carbon;
                     if(!empty($DataPersonT)){
                         ?>
                         <!-- form start -->
-                        <form class="form-horizontal" method="post" id="frmEditPersonE" name="frmEditPersonE"
-                              action="../../../../app/Controllers/PersonController.php?action=editStudent">
+                        <form class="form-horizontal" method="post" id="frmEditEnrollment" name="frmEditEnrollment" action="../../../app/Controllers/EnrollmentControllers.php?action=edit">
                             <input id="idPerson" name="idPerson" value="<?php echo $DataPersonT->getIdPerson(); ?>" hidden
                                    required="required" type="text">
                             <div class="card-body">
@@ -199,20 +198,12 @@ use Carbon\Carbon;
                                         </select>
                                     </div>
                                 </div>
-                                <!--Foto del Estudiante-->
-                                <div class="form-group row">
-                                    <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
-                                    <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="photoPerson" name="photoPerson"
-                                               value="<?= $DataPersonT->getPhotoPerson(); ?>" placeholder="Ingrese su Foto">
-                                    </div>
-                                </div>
                                 <!--Tipo Persona-->
                                 <div class="form-group row">
                                     <label for="typePerson" class="col-sm-2 col-form-label">Tipo</label>
                                     <div class="col-sm-10">
                                         <input required type="text" class="form-control" id="typePerson" name="typePerson"
-                                               value="<?= $DataPersonT->getTypePerson(); ?>" placeholder="Tipo Persona">
+                                               value="<?= $DataPersonT->getTypePerson(); ?>" placeholder="Tipo Persona" readonly="readonly">
                                     </div>
                                 </div>
                                 <!--Estado de la persona-->
@@ -318,35 +309,6 @@ use Carbon\Carbon;
                                         </div>
                                     <?php }
                                 }?>
-                                <!--Matricula Competencia-->
-                                <?php
-                                $dataDates = \App\Models\EnrollmentCompetition::search("SELECT * FROM trainingcompetition tc INNER JOIN trainingprogram tp on tc.TrainingProgram_idTrainingProgram = tp.idTrainingProgram INNER JOIN enrollmentcompetition ec on tc.idTrainingCompetition = ec.TrainingCompetition_idTrainingCompetition INNER JOIN enrollment e on ec.Enrollment_idEnrollment = e.idEnrollment where e.idEnrollment=".$_GET['idEnrollment']);
-                                foreach ($dataDates as $daDe) {
-                                    $DataCpm = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daDe->getTrainingCompetitionIdTrainingCompetition()->getIdTrainingCompetition());
-                                    $idC = $DataCpm;
-                                }
-                                //Horario
-                                $dataSche = \App\Models\EnrollmentCompetition::search("SELECT * FROM schedule sh  INNER JOIN `group` gr on sh.Group_idGroup = gr.idGroup where gr.TrainingCompetition_idTrainingCompetition =".$idC);
-                                foreach ($dataSche as $daSc) {
-                                    $daSch = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daSc->getScheduleIdSchedule()->getIdSchedule());
-                                    $idS = $daDe->getScheduleIdSchedule();
-                                }
-                                //EnrollmentCompetition
-                                $dataSche = \App\Models\EnrollmentCompetition::search("SELECT * FROM EnrollmentCompetition ec INNER JOIN enrollment e on ec.Enrollment_idEnrollment = e.idEnrollment where e.idEnrollment ".$_GET['idEnrollment']);
-                                foreach ($dataSche as $daSc) {
-                                    $daSch = \App\Controllers\EnrollmentCompetitionControllers::searchForID($daSc->getScheduleIdSchedule()->getIdSchedule());
-                                    $idS = $daDe->getScheduleIdSchedule();
-                                }
-                                ?>
-                                <input id="idEnrollmentCompetition" name="idEnrollmentCompetition"
-                                       value="<?php echo $idC; ?>" hidden required="required"
-                                       type="text">
-                                <input id="TrainingCompetition_idTrainingCompetition" name="TrainingCompetition_idTrainingCompetition"
-                                       value="<?php echo $idC; ?>" hidden required="required"
-                                       type="text">
-                                <input id="Schedule_idSchedule" name="Schedule_idSchedule"
-                                       value="<?php echo $idS; ?>" hidden required="required"
-                                       type="text">
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

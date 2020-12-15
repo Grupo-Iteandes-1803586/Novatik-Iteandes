@@ -20,7 +20,7 @@
             <div class="card">
 
                 <div class="card-body">
-                    Bienvenido Administrador en este Portal encontraras todo lo relacionado con las actividades del
+                    Bienvenido, en este Portal encontraras todo lo relacionado con las actividades del
                     instituto <?= getenv('TITLE_SITE')?>
                 </div>
                 <!-- /.card-body -->
