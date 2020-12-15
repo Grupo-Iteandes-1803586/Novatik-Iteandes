@@ -65,7 +65,7 @@ class PersonController{
             $arrayPerson['generePerson'] = $_POST['generePerson'];
             $arrayPerson['typePerson'] = 'Docente';
             $arrayPerson['statePerson'] = 'Activo';
-            $arrayPerson['photoPerson']= $_POST['photoPerson'];
+            $arrayPerson['photoPerson']= 'Sin Imagen';
             //datos de experiencia
             $arrayExperience = array();
             $arrayExperience['institutionExperience'] = $_POST['institutionExperience'];
@@ -137,7 +137,7 @@ class PersonController{
             $arrayPerson['generePerson'] = $_POST['generePerson'];
             $arrayPerson['typePerson'] = $_POST['typePerson'];
             $arrayPerson['statePerson'] = $_POST['statePerson'];
-            $arrayPerson['photoPerson']= $_POST['photoPerson'];
+            $arrayPerson['photoPerson']= 'Sin Imagen';
             $arrayPerson['idPerson']= $_POST['idPerson'];
             $person= new Person($arrayPerson);
             //Datos de la Experiencia

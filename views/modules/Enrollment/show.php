@@ -69,10 +69,10 @@ use App\Controllers\TrainingCompetitionControllers;
                 foreach ($dataP as $person) {
                     $DataPerson =  \App\Controllers\PersonController::searchForID($person->getIdPerson());
                 }
-                if(!empty($DataPerson)){
+                    if(!empty($DataPerson)){
                 ?>
                 <div class="card-header">
-                    <h3 class="card-title"><?= $DataPerson->getNamePerson()  ?></h3>
+                    <h3 class="card-title">MATRICULA ACADEMICA</h3>
                     <?php require("../../partials/optionMenu.php") ;?>
                 </div>
                 <div class="card-body">
@@ -141,6 +141,7 @@ use App\Controllers\TrainingCompetitionControllers;
                     </p>
                     <?php }
                     }?>
+                    </div>
                     <!--Matricula-->
                     <?php if(!empty($_GET["idEnrollment"])){
                         $dataE = \App\Models\Enrollment::search("SELECT * FROM enrollment en where en.idEnrollment =" .$_GET["idEnrollment"]);
@@ -151,7 +152,6 @@ use App\Controllers\TrainingCompetitionControllers;
                             ?>
                             <div class="card-header">
                                 <h3 class="card-title">Matricula</h3>
-                                <?php require("../../partials/optionMenu.php") ;?>
                             </div>
                             <div class="card-body">
                                 <p>
@@ -159,7 +159,7 @@ use App\Controllers\TrainingCompetitionControllers;
                                 <p class="text-muted"><?= $DataEnrollment->getDateEnrollment()->toDateString() ?></p>
                                 <hr>
                                 <strong><i class="fas fa-phone mr-1"></i> Semestre</strong>
-                                <p class="text-muted"><?= $DataEnrollment->getSemesterIdSemester() ?></p>
+                                <p class="text-muted"><?= $DataEnrollment->getSemesterIdSemester()->getNameSemester() ?></p>
                                 <hr>
                                 <strong><i class="fas fa-phone mr-1"></i> Programa de Formacion</strong>
                                 <p class="text-muted"><?= $DataEnrollment->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram() ?></p>
