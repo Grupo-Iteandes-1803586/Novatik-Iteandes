@@ -81,11 +81,11 @@ use Carbon\Carbon;?>
                 </div>
             </div>
             <!--Foto del Docente-->
-            <div class="form-group row">
+            <!--<div class="form-group row">
                 <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
                 <div class="col-sm-10">
                     <input required type="text" class="form-control" id="photoPerson" name="photoPerson" placeholder="Ingrese su Foto">
                 </div>
-            </div>
+            </div>-->
 </div>
 <!-- /.card -->

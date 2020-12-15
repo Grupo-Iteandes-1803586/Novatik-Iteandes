@@ -151,12 +151,13 @@ class Enrollment extends BasicModel{
     public function update()
     {
         $result = $this->updateRow("UPDATE iteandes_novatik.Enrollment  SET dateEnrollment = ?, stateEnrollment = ?, Student_idStudent= ?, Semester_idSemester = ?,TrainingProgram_idTrainingProgram=? WHERE idEnrollment = ?", array(
-                $this->idEnrollment,
+
                 $this->dateEnrollment->toDateString(), //YYYY-MM-DD,
                 $this->stateEnrollment,
                 $this->Student_idStudent->getIdStudent(),
                 $this->Semester_idSemester->getIdSemester(),
-                $this->TrainingProgram_idTrainingProgram->getIdTrainingProgram()
+                $this->TrainingProgram_idTrainingProgram->getIdTrainingProgram(),
+                $this->idEnrollment
             )
         );
         $this->Disconnect();
@@ -207,7 +208,7 @@ class Enrollment extends BasicModel{
             $enrollment= new Enrollment();
             $getrow = $enrollment->getRow("SELECT * FROM iteandes_novatik.Enrollment WHERE idEnrollment =?", array($idEnrollment));
             $enrollment->idEnrollment = $getrow['idEnrollment'];
-            $enrollment->Carbon::parse($getrow['dateEnrollment']);
+            $enrollment->dateEnrollment = Carbon::parse($getrow['dateEnrollment']);
             $enrollment->stateEnrollment = $getrow['stateEnrollment'];
             $enrollment->Student_idStudent = Student::searchForId($getrow['Student_idStudent']);
             $enrollment->Semester_idSemester= Semester::searchForId($getrow['Semester_idSemester']);

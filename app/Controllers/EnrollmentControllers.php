@@ -55,11 +55,11 @@ class EnrollmentControllers{
             $arrayPerson['generePerson'] = $_POST['generePerson'];
             $arrayPerson['typePerson'] = 'Estudiante';
             $arrayPerson['statePerson'] = 'Activo';
-            $arrayPerson['photoPerson']= $_POST['photoPerson'];
+            $arrayPerson['photoPerson']= 'Sin Imagen';
             //Validar registro del Usuario
-            if(!Person::userRegistration($arrayPerson['documentPerson'])) {
-                $person = new Person($arrayPerson);
-                if ($person->create()) {
+            if(!Person::userRegistration($arrayPerson['documentPerson'])){
+                $person =new Person($arrayPerson);
+                if($person->create()){
                     $arrayStudent = array();
                     $arrayStudent['gradeYear'] = $_POST['gradeYear'];
                     $arrayStudent['modality'] = $_POST['modality'];
@@ -74,24 +74,15 @@ class EnrollmentControllers{
                         $arrEnrollment['Student_idStudent'] = $student;
                         $arrEnrollment['Semester_idSemester'] = Semester::searchForId($_POST['Semester_idSemester']);
                         $arrEnrollment['TrainingProgram_idTrainingProgram'] = TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
-                        var_dump($_POST['TrainingProgram_idTrainingProgram']);
                         $enrollmment = new Enrollment($arrEnrollment);
                         if ($enrollmment->create()) {
-
-                            $arrayEnrollmentCompetition['Enrollment_idEnrollment'] = $enrollmment;
-                            $arrayEnrollmentCompetition['Schedule_idSchedule'] = Schedule::searchForId($_POST['Schedule_idSchedule']);
-                            $arrayEnrollmentCompetition['TrainingCompetition_idTrainingCompetition'] = TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
-                            $arrayEnrollmentCompetition['stateEnrollmentCompetition'] = 'Activo';
-                            $EnrollmentCompetition = new EnrollmentCompetition($arrayEnrollmentCompetition);
-                            if ($EnrollmentCompetition->create()) {
-                                header("Location: ../../views/modules/Enrollment/show.php?idEnrollment=".$enrollmment->idEnrollment());
-
-                            }
-
+                            header("Location: ../../views/modules/Enrollment/show.php?idEnrollment=".$enrollmment->getIdEnrollment()."&respuesta=correcto");
                         }
                     }
 
                 }
+            }else{
+                header("Location: ../../views/modules/Enrollment/create.php?respuesta=error&mensaje=Usuario ya registrado");
             }
         } catch (Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
@@ -99,7 +90,7 @@ class EnrollmentControllers{
         }
     }
 
-    static public function edit (){
+    static public function edit(){
         try {
             $arrayPerson = array();
             $arrayPerson['documentPerson'] = $_POST['documentPerson'];
@@ -113,7 +104,7 @@ class EnrollmentControllers{
             $arrayPerson['generePerson'] = $_POST['generePerson'];
             $arrayPerson['typePerson'] = $_POST['typePerson'];
             $arrayPerson['statePerson'] = $_POST['statePerson'];
-            $arrayPerson['photoPerson']= $_POST['photoPerson'];
+            $arrayPerson['photoPerson']= 'Sin Imagen';
             $arrayPerson['idPerson']= $_POST['idPerson'];
             $person= new Person($arrayPerson);
             if($person->update()){
@@ -135,15 +126,7 @@ class EnrollmentControllers{
                     $arrEnrollment->TrainingProgram_idTrainingProgram= TrainingProgram::searchForId($_POST['TrainingProgram_idTrainingProgram']);
                     $enrollmment = new Enrollment($arrEnrollment);
                     if($enrollmment->update()){
-                        $arrayEnrollmentCompetition['idEnrollmentCompetition'] = $_POST['idEnrollmentCompetition'];
-                        $arrayEnrollmentCompetition['Enrollment_idEnrollment'] = $enrollmment;
-                        $arrayEnrollmentCompetition['Schedule_idSchedule'] = Schedule::searchForId($_POST['Schedule_idSchedule']);
-                        $arrayEnrollmentCompetition['TrainingCompetition_idTrainingCompetition'] = TrainingCompetition::searchForId($_POST['TrainingCompetition_idTrainingCompetition']);
-                        $arrayEnrollmentCompetition['stateEnrollmentCompetition'] = $person->getStatePerson();
-                        $EnrollmentCompetition = new EnrollmentCompetition($arrayEnrollmentCompetition);
-                        if($EnrollmentCompetition->update()){
                             header("Location: ../../views/modules/Enrollment/show.php?idEnrollment=".$enrollmment->getIdEnrollment()."&respuesta=correcto");
-                        }
                     }
                 }
             }
@@ -166,21 +149,20 @@ class EnrollmentControllers{
         } catch (\Exception $e) {
             GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Enrollment/index.php?respuesta=error&mensaje=".$e->getMessage());
-            header("Location: ../../views/modules/Enrollment/index.php?respuesta=error&mensaje=".$e->getMessage());
         }
     }
     ///Estado Inactivo
     static public function inactivate (){
         try {
             $enrollment  = Enrollment::searchForId($_GET['idEnrollment']);
-            $enrollment ->setStateEnrollment("Inactivo");
+            $enrollment ->setStateEnrollment('Inactivo');
             if($enrollment ->update()){
                 header("Location: ../../views/modules/Enrollment/index.php");
             }else{
                 header("Location: ../../views/modules/Enrollment/index.php?respuesta=error&mensaje=Error al guardar");
             }
         } catch (\Exception $e) {
-            GeneralFunctions::console( $e, 'error', 'errorStack');
+            //GeneralFunctions::console( $e, 'error', 'errorStack');
             header("Location: ../../views/modules/Enrollment/index.php?respuesta=error");
         }
     }
