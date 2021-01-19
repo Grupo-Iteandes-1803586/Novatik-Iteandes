@@ -47,7 +47,7 @@ require("../../../app/Controllers/GroupControllers.php");?>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-check"></i> Correcto!</h5>
                         <?php  if($_GET['action'] == "update"){ ?>
-                            Los datos de os Grupos han sido actualizados correctamente!
+                            Los datos de los Grupos han sido actualizados correctamente!
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -79,6 +79,8 @@ require("../../../app/Controllers/GroupControllers.php");?>
                                         <th>Cupo Minimo</th>
                                         <th>Cupo Maximo</th>
                                         <th>Competencia Asociada</th>
+                                        <th>Docente</th>
+                                        <th>Horario</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -95,15 +97,27 @@ require("../../../app/Controllers/GroupControllers.php");?>
                                             <td><?php echo $group->getMinimumSpaceGroup(); ?></td>
                                             <td><?php echo $group->getMaximumSpaceGroup(); ?></td>
                                             <td><?php echo $group->getTrainingCompetitionIdTrainingCompetition()->getDenomination(); ?></td>
+                                            <td><?php echo $group->getTeacherIdTeacher()->getIdTeacher() ?></td>
+                                            <td><?php
+                                                $checked_arr = explode("|", $group->getScheduleIdSchedule()->getDaySchedule());
+                                                $daysArray = array("Lu" => "Lunes", "Ma" => "Martes", "Mi" => "Miércoles", "Ju" => "Jueves", "Vi" => "Viernes", "Sa" => "Sábado", "Do" => "Domingo");
+                                                $check = array();
+                                                foreach ($daysArray as $key => $value) {
+                                                    $checked = "";
+                                                    if (in_array($key, $checked_arr)) {
+                                                        array_push($check, $value);
+                                                    }
+                                                }
+                                                echo implode(',', $check);?></td>
                                             <td><?php echo $group->getStateGroup(); ?></td>
                                             <td>
-                                                <a href="edit.php?idGroup=<?php echo $group->getIdGroup(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                                                <a href="show.php?idGroup=<?php echo $group->getIdGroup(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                                <a href="edit.php?idSchedule=<?php echo $group->getScheduleIdSchedule()->getIdSchedule(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                                <a href="show.php?idSchedule=<?php echo$group->getScheduleIdSchedule()->getIdSchedule(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
                                                 <?php if ($group->getStateGroup() != "Activo"){
                                                     ?>
-                                                    <a href="../../../app/Controllers/GroupControllers.php?action=activate&idGroup=<?php echo $group->getIdGroup(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                                    <a href="../../../app/Controllers/GroupControllers.php?action=activate&idSchedule=<?php echo $group->getScheduleIdSchedule()->getIdSchedule(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                                 <?php }else{?>
-                                                    <a type="button" href="../../../app/Controllers/GroupControllers.php?action=inactivate&idGroup=<?php echo $group->getIdGroup(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                                    <a type="button" href="../../../app/Controllers/GroupControllers.php?action=inactivate&idSchedule=<?php echo $group->getScheduleIdSchedule()->getIdSchedule(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                                 <?php } ?>
                                             </td>
                                         </tr>

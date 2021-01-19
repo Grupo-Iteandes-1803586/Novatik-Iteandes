@@ -107,7 +107,7 @@ class ScheduleControllers{
             return Schedule::searchForId($idSchedule);
         } catch (\Exception $e) {
             //GeneralFunctions::console( $e, 'error', 'errorStack');
-            //header("Location: ../../views/modules/Schedule/manager.php?respuesta=error");
+            header("Location: ../../views/modules/Schedule/manager.php?respuesta=error");
         }
     }
     static public function getAll (){

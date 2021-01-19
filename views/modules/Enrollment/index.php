@@ -6,14 +6,12 @@ require_once("../../../app/Controllers/StudentControllers.php");
 
 use App\Controllers\PersonController;
 use App\Controllers\StudentControllers;
-
-
 use App\Controllers\EnrollmentControllers;
 ?>
 <!doctype html>
 <html lang="es">
 <head>
-    <title><?=getenv('TITLE_SITE');?> | Matricula</title>
+    <title><?=getenv('TITLE_SITE');?> | Matriculas</title>
     <?php
     require("../../partials/head_imports.php") ;
     require("../../partials/header.php") ;
@@ -56,7 +54,7 @@ use App\Controllers\EnrollmentControllers;
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-check"></i> Correcto!</h5>
                         <?php  if($_GET['action'] == "update"){ ?>
-                            Los datos de la competencia han sido actualizados correctamente!
+                            Los datos de la Matricula han sido actualizados correctamente!
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -72,7 +70,7 @@ use App\Controllers\EnrollmentControllers;
                     <div class="row">
                         <div class="col-auto mr-auto"></div>
                         <div class="col-auto">
-                            <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
+                            <a role="button" href="infoCreate.php" class="btn btn-primary float-right" style="margin-right: 5px;">
                                 <i class="fas fa-plus"></i> Crear Matricula
                             </a>
                         </div>

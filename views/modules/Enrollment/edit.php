@@ -279,18 +279,17 @@ use Carbon\Carbon;
                                                required="required" type="text">
                                         <!--Fecha de Matricula-->
                                         <div class="form-group row">
-                                            <input id="dateEnrollment" name="dateEnrollment" value="<?php echo $DataEnrollment->getDateEnrollment(); ?>" hidden
-                                                   required="required" type="date">
                                             <label class="col-sm-2 col-form-label">Fecha de Matricula</label>
                                             <div class="col-sm-10">
-                                                <input required type="text" class="form-control" id="gradeYear" name="gradeYear"
+                                                <input required type="text" class="form-control" id="dateEnrollment" name="dateEnrollment"
                                                        value="<?= $DataEnrollment->getDateEnrollment()->toDateString(); ?>" readonly="readonly">
                                             </div>
                                         </div>
                                         <!--Semestre-->
+                                        <input id="Semester_idSemester" name="Semester_idSemester"
+                                               value="<?php echo $DataEnrollment->getSemesterIdSemester()->getIdSemester(); ?>" hidden required="required"
+                                               type="text">
                                         <div class="form-group row">
-                                            <input id="Semester_idSemester" name="Semester_idSemester" value="<?php echo $DataEnrollment->getSemesterIdSemester(); ?>" hidden
-                                                   required="required" type="text">
                                             <label class="col-sm-2 col-form-label">Semestre</label>
                                             <div class="col-sm-10">
                                                 <input required type="text" class="form-control"
@@ -298,9 +297,10 @@ use Carbon\Carbon;
                                             </div>
                                         </div>
                                         <!--Programa de Formacion-->
+                                        <input id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram"
+                                               value="<?php echo $DataEnrollment->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram(); ?>" hidden
+                                               required="required" type="text">
                                         <div class="form-group row">
-                                            <input id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram" value="<?php echo $DataEnrollment->getTrainingProgramIdTrainingProgram(); ?>" hidden
-                                                   required="required" type="text">
                                             <label class="col-sm-2 col-form-label">Programa de Formacion</label>
                                             <div class="col-sm-10">
                                                 <input required type="text" class="form-control"

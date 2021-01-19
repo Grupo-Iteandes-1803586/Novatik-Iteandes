@@ -188,7 +188,7 @@ class Experience extends BasicModel{
     public static function searchForId($idExperience) : Experience{
         $experiences = null;
         if($idExperience > 0) {
-            $experiences = new Experience;
+            $experiences = new Experience();
             $getrow = $experiences->getRow("SELECT * FROM iteandes_novatik.experience WHERE idExperience =?", array($idExperience));
             $experiences->idExperience = $getrow['idExperience'];
             $experiences->institutionExperience = $getrow['institutionExperience'];

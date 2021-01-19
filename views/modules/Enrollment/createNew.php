@@ -1,20 +1,31 @@
 <?php
 require("../../partials/routes.php");
+require_once("../../../app/Controllers/PersonController.php");
+require_once("../../../app/Controllers/EnrollmentControllers.php");
+require_once("../../../app/Controllers/EnrollmentCompetitionControllers.php");
+require_once("../../../app/Controllers/StudentControllers.php");
 require_once("../../../app/Controllers/TrainingCompetitionControllers.php");
 require_once("../../../app/Controllers/TrainingProgramController.php");
-require_once("../../../app/Models/TrainingProgram.php");
-require_once("../../../app/Models/TrainingCompetition.php");
+require_once("../../../app/Controllers/SemesterControllers.php");
+require_once("../../../app/Models/Person.php");
+require_once("../../../app/Models/Enrollment.php");
+require_once("../../../app/Models/EnrollmentCompetition.php");
+require_once("../../../app/Models/Student.php");
 
-use App\Controllers\TrainingCompetitionControllers;
-use App\Controllers\TrainingProgramController;
-use App\Models\TrainingProgram;
-use App\Models\TrainingCompetition;
-
+use App\Controllers\PersonController;
+use App\Controllers\EnrollmentCompetitionControllers;
+use App\Controllers\EnrollmentControllers;
+use App\Controllers\StudentControllers;
+use App\Models\Person;
+use App\Models\Enrollment;
+use App\Models\EnrollmentCompetition;
+use App\Models\Student;
 ?>
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html lang="en">
 <head>
-    <title><?= getenv('TITLE_SITE') ?> | Crear Competencia</title>
+    <title><?= getenv('TITLE_SITE') ?> | Agregar Matricula </title>
     <?php require ("../../partials/head_imports.php");
     require ("../../partials/header.php");?>
     <!-- DataTables -->
@@ -31,13 +42,12 @@ use App\Models\TrainingCompetition;
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-
         <?php if (!empty($_GET['respuesta'])) { ?>
             <?php if ($_GET['respuesta'] != "correcto") { ?>
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h5><i class="icon fas fa-ban"></i> Error!</h5>
-                    Error al crear la Competencia: <?= $_GET['mensaje'] ?>
+                    Error al agregar la Matricula al estudiante: <?= $_GET['mensaje'] ?>
                 </div>
             <?php } ?>
         <?php } ?>
@@ -47,7 +57,7 @@ use App\Models\TrainingCompetition;
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Crear una Nueva Competencia</h1>
+                        <h1>Agregar una Nueva Matricula</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -59,7 +69,6 @@ use App\Models\TrainingCompetition;
             </div><!-- /.container-fluid -->
         </section>
 
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <!-- /.row -->
@@ -67,95 +76,95 @@ use App\Models\TrainingCompetition;
                     <div class="col-md-4">
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-chalkboard-teacher"></i> &nbsp; Información del Programa de Formacion</h3>
+                                <h3 class="card-title"><i class="fas fa-id-card"></i>  Información del Estudiante</h3>
                                 <?php require("../../partials/optionMenu.php") ;?>
                             </div>
 
                             <div class="card-body">
                                 <?php
-                                $DataPrograming = null;
-                                if (!empty($_GET['idTrainingProgram'])) {
-                                    $DataPrograming = TrainingProgramController::searchForID($_GET["idTrainingProgram"]);
+                                $dataEstudentE = null;
+                                if (!empty($_GET['idStudent'])) {
+                                    $idP= $_GET['idStudent'];
+                                    $DataPerson = Person::search("select * from person p inner join student s on p.idPerson  = s.Person_idPerson where s.idStudent = " .$idP);
+                                    foreach ($DataPerson as $person){
+                                        $person = \App\Controllers\PersonController::searchForID($person->getIdPerson());
+                                    }
                                 }
                                 ?>
-                                <!--Datos de Programa de Fomacion Asociado-->
+                                <!--Datos de Estudiante Asociado-->
                                 <div class="form-group row">
-
-                                    <!--Codigo del Programa-->
+                                    <!--Codigo del Estudiante-->
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Codigo</label>
+                                        <label class="col-sm-4 col-form-label">Documento</label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" value="<?php echo $DataPrograming->getCodeTrainingProgram(); ?>"
+                                            <input class="form-control" value="<?php echo $person->getDocumentPerson(); ?>"
                                                    type="text"  readonly="readonly">
                                         </div>
                                     </div>
-                                    <!--Nombre del programa-->
+                                    <!--Nombre del Estudiante-->
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Programa de Formacion</label>
+                                        <label class="col-sm-4 col-form-label">Estudiante</label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" value="<?php echo $DataPrograming->getNameTrainingProgram(); ?>"
+                                            <input class="form-control" value="<?php echo $person->getNamePerson() ; ?>"
                                                    type="text"  readonly="readonly">
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-                        <!-- /.card -->
                     </div>
+
                     <div class="col-md-8">
                         <div class="card card-lightblue">
                             <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-award"></i> &nbsp; Detalles de La Competencia</h3>
+                                <h3 class="card-title"><i class="fas fa-file-signature"></i> Detalles de La Matricula </h3>
                                 <?php require("../../partials/optionMenu.php") ;?>
                             </div>
-                            <!--Datos de la Competencia-->
+                            <!--Datos de la matricula-->
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <?php $idP= $_GET['idTrainingProgram'];?>
-                                        <a role="button" href="index.php?idTrainingProgram=<?= $idP;?>" class="btn btn-primary float-right"
+                                        <?php $idP= $_GET['idStudent'];?>
+                                        <a role="button" href="index.php?idEnrollment=<?= $idP;?>" class="btn btn-primary float-right"
                                            style="margin-right: 5px;">
-                                            <i class="fas fa-eye"></i> Ver Competencia
+                                            <i class="fas fa-eye"></i> Ver Matricula
                                         </a>
                                     </div>
                                     <div class="col-auto">
-                                        <a role="button" href="#" data-toggle="modal" data-target="#modal-add-competition"
-                                           class="btn btn-primary float-right"
-                                           style="margin-right: 5px;">
-                                            <i class="fas fa-plus"></i> Añadir Competencia
+                                            <a role="button" href="#" data-toggle="modal" data-target="#modal-add-EnrollmentEstudent"
+                                               class="btn btn-primary float-right"
+                                               style="margin-right: 5px;">
+                                            <i class="fas fa-plus"></i> Añadir Matricula
                                         </a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <table id="tblCompetition" class="datatable table table-bordered table-striped">
+                                        <table id="tblEnrollmentEstudent" class="datatable table table-bordered table-striped">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Codigo</th>
-                                                <th>Codigo corto</th>
-                                                <th>Nombre</th>
-                                                <th>Duracion</th>
-                                                <th>Cupo Minimo</th>
-                                                <th>orden</th>
+                                                <th>Fecha de Matricula</th>
+                                                <th>Nombre del Estudiante</th>
+                                                <th>Semestre</th>
+                                                <th>Programa de Formacion</th>
                                                 <th>Estado</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <?php
-                                            $idP = $_GET['idTrainingProgram'];
-                                            $arrTrainningCompetition = \App\Models\TrainingCompetition::search("SELECT * FROM TrainingCompetition where TrainingProgram_idTrainingProgram =".$idP);
-                                            foreach ($arrTrainningCompetition as $trainingCom){
+                                            $idP = $_GET['idStudent'];
+                                            $arrEnrollmentEstudent = \App\Models\Enrollment::search("SELECT * FROM Enrollment where Student_idStudent =".$idP);
+                                            foreach ($arrEnrollmentEstudent as $enrEstudent){
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo $trainingCom->getIdTrainingCompetition(); ?></td>
-                                                    <td><?php echo $trainingCom->getCodeTrainingCompetition(); ?></td>
-                                                    <td><?php echo $trainingCom->getCodeAlfaTrainingCompetition(); ?></td>
-                                                    <td><?php echo $trainingCom->getDenomination(); ?></td>
-                                                    <td><?php echo $trainingCom->getDuration(); ?></td>
-                                                    <td><?php echo $trainingCom->getMinimumSpace(); ?></td>
-                                                    <td><?php echo $trainingCom->getOrderTrainingCompetition(); ?></td>
-                                                    <td><?php echo $trainingCom->getStatusTrainingCompetition(); ?></td>
+                                                    <td><?php echo $enrEstudent->getIdEnrollment(); ?></td>
+                                                    <td><?php echo $enrEstudent->getDateEnrollment(); ?></td>
+                                                    <td><?php echo $enrEstudent->getStudentIdStudent()->getPersonIdPerson()->getNamePerson(); ?></td>
+                                                    <td><?php echo $enrEstudent->getSemesterIdSemester()->getNameSemester(); ?></td>
+                                                    <td><?php echo $enrEstudent->getTrainingProgramIdTrainingProgram()->getNameTrainingProgram(); ?></td>
+                                                    <td><?php echo $enrEstudent->getStateEnrollment(); ?></td>
                                                 </tr>
                                             <?php } ?>
 
@@ -167,74 +176,77 @@ use App\Models\TrainingCompetition;
                         </div>
                         <!-- /.card -->
                     </div>
-                </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
 
+                </div>
+            </div>
+        </section>
+
+    </div>
     <div id="modals">
-        <div class="modal fade" id="modal-add-competition">
+        <div class="modal fade" id="modal-add-EnrollmentEstudent">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Agregar Competencia</h4>
+                        <h4 class="modal-title">Agregar Nueva Matricula</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="../../../app/Controllers/TrainingCompetitionControllers.php?action=create" method="post">
+                    <form action="../../../app/Controllers/EnrollmentControllers.php?action=createEstu" method="post">
                         <div class="modal-body">
-                            <input id="idTrainingCompetition" name="idTrainingCompetition" value="<?= !empty($trainingCom) ? $trainingCom->getIdTrainingCompetition() : ''; ?>" hidden
+                            <input id="idEnrollment" name="idEnrollment" value="<?= !empty($enrEstudent) ? $enrEstudent->getIdEnrollment() : ''; ?>" hidden
                                    required="required" type="text">
-                            <div class="form-group row">
-                                <label for="codeTrainingCompetition" class="col-sm-2 col-form-label">Codigo Competencia</label>
-                                <div class="col-sm-10">
-                                    <input required type="number" class="form-control" id="codeTrainingCompetition" name="codeTrainingCompetition" placeholder="Ingrese el Codigo de la Competencia">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="codeAlfaTrainingCompetition" class="col-sm-2 col-form-label">Codigo Competencia Corto:</label>
-                                <div class="col-sm-10">
-                                    <input required type="text" class="form-control" id="codeAlfaTrainingCompetition" name="codeAlfaTrainingCompetition" placeholder="Ingrese el Codigo de la Competencia corto">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="denomination" class="col-sm-2 col-form-label">Nombre de la Competencia</label>
-                                <div class="col-sm-10">
-                                    <input required type="text" maxlength="280"  class="form-control" id="denomination" name="denomination" placeholder="Ingrese el nombre de la Competencia">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="duration" class="col-sm-2 col-form-label">Duracion</label>
-                                <div class="col-sm-10">
-                                    <input required type="text"  maxlength="4" class="form-control" id="duration" name="duration" placeholder="Duracion en horas">
-                                </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="minimumSpace" class="col-sm-2 col-form-label">Cupo Minimo</label>
-                                <div class="col-sm-10">
-                                    <input required type="text" maxlength="2" class="form-control" id="minimumSpace" name="minimumSpace" placeholder="Cupo Minimo">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="orderTrainingCompetition" class="col-sm-2 col-form-label">Orden</label>
-                                <div class="col-sm-10">
-                                    <input required type="text" maxlength="2" class="form-control" id="orderTrainingCompetition" name="orderTrainingCompetition" placeholder="Orden">
-                                </div>
-                            </div>
                             <?php
-                            $idTP= $_GET["idTrainingProgram"];?>
-                            <input id="TrainingProgram_idTrainingProgram" name="TrainingProgram_idTrainingProgram"
+                            $idTP= $_GET["idStudent"];?>
+                            <input id="Student_idStudent" name="Student_idStudent"
                                    value="<?php echo $idTP; ?>" hidden required="required"
                                    type="text">
+                            <!--Datos de la Matricula-->
+                            <!--Semestre-->
+                            <?php
+                            $dataSemester= null;
+                            if (!empty($_GET['idSemester'])) {
+                                $dataSemester = \App\Controllers\SemesterControllers::searchForID($_GET['idSemester']);
+                            }
+                            ?>
+                            <div class="form-group row">
+                                <label for="Semester_idSemester" class="col-sm-2 col-form-label">Semestre</label>
+                                <div class="col-sm-10">
+                                    <?= \App\Controllers\SemesterControllers::selectSemester(false,
+                                        true,
+                                        'Semester_idSemester',
+                                        'Semester_idSemester',
+                                        (!empty($dataSemester)) ? $dataSemester->getSemesterIdSemester()->getIdSemester() : '',
+                                        'form-control select2bs4 select2-info',
+                                        "statuSemester = 'Activo'")
+                                    ?>
+                                </div>
+                            </div>
+                            <!--Programa de Formacion-->
+                            <?php
+                            $dataProgram= null;
+                            if (!empty($_GET['idTrainingProgram'])) {
+                                $dataProgram = \App\Controllers\TrainingProgramController::searchForID($_GET['idTrainingProgram']);
+                            }
+                            ?>
+                            <div class="form-group row">
+                                <label for="TrainingProgram_idTrainingProgram" class="col-sm-2 col-form-label">Programa de Formacion</label>
+                                <div class="col-sm-10">
+                                    <?= \App\Controllers\TrainingProgramController::selectCompetition(false,
+                                        true,
+                                        'TrainingProgram_idTrainingProgram',
+                                        'TrainingProgram_idTrainingProgram',
+                                        (!empty($dataProgram)) ? $dataProgram->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram() : '',
+                                        'form-control select2bs4 select2-info',
+                                        "statusTrainingProgram = 'Activo'")
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" href="create.php?idTrainingProgram=<?= $trainingCom->getTrainingProgramIdTrainingProgram()->getIdTrainingProgram()?>" class="btn btn-primary"></i> Agregar</button>
+                            <button type="submit" href="createNew.php?idStudent=<?= $idTP?>" class="btn btn-primary"></i> Agregar</button>
                         </div>
                     </form>
                 </div>
@@ -245,6 +257,7 @@ use App\Models\TrainingCompetition;
     </div>
 
     <?php require('../../partials/footer.php'); ?>
+
 </div>
 <!-- ./wrapper -->
 <?php require('../../partials/scripts.php'); ?>
@@ -261,7 +274,6 @@ use App\Models\TrainingCompetition;
 <script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/buttons.html5.js"></script>
 <script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/buttons.print.js"></script>
 <script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/buttons.colVis.js"></script>
-
 <script>
     $(function () {
         $('.datatable').DataTable({
@@ -276,7 +288,7 @@ use App\Models\TrainingCompetition;
                 "url": "../../components/Spanish.json" //Idioma
             },
             "buttons": [
-                'copy', 'print', 'excel', 'pdf'
+
             ],
             "pagingType": "full_numbers",
             "responsive": true,
@@ -284,7 +296,6 @@ use App\Models\TrainingCompetition;
         });
     });
 </script>
-
-
 </body>
 </html>
+

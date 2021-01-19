@@ -83,7 +83,6 @@ use App\Controllers\TrainingProgramController;?>
                                     <th>Nombre del Programa</th>
                                     <th>Version</th>
                                     <th>Estado</th>
-                                    <th>Competencia</th>
                                     <th>Opciones</th>
                                 </tr>
                                 </thead>

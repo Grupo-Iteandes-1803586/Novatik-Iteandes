@@ -1,5 +1,9 @@
 <?php require ("../../partials/routes.php");
 require_once("../../../app/Controllers/TrainingCompetitionControllers.php");
+require_once("../../../app/Controllers/TeacherControllers.php");
+require_once("../../../app/Models/Teacher.php");
+
+use App\Models\Teacher;
 use Carbon\Carbon;
 ?>
 
@@ -60,9 +64,75 @@ use Carbon\Carbon;
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form class="form-horizontal" method="post" id="frmCreateGroup" name="frmCreateGroup" action="../../../app/Controllers/GroupControllers.php?action=create">
-
-                    <!--Formulario de los datos de la actividad-->
+                    <!--Formulario de los datos del grupo-->
                     <div class="card-body">
+                    <!------------------------Horario o Jornada-------------------------->
+
+                    <li class="list-Dates"><i class ="far fa-clock" id="icon-iconos"></i>Horario</li>
+                    <hr>
+                    <!--Fecha de Inicio-->
+                    <div class="form-group row">
+                        <label for="startDateSchedule" class="col-sm-2 col-form-label">Fecha de Inicio</label>
+                        <div class="col-sm-10">
+                            <input required type="date" max="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="startDateSchedule"
+                                   name="startDateSchedule" placeholder="Ingrese la fecha de Iniciaizacion de la Competencia">
+                        </div>
+                    </div>
+                    <!--Fecha de Cierre-->
+                    <div class="form-group row">
+                        <label for="endDateSchedule" class="col-sm-2 col-form-label">Fecha de Fin</label>
+                        <div class="col-sm-10">
+                            <input required type="date" min="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="endDateSchedule"
+                                   name="endDateSchedule" placeholder="Ingrese la fecha de Finalizacion de la Competencia">
+                        </div>
+                    </div>
+                    <!--Cantidad de horas-->
+                    <div class="form-group row">
+                        <label for="cantHours" class="col-sm-2 col-form-label">Cantidad de Horas</label>
+                        <div class="col-sm-10">
+                            <input required type="text" maxlength="4" class="form-control" id="cantHours" name="cantHours" placeholder="Cantidad de Horas">
+                        </div>
+                    </div>
+                    <!--Dias-->
+                    <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Dias</label>
+                        <!--Tabla para checkbox-->
+                        <div class="row">
+                            <div class="col">
+                                <table id="tblDays" class="datatable table table-bordered table-striped">
+                                    <tr class="inputC">
+                                        <td><input type="checkbox" name="dayS[]" value="Lu"/>Lunes</td>
+                                        <td><input type="checkbox" name="dayS[]" value="Ma"/>Martes</td>
+                                        <td><input type="checkbox" name="dayS[]" value="Mi"/>Miercoles</td>
+                                        <td><input type="checkbox" name="dayS[]" value="Ju"/>Jueves</td>
+                                        <td><input type="checkbox" name="dayS[]" value="Vi"/>Viernes</td>
+                                        <td><input type="checkbox" name="dayS[]" value="Sa"/>Sabado</td>
+                                        <td><input type="checkbox" name="dayS[]" value="Do"/>Domingo</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--<div class="col-sm-10">
+                            <input required type="text" class="form-control" id="daySchedule" name="daySchedule" placeholder="Dias">
+                        </div>-->
+                    </div>
+                    <!--Hora de inicio-->
+                    <div class="form-group row">
+                        <label for="startHourSchedule" class="col-sm-2 col-form-label">Hora de Inicio</label>
+                        <div class="col-sm-10">
+                            <input required type="time" max="<?= Carbon::now()->format('HH:MM:SS') ?>" class="form-control" id="startHourSchedule"
+                                   name="startHourSchedule" placeholder="Ingrese la Hora de Inicio de la Competencia">
+                        </div>
+                    </div>
+                    <!--Hora de Finaizacion-->
+                    <div class="form-group row">
+                        <label for="endHourSchedule" class="col-sm-2 col-form-label">Hora de Inicio</label>
+                        <div class="col-sm-10">
+                            <input required type="time" max="<?= Carbon::now()->format('HH:MM:SS') ?>" class="form-control" id="endHourSchedule"
+                                   name="endHourSchedule" placeholder="Ingrese la Hora de Cierre de la Competencia">
+                        </div>
+                    </div>
+
                         <li class="list-Dates"><i class ="fas fa-users" id="icon-iconos"></i>Grupo</li>
                         <hr>
                         <!--Codigo del Grupo-->
@@ -112,73 +182,35 @@ use Carbon\Carbon;
                                 ?>
                             </div>
                         </div>
-                        <!------------------------Horario o Jornada-------------------------->
-
-                        <li class="list-Dates"><i class ="far fa-clock" id="icon-iconos"></i>Horario</li>
-                        <hr>
-                        <!--Fecha de Inicio-->
+                        <?php
+                        $dataSchedule= null;
+                        if (!empty($_GET['idSchedule'])) {
+                            $dataSchedule = \App\Controllers\ScheduleControllers::searchForID($_GET['idSchedule']);
+                        }
+                        ?>
+                        <input id="Schedule_idSchedule" name="Schedule_idSchedule" value="<?= !empty($dataSchedule) ? $dataSchedule->getIdSchedule() : ''; ?>" hidden ype="text">
+                        <!--Docente-->
+                        <?php
+                        $dataTeacher = null;
+                        if (!empty($_GET['idTeacher'])) {
+                            $dataTeacher = \App\Controllers\TeacherControllers::searchForID($_GET['idTeacher']);
+                        }
+                        ?>
                         <div class="form-group row">
-                            <label for="startDateSchedule" class="col-sm-2 col-form-label">Fecha de Inicio</label>
+                            <label for="Teacher_idTeacher" class="col-sm-2 col-form-label">Docente</label>
                             <div class="col-sm-10">
-                                <input required type="date" max="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="startDateSchedule"
-                                       name="startDateSchedule" placeholder="Ingrese la fecha de Iniciaizacion de la Competencia">
-                            </div>
-                        </div>
-                        <!--Fecha de Cierre-->
-                        <div class="form-group row">
-                            <label for="endDateSchedule" class="col-sm-2 col-form-label">Fecha de Fin</label>
-                            <div class="col-sm-10">
-                                <input required type="date" min="<?= Carbon::now()->format('Y-m-d') ?>" class="form-control" id="endDateSchedule"
-                                       name="endDateSchedule" placeholder="Ingrese la fecha de Finalizacion de la Competencia">
-                            </div>
-                        </div>
-                        <!--Cantidad de horas-->
-                        <div class="form-group row">
-                            <label for="cantHours" class="col-sm-2 col-form-label">Cantidad de Horas</label>
-                            <div class="col-sm-10">
-                                <input required type="text" maxlength="4" class="form-control" id="cantHours" name="cantHours" placeholder="Cantidad de Horas">
-                            </div>
-                        </div>
-                        <!--Dias-->
-                        <div class="form-group row">
-                            <label  class="col-sm-2 col-form-label">Dias</label>
-                            <!--Tabla para checkbox-->
-                            <div class="row">
-                                <div class="col">
-                                    <table id="tblDays" class="datatable table table-bordered table-striped">
-                                        <tr class="inputC">
-                                            <td><input type="checkbox" name="dayS[]" value="Lu"/>Lunes</td>
-                                            <td><input type="checkbox" name="dayS[]" value="Ma"/>Martes</td>
-                                            <td><input type="checkbox" name="dayS[]" value="Mi"/>Miercoles</td>
-                                            <td><input type="checkbox" name="dayS[]" value="Ju"/>Jueves</td>
-                                            <td><input type="checkbox" name="dayS[]" value="Vi"/>Viernes</td>
-                                            <td><input type="checkbox" name="dayS[]" value="Sa"/>Sabado</td>
-                                            <td><input type="checkbox" name="dayS[]" value="Do"/>Domingo</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <!--<div class="col-sm-10">
-                                <input required type="text" class="form-control" id="daySchedule" name="daySchedule" placeholder="Dias">
-                            </div>-->
-                        </div>
-                        <!--Hora de inicio-->
-                        <div class="form-group row">
-                            <label for="startHourSchedule" class="col-sm-2 col-form-label">Hora de Inicio</label>
-                            <div class="col-sm-10">
-                                <input required type="time" max="<?= Carbon::now()->format('HH:MM:SS') ?>" class="form-control" id="startHourSchedule"
-                                       name="startHourSchedule" placeholder="Ingrese la Hora de Inicio de la Competencia">
-                            </div>
-                        </div>
-                        <!--Hora de Finaizacion-->
-                        <div class="form-group row">
-                            <label for="endHourSchedule" class="col-sm-2 col-form-label">Hora de Inicio</label>
-                            <div class="col-sm-10">
-                                <input required type="time" max="<?= Carbon::now()->format('HH:MM:SS') ?>" class="form-control" id="endHourSchedule"
-                                       name="endHourSchedule" placeholder="Ingrese la Hora de Cierre de la Competencia">
+                                <?= \App\Controllers\TeacherControllers::selectTeacher(false,
+                                    true,
+                                    'Teacher_idTeacher',
+                                    'Teacher_idTeacher',
+                                    (!empty($dataTeacher)) ? $dataTeacher->getTeacherIdTeacher()->getIdTeacher() : '',
+                                    'form-control select2bs4 select2-info',
+                                    "stateTeacher = 'Activo'")
+                                ?>
                             </div>
                         </div>
                     </div>
+
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-info">Enviar</button>
@@ -186,6 +218,7 @@ use Carbon\Carbon;
                     </div>
                     <!-- /.card-footer -->
                 </form>
+            </div>
         </section>
     </div>
     </section>

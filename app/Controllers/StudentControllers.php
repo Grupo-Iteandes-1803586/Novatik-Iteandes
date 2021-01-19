@@ -107,8 +107,8 @@ class StudentControllers
         try{
             return Student::searchForId($idStudent);
         }catch (\Exception $e){
-            var_dump($e);
-            //header("Location: ../../views/modules/Person/Student/index.php?respuesta=error&mensaje" . $e-> getMessage());
+            //var_dump($e);
+            header("Location: ../../views/modules/Person/Student/index.php?respuesta=error&mensaje" . $e-> getMessage());
         }
     }
     //Funcion buscar toda la informacion

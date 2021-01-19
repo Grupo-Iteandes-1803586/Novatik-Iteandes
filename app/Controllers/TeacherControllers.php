@@ -82,4 +82,43 @@ class TeacherControllers
         }
     }
 
+//Seleccion de Docente
+    private static function teacherIsInArray($idTeacher, $ArrTeacher){
+        if(count($ArrTeacher) > 0){
+            foreach ($ArrTeacher as $teacher){
+                if($teacher->getIdTeacher() == $idTeacher){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    static public function selectTeacher ($isMultiple=false,
+                                              $isRequired=true,
+                                              $id="idTeacher",
+                                              $nombre="idTeacher",
+                                              $defaultValue="",
+                                              $class="form-control",
+                                              $where="",
+                                              $arrExcluir = array()){
+        $ArrTeacher = array();
+        if($where != ""){
+            $base = "SELECT * FROM Teacher WHERE ";
+            $ArrTeacher = Teacher::search($base.' '.$where);
+        }else{
+            $ArrTeacher = Teacher::getAll();
+        }
+
+        $htmlSelect = "<select ".(($isMultiple) ? "multiple" : "")." ".(($isRequired) ? "required" : "")." id= '".$id."' name='".$nombre."' class='".$class."' style='width: 100%;'>";
+        $htmlSelect .= "<option value='' >Seleccione</option>";
+        if(count($ArrTeacher) > 0){
+            foreach ($ArrTeacher as $teacher)
+                if (!TeacherControllers::teacherIsInArray($teacher->getIdTeacher(),$arrExcluir))
+                    $htmlSelect .= "<option ".(($teacher != "") ? (($defaultValue == $teacher->getIdTeacher()) ? "selected" : "" ) : "")." value='".$teacher->getIdTeacher()."'>".$teacher->getPersonIdPerson()->getNamePerson()." ".$teacher->getPersonIdPerson()->getLastNamePerson()."</option>";
+        }
+        $htmlSelect .= "</select>";
+        return $htmlSelect;
+    }
+
 }

@@ -13,6 +13,8 @@ class Group extends BasicModel{
     private $maximumSpaceGroup;
     private $stateGroup;
     private $TrainingCompetition_idTrainingCompetition;
+    private $Schedule_idSchedule;
+    private $Teacher_idTeacher;
 
     /**
      * Group constructor.
@@ -23,6 +25,8 @@ class Group extends BasicModel{
      * @param $maximumSpaceGroup
      * @param $stateGroup
      * @param $TrainingCompetition_idTrainingCompetition
+     * @param $Schedule_idSchedule
+     * @param $Teacher_idTeacher
      */
     public function __construct($group = array())
     {
@@ -34,6 +38,40 @@ class Group extends BasicModel{
         $this->maximumSpaceGroup = $group['maximumSpaceGroup'] ?? null;
         $this->stateGroup = $group['stateGroup'] ?? null;
         $this->TrainingCompetition_idTrainingCompetition = $group['TrainingCompetition_idTrainingCompetition'] ?? null;
+        $this->Schedule_idSchedule = $group['Schedule_idSchedule'] ?? null;
+        $this->Teacher_idTeacher = $group['Teacher_idTeacher'] ?? null;
+    }
+
+    /**
+     * @return Teacher
+     */
+    public function getTeacherIdTeacher(): Teacher
+    {
+        return $this->Teacher_idTeacher;
+    }
+
+    /**
+     * @param int $Teacher_idTeacher
+     */
+    public function setTeacherIdTeacher(int $Teacher_idTeacher): void
+    {
+        $this->Teacher_idTeacher = $Teacher_idTeacher;
+    }
+
+    /**
+     * @return int
+     */
+    public function getScheduleIdSchedule(): Schedule
+    {
+        return $this->Schedule_idSchedule;
+    }
+
+    /**
+     * @param int $Schedule_idSchedule
+     */
+    public function setScheduleIdSchedule(int $Schedule_idSchedule): void
+    {
+        $this->Schedule_idSchedule = $Schedule_idSchedule;
     }
 
     /**
@@ -156,29 +194,34 @@ class Group extends BasicModel{
 //Funcion crear un grupo
     public function create()
     {
-        $result = $this->insertRow("INSERT INTO iteandes_novatik.Group VALUES (NULL, ?, ?, ?, ?,?,?)", array(
-                $this->codeGroup,
-                $this->nameGroup,
-                $this->minimumSpaceGroup,
-                $this->maximumSpaceGroup,
-                $this->stateGroup,
-                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition()
-            )
-        );
-        $this->setIdGroup(($result) ? $this->getLastId() : null);
-        $this->Disconnect();
-        return $result;
-    }
-    //Actualizar  un Grupo
-    public function update()
-    {
-        $result = $this->updateRow("UPDATE iteandes_novatik.Group  SET codeGroup = ?, nameGroup = ?, minimumSpaceGroup= ?, maximumSpaceGroup = ?,stateGroup=?,TrainingCompetition_idTrainingCompetition=?  WHERE idGroup = ?", array(
+        $result = $this->insertRow("INSERT INTO iteandes_novatik.Group VALUES (NULL, ?, ?, ?, ?,?,?,?,?)", array(
                 $this->codeGroup,
                 $this->nameGroup,
                 $this->minimumSpaceGroup,
                 $this->maximumSpaceGroup,
                 $this->stateGroup,
                 $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition(),
+                $this->Schedule_idSchedule->getIdSchedule(),
+                $this->Teacher_idTeacher->getIdTeacher()
+            )
+        );
+        $this->setIdGroup(($result) ? $this->getLastId() : null);
+        $this->Disconnect();
+        return $result;
+    }
+
+    //Actualizar  un Grupo
+    public function update()
+    {
+        $result = $this->updateRow("UPDATE iteandes_novatik.Group  SET codeGroup = ?, nameGroup = ?, minimumSpaceGroup= ?, maximumSpaceGroup = ?,stateGroup = ?,TrainingCompetition_idTrainingCompetition = ?,Schedule_idSchedule = ?,Teacher_idTeacher = ?   WHERE idGroup = ?", array(
+                $this->codeGroup,
+                $this->nameGroup,
+                $this->minimumSpaceGroup,
+                $this->maximumSpaceGroup,
+                $this->stateGroup,
+                $this->TrainingCompetition_idTrainingCompetition->getIdTrainingCompetition(),
+                $this->Schedule_idSchedule->getIdSchedule(),
+                $this->Teacher_idTeacher->getIdTeacher(),
                 $this->idGroup
             )
         );
@@ -189,7 +232,7 @@ class Group extends BasicModel{
     public function delete($idGroup)
     {
         $Group = Group::searchForId($idGroup); //Buscando un Teacher por el ID
-        $Group->setStateGroup("Inactivo"); //Cambia el estado del Teacher
+        $Group->setStateGroup("Inactivo"); //Cambia el estado
         return $Group->update();                    //Guarda los cambios..
     }
     //Funcion buscar por jquery
@@ -207,6 +250,8 @@ class Group extends BasicModel{
                 $group->maximumSpaceGroup = $value['maximumSpaceGroup'];
                 $group->stateGroup = $value['stateGroup'];
                 $group->TrainingCompetition_idTrainingCompetition = TrainingCompetition::searchForId($value['TrainingCompetition_idTrainingCompetition']);
+                $group->Schedule_idSchedule = Schedule::searchForId($value['Schedule_idSchedule']);
+                $group->Teacher_idTeacher = Teacher::searchForIdTeacher($value['Teacher_idTeacher']);
                 $group->Disconnect();
                 array_push($arrGroup,$group);
             }
@@ -232,13 +277,15 @@ class Group extends BasicModel{
             $group->maximumSpaceGroup = $getrow['maximumSpaceGroup'];
             $group->stateGroup = $getrow['stateGroup'];
             $group->TrainingCompetition_idTrainingCompetition = TrainingCompetition::searchForId($getrow['TrainingCompetition_idTrainingCompetition']);
+            $group->Schedule_idSchedule = Schedule::searchForId($getrow['Schedule_idSchedule']);
+            $group->Teacher_idTeacher = Teacher::searchForIdTeacher($getrow['Teacher_idTeacher']);
         }
         $group->Disconnect();
         return $group;
     }
     public function __toString()
     {
-        return "codigo: $this->codeGroup, nombre: $this->nameGroup, cupo minimo: $this->minimumSpaceGroup , cupo maximo: $this->maximumSpaceGroup,  estado: $this->stateGroup, competencia: $this->TrainingCompetition_idTrainingCompetition";
+        return "codigo: $this->codeGroup, nombre: $this->nameGroup, cupo minimo: $this->minimumSpaceGroup , cupo maximo: $this->maximumSpaceGroup,  estado: $this->stateGroup, competencia: $this->TrainingCompetition_idTrainingCompetition, Horario: $this->Schedule_idSchedule,Docente : $this->Teacher_idTeacher";
     }
 
 }

@@ -179,12 +179,12 @@ use App\Controllers\TrainingCompetitionControllers;
                         <div class="row">
                             <div class="col-auto mr-auto">
                                 <a role="button" href="index.php" class="btn btn-success float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-tasks"></i> Consultar Estudiante
+                                    <i class="fas fa-tasks"></i> Consultar Matricula
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-plus"></i> Crear Estudiante
+                                <a role="button" href="infoCreate.php" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                    <i class="fas fa-plus"></i> Crear Matricula
                                 </a>
                             </div>
                         </div>

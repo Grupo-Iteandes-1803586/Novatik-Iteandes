@@ -433,7 +433,7 @@ class Person extends BasicModel{
     public static function searchForId($idPerson) : Person{
     $Users = null;
     if($idPerson > 0) {
-        $Users = new Person;
+        $Users = new Person();
         $getrow = $Users->getRow("SELECT * FROM iteandes_novatik.person WHERE idPerson =?", array($idPerson));
         $Users->idPerson = $getrow['idPerson'];
         $Users->documentPerson = $getrow['documentPerson'];
@@ -454,6 +454,19 @@ class Person extends BasicModel{
     $Users->Disconnect();
     return $Users;
     }
+
+    //Buscar pot Id de persona
+    public static function searchForIdP($documentPerson) : Person{
+        $Users = null;
+        if($documentPerson > 0) {
+            $Users = new Person();
+            $getrow = $Users->getRow("SELECT * FROM iteandes_novatik.person WHERE documentPerson =?", array($documentPerson));
+            $Users->idPerson = $getrow['idPerson'];
+        }
+        $Users->Disconnect();
+        return $Users;
+    }
+    
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {
