@@ -164,6 +164,14 @@ class Enrollment extends BasicModel{
         return $result;
     }
 
+    //Update new
+    public static function updateNew($idEnrollment, $stateEnrollment){
+        $enroolment= new Enrollment();
+        $result = $enroolment-> insertRow("CALL UpdateEnrrollment(?,?)",array($idEnrollment, $stateEnrollment));
+        $enroolment->Disconnect();
+        return $result;
+    }
+
     //inactivar un Teacher
     public function delete($idEnrollment)
     {
@@ -217,6 +225,8 @@ class Enrollment extends BasicModel{
         $enrollment->Disconnect();
         return $enrollment;
     }
+
+
     public function __toString()
     {
         return "id: $this->idEnrollment,fecha: $this->dateEnrollment->toDateString(), estudiante: $this->Student_idStudent , semeste: $this->Semester_idSemester,  programa: $this->TrainingProgram_idTrainingProgram, estado: $this->stateEnrollment";

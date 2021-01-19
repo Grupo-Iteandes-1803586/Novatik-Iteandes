@@ -101,12 +101,9 @@ use App\Controllers\LenguagesControllers; ?>
                                     <th>Celular</th>
                                     <th>Direccion</th>
                                     <th>Genero</th>
-                                    <th>Usuario</th>
-                                    <th>Password</th>
                                     <th>Tipo Usuario</th>
                                     <th>Edad</th>
                                     <th>Estado</th>
-                                    <th>Foto</th>
                                     <th>Opciones</th>
 
                                 </tr>
@@ -128,12 +125,9 @@ use App\Controllers\LenguagesControllers; ?>
                                             <td><?php echo $personC->getPhonePerson(); ?></td>
                                             <td><?php echo $personC->getAdressPerson(); ?></td>
                                             <td><?php echo $personC->getGenerePerson(); ?></td>
-                                            <td><?php echo $personC->getUserPerson(); ?></td>
-                                            <td><?php echo $personC->getPasswordPerson(); ?></td>
                                             <td><?php echo $personC->getTypePerson(); ?></td>
                                             <td><?php echo $personC->generateAge($personC->getDateBornPerson()); ?></td>
                                             <td><?php echo $personC->getStatePerson(); ?></td>
-                                            <td><?php echo $personC->getPhotoPerson(); ?></td>
                                             <td>
                                                 <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button"
                                                    data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i

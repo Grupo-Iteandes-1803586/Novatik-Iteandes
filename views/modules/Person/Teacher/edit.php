@@ -222,6 +222,15 @@ use Carbon\Carbon;?>
                                                value="<?= $DataPersonT->getTypePerson(); ?>" placeholder="Tipo Persona" readonly="readonly">
                                     </div>
                                 </div>
+                                <!--Password del Personal-->
+                                <div class="form-group row">
+                                    <label for="passwordPerson" class="col-sm-2 col-form-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input required type="password" maxlength="45"class="form-control" id="passwordPerson" name="passwordPerson"
+                                               value="<?= $DataPersonT->getPasswordPerson(); ?>"
+                                               placeholder="Ingrese su Contraseña Nueva">
+                                    </div>
+                                </div>
                                 <!--Estado de la persona-->
                                 <div class="form-group row">
                                     <label for="statePerson" class="col-sm-2 col-form-label">Estado</label>

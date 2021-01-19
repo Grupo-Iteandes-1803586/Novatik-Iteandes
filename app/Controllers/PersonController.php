@@ -135,7 +135,8 @@ class PersonController{
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
             $arrayPerson['adressPerson'] = $_POST['adressPerson'];
             $arrayPerson['generePerson'] = $_POST['generePerson'];
-            $arrayPerson['typePerson'] = $_POST['typePerson'];
+            $arrayPerson['passwordPerson'] = $_POST['passwordPerson'];
+            $arrayPerson['typePerson'] = 'Docente';
             $arrayPerson['statePerson'] = $_POST['statePerson'];
             $arrayPerson['photoPerson']= 'Sin Imagen';
             $arrayPerson['idPerson']= $_POST['idPerson'];
@@ -221,8 +222,8 @@ class PersonController{
         try{
             return Person::searchForId($idPerson);
         }catch (\Exception $exc){
-            var_dump($exc);
-            //header("Location: ../../views/modules/Person/index.php?respuesta=error");
+            //var_dump($exc);
+            header("Location: ../../views/modules/Person/index.php?respuesta=error");
         }
     }
 

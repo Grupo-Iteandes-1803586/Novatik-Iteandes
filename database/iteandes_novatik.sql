@@ -1,697 +1,417 @@
--- phpMyAdmin SQL Dump
--- version 4.9.5
--- https://www.phpmyadmin.net/
---
--- Servidor: localhost:3306
--- Tiempo de generación: 01-08-2020 a las 15:56:41
--- Versión del servidor: 5.7.24
--- Versión de PHP: 7.4.8
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `iteandes_novatik`
---
-
-DELIMITER $$
---
--- Procedimientos
---
-DROP PROCEDURE IF EXISTS `UpdatePerson`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdatePerson` (IN `uIdPerson` INT, IN `stateTotal` VARCHAR(10))  NO SQL
-BEGIN
-UPDATE experience e
-INNER JOIN teacher t ON e.idExperience=t.Experience_idExperience
-SET stateExperience=stateTotal
- WHERE t.Person_idPerson=uIdPerson;
- 
-UPDATE teacherstudies ts
-INNER JOIN teacher t ON ts.idTeacherStudies=t.TeacherStudies_idTeacherStudies
-SET stateTeacherStudies=stateTotal
- WHERE t.Person_idPerson=uIdPerson;
- 
-UPDATE lenguages l
-INNER JOIN teacherlenguages tl ON tl.Lenguages_idLenguages=l.idLenguages
-INNER JOIN teacher t ON tl.Teacher_idTeacher=t.idTeacher
-SET stateLenguague=stateTotal
- WHERE t.Person_idPerson=uIdPerson;
-
-UPDATE teacherlenguages tl
-INNER JOIN   lenguages l  ON tl.Lenguages_idLenguages=l.idLenguages
-INNER JOIN teacher t ON tl.Teacher_idTeacher=t.idTeacher
-SET stateTeacherLenguages=stateTotal
- WHERE t.Person_idPerson=uIdPerson;
-
-UPDATE teacher t
-SET stateTeacher=stateTotal
- WHERE t.Person_idPerson=uIdPerson;
- 
- UPDATE person p
-SET statePerson=stateTotal
- WHERE p.idPerson=uIdPerson;
- 
-END$$
-
-DROP PROCEDURE IF EXISTS `UpdateStudent`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateStudent` (IN `uIdPerson` INT, IN `stateTotal` VARCHAR(10))  NO SQL
-BEGIN
-UPDATE student st
-INNER JOIN person p ON st.Person_idPerson=p.idPerson
-SET stateStudent=stateTotal
-WHERE st.Person_idPerson=uIdPerson;
- 
- UPDATE person p
-SET statePerson=stateTotal
- WHERE p.idPerson=uIdPerson;
-END$$
-
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `activity`
---
-
-CREATE TABLE `activity` (
-  `idActivity` bigint(19) UNSIGNED NOT NULL,
-  `codeActivity` bigint(20) NOT NULL,
-  `nameActivity` varchar(300) NOT NULL,
-  `descriptionActivity` varchar(500) NOT NULL,
-  `typeActivity` enum('Desempeño','Producto','Conocimiento') NOT NULL,
-  `LearningResult_idLearningResult` bigint(19) UNSIGNED NOT NULL,
-  `stateActivity` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `archive`
---
-
-CREATE TABLE `archive` (
-  `idArchive` bigint(19) UNSIGNED NOT NULL,
-  `nameArchive` varchar(300) NOT NULL,
-  `descriptionArchive` varchar(250) NOT NULL,
-  `stateArchive` enum('Activo','Inactivo') NOT NULL,
-  `rutaArchive` varchar(500) NOT NULL,
-  `Activity_idActivity` bigint(19) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `enrollment`
---
-
-CREATE TABLE `enrollment` (
-  `idEnrollment` bigint(19) UNSIGNED NOT NULL,
-  `dateEnrollment` date NOT NULL,
-  `stateEnrollment` enum('Activo','Inactivo') NOT NULL,
-  `Student_idStudent` bigint(19) UNSIGNED NOT NULL,
-  `Semester_idSemester` bigint(19) UNSIGNED NOT NULL,
-  `TrainingProgram_idTrainingProgram` bigint(19) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `enrollmentcompetition`
---
-
-CREATE TABLE `enrollmentcompetition` (
-  `idEnrollmentCompetition` bigint(19) UNSIGNED NOT NULL,
-  `Enrollment_idEnrollment` bigint(19) UNSIGNED NOT NULL,
-  `Schedule_idSchedule` bigint(19) UNSIGNED NOT NULL,
-  `TrainingCompetition_idTrainingCompetition` bigint(19) UNSIGNED NOT NULL,
-  `stateEnrollmentCompetition` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `experience`
---
-
-CREATE TABLE `experience` (
-  `idExperience` bigint(19) UNSIGNED NOT NULL,
-  `institutionExperience` varchar(300) NOT NULL,
-  `dedicationExperience` varchar(500) NOT NULL,
-  `startExperience` date NOT NULL,
-  `endExperince` date NOT NULL,
-  `stateExperience` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `group`
---
-
-CREATE TABLE `group` (
-  `idGroup` bigint(19) UNSIGNED NOT NULL,
-  `codeGroup` bigint(20) NOT NULL,
-  `nameGroup` varchar(300) NOT NULL,
-  `minimumSpaceGroup` tinyint(4) NOT NULL,
-  `maximumSpaceGroup` bigint(20) NOT NULL,
-  `stateGroup` enum('Activo','Inactivo') NOT NULL,
-  `TrainingCompetition_idTrainingCompetition` bigint(19) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `learningresult`
---
-
-CREATE TABLE `learningresult` (
-  `idLearningResult` bigint(19) UNSIGNED NOT NULL,
-  `codeLearningResult` bigint(20) NOT NULL,
-  `nameLearningResult` varchar(500) NOT NULL,
-  `durationLearningResult` tinyint(4) NOT NULL,
-  `statuLearningResult` enum('Activo','Inactivo') NOT NULL,
-  `TrainingCompetition_idTrainingCompetition` bigint(19) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `lenguages`
---
-
-CREATE TABLE `lenguages` (
-  `idLenguages` bigint(19) UNSIGNED NOT NULL,
-  `nameLenguages` varchar(40) NOT NULL,
-  `stateLenguague` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `note`
---
-
-CREATE TABLE `note` (
-  `idNote` bigint(19) UNSIGNED NOT NULL,
-  `dateNote` date NOT NULL,
-  `valueNote` float NOT NULL,
-  `Activity_idActivity` bigint(19) UNSIGNED NOT NULL,
-  `Teacher_idTeacher` bigint(19) UNSIGNED NOT NULL,
-  `stateNote` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `person`
---
-
-CREATE TABLE `person` (
-  `idPerson` bigint(19) UNSIGNED NOT NULL,
-  `documentPerson` bigint(20)  NOT NULL ,
-  `namePerson` varchar(150) NOT NULL,
-  `lastNamePerson` varchar(150) NOT NULL,
-  `dateBornPerson` date NOT NULL,
-  `rhPerson` enum('A+','A-','B-','B+','O+','O-','AB-','AB+') NOT NULL,
-  `emailPerson` varchar(90) NOT NULL,
-  `phonePerson` bigint(20) NOT NULL,
-  `adressPerson` varchar(260) NOT NULL,
-  `generePerson` enum('Femenino','Masculino','Otro') NOT NULL,
-  `userPerson` varchar(45) NOT NULL,
-  `passwordPerson` varchar(45) NOT NULL,
-  `typePerson` enum('Administrador','Secretaria','Docente','Estudiante') NOT NULL,
-  `statePerson` enum('Activo','Inactivo') NOT NULL,
-  `photoPerson` varchar(350) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
--------------------------------------------------
-
---
--- Estructura de tabla para la tabla `schedule`
---
-
-CREATE TABLE `schedule` (
-  `idSchedule` bigint(19) UNSIGNED NOT NULL,
-  `startDateSchedule` date NOT NULL,
-  `endDateSchedule` date NOT NULL,
-  `cantHours` tinyint(4) NOT NULL,
-  `daySchedule` varchar(40) NOT NULL,
-  `startHourSchedule` time NOT NULL,
-  `endHourSchedule` time NOT NULL,
-  `stateSchedule` enum('Activo','Inactivo') NOT NULL,
-  `Group_idGroup` bigint(19) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `semester`
---
-
-CREATE TABLE `semester` (
-  `idSemester` bigint(19) UNSIGNED NOT NULL,
-  `nameSemester` varchar(250) NOT NULL,
-  `descriptionSemester` varchar(500) DEFAULT NULL,
-  `starDateSemester` date NOT NULL,
-  `endDateSemester` date NOT NULL,
-  `startDate50` date NOT NULL,
-  `endDate50` date NOT NULL,
-  `starDate2Semester` date NOT NULL,
-  `endDate2Semester` date NOT NULL,
-  `statuSemester` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `student`
---
-
-CREATE TABLE `student` (
-  `idStudent` bigint(19) UNSIGNED NOT NULL,
-  `gradeYear` smallint(4) NOT NULL,
-  `modality` enum('Bachiller Academico','Bachiller Tecnico') NOT NULL,
-  `Institution` varchar(300) NOT NULL,
-  `Person_idPerson` bigint(19) UNSIGNED NOT NULL,
-  `stateStudent` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `teacher`
---
-
-CREATE TABLE `teacher` (
-  `idTeacher` bigint(19) UNSIGNED NOT NULL,
-  `Experience_idExperience` bigint(19) UNSIGNED NOT NULL,
-  `TeacherStudies_idTeacherStudies` bigint(19) UNSIGNED NOT NULL,
-  `Person_idPerson` bigint(19) UNSIGNED NOT NULL,
-  `stateTeacher` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `teacherlenguages`
---
-
-CREATE TABLE `teacherlenguages` (
-  `idTeacherLenguages` bigint(19) UNSIGNED NOT NULL,
-  `Teacher_idTeacher` bigint(19) UNSIGNED NOT NULL,
-  `Lenguages_idLenguages` bigint(19) UNSIGNED NOT NULL,
-  `stateTeacherLenguages` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `teacherstudies`
---
-
-CREATE TABLE `teacherstudies` (
-  `idTeacherStudies` bigint(19) UNSIGNED NOT NULL,
-  `titleTeacherStudies` varchar(300) NOT NULL,
-  `yearStudyTeacher` smallint(4) NOT NULL,
-  `stateTeacherStudies` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `trainingcompetition`
---
-
-CREATE TABLE `trainingcompetition` (
-  `idTrainingCompetition` bigint(19) UNSIGNED NOT NULL,
-  `codeTrainingCompetition` bigint(20) NOT NULL,
-  `codeAlfaTrainingCompetition` varchar(10) NOT NULL,
-  `denomination` varchar(300) NOT NULL,
-  `duration` INT(11) NOT NULL ,
-  `minimumSpace` INT(11) NOT NULL ,
-  `orderTrainingCompetition` tinyint(4) NOT NULL,
-  `statusTrainingCompetition` enum('Activo','Inactivo') NOT NULL,
-  `TrainingProgram_idTrainingProgram` bigint(19) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `trainingprogram`
---
-
-CREATE TABLE `trainingprogram` (
-  `idTrainingProgram` bigint(19) UNSIGNED NOT NULL,
-  `codeTrainingProgram` bigint(19) UNSIGNED NOT NULL,
-  `codeAlfaTrainingProgram` varchar(10) NOT NULL,
-  `nameTrainingProgram` varchar(500) NOT NULL,
-  `version` float NOT NULL,
-  `statusTrainingProgram` enum('Activo','Inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Indices de la tabla `activity`
---
-ALTER TABLE `activity`
-  ADD PRIMARY KEY (`idActivity`),
-  ADD UNIQUE KEY `codeActivity_UNIQUE` (`codeActivity`),
-  ADD KEY `fk_Activity_LearningResult1_idx` (`LearningResult_idLearningResult`);
-
---
--- Indices de la tabla `archive`
---
-ALTER TABLE `archive`
-  ADD PRIMARY KEY (`idArchive`),
-  ADD KEY `fk_Archive_Activity1_idx` (`Activity_idActivity`);
-
---
--- Indices de la tabla `enrollment`
---
-ALTER TABLE `enrollment`
-  ADD PRIMARY KEY (`idEnrollment`),
-  ADD KEY `fk_Enrollment_Student1_idx` (`Student_idStudent`),
-  ADD KEY `fk_Enrollment_Semester1_idx` (`Semester_idSemester`),
-  ADD KEY `fk_Enrollment_TrainingProgram1_idx` (`TrainingProgram_idTrainingProgram`);
-
---
--- Indices de la tabla `enrollmentcompetition`
---
-ALTER TABLE `enrollmentcompetition`
-  ADD PRIMARY KEY (`idEnrollmentCompetition`),
-  ADD KEY `fk_EnrollmentCompetition_Enrollment1_idx` (`Enrollment_idEnrollment`),
-  ADD KEY `fk_EnrollmentCompetition_Schedule1_idx` (`Schedule_idSchedule`),
-  ADD KEY `fk_EnrollmentCompetition_TrainingCompetition1_idx` (`TrainingCompetition_idTrainingCompetition`);
-
---
--- Indices de la tabla `experience`
---
-ALTER TABLE `experience`
-  ADD PRIMARY KEY (`idExperience`);
-
---
--- Indices de la tabla `group`
---
-ALTER TABLE `group`
-  ADD PRIMARY KEY (`idGroup`),
-  ADD UNIQUE KEY `codeGroup_UNIQUE` (`codeGroup`),
-  ADD KEY `fk_Group_TrainingCompetition1_idx` (`TrainingCompetition_idTrainingCompetition`);
-
---
--- Indices de la tabla `learningresult`
---
-ALTER TABLE `learningresult`
-  ADD PRIMARY KEY (`idLearningResult`),
-  ADD UNIQUE KEY `codeLearningResult_UNIQUE` (`codeLearningResult`),
-  ADD KEY `fk_LearningResult_TrainingCompetition1_idx` (`TrainingCompetition_idTrainingCompetition`);
-
---
--- Indices de la tabla `lenguages`
---
-ALTER TABLE `lenguages`
-  ADD PRIMARY KEY (`idLenguages`);
-
---
--- Indices de la tabla `note`
---
-ALTER TABLE `note`
-  ADD PRIMARY KEY (`idNote`),
-  ADD KEY `fk_Note_Activity1_idx` (`Activity_idActivity`),
-  ADD KEY `fk_Note_Teacher1_idx` (`Teacher_idTeacher`);
-
---
--- Indices de la tabla `person`
---
-ALTER TABLE `person`
-  ADD PRIMARY KEY (`idPerson`),
-  ADD UNIQUE KEY `documentPerson_UNIQUE` (`documentPerson`);
-
---
--- Indices de la tabla `schedule`
---
-ALTER TABLE `schedule`
-  ADD PRIMARY KEY (`idSchedule`),
-  ADD KEY `fk_Schedule_Group1_idx` (`Group_idGroup`);
-
---
--- Indices de la tabla `semester`
---
-ALTER TABLE `semester`
-  ADD PRIMARY KEY (`idSemester`);
-
---
--- Indices de la tabla `student`
---
-ALTER TABLE `student`
-  ADD PRIMARY KEY (`idStudent`),
-  ADD KEY `fk_Student_Person1_idx` (`Person_idPerson`);
-
---
--- Indices de la tabla `teacher`
---
-ALTER TABLE `teacher`
-  ADD PRIMARY KEY (`idTeacher`),
-  ADD KEY `fk_Teacher_Experience_idx` (`Experience_idExperience`),
-  ADD KEY `fk_Teacher_TeacherStudies1_idx` (`TeacherStudies_idTeacherStudies`),
-  ADD KEY `fk_Teacher_Person1_idx` (`Person_idPerson`);
-
---
--- Indices de la tabla `teacherlenguages`
---
-ALTER TABLE `teacherlenguages`
-  ADD PRIMARY KEY (`idTeacherLenguages`),
-  ADD KEY `fk_TeacherLenguages_Teacher1_idx` (`Teacher_idTeacher`),
-  ADD KEY `fk_TeacherLenguages_Lenguages1_idx` (`Lenguages_idLenguages`);
-
---
--- Indices de la tabla `teacherstudies`
---
-ALTER TABLE `teacherstudies`
-  ADD PRIMARY KEY (`idTeacherStudies`);
-
---
--- Indices de la tabla `trainingcompetition`
---
-ALTER TABLE `trainingcompetition`
-  ADD PRIMARY KEY (`idTrainingCompetition`),
-  ADD UNIQUE KEY `codeTrainingCompetition_UNIQUE` (`codeTrainingCompetition`),
-  ADD KEY `fk_TrainingCompetition_TrainingProgram1_idx` (`TrainingProgram_idTrainingProgram`);
-
---
--- Indices de la tabla `trainingprogram`
---
-ALTER TABLE `trainingprogram`
-  ADD PRIMARY KEY (`idTrainingProgram`),
-  ADD UNIQUE KEY `codeTrainingProgram_UNIQUE` (`codeTrainingProgram`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `activity`
---
-ALTER TABLE `activity`
-  MODIFY `idActivity` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `archive`
---
-ALTER TABLE `archive`
-  MODIFY `idArchive` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `enrollment`
---
-ALTER TABLE `enrollment`
-  MODIFY `idEnrollment` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `enrollmentcompetition`
---
-ALTER TABLE `enrollmentcompetition`
-  MODIFY `idEnrollmentCompetition` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `experience`
---
-ALTER TABLE `experience`
-  MODIFY `idExperience` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT de la tabla `group`
---
-ALTER TABLE `group`
-  MODIFY `idGroup` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `learningresult`
---
-ALTER TABLE `learningresult`
-  MODIFY `idLearningResult` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `lenguages`
---
-ALTER TABLE `lenguages`
-  MODIFY `idLenguages` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `note`
---
-ALTER TABLE `note`
-  MODIFY `idNote` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `person`
---
-ALTER TABLE `person`
-  MODIFY `idPerson` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT de la tabla `schedule`
---
-ALTER TABLE `schedule`
-  MODIFY `idSchedule` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `semester`
---
-ALTER TABLE `semester`
-  MODIFY `idSemester` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `student`
---
-ALTER TABLE `student`
-  MODIFY `idStudent` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `teacher`
---
-ALTER TABLE `teacher`
-  MODIFY `idTeacher` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `teacherlenguages`
---
-ALTER TABLE `teacherlenguages`
-  MODIFY `idTeacherLenguages` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `teacherstudies`
---
-ALTER TABLE `teacherstudies`
-  MODIFY `idTeacherStudies` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT de la tabla `trainingcompetition`
---
-ALTER TABLE `trainingcompetition`
-  MODIFY `idTrainingCompetition` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `trainingprogram`
---
-ALTER TABLE `trainingprogram`
-  MODIFY `idTrainingProgram` bigint(19) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `activity`
---
-ALTER TABLE `activity`
-  ADD CONSTRAINT `fk_Activity_LearningResult1` FOREIGN KEY (`LearningResult_idLearningResult`) REFERENCES `learningresult` (`idLearningResult`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `archive`
---
-ALTER TABLE `archive`
-  ADD CONSTRAINT `fk_Archive_Activity1` FOREIGN KEY (`Activity_idActivity`) REFERENCES `activity` (`idActivity`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `enrollment`
---
-ALTER TABLE `enrollment`
-  ADD CONSTRAINT `fk_Enrollment_Semester1` FOREIGN KEY (`Semester_idSemester`) REFERENCES `semester` (`idSemester`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Enrollment_Student1` FOREIGN KEY (`Student_idStudent`) REFERENCES `student` (`idStudent`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Enrollment_TrainingProgram1` FOREIGN KEY (`TrainingProgram_idTrainingProgram`) REFERENCES `trainingprogram` (`idTrainingProgram`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `enrollmentcompetition`
---
-ALTER TABLE `enrollmentcompetition`
-  ADD CONSTRAINT `fk_EnrollmentCompetition_Enrollment1` FOREIGN KEY (`Enrollment_idEnrollment`) REFERENCES `enrollment` (`idEnrollment`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_EnrollmentCompetition_Schedule1` FOREIGN KEY (`Schedule_idSchedule`) REFERENCES `schedule` (`idSchedule`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_EnrollmentCompetition_TrainingCompetition1` FOREIGN KEY (`TrainingCompetition_idTrainingCompetition`) REFERENCES `trainingcompetition` (`idTrainingCompetition`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `group`
---
-ALTER TABLE `group`
-  ADD CONSTRAINT `fk_Group_TrainingCompetition1` FOREIGN KEY (`TrainingCompetition_idTrainingCompetition`) REFERENCES `trainingcompetition` (`idTrainingCompetition`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `learningresult`
---
-ALTER TABLE `learningresult`
-  ADD CONSTRAINT `fk_LearningResult_TrainingCompetition1` FOREIGN KEY (`TrainingCompetition_idTrainingCompetition`) REFERENCES `trainingcompetition` (`idTrainingCompetition`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `note`
---
-ALTER TABLE `note`
-  ADD CONSTRAINT `fk_Note_Activity1` FOREIGN KEY (`Activity_idActivity`) REFERENCES `activity` (`idActivity`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Note_Teacher1` FOREIGN KEY (`Teacher_idTeacher`) REFERENCES `teacher` (`idTeacher`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `schedule`
---
-ALTER TABLE `schedule`
-  ADD CONSTRAINT `fk_Schedule_Group1` FOREIGN KEY (`Group_idGroup`) REFERENCES `group` (`idGroup`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `student`
---
-ALTER TABLE `student`
-  ADD CONSTRAINT `fk_Student_Person1` FOREIGN KEY (`Person_idPerson`) REFERENCES `person` (`idPerson`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `teacher`
---
-ALTER TABLE `teacher`
-  ADD CONSTRAINT `fk_Teacher_Experience` FOREIGN KEY (`Experience_idExperience`) REFERENCES `experience` (`idExperience`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Teacher_Person1` FOREIGN KEY (`Person_idPerson`) REFERENCES `person` (`idPerson`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Teacher_TeacherStudies1` FOREIGN KEY (`TeacherStudies_idTeacherStudies`) REFERENCES `teacherstudies` (`idTeacherStudies`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `teacherlenguages`
---
-ALTER TABLE `teacherlenguages`
-  ADD CONSTRAINT `fk_TeacherLenguages_Lenguages1` FOREIGN KEY (`Lenguages_idLenguages`) REFERENCES `lenguages` (`idLenguages`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_TeacherLenguages_Teacher1` FOREIGN KEY (`Teacher_idTeacher`) REFERENCES `teacher` (`idTeacher`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `trainingcompetition`
---
-ALTER TABLE `trainingcompetition`
-  ADD CONSTRAINT `fk_TrainingCompetition_TrainingProgram1` FOREIGN KEY (`TrainingProgram_idTrainingProgram`) REFERENCES `trainingprogram` (`idTrainingProgram`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- MySQL Script generated by MySQL Workbench
+-- Wed Dec 16 15:52:10 2020
+-- Model: New Model    Version: 1.0
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema iteandes_novatik
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema iteandes_novatik
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `iteandes_novatik` DEFAULT CHARACTER SET utf8 ;
+USE `iteandes_novatik` ;
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Person`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Person` (
+  `idPerson` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `documentPerson` BIGINT NOT NULL,
+  `namePerson` VARCHAR(150) NOT NULL,
+  `lastNamePerson` VARCHAR(150) NOT NULL,
+  `dateBornPerson` DATE NOT NULL,
+  `rhPerson` ENUM('A+', 'A-', 'B-', 'B+', 'O+', 'O-', 'AB-', 'AB+') NOT NULL,
+  `emailPerson` VARCHAR(90) NOT NULL,
+  `phonePerson` BIGINT NOT NULL,
+  `adressPerson` VARCHAR(260) NOT NULL,
+  `generePerson` ENUM('Femenino', 'Masculino', 'Otro') NOT NULL,
+  `userPerson` VARCHAR(45) NOT NULL,
+  `passwordPerson` VARCHAR(45) NOT NULL,
+  `typePerson` ENUM('Administrador', 'Secretaria', 'Docente', 'Estudiante') NOT NULL,
+  `statePerson` ENUM('Activo', 'Inactivo') NOT NULL,
+  `photoPerson` VARCHAR(350) NULL,
+  PRIMARY KEY (`idPerson`),
+  UNIQUE INDEX `documentPerson_UNIQUE` (`documentPerson` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Experience`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Experience` (
+  `idExperience` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `institutionExperience` VARCHAR(300) NOT NULL,
+  `dedicationExperience` VARCHAR(500) NOT NULL,
+  `startExperience` DATE NOT NULL,
+  `endExperince` DATE NOT NULL,
+  `stateExperience` ENUM('Activo', 'Inactivo') NOT NULL,
+  PRIMARY KEY (`idExperience`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`TeacherStudies`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`TeacherStudies` (
+  `idTeacherStudies` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `titleTeacherStudies` VARCHAR(300) NOT NULL,
+  `yearStudyTeacher` SMALLINT(4) NOT NULL,
+  `stateTeacherStudies` ENUM('Activo', 'Inactivo') NOT NULL,
+  PRIMARY KEY (`idTeacherStudies`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Teacher`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Teacher` (
+  `idTeacher` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Experience_idExperience` BIGINT UNSIGNED NOT NULL,
+  `TeacherStudies_idTeacherStudies` BIGINT UNSIGNED NOT NULL,
+  `Person_idPerson` BIGINT UNSIGNED NOT NULL,
+  `stateTeacher` ENUM('Activo','Inactivo') NOT NULL,
+  PRIMARY KEY (`idTeacher`),
+  INDEX `fk_Teacher_Experience_idx` (`Experience_idExperience` ASC) ,
+  INDEX `fk_Teacher_TeacherStudies1_idx` (`TeacherStudies_idTeacherStudies` ASC) ,
+  INDEX `fk_Teacher_Person1_idx` (`Person_idPerson` ASC) ,
+  CONSTRAINT `fk_Teacher_Experience`
+    FOREIGN KEY (`Experience_idExperience`)
+    REFERENCES `iteandes_novatik`.`Experience` (`idExperience`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Teacher_TeacherStudies1`
+    FOREIGN KEY (`TeacherStudies_idTeacherStudies`)
+    REFERENCES `iteandes_novatik`.`TeacherStudies` (`idTeacherStudies`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Teacher_Person1`
+    FOREIGN KEY (`Person_idPerson`)
+    REFERENCES `iteandes_novatik`.`Person` (`idPerson`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Lenguages`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Lenguages` (
+  `idLenguages` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nameLenguages` VARCHAR(40) NOT NULL,
+  `stateLenguague` ENUM('Activo', 'Inactivo') NOT NULL,
+  PRIMARY KEY (`idLenguages`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`TeacherLenguages`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`TeacherLenguages` (
+  `idTeacherLenguages` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Teacher_idTeacher` BIGINT UNSIGNED NOT NULL,
+  `Lenguages_idLenguages` BIGINT UNSIGNED NOT NULL,
+  `stateTeacherLenguages` ENUM('Activo','Inactivo') NOT NULL,
+  PRIMARY KEY (`idTeacherLenguages`),
+  INDEX `fk_TeacherLenguages_Teacher1_idx` (`Teacher_idTeacher` ASC) ,
+  INDEX `fk_TeacherLenguages_Lenguages1_idx` (`Lenguages_idLenguages` ASC) ,
+  CONSTRAINT `fk_TeacherLenguages_Lenguages1`
+    FOREIGN KEY (`Lenguages_idLenguages`)
+    REFERENCES `iteandes_novatik`.`Lenguages` (`idLenguages`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TeacherLenguages_Teacher1`
+    FOREIGN KEY (`Teacher_idTeacher`)
+    REFERENCES `iteandes_novatik`.`teacher` (`idTeacher`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Student`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Student` (
+  `idStudent` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `gradeYear` SMALLINT(4) NOT NULL,
+  `modality` ENUM('Bachiller Academico', 'Bachiller Tecnico') NOT NULL,
+  `Institution` VARCHAR(300) NOT NULL,
+  `Person_idPerson` BIGINT UNSIGNED NOT NULL,
+  `stateStudent` ENUM('Activo','Inactivo') NOT NULL,
+  PRIMARY KEY (`idStudent`),
+  INDEX `fk_Student_Person1_idx` (`Person_idPerson` ASC) ,
+  CONSTRAINT `fk_Student_Person1`
+    FOREIGN KEY (`Person_idPerson`)
+    REFERENCES `iteandes_novatik`.`Person` (`idPerson`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`TrainingProgram`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`TrainingProgram` (
+  `idTrainingProgram` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `codeTrainingProgram` BIGINT UNSIGNED NOT NULL,
+  `codeAlfaTrainingProgram` VARCHAR(10) NOT NULL,
+  `nameTrainingProgram` VARCHAR(500) NOT NULL,
+  `version` FLOAT NOT NULL,
+  `statusTrainingProgram` ENUM('Activo', 'Inactivo') NOT NULL,
+  PRIMARY KEY (`idTrainingProgram`),
+  UNIQUE INDEX `codeTrainingProgram_UNIQUE` (`codeTrainingProgram` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`TrainingCompetition`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`TrainingCompetition` (
+  `idTrainingCompetition` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `codeTrainingCompetition` BIGINT NOT NULL,
+  `codeAlfaTrainingCompetition` VARCHAR(10) NOT NULL,
+  `denomination` VARCHAR(300) NOT NULL,
+  `duration` INT NOT NULL,
+  `minimumSpace` INT NOT NULL,
+  `orderTrainingCompetition` INT NOT NULL,
+  `statusTrainingCompetition` ENUM('Activo', 'Inactivo') NOT NULL,
+  `TrainingProgram_idTrainingProgram` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idTrainingCompetition`),
+  UNIQUE INDEX `codeTrainingCompetition_UNIQUE` (`codeTrainingCompetition` ASC) ,
+  INDEX `fk_TrainingCompetition_TrainingProgram1_idx` (`TrainingProgram_idTrainingProgram` ASC) ,
+  CONSTRAINT `fk_TrainingCompetition_TrainingProgram1`
+    FOREIGN KEY (`TrainingProgram_idTrainingProgram`)
+    REFERENCES `iteandes_novatik`.`TrainingProgram` (`idTrainingProgram`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`LearningResult`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`LearningResult` (
+  `idLearningResult` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `codeLearningResult` BIGINT NOT NULL,
+  `nameLearningResult` VARCHAR(500) NOT NULL,
+  `durationLearningResult` TINYINT NOT NULL,
+  `statuLearningResult` ENUM('Activo', 'Inactivo') NOT NULL,
+  `TrainingCompetition_idTrainingCompetition` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idLearningResult`),
+  UNIQUE INDEX `codeLearningResult_UNIQUE` (`codeLearningResult` ASC) ,
+  INDEX `fk_LearningResult_TrainingCompetition1_idx` (`TrainingCompetition_idTrainingCompetition` ASC) ,
+  CONSTRAINT `fk_LearningResult_TrainingCompetition1`
+    FOREIGN KEY (`TrainingCompetition_idTrainingCompetition`)
+    REFERENCES `iteandes_novatik`.`TrainingCompetition` (`idTrainingCompetition`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Activity`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Activity` (
+  `idActivity` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `codeActivity` BIGINT NOT NULL,
+  `nameActivity` VARCHAR(300) NOT NULL,
+  `descriptionActivity` VARCHAR(500) NOT NULL,
+  `typeActivity` ENUM('Desempeño', 'Producto', 'Conocimiento') NOT NULL,
+  `LearningResult_idLearningResult` BIGINT UNSIGNED NOT NULL,
+  `stateActivity` ENUM('Activo','Inactivo') NOT NULL,
+  PRIMARY KEY (`idActivity`),
+  UNIQUE INDEX `codeActivity_UNIQUE` (`codeActivity` ASC) ,
+  INDEX `fk_Activity_LearningResult1_idx` (`LearningResult_idLearningResult` ASC) ,
+  CONSTRAINT `fk_Activity_LearningResult1`
+    FOREIGN KEY (`LearningResult_idLearningResult`)
+    REFERENCES `iteandes_novatik`.`LearningResult` (`idLearningResult`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Note`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Note` (
+  `idNote` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `dateNote` DATE NOT NULL,
+  `valueNote` FLOAT NOT NULL,
+  `Activity_idActivity` BIGINT UNSIGNED NOT NULL,
+  `stateNote` ENUM('Activo','Inactivo') NOT NULL,
+  `Teacher_idTeacher` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idNote`),
+  INDEX `fk_Note_Activity1_idx` (`Activity_idActivity` ASC) ,
+  INDEX `fk_Note_Teacher2_idx` (`Teacher_idTeacher` ASC) ,
+  CONSTRAINT `fk_Note_Activity1`
+    FOREIGN KEY (`Activity_idActivity`)
+    REFERENCES `iteandes_novatik`.`Activity` (`idActivity`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Note_Teacher1`
+    FOREIGN KEY (`Teacher_idTeacher`)
+    REFERENCES `iteandes_novatik`.`teacher` (`idTeacher`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Note_Teacher2`
+    FOREIGN KEY (`Teacher_idTeacher`)
+    REFERENCES `iteandes_novatik`.`Teacher` (`idTeacher`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Semester`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Semester` (
+  `idSemester` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nameSemester` VARCHAR(250) NOT NULL,
+  `descriptionSemester` VARCHAR(500) NULL,
+  `starDateSemester` DATE NOT NULL,
+  `endDateSemester` DATE NOT NULL,
+  `startDate50` DATE NOT NULL,
+  `endDate50` DATE NOT NULL,
+  `starDate2Semester` DATE NOT NULL,
+  `endDate2Semester` DATE NOT NULL,
+  `statuSemester` ENUM('Activo', 'Inactivo') NOT NULL,
+  PRIMARY KEY (`idSemester`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Enrollment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Enrollment` (
+  `idEnrollment` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `dateEnrollment` DATE NOT NULL,
+  `stateEnrollment` ENUM('Activo', 'Inactivo') NOT NULL,
+  `Student_idStudent` BIGINT UNSIGNED NOT NULL,
+  `Semester_idSemester` BIGINT UNSIGNED NOT NULL,
+  `TrainingProgram_idTrainingProgram` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idEnrollment`),
+  INDEX `fk_Enrollment_Student1_idx` (`Student_idStudent` ASC) ,
+  INDEX `fk_Enrollment_Semester1_idx` (`Semester_idSemester` ASC) ,
+  INDEX `fk_Enrollment_TrainingProgram1_idx` (`TrainingProgram_idTrainingProgram` ASC) ,
+  CONSTRAINT `fk_Enrollment_Student1`
+    FOREIGN KEY (`Student_idStudent`)
+    REFERENCES `iteandes_novatik`.`Student` (`idStudent`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Enrollment_Semester1`
+    FOREIGN KEY (`Semester_idSemester`)
+    REFERENCES `iteandes_novatik`.`Semester` (`idSemester`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Enrollment_TrainingProgram1`
+    FOREIGN KEY (`TrainingProgram_idTrainingProgram`)
+    REFERENCES `iteandes_novatik`.`TrainingProgram` (`idTrainingProgram`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Schedule`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Schedule` (
+  `idSchedule` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `startDateSchedule` DATE NOT NULL,
+  `endDateSchedule` DATE NOT NULL,
+  `cantHours` TINYINT NOT NULL,
+  `daySchedule` VARCHAR(40) NOT NULL,
+  `startHourSchedule` TIME NOT NULL,
+  `endHourSchedule` TIME NOT NULL,
+  `stateSchedule` ENUM('Activo', 'Inactivo') NOT NULL,
+  PRIMARY KEY (`idSchedule`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Group`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Group` (
+  `idGroup` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `codeGroup` BIGINT NOT NULL,
+  `nameGroup` VARCHAR(300) NOT NULL,
+  `minimumSpaceGroup` TINYINT NOT NULL,
+  `maximumSpaceGroup` BIGINT NOT NULL,
+  `stateGroup` ENUM('Activo', 'Inactivo') NOT NULL,
+  `TrainingCompetition_idTrainingCompetition` BIGINT UNSIGNED NOT NULL,
+  `Schedule_idSchedule` BIGINT UNSIGNED NOT NULL,
+  `Teacher_idTeacher` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idGroup`),
+  UNIQUE INDEX `codeGroup_UNIQUE` (`codeGroup` ASC) ,
+  INDEX `fk_Group_TrainingCompetition1_idx` (`TrainingCompetition_idTrainingCompetition` ASC) ,
+  INDEX `fk_Group_Schedule1_idx` (`Schedule_idSchedule` ASC) ,
+  INDEX `fk_Group_Teacher1_idx` (`Teacher_idTeacher` ASC) ,
+  CONSTRAINT `fk_Group_TrainingCompetition1`
+    FOREIGN KEY (`TrainingCompetition_idTrainingCompetition`)
+    REFERENCES `iteandes_novatik`.`TrainingCompetition` (`idTrainingCompetition`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Group_Schedule1`
+    FOREIGN KEY (`Schedule_idSchedule`)
+    REFERENCES `iteandes_novatik`.`Schedule` (`idSchedule`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Group_Teacher1`
+    FOREIGN KEY (`Teacher_idTeacher`)
+    REFERENCES `iteandes_novatik`.`Teacher` (`idTeacher`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`EnrollmentCompetition`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`EnrollmentCompetition` (
+  `idEnrollmentCompetition` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Enrollment_idEnrollment` BIGINT UNSIGNED NOT NULL,
+  `stateEnrollmentCompetition` ENUM('Activo','Inactivo') NOT NULL,
+  `Group_idGroup` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idEnrollmentCompetition`),
+  INDEX `fk_EnrollmentCompetition_Enrollment1_idx` (`Enrollment_idEnrollment` ASC) ,
+  INDEX `fk_EnrollmentCompetition_Group1_idx` (`Group_idGroup` ASC) ,
+  CONSTRAINT `fk_EnrollmentCompetition_Enrollment1`
+    FOREIGN KEY (`Enrollment_idEnrollment`)
+    REFERENCES `iteandes_novatik`.`Enrollment` (`idEnrollment`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_EnrollmentCompetition_Group1`
+    FOREIGN KEY (`Group_idGroup`)
+    REFERENCES `iteandes_novatik`.`Group` (`idGroup`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `iteandes_novatik`.`Archive`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `iteandes_novatik`.`Archive` (
+  `idArchive` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nameArchive` VARCHAR(300) NOT NULL,
+  `descriptionArchive` VARCHAR(250) NOT NULL,
+  `stateArchive` ENUM('Activo', 'Inactivo') NOT NULL,
+  `rutaArchive` VARCHAR(500) NOT NULL,
+  `Activity_idActivity` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idArchive`),
+  INDEX `fk_Archive_Activity1_idx` (`Activity_idActivity` ASC) ,
+  CONSTRAINT `fk_Archive_Activity1`
+    FOREIGN KEY (`Activity_idActivity`)
+    REFERENCES `iteandes_novatik`.`Activity` (`idActivity`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
