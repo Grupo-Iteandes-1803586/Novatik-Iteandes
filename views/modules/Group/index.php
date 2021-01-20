@@ -47,7 +47,7 @@ require("../../../app/Controllers/GroupControllers.php");?>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-check"></i> Correcto!</h5>
                         <?php  if($_GET['action'] == "update"){ ?>
-                            Los datos de os Grupos han sido actualizados correctamente!
+                            Los datos de los Grupos han sido actualizados correctamente!
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -79,6 +79,8 @@ require("../../../app/Controllers/GroupControllers.php");?>
                                         <th>Cupo Minimo</th>
                                         <th>Cupo Maximo</th>
                                         <th>Competencia Asociada</th>
+                                        <th>Docente</th>
+                                        <th>Horario</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -95,15 +97,27 @@ require("../../../app/Controllers/GroupControllers.php");?>
                                             <td><?php echo $group->getMinimumSpaceGroup(); ?></td>
                                             <td><?php echo $group->getMaximumSpaceGroup(); ?></td>
                                             <td><?php echo $group->getTrainingCompetitionIdTrainingCompetition()->getDenomination(); ?></td>
+                                            <td><?php echo $group->getTeacherIdTeacher()->getIdTeacher() ?></td>
+                                            <td><?php
+                                                $checked_arr = explode("|", $group->getScheduleIdSchedule()->getDaySchedule());
+                                                $daysArray = array("Lu" => "Lunes", "Ma" => "Martes", "Mi" => "Miércoles", "Ju" => "Jueves", "Vi" => "Viernes", "Sa" => "Sábado", "Do" => "Domingo");
+                                                $check = array();
+                                                foreach ($daysArray as $key => $value) {
+                                                    $checked = "";
+                                                    if (in_array($key, $checked_arr)) {
+                                                        array_push($check, $value);
+                                                    }
+                                                }
+                                                echo implode(',', $check);?></td>
                                             <td><?php echo $group->getStateGroup(); ?></td>
                                             <td>
-                                                <a href="edit.php?idGroup=<?php echo $group->getIdGroup(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                                                <a href="show.php?idGroup=<?php echo $group->getIdGroup(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
+                                                <a href="edit.php?idSchedule=<?php echo $group->getScheduleIdSchedule()->getIdSchedule(); ?>" type="button" data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                                <a href="show.php?idSchedule=<?php echo$group->getScheduleIdSchedule()->getIdSchedule(); ?>" type="button" data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i class="fa fa-eye"></i></a>
                                                 <?php if ($group->getStateGroup() != "Activo"){
                                                     ?>
-                                                    <a href="../../../app/Controllers/GroupControllers.php?action=activate&idGroup=<?php echo $group->getIdGroup(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
+                                                    <a href="../../../app/Controllers/GroupControllers.php?action=activate&idSchedule=<?php echo $group->getScheduleIdSchedule()->getIdSchedule(); ?>" type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                                 <?php }else{?>
-                                                    <a type="button" href="../../../app/Controllers/GroupControllers.php?action=inactivate&idGroup=<?php echo $group->getIdGroup(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+                                                    <a type="button" href="../../../app/Controllers/GroupControllers.php?action=inactivate&idSchedule=<?php echo $group->getScheduleIdSchedule()->getIdSchedule(); ?>" data-toggle="tooltip" title="Inactivar" class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                                 <?php } ?>
                                             </td>
                                         </tr>
@@ -127,39 +141,5 @@ require("../../../app/Controllers/GroupControllers.php");?>
 </div>
 <!-- ./wrapper -->
 <?php require ('../../partials/scripts.php');?>
-<!-- DataTables -->
-<script src="<?= $adminlteURL ?>/plugins/datatables/jquery.dataTables.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/datatables-responsive/js/dataTables.responsive.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/datatables-responsive/js/responsive.bootstrap4.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/dataTables.buttons.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/buttons.bootstrap4.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/jszip/jszip.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/pdfmake/pdfmake.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/buttons.html5.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/buttons.print.js"></script>
-<script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/buttons.colVis.js"></script>
 
-<script>
-    $(function () {
-        $('.datatable').DataTable({
-            "dom": 'Bfrtip',
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "language": {
-                "url": "../../components/Spanish.json" //Idioma
-            },
-            "buttons": [
-                'copy', 'print', 'excel', 'pdf'
-            ],
-            "pagingType": "full_numbers",
-            "responsive": true,
-            "stateSave" : true, //Guardar la configuracion
-        });
-    });
-</script>
 </body>

@@ -207,6 +207,17 @@ class Student extends BasicModel{
         $Student->Disconnect();
         return $Student;
     }
+
+    public static function searchForIdP($Person_idPerson) : Student{
+        $Student = null;
+        if($Person_idPerson > 0) {
+            $Student = new Student();
+            $getrow = $Student->getRow("SELECT * FROM iteandes_novatik.Student WHERE Person_idPerson =?", array($Person_idPerson));
+            $Student->idStudent = $getrow['idStudent'];
+        }
+        $Student->Disconnect();
+        return $Student;
+    }
     //  Obtener toda la informacion de la BD
     public static function getAll() : array
     {

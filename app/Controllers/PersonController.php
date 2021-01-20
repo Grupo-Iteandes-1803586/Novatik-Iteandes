@@ -47,9 +47,70 @@ class PersonController{
             PersonController::login();
         }else if($action == "cerrarSession"){
             PersonController::cerrarSession();
-}
+        }else if($action == "createAdmStaff"){
+            PersonController::createAdmStaff();
+        }else if($action == "editStaff"){
+            PersonController::editStaff();
+        }
 
     }
+
+    static  public  function  editStaff(){
+        try{
+            $arrayPerson = array();
+            $arrayPerson['documentPerson'] = $_POST['documentPerson'];
+            $arrayPerson['namePerson'] = $_POST['namePerson'];
+            $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
+            $arrayPerson['dateBornPerson']= Carbon::parse($_POST['dateBornPerson']);
+            $arrayPerson['rhPerson'] = $_POST['rhPerson'];
+            $arrayPerson['emailPerson'] = $_POST['emailPerson'];
+            $arrayPerson['phonePerson'] = $_POST['phonePerson'];
+            $arrayPerson['adressPerson'] = $_POST['adressPerson'];
+            $arrayPerson['generePerson'] = $_POST['generePerson'];
+            $arrayPerson['passwordPerson'] = $_POST['passwordPerson'];
+            $arrayPerson['typePerson'] = $_POST['typePerson'];
+            $arrayPerson['statePerson'] = $_POST['statePerson'];
+            $arrayPerson['photoPerson']= 'Sin Imagen';
+            $arrayPerson['idPerson']= $_POST['idPerson'];
+            $person= new Person($arrayPerson);
+            if($person->update()) {
+                header("Location: ../../views/modules/Person/AdministrativeStaff/show.php?idPerson=" .$person->getIdPerson() . "&respuesta=correcto");
+            }
+        }catch (Exception $exc){
+            //GeneralFunctions::console( $exc, 'error', 'errorStack');
+            header("Location: ../../views/modules/Person/AdministrativeStaff/edit.php?respuesta=error&mensaje" . $exc-> getMessage());
+        }
+    }
+//Funcion crear personal Administrativo
+    static public function createAdmStaff(){
+        try{
+            $arrayPerson = array();
+            $arrayPerson['documentPerson'] = $_POST['documentPerson'];
+            $arrayPerson['namePerson'] = $_POST['namePerson'];
+            $arrayPerson['lastNamePerson'] = $_POST['lastNamePerson'];
+            $arrayPerson['dateBornPerson']= Carbon::parse($_POST['dateBornPerson']);
+            $arrayPerson['rhPerson'] = $_POST['rhPerson'];
+            $arrayPerson['emailPerson'] = $_POST['emailPerson'];
+            $arrayPerson['phonePerson'] = $_POST['phonePerson'];
+            $arrayPerson['adressPerson'] = $_POST['adressPerson'];
+            $arrayPerson['generePerson'] = $_POST['generePerson'];
+            $arrayPerson['typePerson'] = $_POST['typePerson'];
+            $arrayPerson['statePerson'] = 'Activo';
+            $arrayPerson['photoPerson']= 'Sin Imagen';
+            //Validar registro del Usuario
+            if(!Person::userRegistration($arrayPerson['documentPerson'])){
+                $person =new Person($arrayPerson);
+                if($person->create()){
+                    header("Location: ../../views/modules/Person/AdministrativeStaff/show.php?idPerson=".$person->getIdPerson()."&respuesta=correcto");
+                 }
+            }else{
+                header("Location: ../../views/modules/Person/AdministrativeStaff/create.php?respuesta=error&mensaje=Usuario ya registrado");
+            }
+        }catch (\Exception $exc){
+            header("Location: ../../views/modules/Person/AdministrativeStaff/create.php?respuesta=error&mensaje" . $exc-> getMessage());
+        }
+    }
+
     //Funcion crear persona
     static public function create(){
         try{
@@ -135,7 +196,8 @@ class PersonController{
             $arrayPerson['phonePerson'] = $_POST['phonePerson'];
             $arrayPerson['adressPerson'] = $_POST['adressPerson'];
             $arrayPerson['generePerson'] = $_POST['generePerson'];
-            $arrayPerson['typePerson'] = $_POST['typePerson'];
+            $arrayPerson['passwordPerson'] = $_POST['passwordPerson'];
+            $arrayPerson['typePerson'] = 'Docente';
             $arrayPerson['statePerson'] = $_POST['statePerson'];
             $arrayPerson['photoPerson']= 'Sin Imagen';
             $arrayPerson['idPerson']= $_POST['idPerson'];
@@ -193,7 +255,7 @@ class PersonController{
                 }
             }
         }catch (Exception $exc){
-            GeneralFunctions::console( $exc, 'error', 'errorStack');
+            //GeneralFunctions::console( $exc, 'error', 'errorStack');
             header("Location: ../../views/modules/Person/Teacher/edit.php?respuesta=error&mensaje" . $exc-> getMessage());
         }
     }
@@ -221,8 +283,8 @@ class PersonController{
         try{
             return Person::searchForId($idPerson);
         }catch (\Exception $exc){
-            var_dump($exc);
-            //header("Location: ../../views/modules/Person/index.php?respuesta=error");
+            //var_dump($exc);
+            header("Location: ../../views/modules/Person/index.php?respuesta=error");
         }
     }
 
@@ -235,6 +297,7 @@ class PersonController{
             //header("Location: ../../views/modules/Person/index.php?respuesta=error");
         }
     }
+
     public static function login (){
         try {
             if(!empty($_POST['userPerson']) && !empty($_POST['passwordPerson'])){

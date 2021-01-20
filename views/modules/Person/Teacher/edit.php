@@ -206,14 +206,6 @@ use Carbon\Carbon;?>
                                         </select>
                                     </div>
                                 </div>
-                                <!--Correo Electronico del Docente-->
-                                <div class="form-group row">
-                                    <label for="photoPerson" class="col-sm-2 col-form-label">Foto</label>
-                                    <div class="col-sm-10">
-                                        <input required type="text" class="form-control" id="photoPerson" name="photoPerson"
-                                               value="<?= $DataPersonT->getPhotoPerson(); ?>" placeholder="Ingrese su Foto">
-                                    </div>
-                                </div>
                                 <!--Tipo Persona-->
                                 <div class="form-group row">
                                     <label for="typePerson" class="col-sm-2 col-form-label">Tipo</label>

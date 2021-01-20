@@ -1,26 +1,12 @@
 <?php
 require_once("../../../partials/routes.php");
 require_once("../../../../app/Controllers/PersonController.php");
-require_once("../../../../app/Controllers/TeacherControllers.php");
-require_once("../../../../app/Models/Teacher.php");
-require_once("../../../../app/Models/TeacherLenguages.php");
-require_once("../../../../app/Controllers/TeacherStudiesControllers.php");
-require_once("../../../../app/Controllers/TeacherLenguagesControllers.php");
-require_once("../../../../app/Controllers/ExperienceControllers.php");
-require_once("../../../../app/Controllers/LenguagesControllers.php");
 
-use App\Controllers\PersonController;
-use App\Controllers\TeacherControllers;
-use App\Models\Teacher;
-use App\Models\TeacherLenguages;
-use App\Controllers\TeacherStudiesControllers;
-use App\Controllers\TeacherLenguagesControllers;
-use App\Controllers\ExperienceControllers;
-use App\Controllers\LenguagesControllers; ?>
+use App\Controllers\PersonController; ?>
 <!doctype html>
 <html lang="es">
 <head>
-    <title><?=getenv('TITLE_SITE');?> | Docente</title>
+    <title><?=getenv('TITLE_SITE');?> | Personal Administrativo</title>
     <?php
     require("../../../partials/head_imports.php") ;
     require("../../../partials/header.php") ;
@@ -43,7 +29,7 @@ use App\Controllers\LenguagesControllers; ?>
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Consultar Docente</h1>
+                        <h1>Consultar Personal Administrativo</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -63,9 +49,9 @@ use App\Controllers\LenguagesControllers; ?>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h5><i class="icon fas fa-check"></i> Correcto!</h5>
                         <?php if ($_GET['action'] == "create"){ ?>
-                            El Docente ha sido creado con exito!
+                            El Personal Administrativo ha sido creado con exito!
                         <?php }else if($_GET['action'] == "update"){ ?>
-                            Los datos del Docente se han sido actualizados correctamente!
+                            Los datos del Personal Administrativo se han sido actualizados correctamente!
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -74,7 +60,7 @@ use App\Controllers\LenguagesControllers; ?>
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Gestionar Docentes</h3>
+                    <h3 class="card-title">Gestionar Personal Administrativo</h3>
                     <?php require("../../../partials/optionMenu.php") ;?>
                 </div>
                 <div class="card-body">
@@ -82,7 +68,7 @@ use App\Controllers\LenguagesControllers; ?>
                         <div class="col-auto mr-auto"></div>
                         <div class="col-auto">
                             <a role="button" href="create.php" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                <i class="fas fa-plus"></i> Crear Docente
+                                <i class="fas fa-plus"></i> Crear Personal Administrativo
                             </a>
                         </div>
                     </div>
@@ -112,7 +98,7 @@ use App\Controllers\LenguagesControllers; ?>
                                 <?php
                                 $arrPerson= \App\Controllers\PersonController::getAll();
                                 foreach ($arrPerson as $personC) {
-                                    if ($personC->getTypePerson() == "Docente") {
+                                    if ($personC->getTypePerson() == "Administrador" || $personC->getTypePerson() == "Secretaria" ) {
                                         ?>
                                         <tr>
                                             <td><?php echo $personC->getIdPerson(); ?></td>
@@ -131,16 +117,16 @@ use App\Controllers\LenguagesControllers; ?>
                                             <td>
                                                 <a href="edit.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button"
                                                    data-toggle="tooltip" title="Actualizar" class="btn docs-tooltip btn-primary btn-xs"><i
-                                                            class="fa fa-edit"></i></a>
+                                                        class="fa fa-edit"></i></a>
                                                 <a href="show.php?idPerson=<?php echo $personC->getIdPerson(); ?>" type="button"
                                                    data-toggle="tooltip" title="Ver" class="btn docs-tooltip btn-warning btn-xs"><i
-                                                            class="fa fa-eye"></i></a>
+                                                        class="fa fa-eye"></i></a>
                                                 <?php if ($personC->getStatePerson() != "Activo") {?>
-                                                    <a href="../../../../app/Controllers/PersonController.php?action=active&idPerson=<?php echo $personC->getIdPerson(); ?>"
+                                                    <a href="../../../../app/Controllers/PersonController.php?action=activeStaff&idPerson=<?php echo $personC->getIdPerson(); ?>"
                                                        type="button" data-toggle="tooltip" title="Activar" class="btn docs-tooltip btn-success btn-xs"><i class="fa fa-check-square"></i></a>
                                                 <?php } else { ?>
                                                     <a type="button"
-                                                       href="../../../../app/Controllers/PersonController.php?action=inactive&idPerson=<?php echo $personC->getIdPerson(); ?>"
+                                                       href="../../../../app/Controllers/PersonController.php?action=inactiveStaff&idPerson=<?php echo $personC->getIdPerson(); ?>"
                                                        data-toggle="tooltip" title="Inactivar"
                                                        class="btn docs-tooltip btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
                                                 <?php } ?>

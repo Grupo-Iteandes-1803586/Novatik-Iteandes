@@ -1,7 +1,8 @@
 <?php
 namespace App\Models;
-
+use http\QueryString;
 require_once('BasicModel.php');
+use Carbon\Carbon;
 
 class  Teacher Extends BasicModel{
 
@@ -84,9 +85,9 @@ class  Teacher Extends BasicModel{
     }
 
     /**
-     * @return int
+     * @return Person
      */
-    public function getPersonIdPerson(): int
+    public function getPersonIdPerson(): Person
     {
         return $this->Person_idPerson;
     }
@@ -146,17 +147,30 @@ class  Teacher Extends BasicModel{
      * @param $idTeacher
      * @return mixed
      */
-    public static function searchForId($idTeacher )
+
+    public static function searchForId($idTeacher) : Teacher
+    {
+        $teacher = null;
+        if ($idTeacher  > 0) {
+            $teacher= new Teacher();
+            $getrow = $teacher->getRow("SELECT * FROM iteandes_novatik.Teacher WHERE idTeacher =?", array($idTeacher));
+            $teacher->Experience_idExperience = Experience::searchForId($getrow['Experience_idExperience']);
+            $teacher->TeacherStudies_idTeacherStudies = TeacherStudies::searchForId($getrow['TeacherStudies_idTeacherStudies']);
+            $teacher->Person_idPerson = Person::searchForId($getrow['Person_idPerson']);
+            $teacher->stateTeacher = $getrow['stateTeacher'];
+            $teacher->idTeacher = $getrow['idTeacher'];
+        }
+        $teacher->Disconnect();
+        return $teacher;
+    }
+
+    public static function searchForIdTeacher($idTeacher) : Teacher
     {
         $teacher = null;
         if ($idTeacher  > 0) {
             $teacher= new Teacher();
             $getrow = $teacher->getRow("SELECT * FROM iteandes_novatik.Teacher WHERE idTeacher =?", array($idTeacher));
             $teacher->idTeacher = $getrow['idTeacher'];
-            $teacher->Experience_idExperience = Experience::searchForId($getrow['Experience_idExperience']);
-            $teacher->TeacherStudies_idTeacherStudies = TeacherStudies::searchForId($getrow['TeacherStudies_idTeacherStudies']);
-            $teacher->Person_idPerson = Person::searchForId($getrow['Person_idPerson']);
-            $teacher->stateTeacher = $getrow['stateTeacher'];
         }
         $teacher->Disconnect();
         return $teacher;
