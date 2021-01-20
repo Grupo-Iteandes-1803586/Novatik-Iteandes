@@ -65,7 +65,7 @@ use Carbon\Carbon;
             <!-- /.card-header -->
                <div class="card-body">
                    <!-- form start -->
-                   <form class="form-horizontal" method="post" id="frmObtEnrollment" name="frmObtEnrollment" action="../../../app/Controllers/EnrollmentControllers.php?action=infoCreate">
+                   <form class="form-horizontal" method="post" id="frmObtEnrollment" name="frmObtEnrollment" action="../../../app/Controllers/EnrollmentControllers.php?action=infoCreateE">
                    <!--Documento -->
                         <div class="form-group row">
                             <label for="documentPerson" class="col-sm-2 col-form-label">Documento</label>
