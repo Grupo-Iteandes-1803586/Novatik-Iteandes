@@ -38,12 +38,12 @@ class EnrollmentControllers{
             EnrollmentControllers::activate();
         } else if ($action == "inactivate") {
             EnrollmentControllers::inactivate();
-        }else if ($action == "infoCreate") {
-            EnrollmentControllers::infoCreate($_REQUEST['documentPerson']);
+        }else if ($action == "infoCreateE") {
+            EnrollmentControllers::infoCreateE($_REQUEST['documentPerson']);
         }
     }
 
-    static public  function infoCreate($documentPerson){
+    static public  function infoCreateE($documentPerson){
         try {
             $arrayPerson  = Person::searchForIdP($documentPerson);
             //Validar registro del Usuario
