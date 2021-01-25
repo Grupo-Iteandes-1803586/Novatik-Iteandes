@@ -68,7 +68,7 @@ class GroupControllers{
                     $arrGroup['Teacher_idTeacher']= Teacher::searchForIdTeacher($_POST['Teacher_idTeacher']);
                     $group = new Group($arrGroup);
                     if($group->create()) {
-                        header("Location: ../../views/modules/Group/show.php?idSchedule=".$schedule->getIdSchedule()."respuesta=correcto");
+                        header("Location: ../../views/modules/Group/show.php?idSchedule=".$schedule->getIdSchedule()."&respuesta=correcto");
                     }
                 }
         } catch (Exception $e) {
