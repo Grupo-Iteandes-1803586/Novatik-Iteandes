@@ -22,29 +22,3 @@
 <script src="<?= $adminlteURL ?>/plugins/datatables-buttons/js/buttons.colVis.js"></script>
 <script src="<?= $adminlteURL ?>/plugins/chart.js/Chart.min.js"></script>
 <script src="<?= $adminlteURL ?>/plugins/jquery-knob/jquery.knob.min.js"></script>
-<script>
-    $(function () {
-        $('.datatable').DataTable({
-            "dom": 'Bfrtip',
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "language": {
-                "url": "../../components/Spanish.json" //Idioma
-            },
-            "buttons": [
-                'copy', 'print', 'excel', {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    pageSize: 'LETTER'
-                }
-            ],
-            "pagingType": "full_numbers",
-            "responsive": true,
-            "stateSave": true, //Guardar la configuracion del usuario
-        });
-    });
-</script>

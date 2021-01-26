@@ -51,10 +51,41 @@ class PersonController{
             PersonController::createAdmStaff();
         }else if($action == "editStaff"){
             PersonController::editStaff();
+        }else if($action == "activeStaff"){
+            PersonController::activeStaff();
+        }else if($action == "inactiveStaff"){
+            PersonController::inactiveStaff();
         }
 
     }
-
+    //Funcion de activacion del estado
+    static public function activeStaff(){
+        try{
+            $ObjPerson = Person::searchForId($_GET['idPerson']);
+            $ObjPerson->setStatePerson('Activo');
+            if($ObjPerson->update()){
+                header("Location: ../../views/modules/Person/AdministrativeStaff/index.php?respuesta=correcto");
+            }else{
+                header("Location: ../../views/modules/Person/AdministrativeStaff/index.php?respuesta=error&mensaje=Error al Guardar");
+            }
+        }catch (\Exception $ex){
+            header("Location: ../../views/modules/Person/AdministrativeStaff/index.php?respuesta=error&mensaje" . $ex-> getMessage());
+        }
+    }
+    //Funcion de inactivado del estado
+    static public function inactiveStaff(){
+        try{
+            $ObjPerson = Person::searchForId($_GET['idPerson']);
+            $ObjPerson->setStatePerson('Inactivo');
+            if($ObjPerson->update()){
+                header("Location: ../../views/modules/Person/AdministrativeStaff/index.php?respuesta=correcto");
+            }else{
+                header("Location: ../../views/modules/Person/AdministrativeStaff/index.php?respuesta=error&mensaje=Error al Guardar");
+            }
+        }catch (\Exception $ex){
+            header("Location: ../../views/modules/Person/AdministrativeStaff/index.php?respuesta=error&mensaje" . $ex-> getMessage());
+        }
+    }
     static  public  function  editStaff(){
         try{
             $arrayPerson = array();

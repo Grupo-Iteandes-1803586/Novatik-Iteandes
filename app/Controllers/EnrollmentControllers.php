@@ -22,8 +22,10 @@ if(!empty($_GET['action'])){
     EnrollmentControllers::main($_GET['action']);
 }
 
-class EnrollmentControllers{
-    static function main($action){
+class EnrollmentControllers
+{
+    static function main($action)
+    {
         if ($action == "create") {
             EnrollmentControllers::create();
         } else if ($action == "edit") {
@@ -38,21 +40,22 @@ class EnrollmentControllers{
             EnrollmentControllers::activate();
         } else if ($action == "inactivate") {
             EnrollmentControllers::inactivate();
-        }else if ($action == "infoCreateE") {
+        } else if ($action == "infoCreateE") {
             EnrollmentControllers::infoCreateE($_REQUEST['documentPerson']);
         }
     }
 
-    static public  function infoCreateE($documentPerson){
+    static public function infoCreateE($documentPerson)
+    {
         try {
-            $arrayPerson  = Person::searchForIdP($documentPerson);
+            $arrayPerson = Person::searchForIdP($documentPerson);
             //Validar registro del Usuario
-            if(!Person::userRegistration($documentPerson)) {
+            if (!Person::userRegistration($documentPerson)) {
                 header("Location: ../../views/modules/Enrollment/create.php?respuesta=correcto");
-            }else{
+            } else {
                 //buscar idStudent de la persona
-                $arrayStu  = Student::searchForIdP($arrayPerson->getIdPerson());
-                header("Location: ../../views/modules/Enrollment/createNew.php?idStudent=".$arrayStu->getIdStudent()."&respuesta=correcto");
+                $arrayStu = Student::searchForIdP($arrayPerson->getIdPerson());
+                header("Location: ../../views/modules/Enrollment/createNew.php?idStudent=" . $arrayStu->getIdStudent() . "&respuesta=correcto");
             }
 
         } catch (\Exception $e) {
@@ -60,6 +63,7 @@ class EnrollmentControllers{
             header("Location: ../../views/modules/Enrollment/infoCreate.php?respuesta=error");
         }
     }
+
     static  public function createEstu(){
         try {
             $arrEnrollment = array();

@@ -74,6 +74,7 @@ use App\Controllers\ActivityControllers;?>
                             </a>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col">
                             <table id="tblActivity" class="datatable table table-bordered table-striped">
@@ -132,5 +133,30 @@ use App\Controllers\ActivityControllers;?>
 </div>
 <!-- ./wrapper -->
 <?php require ('../../partials/scripts.php');?>
-
+<script>
+    $(function () {
+        $('.datatable').DataTable({
+            "dom": 'Bfrtip',
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "language": {
+                "url": "../../public/Spanish.json" //Idioma
+            },
+            "buttons": [
+                'copy', 'print', 'excel', {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LETTER'
+                }
+            ],
+            "pagingType": "full_numbers",
+            "responsive": true,
+            "stateSave": true, //Guardar la configuracion del usuario
+        });
+    });
+</script>
 </body>
