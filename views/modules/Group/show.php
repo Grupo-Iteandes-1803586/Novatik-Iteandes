@@ -104,7 +104,7 @@ use App\Controllers\ScheduleControllers;
                     <!--Datos del Grupo-->
                     <?php
                     if (!empty($_GET["idSchedule"])) {
-                        $dataGroup = \App\Models\Group::search("SELECT * FROM iteandes_novatik.Group WHERE Schedule_idSchedule =" . $_GET["idSchedule"]);
+                        $dataGroup = \App\Models\Group::search("SELECT * FROM iteandes_novatik.Group WHERE Schedule_idSchedule =" .$_GET["idSchedule"]);
                         foreach ($dataGroup as $group) {
                             $DataG = \App\Controllers\GroupControllers::searchForID($group->getIdGroup());
                         }

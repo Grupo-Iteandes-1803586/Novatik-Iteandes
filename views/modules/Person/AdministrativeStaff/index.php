@@ -152,6 +152,31 @@ use App\Controllers\PersonController; ?>
 </div>
 <!-- ./wrapper -->
 <?php require ('../../../partials/scripts.php');?>
-
+<script>
+    $(function () {
+        $('.datatable').DataTable({
+            "dom": 'Bfrtip',
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "language": {
+                "url": "../../public/Spanish.json" //Idioma
+            },
+            "buttons": [
+                'copy', 'print', 'excel', {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LETTER'
+                }
+            ],
+            "pagingType": "full_numbers",
+            "responsive": true,
+            "stateSave": true, //Guardar la configuracion del usuario
+        });
+    });
+</script>
 </body>
 </html>

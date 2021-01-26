@@ -24,33 +24,8 @@
                     </a>
                 </li>
                 </li>-->
-                <li class="nav-header">Modulos Principales</li>
-                <!--Gestionar Personal Admnistrativo-->
-                <li class="nav-item has-treeview menu-open">
-                <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'Admin') ? 'menu-open' : '' ?>
-                    <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'Admin') ? 'active' : '' ?>
-                        <i class="nav-icon fas fa-user-plus"></i>
-                        <p>
-                            Gestionar Personal<br> Administrativo
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= $baseURL ?>/views/modules/Person/AdministrativeStaff/index.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Consultar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= $baseURL ?>/views/modules/Person/AdministrativeStaff/create.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Registrar</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                </li>
+                <li class="nav-header">Modulos Principales </li>
+
 
                 <!--Gestionar Docente-->
                 <li class="nav-item has-treeview menu-open">
@@ -78,6 +53,34 @@
                     </ul>
                 </li>
                 </li>
+
+                <!--Gestionar Personal Admnistrativo-->
+                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'AdministrativeStaff') ? 'menu-open' : '' ?>
+                    <a href="#" class="nav-link active"><?= strpos($_SERVER['REQUEST_URI'],'AdministrativeStaff') ? 'active' : '' ?>
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>
+                            Gestionar Personal<br> Administrativo
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $baseURL ?>/views/modules/Person/AdministrativeStaff/index.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Consultar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $baseURL ?>/views/modules/Person/AdministrativeStaff/create.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Registrar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                </li>
+
                 <!--Modulo Gestionar Semestre-->
                 <li class="nav-item has-treeview menu-open">
                 <li class="nav-item has-treeview "><?= strpos($_SERVER['REQUEST_URI'],'semester') ? 'menu-open' : '' ?>
